@@ -1,7 +1,8 @@
 # MoveX-client
 
-This is the React-based frontend of the MoveX app - A library of movements from various styles and traditions, with descriptions/cues and video sources.
+MoveX is a library of movements from various styles and traditions, with descriptions/cues and video sources.
 
+This is the React-based frontend - A single-page, responsive web application (SPA).
 Find the backend (REST API and MongoDB) here: [MoveX backend](https://github.com/MitoMonkey/MoveX-backend)
 
 It was created as a study project during my Fullstack Webdeveloper course @CarrerFoundry
@@ -11,6 +12,15 @@ It was created as a study project during my Fullstack Webdeveloper course @Carre
 - Major languages
 - Frameworks
 - Technologies used
+
+* build tool: Parcel
+* Dependencies: 
+** react 17.0.2
+** react-dom 17.0.2
+
+React Redux (respecting the Flux pattern)
+Bootstrap as a UI library for styling and responsiveness
+a mix of class components and function components
 
 ## Live Demo
 
