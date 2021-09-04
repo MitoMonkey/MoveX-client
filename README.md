@@ -6,6 +6,7 @@ This is the React-based frontend - A single-page, responsive web application (SP
 Find the backend (REST API and MongoDB) here: [MoveX backend](https://github.com/MitoMonkey/MoveX-backend)
 
 It was created as a study project during my Fullstack Webdeveloper course @CarrerFoundry
+[Project Brief](https://images.careerfoundry.com/public/courses/fullstack-immersion/Full-Stack%20Immersion%20A3%20Project%20Brief.pdf)
 
 ## Built With
 
