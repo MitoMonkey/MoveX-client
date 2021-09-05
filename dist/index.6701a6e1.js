@@ -947,7 +947,6 @@ var _reactDom = require("react-dom");
 var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
 var _mainView = require("./components/main-view/main-view");
 var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
-// Import statement to indicate that you need to bundle `./index.scss`
 var _indexScss = require("./index.scss");
 // Main component (will eventually use all the others)
 class MoveXApplication extends _reactDefault.default.Component {
@@ -955,15 +954,15 @@ class MoveXApplication extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsx(_mainViewDefault.default, {
             __source: {
                 fileName: "src/index.jsx",
-                lineNumber: 12
+                lineNumber: 11
             },
             __self: this
         }));
     }
 }
-// Finds the root of the app
+// Find the root of the app
 const container = document.getElementsByClassName('app-container')[0];
-// Tells React to render the app in the root DOM element
+// Tell React to render the app in the root DOM element
 _reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElement(MoveXApplication), container);
 
   $parcel$ReactRefreshHelpers$b058.postlude(module);
@@ -22895,47 +22894,100 @@ parcelHelpers.export(exports, "MainView", ()=>MainView
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _moveCard = require("../move-card/move-card");
 class MainView extends _reactDefault.default.Component {
+    constructor(){
+        super();
+        this.state = {
+            moves: [
+                {
+                    _id: 1,
+                    Title: 'Inception',
+                    Description: 'desc1...',
+                    ImagePath: '...'
+                },
+                {
+                    _id: 2,
+                    Title: 'The Shawshank Redemption',
+                    Description: 'desc2...',
+                    ImagePath: '...'
+                },
+                {
+                    _id: 3,
+                    Title: 'Gladiator',
+                    Description: 'desc3...',
+                    ImagePath: '...'
+                }
+            ]
+        };
+    }
     render() {
-        return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+        const { moves  } = this.state; // Short for ´const moves = this.state.moves;´ (ES6 object destruction)
+        if (moves.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 7
+                lineNumber: 19
             },
             __self: this,
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+            children: "The list is empty!"
+        }));
+        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+            className: "main-view",
+            __source: {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 22
+            },
+            __self: this,
+            children: moves.map((move)=>/*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                    moveData: move,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 8
+                        lineNumber: 23
                     },
-                    __self: this,
-                    children: "Inception"
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                    __source: {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 9
-                    },
-                    __self: this,
-                    children: "The Shawshank Redemption"
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                    __source: {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 10
-                    },
-                    __self: this,
-                    children: "Gladiator"
-                })
-            ]
+                    __self: this
+                }, move._id)
+            )
         }));
     }
 }
 exports.default = MainView; // without the "default" {} would be required when importing in index.jsx
 
   $parcel$ReactRefreshHelpers$35bf.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr"}],"b3Zmr":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$7140 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$7140.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MoveCard", ()=>MoveCard
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+class MoveCard extends _reactDefault.default.Component {
+    render() {
+        const { moveData  } = this.props; // short for this.props.moveData, retrieving the parameter from main-view > moves.map() 
+        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+            className: "move-card",
+            __source: {
+                fileName: "src/components/move-card/move-card.jsx",
+                lineNumber: 6
+            },
+            __self: this,
+            children: moveData.Title
+        }));
+    }
+}
+
+  $parcel$ReactRefreshHelpers$7140.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
