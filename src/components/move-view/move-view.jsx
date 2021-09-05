@@ -2,7 +2,7 @@ import React from 'react';
 
 export class MoveView extends React.Component {
     render() {
-        const { move } = this.props;
+        const { move, onBackClick } = this.props;
         return (
             <div className="move-view">
                 <div className="move-Poster">
@@ -16,6 +16,7 @@ export class MoveView extends React.Component {
                     <span className="label">Description: </span>
                     <span className="value">{move.Description}</span>
                 </div>
+                <button onClick={() => { onBackClick(null); }}>Back</button>
             </div>
         )
     }

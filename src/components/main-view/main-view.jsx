@@ -16,16 +16,25 @@ export class MainView extends React.Component {
         }
     }
 
+    setSelectedMove(newSelectedMove) {
+        this.setState({
+            selectedMove: newSelectedMove
+        });
+    }
+
     render() {
         const { moves, selectedMove } = this.state;
-
-        if (selectedMove) return <MoveView move={selectedMove} />;
 
         if (moves.length === 0) return <div className="main-view">The list is empty!</div>;
 
         return (
             <div className="main-view">
-                {moves.map(move => <MoveCard key={move._id} moveData={move} />)}
+                {selectedMove
+                    ? <MoveView move={selectedMove} onBackClick={newSelectedMove => { this.setSelectedMove(newSelectedMove); }} />
+                    : moves.map(move => (
+                        <MoveCard key={move._id} moveData={move} onMoveClick={(move) => { this.setSelectedMove(move) }} />
+                    ))
+                }
             </div>
         );
     }

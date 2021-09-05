@@ -22895,6 +22895,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _moveCard = require("../move-card/move-card");
+var _moveView = require("../move-view/move-view");
 class MainView extends _reactDefault.default.Component {
     constructor(){
         super();
@@ -22918,16 +22919,22 @@ class MainView extends _reactDefault.default.Component {
                     Description: 'desc3...',
                     ImagePath: '...'
                 }
-            ]
+            ],
+            selectedMove: null
         };
     }
+    setSelectedMove(newSelectedMove) {
+        this.setState({
+            selectedMove: newSelectedMove
+        });
+    }
     render() {
-        const { moves  } = this.state; // Short for ´const moves = this.state.moves;´ (ES6 object destruction)
+        const { moves , selectedMove  } = this.state;
         if (moves.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 19
+                lineNumber: 28
             },
             __self: this,
             children: "The list is empty!"
@@ -22936,14 +22943,27 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 22
+                lineNumber: 31
             },
             __self: this,
-            children: moves.map((move)=>/*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+            children: selectedMove ? /*#__PURE__*/ _jsxRuntime.jsx(_moveView.MoveView, {
+                move: selectedMove,
+                onBackClick: (newSelectedMove)=>{
+                    this.setSelectedMove(newSelectedMove);
+                },
+                __source: {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 33
+                },
+                __self: this
+            }) : moves.map((move)=>/*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
                     moveData: move,
+                    onMoveClick: (move1)=>{
+                        this.setSelectedMove(move1);
+                    },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 23
+                        lineNumber: 35
                     },
                     __self: this
                 }, move._id)
@@ -22958,7 +22978,7 @@ exports.default = MainView; // without the "default" {} would be required when i
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr"}],"b3Zmr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","../move-view/move-view":"iUGEL"}],"b3Zmr":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$7140 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -22974,12 +22994,16 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 class MoveCard extends _reactDefault.default.Component {
     render() {
-        const { moveData  } = this.props; // short for this.props.moveData, retrieving the parameter from main-view > moves.map() 
+        // const { moveData } = this.props; = short for this.props.moveData, retrieving the parameter from main-view > moves.map() 
+        const { moveData , onMoveClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
             className: "move-card",
+            onClick: ()=>{
+                onMoveClick(moveData);
+            },
             __source: {
                 fileName: "src/components/move-card/move-card.jsx",
-                lineNumber: 6
+                lineNumber: 7
             },
             __self: this,
             children: moveData.Title
@@ -22988,6 +23012,124 @@ class MoveCard extends _reactDefault.default.Component {
 }
 
   $parcel$ReactRefreshHelpers$7140.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN"}],"iUGEL":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$233b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$233b.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MoveView", ()=>MoveView
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+class MoveView extends _reactDefault.default.Component {
+    render() {
+        const { move , onBackClick  } = this.props;
+        return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+            className: "move-view",
+            __source: {
+                fileName: "src/components/move-view/move-view.jsx",
+                lineNumber: 7
+            },
+            __self: this,
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                    className: "move-Poster",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 8
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                        src: move.ImagePath,
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 9
+                        },
+                        __self: this
+                    })
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "move-title",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 11
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 12
+                            },
+                            __self: this,
+                            children: "Title: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 13
+                            },
+                            __self: this,
+                            children: move.Title
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "move-description",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 15
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 16
+                            },
+                            __self: this,
+                            children: "Description: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 17
+                            },
+                            __self: this,
+                            children: move.Description
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                    onClick: ()=>{
+                        onBackClick(null);
+                    },
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 19
+                    },
+                    __self: this,
+                    children: "Back"
+                })
+            ]
+        }));
+    }
+}
+
+  $parcel$ReactRefreshHelpers$233b.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
