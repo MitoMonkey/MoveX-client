@@ -23078,7 +23078,7 @@ class MoveView extends _reactDefault.default.Component {
                     ]
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                    className: "move-description",
+                    className: "move-style",
                     __source: {
                         fileName: "src/components/move-view/move-view.jsx",
                         lineNumber: 15
@@ -23092,7 +23092,7 @@ class MoveView extends _reactDefault.default.Component {
                                 lineNumber: 16
                             },
                             __self: this,
-                            children: "Description: "
+                            children: "Style: "
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx("span", {
                             className: "value",
@@ -23101,7 +23101,92 @@ class MoveView extends _reactDefault.default.Component {
                                 lineNumber: 17
                             },
                             __self: this,
-                            children: move.Description
+                            children: move.Style.Name
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "move-source",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 19
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 20
+                            },
+                            __self: this,
+                            children: "Source: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 21
+                            },
+                            __self: this,
+                            children: move.Source.Name
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "move-cues",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 23
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 24
+                            },
+                            __self: this,
+                            children: "Cues: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 25
+                            },
+                            __self: this,
+                            children: move.Cues
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "move-videoLink",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 27
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 28
+                            },
+                            __self: this,
+                            children: "Video: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("a", {
+                            className: "value",
+                            href: move.VideoURL,
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 29
+                            },
+                            __self: this,
+                            children: move.VideoURL
                         })
                     ]
                 }),
@@ -23111,7 +23196,7 @@ class MoveView extends _reactDefault.default.Component {
                     },
                     __source: {
                         fileName: "src/components/move-view/move-view.jsx",
-                        lineNumber: 19
+                        lineNumber: 31
                     },
                     __self: this,
                     children: "Back"

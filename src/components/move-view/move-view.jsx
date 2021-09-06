@@ -14,19 +14,19 @@ export class MoveView extends React.Component {
                 </div>
                 <div className="move-style">
                     <span className="label">Style: </span>
-                    <span className="value">{move.style.name}</span>
+                    <span className="value">{move.Style.Name}</span>
                 </div>
                 <div className="move-source">
                     <span className="label">Source: </span>
-                    <span className="value">{move.source.name}</span>
+                    <span className="value">{move.Source.Name}</span>
                 </div>
                 <div className="move-cues">
                     <span className="label">Cues: </span>
-                    <span className="value">{move.cues}</span>
+                    <span className="value">{move.Cues}</span>
                 </div>
                 <div className="move-videoLink">
                     <span className="label">Video: </span>
-                    <a className="value" href={move.VideoURL}></a>
+                    <a className="value" href={move.VideoURL}>{move.VideoURL}</a>
                 </div>
                 <button onClick={() => { onBackClick(null); }}>Back</button>
             </div>
