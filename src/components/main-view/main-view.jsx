@@ -15,7 +15,7 @@ export class MainView extends React.Component {
 
     // import the moves from the backend
     componentDidMount() {
-        axios.get('https://move-x.herokuapp.com/moves')
+        axios.get('http://localhost:8080/moves')
             .then(response => {
                 this.setState({
                     moves: response.data
