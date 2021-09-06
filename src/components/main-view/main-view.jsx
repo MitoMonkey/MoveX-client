@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'; // library for AJAX operations
 import { MoveCard } from '../move-card/move-card';
 import { MoveView } from '../move-view/move-view';
 
@@ -7,13 +8,22 @@ export class MainView extends React.Component {
     constructor() {
         super();
         this.state = {
-            moves: [
-                { _id: 1, Title: 'Inception', Description: 'desc1...', ImagePath: '...' },
-                { _id: 2, Title: 'The Shawshank Redemption', Description: 'desc2...', ImagePath: '...' },
-                { _id: 3, Title: 'Gladiator', Description: 'desc3...', ImagePath: '...' }
-            ],
+            moves: [],
             selectedMove: null
         }
+    }
+
+    // import the moves from the backend
+    componentDidMount() {
+        axios.get('https://move-x.herokuapp.com/moves')
+            .then(response => {
+                this.setState({
+                    moves: response.data
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     setSelectedMove(newSelectedMove) {
@@ -25,7 +35,7 @@ export class MainView extends React.Component {
     render() {
         const { moves, selectedMove } = this.state;
 
-        if (moves.length === 0) return <div className="main-view">The list is empty!</div>;
+        if (moves.length === 0) return <div className="main-view" />;
 
         return (
             <div className="main-view">
