@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class MoveCard extends React.Component {
     render() {
@@ -7,3 +8,11 @@ export class MoveCard extends React.Component {
         return <div className="move-card" onClick={() => { onMoveClick(moveData); }}>{moveData.Title}</div>;
     }
 }
+
+// validate data types
+MoveCard.propTypes = {
+    move: PropTypes.shape({
+        Title: PropTypes.string
+    }).isRequired,
+    onMoveClick: PropTypes.func.isRequired
+};
