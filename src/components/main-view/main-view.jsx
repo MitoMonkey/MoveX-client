@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios'; // library for AJAX operations
 import { LoginView } from '../login-view/login-view';
+import { RegistrationView } from '../registration-view/registration-view';
 import { MoveCard } from '../move-card/move-card';
 import { MoveView } from '../move-view/move-view';
 
@@ -11,13 +12,14 @@ export class MainView extends React.Component {
         this.state = {
             moves: [],
             selectedMove: null,
-            user: null
+            user: null,
+            registerRequest: false
         }
     }
 
     // import the moves from the backend
     componentDidMount() {
-        axios.get('http://localhost:8080/moves')
+        axios.get('http://localhost:8080/moves') // https://move-x.herokuapp.com/moves
             .then(response => {
                 this.setState({
                     moves: response.data
@@ -42,11 +44,25 @@ export class MainView extends React.Component {
         });
     }
 
+    // trigger re-render from login screen when user wants to register
+    registerOn() {
+        this.setState({
+            registerRequest: true
+        });
+    }
+    registerOff() {
+        this.setState({
+            registerRequest: false
+        });
+    }
+
     render() {
-        const { moves, selectedMove, user } = this.state;
+        const { moves, selectedMove, user, registerRequest } = this.state;
+
+        if (registerRequest) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} completed={() => this.registerOff()} />
 
         /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} register={() => this.registerOn()} />
 
         if (moves.length === 0) return <div className="main-view" />; // empty page is displayed if no moves could be loaded
 
