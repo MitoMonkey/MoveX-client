@@ -6,7 +6,7 @@ export class MoveView extends React.Component {
         return (
             <div className="move-view">
                 <div className="move-Poster">
-                    <img src={move.ImagePath} />
+                    <img src={move.ImgURL} />
                 </div>
                 <div className="move-title">
                     <span className="label">Title: </span>
@@ -33,3 +33,24 @@ export class MoveView extends React.Component {
         )
     }
 }
+
+// validate data types
+MoveView.propTypes = {
+    move: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        Title: PropTypes.string.isRequired,
+        Cues: PropTypes.string.isRequired,
+        Style: PropTypes.shape({
+            Name: PropTypes.string.isRequired,
+            Description: PropTypes.string.isRequired
+        }).isRequired,
+        Source: PropTypes.shape({
+            Name: PropTypes.string.isRequired,
+            Weblink: PropTypes.string.isRequired
+        }).isRequired,
+        VideoURL: PropTypes.string.isRequired,
+        ImgURL: PropTypes.string,
+        Featured: PropTypes.bool
+    }).isRequired,
+    onBackClick: PropTypes.func.isRequired
+};

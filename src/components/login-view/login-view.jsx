@@ -25,3 +25,8 @@ export function LoginView(props) {
         </form>
     );
 }
+
+// validate data types
+LoginView.propTypes = {
+    onLoggedIn: PropTypes.func.isRequired
+};

@@ -11,8 +11,21 @@ export class MoveCard extends React.Component {
 
 // validate data types
 MoveCard.propTypes = {
-    move: PropTypes.shape({
-        Title: PropTypes.string
+    moveData: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        Title: PropTypes.string.isRequired,
+        Cues: PropTypes.string.isRequired,
+        Style: PropTypes.shape({
+            Name: PropTypes.string.isRequired,
+            Description: PropTypes.string.isRequired
+        }).isRequired,
+        Source: PropTypes.shape({
+            Name: PropTypes.string.isRequired,
+            Weblink: PropTypes.string.isRequired
+        }).isRequired,
+        VideoURL: PropTypes.string.isRequired,
+        ImgURL: PropTypes.string,
+        Featured: PropTypes.bool
     }).isRequired,
     onMoveClick: PropTypes.func.isRequired
 };
