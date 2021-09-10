@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MainView from './components/main-view/main-view';
+import Container from 'react-bootstrap/Container';
 
 import './index.scss';
 
@@ -8,13 +9,15 @@ import './index.scss';
 class MoveXApplication extends React.Component {
     render() {
         return (
-            <MainView />
-            /*
-            <div className="move-x">
-                <div>Good morning</div>
-            </div> 
-            */
+            <Container>
+                <MainView />
+            </Container>
         );
+        /*
+        <div className="move-x">
+            <div>Good morning</div>
+        </div> 
+        */
     }
 }
 

@@ -4,6 +4,8 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MoveCard } from '../move-card/move-card';
 import { MoveView } from '../move-view/move-view';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import './main-view.scss';
 
@@ -73,14 +75,22 @@ export class MainView extends React.Component {
         if (moves.length === 0) return <div className="main-view" />; // empty page is displayed if no moves could be loaded
 
         return (
-            <div className="main-view">
+            <Row className="main-view justify-content-md-center">
                 {selectedMove
-                    ? <MoveView move={selectedMove} onBackClick={newSelectedMove => { this.setSelectedMove(newSelectedMove); }} />
-                    : moves.map(move => (
-                        <MoveCard key={move._id} moveData={move} onMoveClick={(move) => { this.setSelectedMove(move) }} />
-                    ))
+                    ? (
+                        <Col md={8}>
+                            <MoveView move={selectedMove} onBackClick={newSelectedMove => { this.setSelectedMove(newSelectedMove); }} />
+                        </Col>
+                    )
+                    : (
+                        moves.map(move => (
+                            <Col md={3}>
+                                <MoveCard key={move._id} moveData={move} onMoveClick={(move) => { this.setSelectedMove(move) }} />
+                            </Col>
+                        ))
+                    )
                 }
-            </div>
+            </Row>
         );
     }
 }
