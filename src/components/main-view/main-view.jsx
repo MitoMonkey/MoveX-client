@@ -66,8 +66,13 @@ export class MainView extends React.Component {
     render() {
         const { moves, selectedMove, user, registerRequest } = this.state;
 
-        if (registerRequest) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />
-        // completed={() => this.registerOff()}
+        if (registerRequest) return (
+            <Row className="main-view justify-content-md-center">
+                <Col md={4}>
+                    <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />
+                </Col>
+            </Row>
+        );  //completed={() => this.registerOff()}
 
         /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
         if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} register={() => this.registerOn()} />
