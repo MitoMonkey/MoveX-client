@@ -42,7 +42,8 @@ export class MainView extends React.Component {
     // Method once a user is successfully logged in
     onLoggedIn(user) {
         this.setState({
-            user
+            user,
+            registerRequest: false
         });
     }
 
@@ -52,16 +53,19 @@ export class MainView extends React.Component {
             registerRequest: true
         });
     }
+    /*
     registerOff() {
         this.setState({
             registerRequest: false
         });
     }
+    */
 
     render() {
         const { moves, selectedMove, user, registerRequest } = this.state;
 
-        if (registerRequest) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} completed={() => this.registerOff()} />
+        if (registerRequest) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />
+        // completed={() => this.registerOff()}
 
         /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
         if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} register={() => this.registerOn()} />

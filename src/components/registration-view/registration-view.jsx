@@ -5,14 +5,15 @@ import './registration-view.scss';
 
 export function RegistrationView(props) {
     const [userData, setUserdata] = useState([]);
+    const [username, setUsername] = useState('');
 
     const handleSubmit = () => {
         // e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
-        console.log(userData.Username, userData.Password, userData.Email, userData.Birthday);
+        // console.log(userData.Username, userData.Password, userData.Email, userData.Birthday);
         /* Missing: Send a request to the server for authentication */
-        props.completed();
-        console.log('registration successfully completed');
-        props.onLoggedIn(userData.Username);
+        // props.completed();
+        // console.log('registration successfully completed');
+        props.onLoggedIn(username);
         console.log(username + ' logged in')
     };
 
@@ -20,7 +21,7 @@ export function RegistrationView(props) {
         <form>
             <label>
                 Username:
-                <input type="text" value={userData.Username} onChange={e => setUserdata(userData => userData.concat(e.target.value))} />
+                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
             </label>
             <label>
                 Password:
