@@ -5,6 +5,8 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { MoveCard } from '../move-card/move-card';
 import { MoveView } from '../move-view/move-view';
 
+import './main-view.scss';
+
 export class MainView extends React.Component {
 
     constructor() {

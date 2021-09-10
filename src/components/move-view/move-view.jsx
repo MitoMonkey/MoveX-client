@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './move-view.scss';
+
 export class MoveView extends React.Component {
     render() {
         const { move, onBackClick } = this.props;

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './move-card.scss';
+
 export class MoveCard extends React.Component {
     render() {
         // const { moveData } = this.props; = short for this.props.moveData, retrieving the parameter from main-view > moves.map() 
