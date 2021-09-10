@@ -38,6 +38,12 @@ export function LoginView(props) {
         </form>
     );
     */
+
+    /*
+    <FloatingLabel controlId="floatingUsername" label="Username" className="mb-3">
+                <Form.Control type="text" placeholder="John Doe" />
+            </FloatingLabel>
+    */
     return (
         <Form>
             <Form.Group controlId="formUsername">

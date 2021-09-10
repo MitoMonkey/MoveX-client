@@ -6,6 +6,7 @@ import { MoveCard } from '../move-card/move-card';
 import { MoveView } from '../move-view/move-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import CardGroup from 'react-bootstrap/CardGroup';
 
 import './main-view.scss';
 
@@ -75,7 +76,13 @@ export class MainView extends React.Component {
         );  //completed={() => this.registerOff()}
 
         /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} register={() => this.registerOn()} />
+        if (!user) return (
+            <Row className="main-view justify-content-md-center">
+                <Col md={4}>
+                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} register={() => this.registerOn()} />
+                </Col>
+            </Row>
+        );
 
         if (moves.length === 0) return <div className="main-view" />; // empty page is displayed if no moves could be loaded
 
@@ -89,8 +96,10 @@ export class MainView extends React.Component {
                     )
                     : (
                         moves.map(move => (
-                            <Col md={3}>
-                                <MoveCard key={move._id} moveData={move} onMoveClick={(move) => { this.setSelectedMove(move) }} />
+                            <Col md={3} className="move-card">
+                                <CardGroup>
+                                    <MoveCard key={move._id} moveData={move} onMoveClick={(move) => { this.setSelectedMove(move) }} />
+                                </CardGroup>
                             </Col>
                         ))
                     )

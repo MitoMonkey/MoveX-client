@@ -5,5 +5,12 @@
 
 
 
-
+.move-card {
+  flex: 0 0 33.3333333%;
+  max-width: 33.3333333%;
+  position: relative;
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+}
 /*# sourceMappingURL=index.caa67093.css.map */

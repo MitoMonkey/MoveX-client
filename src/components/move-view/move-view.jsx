@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 import './move-view.scss';
 
@@ -7,32 +10,35 @@ export class MoveView extends React.Component {
     render() {
         const { move, onBackClick } = this.props;
         return (
-            <div className="move-view">
-                <div className="move-Poster">
-                    <img src={move.ImgURL} />
-                </div>
-                <div className="move-title">
-                    <span className="label">Title: </span>
-                    <span className="value">{move.Title}</span>
-                </div>
-                <div className="move-style">
-                    <span className="label">Style: </span>
-                    <span className="value">{move.Style.Name}</span>
-                </div>
-                <div className="move-source">
-                    <span className="label">Source: </span>
-                    <span className="value">{move.Source.Name}</span>
-                </div>
-                <div className="move-cues">
-                    <span className="label">Cues: </span>
-                    <span className="value">{move.Cues}</span>
-                </div>
-                <div className="move-videoLink">
-                    <span className="label">Video: </span>
-                    <a className="value" href={move.VideoURL}>{move.VideoURL}</a>
-                </div>
-                <button onClick={() => { onBackClick(null); }}>Back</button>
-            </div>
+            <Row className="move-view justify-content-md-center">
+                <Col md={1}>
+                    <div className="move-Poster">
+                        <img src={move.ImgURL} />
+                    </div>
+                </Col>
+                <Col>
+                    <div className="move-title">
+                        <h1 className="value">Move Title: {move.Title}</h1>
+                    </div>
+                    <div className="move-style">
+                        <span className="label">Style: </span>
+                        <span className="value">{move.Style.Name}</span>
+                    </div>
+                    <div className="move-source">
+                        <span className="label">Source: </span>
+                        <span className="value">{move.Source.Name}</span>
+                    </div>
+                    <div className="move-cues">
+                        <span className="label">Cues: </span>
+                        <span className="value">{move.Cues}</span>
+                    </div>
+                    <div className="move-videoLink">
+                        <span className="label">Video: </span>
+                        <a className="value" href={move.VideoURL}>{move.VideoURL}</a>
+                    </div>
+                    <Button variant="primary" type="button" onClick={() => { onBackClick(null); }}>Back</Button>
+                </Col>
+            </Row>
         )
     }
 }
