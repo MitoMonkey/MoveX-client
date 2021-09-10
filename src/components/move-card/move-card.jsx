@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 import './move-card.scss';
 
@@ -7,7 +9,18 @@ export class MoveCard extends React.Component {
     render() {
         // const { moveData } = this.props; = short for this.props.moveData, retrieving the parameter from main-view > moves.map() 
         const { moveData, onMoveClick } = this.props;
-        return <div className="move-card" onClick={() => { onMoveClick(moveData); }}>{moveData.Title}</div>;
+
+        return (
+            // <div className="move-card" onClick={() => { onMoveClick(moveData); }}>{moveData.Title}</div>;
+            <Card>
+                <Card.Img variant="top" src={moveData.ImgURL} />
+                <Card.Body>
+                    <Card.Title>{moveData.Title}</Card.Title>
+                    <Card.Text>{moveData.Cues}</Card.Text>
+                    <Button onClick={() => onMoveClick(moveData)} variant="link">Open</Button>
+                </Card.Body>
+            </Card>
+        );
     }
 }
 
