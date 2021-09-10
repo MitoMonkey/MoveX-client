@@ -5,7 +5,6 @@ import Container from 'react-bootstrap/Container';
 
 import './index.scss';
 
-// Main component (will eventually use all the others)
 class MoveXApplication extends React.Component {
     render() {
         return (
@@ -13,11 +12,6 @@ class MoveXApplication extends React.Component {
                 <MainView />
             </Container>
         );
-        /*
-        <div className="move-x">
-            <div>Good morning</div>
-        </div> 
-        */
     }
 }
 

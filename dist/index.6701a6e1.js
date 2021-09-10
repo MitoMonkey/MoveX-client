@@ -950,28 +950,23 @@ var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
 var _container = require("react-bootstrap/Container");
 var _containerDefault = parcelHelpers.interopDefault(_container);
 var _indexScss = require("./index.scss");
-// Main component (will eventually use all the others)
 class MoveXApplication extends _reactDefault.default.Component {
     render() {
         return(/*#__PURE__*/ _jsxRuntime.jsx(_containerDefault.default, {
             __source: {
                 fileName: "src/index.jsx",
-                lineNumber: 12
+                lineNumber: 11
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx(_mainViewDefault.default, {
                 __source: {
                     fileName: "src/index.jsx",
-                    lineNumber: 13
+                    lineNumber: 12
                 },
                 __self: this
             })
         }));
-    /*
-        <div className="move-x">
-            <div>Good morning</div>
-        </div> 
-        */ }
+    }
 }
 // Find the root of the app
 const container = document.getElementsByClassName('app-container')[0];
@@ -22995,50 +22990,50 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         })); // empty page is displayed if no moves could be loaded
-        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-            className: "main-view",
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+            className: "main-view justify-content-md-center",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 78
             },
             __self: this,
-            children: selectedMove ? /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-                className: "justify-content-md-center",
+            children: selectedMove ? /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                md: 8,
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 81
                 },
                 __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                    md: 8,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_moveView.MoveView, {
+                    move: selectedMove,
+                    onBackClick: (newSelectedMove)=>{
+                        this.setSelectedMove(newSelectedMove);
+                    },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
                         lineNumber: 82
                     },
+                    __self: this
+                })
+            }) : moves.map((move)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                    md: 3,
+                    __source: {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 87
+                    },
                     __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_moveView.MoveView, {
-                        move: selectedMove,
-                        onBackClick: (newSelectedMove)=>{
-                            this.setSelectedMove(newSelectedMove);
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                        moveData: move,
+                        onMoveClick: (move1)=>{
+                            this.setSelectedMove(move1);
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 83
+                            lineNumber: 88
                         },
                         __self: this
-                    })
+                    }, move._id)
                 })
-            }) : moves.map((move)=>/*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
-                    moveData: move,
-                    onMoveClick: (move1)=>{
-                        this.setSelectedMove(move1);
-                    },
-                    __source: {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 88
-                    },
-                    __self: this
-                }, move._id)
             )
         }));
     }
