@@ -7,6 +7,7 @@ import { MoveView } from '../move-view/move-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CardGroup from 'react-bootstrap/CardGroup';
+import Button from 'react-bootstrap/Button';
 
 import './main-view.scss';
 
@@ -44,7 +45,7 @@ export class MainView extends React.Component {
             this.setState({
                 user: localStorage.getItem('user')
             });
-            this.getMovies(accessToken);
+            this.getMoves(accessToken);
         }
     }
 
@@ -71,7 +72,15 @@ export class MainView extends React.Component {
 
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
-        this.getMovies(authData.token);
+        this.getMoves(authData.token);
+    }
+
+    onLoggedOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        this.setState({
+            user: null
+        });
     }
 
     // trigger re-render from login screen when user wants to register
@@ -111,24 +120,29 @@ export class MainView extends React.Component {
         if (moves.length === 0) return <div className="main-view" />; // empty page is displayed if no moves could be loaded
 
         return (
-            <Row className="main-view justify-content-md-center">
-                {selectedMove
-                    ? (
-                        <Col md={8}>
-                            <MoveView move={selectedMove} onBackClick={newSelectedMove => { this.setSelectedMove(newSelectedMove); }} />
-                        </Col>
-                    )
-                    : (
-                        moves.map(move => (
-                            <Col md={3} className="move-card">
-                                <CardGroup>
-                                    <MoveCard key={move._id} moveData={move} onMoveClick={(move) => { this.setSelectedMove(move) }} />
-                                </CardGroup>
+            <div>
+                <Row className="main-view justify-content-md-center">
+                    {selectedMove
+                        ? (
+                            <Col md={8}>
+                                <MoveView move={selectedMove} onBackClick={newSelectedMove => { this.setSelectedMove(newSelectedMove); }} />
                             </Col>
-                        ))
-                    )
-                }
-            </Row>
+                        )
+                        : (
+                            moves.map(move => (
+                                <Col md={3} className="move-card">
+                                    <CardGroup>
+                                        <MoveCard key={move._id} moveData={move} onMoveClick={(move) => { this.setSelectedMove(move) }} />
+                                    </CardGroup>
+                                </Col>
+                            ))
+                        )
+                    }
+                </Row>
+                <Row>
+                    <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>
+                </Row>
+            </div>
         );
     }
 }

@@ -22914,6 +22914,8 @@ var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _cardGroup = require("react-bootstrap/CardGroup");
 var _cardGroupDefault = parcelHelpers.interopDefault(_cardGroup);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _mainViewScss = require("./main-view.scss");
 class MainView extends _reactDefault.default.Component {
     constructor(){
@@ -22946,7 +22948,7 @@ class MainView extends _reactDefault.default.Component {
             this.setState({
                 user: localStorage.getItem('user')
             });
-            this.getMovies(accessToken);
+            this.getMoves(accessToken);
         }
     }
     // When a move is clicked, this function is invoked and updates the state of the `selectedMove` property to that move
@@ -22969,7 +22971,14 @@ class MainView extends _reactDefault.default.Component {
         });
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
-        this.getMovies(authData.token);
+        this.getMoves(authData.token);
+    }
+    onLoggedOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        this.setState({
+            user: null
+        });
     }
     // trigger re-render from login screen when user wants to register
     registerOn() {
@@ -22989,31 +22998,6 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view justify-content-md-center",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 95
-            },
-            __self: this,
-            children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                md: 4,
-                __source: {
-                    fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 96
-                },
-                __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
-                    onLoggedIn: (user1)=>this.onLoggedIn(user1)
-                    ,
-                    __source: {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 97
-                    },
-                    __self: this
-                })
-            })
-        })); //completed={() => this.registerOff()}
-        /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/ if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-            className: "main-view justify-content-md-center",
-            __source: {
-                fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 104
             },
             __self: this,
@@ -23024,6 +23008,31 @@ class MainView extends _reactDefault.default.Component {
                     lineNumber: 105
                 },
                 __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
+                    onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                    ,
+                    __source: {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 106
+                    },
+                    __self: this
+                })
+            })
+        })); //completed={() => this.registerOff()}
+        /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/ if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+            className: "main-view justify-content-md-center",
+            __source: {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 113
+            },
+            __self: this,
+            children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                md: 4,
+                __source: {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 114
+                },
+                __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
                     ,
@@ -23031,7 +23040,7 @@ class MainView extends _reactDefault.default.Component {
                     ,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 106
+                        lineNumber: 115
                     },
                     __self: this
                 })
@@ -23041,63 +23050,91 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 111
+                lineNumber: 120
             },
             __self: this
         })); // empty page is displayed if no moves could be loaded
-        return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-            className: "main-view justify-content-md-center",
+        return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 114
+                lineNumber: 123
             },
             __self: this,
-            children: selectedMove ? /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                md: 8,
-                __source: {
-                    fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 117
-                },
-                __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_moveView.MoveView, {
-                    move: selectedMove,
-                    onBackClick: (newSelectedMove)=>{
-                        this.setSelectedMove(newSelectedMove);
-                    },
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                    className: "main-view justify-content-md-center",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 118
-                    },
-                    __self: this
-                })
-            }) : moves.map((move)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                    md: 3,
-                    className: "move-card",
-                    __source: {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 123
+                        lineNumber: 124
                     },
                     __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_cardGroupDefault.default, {
+                    children: selectedMove ? /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                        md: 8,
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 124
+                            lineNumber: 127
                         },
                         __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
-                            moveData: move,
-                            onMoveClick: (move1)=>{
-                                this.setSelectedMove(move1);
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveView.MoveView, {
+                            move: selectedMove,
+                            onBackClick: (newSelectedMove)=>{
+                                this.setSelectedMove(newSelectedMove);
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 125
+                                lineNumber: 128
                             },
                             __self: this
-                        }, move._id)
+                        })
+                    }) : moves.map((move)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                            md: 3,
+                            className: "move-card",
+                            __source: {
+                                fileName: "src/components/main-view/main-view.jsx",
+                                lineNumber: 133
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_cardGroupDefault.default, {
+                                __source: {
+                                    fileName: "src/components/main-view/main-view.jsx",
+                                    lineNumber: 134
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                                    moveData: move,
+                                    onMoveClick: (move1)=>{
+                                        this.setSelectedMove(move1);
+                                    },
+                                    __source: {
+                                        fileName: "src/components/main-view/main-view.jsx",
+                                        lineNumber: 135
+                                    },
+                                    __self: this
+                                }, move._id)
+                            })
+                        })
+                    )
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                    __source: {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 142
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                        variant: "primary",
+                        onClick: ()=>{
+                            this.onLoggedOut();
+                        },
+                        __source: {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 143
+                        },
+                        __self: this,
+                        children: "Logout"
                     })
                 })
-            )
+            ]
         }));
     }
 }
@@ -23108,7 +23145,7 @@ exports.default = MainView; // without the "default" {} would be required when i
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","../move-view/move-view":"iUGEL","axios":"iYoWk","../login-view/login-view":"054li","../registration-view/registration-view":"aP2YV","./main-view.scss":"jyMAr","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/CardGroup":"lNZc4"}],"b3Zmr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","../move-view/move-view":"iUGEL","axios":"iYoWk","../login-view/login-view":"054li","../registration-view/registration-view":"aP2YV","./main-view.scss":"jyMAr","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/CardGroup":"lNZc4","react-bootstrap/Button":"9CzHT"}],"b3Zmr":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$7140 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
