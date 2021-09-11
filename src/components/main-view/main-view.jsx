@@ -23,16 +23,29 @@ export class MainView extends React.Component {
     }
 
     // import the moves from the backend
-    componentDidMount() {
-        axios.get('http://localhost:8080/moves') // https://move-x.herokuapp.com/moves
+    getMoves(token) {
+        axios.get('http://localhost:8080/moves', { // https://move-x.herokuapp.com/moves
+            headers: { Authorization: `Bearer ${token}` }
+        })
             .then(response => {
                 this.setState({
                     moves: response.data
                 });
             })
-            .catch(error => {
+            .catch(function (error) {
                 console.log(error);
             });
+    }
+
+    // make login data persistent
+    componentDidMount() {
+        let accessToken = localStorage.getItem('token');
+        if (accessToken !== null) {
+            this.setState({
+                user: localStorage.getItem('user')
+            });
+            this.getMovies(accessToken);
+        }
     }
 
     // When a move is clicked, this function is invoked and updates the state of the `selectedMove` property to that move
@@ -43,11 +56,22 @@ export class MainView extends React.Component {
     }
 
     // Method once a user is successfully logged in
-    onLoggedIn(user) {
+    /* onLoggedIn(user) {
         this.setState({
             user,
             registerRequest: false
         });
+    } */
+    onLoggedIn(authData) {
+        console.log(authData);
+        this.setState({
+            user: authData.user.Username,
+            registerRequest: false
+        });
+
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.Username);
+        this.getMovies(authData.token);
     }
 
     // trigger re-render from login screen when user wants to register
