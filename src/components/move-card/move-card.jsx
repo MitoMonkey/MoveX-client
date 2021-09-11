@@ -17,7 +17,7 @@ export class MoveCard extends React.Component {
                 <Card.Body>
                     <Card.Title>{moveData.Title}</Card.Title>
                     <Card.Text>{moveData.Cues}</Card.Text>
-                    <Button onClick={() => onMoveClick(moveData)} variant="link">Open</Button>
+                    <Button variant="primary" onClick={() => onMoveClick(moveData)} >Open</Button>
                 </Card.Body>
             </Card>
         );

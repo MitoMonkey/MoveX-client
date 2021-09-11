@@ -23152,9 +23152,9 @@ class MoveCard extends _reactDefault.default.Component {
                             children: moveData.Cues
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                            variant: "primary",
                             onClick: ()=>onMoveClick(moveData)
                             ,
-                            variant: "link",
                             __source: {
                                 fileName: "src/components/move-card/move-card.jsx",
                                 lineNumber: 20
@@ -26212,10 +26212,13 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _form = require("react-bootstrap/Form");
 var _formDefault = parcelHelpers.interopDefault(_form);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
+// import FloatingLabel from 'react-bootstrap/FloatingLabel';
 var _loginViewScss = require("./login-view.scss");
 var _s = $RefreshSig$();
 function LoginView(props) {
@@ -26224,8 +26227,17 @@ function LoginView(props) {
     const [password, setPassword] = _react.useState('');
     const handleSubmit = (e)=>{
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
-        console.log(username, password);
-        /* Missing: Send a request to the server for authentication */ props.onLoggedIn(username);
+        // console.log(username, password);
+        /* Send a request to the server for authentication */ _axiosDefault.default.post('http://localhost:8080/login', {
+            Username: username,
+            Password: password
+        }).then((response)=>{
+            const data = response.data;
+            props.onLoggedIn(data);
+        }).catch((e1)=>{
+            console.log('no such user');
+        });
+    // props.onLoggedIn(username);
     };
     const register = ()=>{
         console.log('user wants to register');
@@ -26253,7 +26265,7 @@ function LoginView(props) {
     */ return(/*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 48
+            lineNumber: 61
         },
         __self: this,
         children: [
@@ -26261,14 +26273,14 @@ function LoginView(props) {
                 controlId: "formUsername",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 49
+                    lineNumber: 62
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 50
+                            lineNumber: 63
                         },
                         __self: this,
                         children: "Username:"
@@ -26279,7 +26291,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 51
+                            lineNumber: 64
                         },
                         __self: this
                     })
@@ -26289,14 +26301,14 @@ function LoginView(props) {
                 controlId: "formPassword",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 54
+                    lineNumber: 67
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 55
+                            lineNumber: 68
                         },
                         __self: this,
                         children: "Password:"
@@ -26307,7 +26319,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 56
+                            lineNumber: 69
                         },
                         __self: this
                     })
@@ -26319,7 +26331,7 @@ function LoginView(props) {
                 onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 58
+                    lineNumber: 71
                 },
                 __self: this,
                 children: "Submit"
@@ -26331,7 +26343,7 @@ function LoginView(props) {
                 onClick: register,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 59
+                    lineNumber: 72
                 },
                 __self: this,
                 children: "Register as new user"
@@ -26353,7 +26365,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","prop-types":"1tgq3","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT","./login-view.scss":"lS4BK"}],"5ykgY":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","prop-types":"1tgq3","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT","./login-view.scss":"lS4BK","axios":"iYoWk"}],"5ykgY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _extends = require("@babel/runtime/helpers/esm/extends");

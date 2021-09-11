@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+// import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 import './login-view.scss';
 
@@ -12,9 +14,20 @@ export function LoginView(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
-        console.log(username, password);
-        /* Missing: Send a request to the server for authentication */
-        props.onLoggedIn(username);
+        // console.log(username, password);
+        /* Send a request to the server for authentication */
+        axios.post('http://localhost:8080/login', { // https://move-x.herokuapp.com/
+            Username: username,
+            Password: password
+        })
+            .then(response => {
+                const data = response.data;
+                props.onLoggedIn(data);
+            })
+            .catch(e => {
+                console.log('no such user')
+            });
+        // props.onLoggedIn(username);
     };
 
     const register = () => {
