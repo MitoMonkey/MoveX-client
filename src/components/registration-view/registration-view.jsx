@@ -14,24 +14,26 @@ export function RegistrationView(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
-        // console.log(userData.Username, userData.Password, userData.Email, userData.Birthday);
+
+        // add user to database
+
+        // automatic log in
         props.onLoggedIn(username);
-        console.log(username + ' logged in')
     };
 
     return (
         <Form>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
-                <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+                <Form.Control type="text" required onChange={e => setUsername(e.target.value)} />
             </Form.Group>
             <Form.Group controlId="formPassword">
                 <Form.Label>Password:</Form.Label>
-                <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+                <Form.Control type="password" required onChange={e => setPassword(e.target.value)} />
             </Form.Group>
             <Form.Group controlId="formEmail">
                 <Form.Label>Email:</Form.Label>
-                <Form.Control type="email" onChange={e => setEmail(e.target.value)} />
+                <Form.Control type="email" required onChange={e => setEmail(e.target.value)} />
             </Form.Group>
             <Form.Group controlId="formBirthday">
                 <Form.Label>Birthday:</Form.Label>
@@ -64,7 +66,7 @@ export function RegistrationView(props) {
     );
 }
 
-// validate data types
+// validate prop data types
 RegistrationView.propTypes = {
     onLoggedIn: PropTypes.func.isRequired
     /*

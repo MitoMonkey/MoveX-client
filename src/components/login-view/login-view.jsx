@@ -16,7 +16,7 @@ export function LoginView(props) {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
         // console.log(username, password);
         /* Send a request to the server for authentication */
-        axios.post('https://move-x.herokuapp.com/', { // http://localhost:8080/login
+        axios.post('https://move-x.herokuapp.com/login', { // http://localhost:8080/login
             Username: username,
             Password: password
         })
@@ -27,7 +27,6 @@ export function LoginView(props) {
             .catch(e => {
                 console.log('No such user. Error: ' + e)
             });
-        // props.onLoggedIn(username);
     };
 
     const register = () => {
@@ -61,12 +60,12 @@ export function LoginView(props) {
         <Form>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
-                <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+                <Form.Control type="text" required onChange={e => setUsername(e.target.value)} />
             </Form.Group>
 
             <Form.Group controlId="formPassword">
                 <Form.Label>Password:</Form.Label>
-                <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+                <Form.Control type="password" required onChange={e => setPassword(e.target.value)} />
             </Form.Group>
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{' '}
             <Button variant="primary" type="button" onClick={register}>Register as new user</Button>
@@ -74,7 +73,8 @@ export function LoginView(props) {
     );
 }
 
-// validate data types
+// validate prop data types
 LoginView.propTypes = {
-    onLoggedIn: PropTypes.func.isRequired
+    onLoggedIn: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired
 };
