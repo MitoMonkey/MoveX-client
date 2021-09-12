@@ -25,7 +25,7 @@ export class MainView extends React.Component {
 
     // import the moves from the backend
     getMoves(token) {
-        axios.get('http://localhost:8080/moves', { // https://move-x.herokuapp.com/moves
+        axios.get('https://move-x.herokuapp.com/moves', { // http://localhost:8080/moves
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => {

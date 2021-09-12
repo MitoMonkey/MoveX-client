@@ -15,9 +15,6 @@ export function RegistrationView(props) {
     const handleSubmit = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
         // console.log(userData.Username, userData.Password, userData.Email, userData.Birthday);
-        /* Missing: Send a request to the server for authentication */
-        // props.completed();
-        // console.log('registration successfully completed');
         props.onLoggedIn(username);
         console.log(username + ' logged in')
     };
@@ -69,11 +66,12 @@ export function RegistrationView(props) {
 
 // validate data types
 RegistrationView.propTypes = {
+    onLoggedIn: PropTypes.func.isRequired
+    /*
     userData: PropTypes.shape({
         Username: PropTypes.string.isRequired,
         Password: PropTypes.string.isRequired,
         Email: PropTypes.string.isRequired,
         Birthday: PropTypes.string // should be "date" (also in the form above), but that does not seem to be a valid data type
-    })
-    // onLoggedIn: PropTypes.func.isRequired
+    }) */
 };
