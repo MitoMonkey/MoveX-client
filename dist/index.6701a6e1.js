@@ -26284,9 +26284,13 @@ function LoginView(props) {
     _s();
     const [username, setUsername] = _react.useState('');
     const [password, setPassword] = _react.useState('');
+    const [validated, setValidated] = _react.useState(false);
     const handleSubmit = (e)=>{
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
-        // console.log(username, password);
+        // constraint validation
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) e.stopPropagation();
+        setValidated(true);
         /* Send a request to the server for authentication */ _axiosDefault.default.post('https://move-x.herokuapp.com/login', {
             Username: username,
             Password: password
@@ -26301,29 +26305,13 @@ function LoginView(props) {
         console.log('user wants to register');
         props.register();
     };
-    /*
-    return (
-        <form>
-            <label>
-                Username:
-                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-            </label>
-            <label>
-                Password:
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            </label>
-            <button type="button" onClick={handleSubmit}>Submit</button>
-            <button type="button" onClick={register}>Register as new user</button>
-        </form>
-    );
-    */ /*
-    <FloatingLabel controlId="floatingUsername" label="Username" className="mb-3">
-                <Form.Control type="text" placeholder="John Doe" />
-            </FloatingLabel>
-    */ return(/*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
+    // noValidate attribute to disable HTML5 validations by default and access Constraint API
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
+        noValidate: true,
+        validated: validated,
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 60
+            lineNumber: 47
         },
         __self: this,
         children: [
@@ -26331,25 +26319,26 @@ function LoginView(props) {
                 controlId: "formUsername",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 61
+                    lineNumber: 48
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 62
+                            lineNumber: 49
                         },
                         __self: this,
                         children: "Username:"
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+                        required: true,
                         type: "text",
                         onChange: (e)=>setUsername(e.target.value)
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 63
+                            lineNumber: 50
                         },
                         __self: this
                     })
@@ -26359,25 +26348,26 @@ function LoginView(props) {
                 controlId: "formPassword",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 66
+                    lineNumber: 53
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 67
+                            lineNumber: 54
                         },
                         __self: this,
                         children: "Password:"
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+                        required: true,
                         type: "password",
                         onChange: (e)=>setPassword(e.target.value)
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 68
+                            lineNumber: 55
                         },
                         __self: this
                     })
@@ -26389,7 +26379,7 @@ function LoginView(props) {
                 onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 70
+                    lineNumber: 57
                 },
                 __self: this,
                 children: "Submit"
@@ -26401,7 +26391,7 @@ function LoginView(props) {
                 onClick: register,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 71
+                    lineNumber: 58
                 },
                 __self: this,
                 children: "Register as new user"
@@ -26409,7 +26399,7 @@ function LoginView(props) {
         ]
     }));
 }
-_s(LoginView, "wuQOK7xaXdVz4RMrZQhWbI751Oc=");
+_s(LoginView, "SA/z51gtsh1VmRJTBtoE1mObG10=");
 _c = LoginView;
 // validate prop data types
 LoginView.propTypes = {
@@ -27297,6 +27287,7 @@ function RegistrationView(props) {
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                         type: "text",
+                        required: true,
                         onChange: (e)=>setUsername(e.target.value)
                         ,
                         __source: {
@@ -27325,6 +27316,7 @@ function RegistrationView(props) {
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                         type: "password",
+                        required: true,
                         onChange: (e)=>setPassword(e.target.value)
                         ,
                         __source: {
@@ -27353,6 +27345,7 @@ function RegistrationView(props) {
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                         type: "email",
+                        required: true,
                         onChange: (e)=>setEmail(e.target.value)
                         ,
                         __source: {

@@ -11,10 +11,18 @@ import './login-view.scss';
 export function LoginView(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [validated, setValidated] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
-        // console.log(username, password);
+
+        // constraint validation
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+        setValidated(true);
+
         /* Send a request to the server for authentication */
         axios.post('https://move-x.herokuapp.com/login', { // http://localhost:8080/login
             Username: username,
@@ -34,38 +42,17 @@ export function LoginView(props) {
         props.register();
     };
 
-    /*
+    // noValidate attribute to disable HTML5 validations by default and access Constraint API
     return (
-        <form>
-            <label>
-                Username:
-                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-            </label>
-            <label>
-                Password:
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            </label>
-            <button type="button" onClick={handleSubmit}>Submit</button>
-            <button type="button" onClick={register}>Register as new user</button>
-        </form>
-    );
-    */
-
-    /*
-    <FloatingLabel controlId="floatingUsername" label="Username" className="mb-3">
-                <Form.Control type="text" placeholder="John Doe" />
-            </FloatingLabel>
-    */
-    return (
-        <Form>
+        <Form noValidate validated={validated}>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
-                <Form.Control type="text" required onChange={e => setUsername(e.target.value)} />
+                <Form.Control required type="text" onChange={e => setUsername(e.target.value)} />
             </Form.Group>
 
             <Form.Group controlId="formPassword">
                 <Form.Label>Password:</Form.Label>
-                <Form.Control type="password" required onChange={e => setPassword(e.target.value)} />
+                <Form.Control required type="password" onChange={e => setPassword(e.target.value)} />
             </Form.Group>
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{' '}
             <Button variant="primary" type="button" onClick={register}>Register as new user</Button>
