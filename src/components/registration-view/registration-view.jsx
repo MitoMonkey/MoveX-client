@@ -15,10 +15,24 @@ export function RegistrationView(props) {
     const handleSubmit = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
 
-        // add user to database
+        // add user to database, and propt to root directory for login
+        axios.post('https://move-x.herokuapp.com/users', {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday
+        })
+            .then(response => {
+                const data = response.data;
+                console.log(data);
+                window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+            })
+            .catch(e => {
+                console.log('error registering the user')
+            });
 
-        // automatic log in
-        props.onLoggedIn(username);
+        // automaticaly log in
+        // props.onLoggedIn(username);
     };
 
     return (
@@ -41,35 +55,13 @@ export function RegistrationView(props) {
             </Form.Group>
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
         </Form>
-
-        /*
-        <form>
-            <label>
-                Username:
-                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-            </label>
-            <label>
-                Password:
-                <input type="password" value={userData.Password} onChange={e => setUserdata(userData => userData.concat(e.target.value))} />
-            </label>
-            <label>
-                Email:
-                <input type="text" value={userData.Email} onChange={e => setUserdata(userData => userData.concat(e.target.value))} />
-            </label>
-            <label>
-                Birthday:
-                <input type="text" value={userData.Birthday} onChange={e => setUserdata(userData => userData.concat(e.target.value))} />
-            </label>
-            <button type="button" onClick={handleSubmit}>Submit</button>
-        </form>
-        */
     );
 }
 
 // validate prop data types
 RegistrationView.propTypes = {
     onLoggedIn: PropTypes.func.isRequired
-    /*
+    /* see login-view for details on data validation
     userData: PropTypes.shape({
         Username: PropTypes.string.isRequired,
         Password: PropTypes.string.isRequired,

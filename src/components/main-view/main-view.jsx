@@ -21,7 +21,6 @@ export class MainView extends React.Component {
         super();
         this.state = {
             moves: [],
-            selectedMove: null,
             user: null,
             registerRequest: false
         }
@@ -53,20 +52,7 @@ export class MainView extends React.Component {
         }
     }
 
-    // When a move is clicked, this function is invoked and updates the state of the `selectedMove` property to that move
-    setSelectedMove(newSelectedMove) {
-        this.setState({
-            selectedMove: newSelectedMove
-        });
-    }
-
     // Method once a user is successfully logged in
-    /* onLoggedIn(user) {
-        this.setState({
-            user,
-            registerRequest: false
-        });
-    } */
     onLoggedIn(authData) {
         console.log(authData);
         this.setState({
@@ -93,16 +79,9 @@ export class MainView extends React.Component {
             registerRequest: true
         });
     }
-    /*
-    registerOff() {
-        this.setState({
-            registerRequest: false
-        });
-    }
-    */
 
     render() {
-        const { moves, selectedMove, user, registerRequest } = this.state;
+        const { moves, user, registerRequest } = this.state;
 
         if (registerRequest) return (
             <Row className="main-view justify-content-md-center">
@@ -110,16 +89,16 @@ export class MainView extends React.Component {
                     <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />
                 </Col>
             </Row>
-        );  //completed={() => this.registerOff()}
+        );
 
-        /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
+        /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
         if (!user) return (
             <Row className="main-view justify-content-md-center">
                 <Col md={4}>
                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} register={() => this.registerOn()} />
                 </Col>
             </Row>
-        );
+        ); */
 
         if (moves.length === 0) return <div className="main-view" />; // empty page is displayed if no moves could be loaded
 
@@ -128,6 +107,10 @@ export class MainView extends React.Component {
                 <div>
                     <Row className="main-view justify-content-md-center">
                         <Route exact path="/" render={() => {
+                            if (!user) return
+                            <Col>
+                                <LoginView onLoggedIn={user => this.onLoggedIn(user)} register={() => this.registerOn()} />
+                            </Col>
                             return moves.map(m => (
                                 <Col md={3} key={m._id}>
                                     <CardGroup>
@@ -152,27 +135,6 @@ export class MainView extends React.Component {
                         <Route exact path="/genres/:name" render={} />
                         */}
                     </Row>
-
-                    { /* pre react-router-dom
-                    <Row className="main-view justify-content-md-center">
-                        {selectedMove
-                            ? (
-                                <Col md={8}>
-                                    <MoveView move={selectedMove} onBackClick={newSelectedMove => { this.setSelectedMove(newSelectedMove); }} />
-                                </Col>
-                            )
-                            : (
-                                moves.map(move => (
-                                    <Col md={3} className="move-card">
-                                        <CardGroup>
-                                            <MoveCard key={move._id} move={move} onMoveClick={(move) => { this.setSelectedMove(move) }} />
-                                        </CardGroup>
-                                    </Col>
-                                ))
-                            )
-                        }
-                    </Row>
-                    */ }
 
                     <Row>
                         <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>

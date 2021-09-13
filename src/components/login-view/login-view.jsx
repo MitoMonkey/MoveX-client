@@ -38,7 +38,6 @@ export function LoginView(props) {
     };
 
     const register = () => {
-        console.log('user wants to register');
         props.register();
     };
 
@@ -49,7 +48,6 @@ export function LoginView(props) {
                 <Form.Label>Username:</Form.Label>
                 <Form.Control required type="text" onChange={e => setUsername(e.target.value)} />
             </Form.Group>
-
             <Form.Group controlId="formPassword">
                 <Form.Label>Password:</Form.Label>
                 <Form.Control required type="password" onChange={e => setPassword(e.target.value)} />
