@@ -1,13 +1,17 @@
 import React from 'react';
 import axios from 'axios'; // library for AJAX operations
+
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MoveCard } from '../move-card/move-card';
 import { MoveView } from '../move-view/move-view';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
+
+import { BrowserRouter as Router, Route } from "react-router-dom"; // library module for state-based routing. "BrowserRouter" relates to <Router> in the render() block
 
 import './main-view.scss';
 
@@ -120,29 +124,61 @@ export class MainView extends React.Component {
         if (moves.length === 0) return <div className="main-view" />; // empty page is displayed if no moves could be loaded
 
         return (
-            <div>
-                <Row className="main-view justify-content-md-center">
-                    {selectedMove
-                        ? (
-                            <Col md={8}>
-                                <MoveView move={selectedMove} onBackClick={newSelectedMove => { this.setSelectedMove(newSelectedMove); }} />
-                            </Col>
-                        )
-                        : (
-                            moves.map(move => (
-                                <Col md={3} className="move-card">
+            <Router>
+                <div>
+                    <Row className="main-view justify-content-md-center">
+                        <Route exact path="/" render={() => {
+                            return moves.map(m => (
+                                <Col md={3} key={m._id}>
                                     <CardGroup>
-                                        <MoveCard key={move._id} moveData={move} onMoveClick={(move) => { this.setSelectedMove(move) }} />
+                                        <MoveCard moveData={m} />
                                     </CardGroup>
                                 </Col>
                             ))
-                        )
-                    }
-                </Row>
-                <Row>
-                    <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>
-                </Row>
-            </div>
+                        }} />
+                        <Route path="/moves/:moveId" render={({ match, history }) => {
+                            return <Col md={8}>
+                                <MoveView move={moves.find(m => m._id === match.params.moveId)} onBackClick={() => history.goBack()} />
+                            </Col>
+                        }} />
+                        {/* Routes that are not ready yet (Views are missing)
+                        <Route path="/styles/:name" render={({ match, history }) => {
+                            if (movies.length === 0) return <div className="main-view" />;
+                            return
+                            <Col md={8}>
+                                <StylesView style={moves.find(m => m.Style.Name === match.params.name).Style} onBackClick={() => history.goBack()} />
+                            </Col>
+                        }} />
+                        <Route exact path="/genres/:name" render={} />
+                        */}
+                    </Row>
+
+                    { /* pre react-router-dom
+                    <Row className="main-view justify-content-md-center">
+                        {selectedMove
+                            ? (
+                                <Col md={8}>
+                                    <MoveView move={selectedMove} onBackClick={newSelectedMove => { this.setSelectedMove(newSelectedMove); }} />
+                                </Col>
+                            )
+                            : (
+                                moves.map(move => (
+                                    <Col md={3} className="move-card">
+                                        <CardGroup>
+                                            <MoveCard key={move._id} move={move} onMoveClick={(move) => { this.setSelectedMove(move) }} />
+                                        </CardGroup>
+                                    </Col>
+                                ))
+                            )
+                        }
+                    </Row>
+                    */ }
+
+                    <Row>
+                        <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>
+                    </Row>
+                </div>
+            </Router>
         );
     }
 }

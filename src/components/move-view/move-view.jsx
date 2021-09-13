@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+
+import { Link } from "react-router-dom";
 
 import './move-view.scss';
 
@@ -20,14 +23,14 @@ export class MoveView extends React.Component {
                     <div className="move-title">
                         <h1 className="value">Move Title: {move.Title}</h1>
                     </div>
-                    <div className="move-style">
-                        <span className="label">Style: </span>
-                        <span className="value">{move.Style.Name}</span>
-                    </div>
-                    <div className="move-source">
-                        <span className="label">Source: </span>
-                        <span className="value">{move.Source.Name}</span>
-                    </div>
+                    {/* those views are not available yet
+                    <Link to={`/styles/${move.Style.Name}`}>
+                        <Button variant="link">Style: {move.Style.Name}</Button>
+                    </Link>
+                    <Link to={`/sources/${move.Source.Name}`}>
+                        <Button variant="link">Source</Button>
+                    </Link>
+                    */}
                     <div className="move-cues">
                         <span className="label">Cues: </span>
                         <span className="value">{move.Cues}</span>
@@ -36,7 +39,7 @@ export class MoveView extends React.Component {
                         <span className="label">Video: </span>
                         <a className="value" href={move.VideoURL}>{move.VideoURL}</a>
                     </div>
-                    <Button variant="primary" type="button" onClick={() => { onBackClick(null); }}>Back</Button>
+                    <Button variant="primary" type="button" onClick={() => { onBackClick(); }}>Back</Button>
                 </Col>
             </Row>
         )
