@@ -10,13 +10,17 @@ body {
   background-color: #009688 !important;
 }
 
+.btn-primary:hover {
+  color: #ff9800 !important;
+}
+
 a {
   color: #009688 !important;
 }
 
-
-
-
+.Card {
+  margin-bottom: 15px;
+}
 .main-view {
   padding: 10px;
 }

@@ -5,6 +5,7 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { Link } from "react-router-dom";
 
 // import './login-view.scss';
 
@@ -50,7 +51,7 @@ export function LoginView(props) {
             </Form.Group>
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{' '}
             <Link to={`/register`}>
-                <Button variant="link">Register as new user</Button>
+                <Button variant="primary">Register as new user</Button>
             </Link>
         </Form>
     );

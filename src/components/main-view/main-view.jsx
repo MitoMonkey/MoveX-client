@@ -48,6 +48,7 @@ export class MainView extends React.Component {
             user: authData.user.Username,
             registerRequest: false
         });
+        // safe user data and token locally so they do not have to log again until they click the "log out" button
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
         this.getMoves(authData.token);
@@ -81,57 +82,60 @@ export class MainView extends React.Component {
                     <Row className="main-view justify-content-md-center">
                         <Route exact path="/" render={() => {
                             // make sure user is logged in
-                            if (!user) return
-                            <Col md={4}>
-                                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                            </Col>
+                            if (!user) return (
+                                <Col md={4}>
+                                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+                                </Col>);
 
                             // Loading page is displayed if no moves could be loaded
                             if (moves.length === 0) return <div className="main-view">Loading...</div>;
 
-                            return moves.map(m => (
-                                <Col md={3} key={m._id}>
-                                    <CardGroup>
-                                        <MoveCard move={m} />
-                                    </CardGroup>
-                                </Col>
-                            ))
+                            return (
+                                <CardGroup className="justify-content-md-center">
+                                    {moves.map(m => (
+                                        <Col md={3} key={m._id}>
+                                            <MoveCard move={m} />
+                                        </Col>
+                                    ))}
+                                </CardGroup>
+                            );
                         }} />
                         <Route path="/register" render={() => {
-                            return <Col md={4}>
+                            if (user) return <Redirect to="/" />
+                            return (<Col md={4}>
                                 <RegistrationView />
-                            </Col>
+                            </Col>);
                         }} />
                         <Route path="/moves/:moveId" render={({ match, history }) => {
 
                             // make sure user is logged in
-                            if (!user) return
-                            <Col md={4}>
-                                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                            </Col>
+                            if (!user) return (
+                                <Col md={4}>
+                                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+                                </Col>);
 
                             // Loading page is displayed if no moves could be loaded
                             if (moves.length === 0) return <div className="main-view">Loading...</div>;
 
-                            return <Col md={8}>
+                            return (<Col md={8}>
                                 <MoveView move={moves.find(m => m._id === match.params.moveId)} onBackClick={() => history.goBack()} />
-                            </Col>
+                            </Col>);
                         }} />
                         {/* Routes that are not ready yet (Views are missing)
                         <Route path="/styles/:name" render={({ match, history }) => {
                             // make sure user is logged in
-                            if (!user) return
+                            if (!user) return (
                             <Col md={4}>
                                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                            </Col>
+                            </Col>);
 
                             // Loading page is displayed if no moves could be loaded
                             if (moves.length === 0) return <div className="main-view">Loading...</div>;
 
-                            return
+                            return (
                             <Col md={8}>
                                 <StylesView style={moves.find(m => m.Style.Name === match.params.name).Style} onBackClick={() => history.goBack()} />
-                            </Col>
+                            </Col> );
                         }} />
                         <Route exact path="/genres/:name" render={} />
                         */}

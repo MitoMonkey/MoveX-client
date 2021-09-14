@@ -13,13 +13,13 @@ export class MoveCard extends React.Component {
         const { move } = this.props; // = short for this.props.move, retrieving the parameter from main-view
 
         return (
-            <Card>
+            <Card className="Card" >
                 <Card.Img variant="top" src={move.ImgURL} />
                 <Card.Body>
                     <Card.Title>{move.Title}</Card.Title>
                     <Card.Text>{move.Cues}</Card.Text>
                     <Link to={`/moves/${move._id}`}>
-                        <Button variant="link">View details</Button>
+                        <Button variant="primary">View details</Button>
                     </Link>
                 </Card.Body>
             </Card>
