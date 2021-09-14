@@ -50,7 +50,7 @@ export class MoveCard extends React.Component {
 
 // validate data types
 MoveCard.propTypes = {
-    moveData: PropTypes.shape({
+    move: PropTypes.shape({
         _id: PropTypes.string.isRequired,
         Title: PropTypes.string.isRequired,
         Cues: PropTypes.string.isRequired,
@@ -65,6 +65,5 @@ MoveCard.propTypes = {
         VideoURL: PropTypes.string.isRequired,
         ImgURL: PropTypes.string,
         Featured: PropTypes.bool
-    }).isRequired,
-    onMoveClick: PropTypes.func.isRequired
+    }).isRequired
 };

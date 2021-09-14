@@ -37,10 +37,6 @@ export function LoginView(props) {
             });
     };
 
-    const register = () => {
-        props.register();
-    };
-
     // noValidate attribute to disable HTML5 validations by default and access Constraint API
     return (
         <Form noValidate validated={validated}>
@@ -53,7 +49,9 @@ export function LoginView(props) {
                 <Form.Control required type="password" onChange={e => setPassword(e.target.value)} />
             </Form.Group>
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{' '}
-            <Button variant="primary" type="button" onClick={register}>Register as new user</Button>
+            <Link to={`/register`}>
+                <Button variant="link">Register as new user</Button>
+            </Link>
         </Form>
     );
 }
@@ -61,5 +59,4 @@ export function LoginView(props) {
 // validate prop data types
 LoginView.propTypes = {
     onLoggedIn: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired
 };

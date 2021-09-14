@@ -21,8 +21,7 @@ export class MainView extends React.Component {
         super();
         this.state = {
             moves: [],
-            user: null,
-            registerRequest: false
+            user: null
         }
     }
 
@@ -41,6 +40,18 @@ export class MainView extends React.Component {
             });
     }
 
+    // Method once a user is successfully logged in
+    onLoggedIn(authData) {
+        console.log(authData);
+        this.setState({
+            user: authData.user.Username,
+            registerRequest: false
+        });
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.Username);
+        this.getMoves(authData.token);
+    }
+
     // make login data persistent
     componentDidMount() {
         let accessToken = localStorage.getItem('token');
@@ -52,19 +63,6 @@ export class MainView extends React.Component {
         }
     }
 
-    // Method once a user is successfully logged in
-    onLoggedIn(authData) {
-        console.log(authData);
-        this.setState({
-            user: authData.user.Username,
-            registerRequest: false
-        });
-
-        localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', authData.user.Username);
-        this.getMoves(authData.token);
-    }
-
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -73,53 +71,33 @@ export class MainView extends React.Component {
         });
     }
 
-    // trigger re-render from login screen when user wants to register
-    registerOn() {
-        this.setState({
-            registerRequest: true
-        });
-    }
-
     render() {
-        const { moves, user, registerRequest } = this.state;
-
-        if (registerRequest) return (
-            <Row className="main-view justify-content-md-center">
-                <Col md={4}>
-                    <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />
-                </Col>
-            </Row>
-        );
-
-        /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
-        if (!user) return (
-            <Row className="main-view justify-content-md-center">
-                <Col md={4}>
-                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} register={() => this.registerOn()} />
-                </Col>
-            </Row>
-        ); */
-
-        if (moves.length === 0) return <div className="main-view" />; // empty page is displayed if no moves could be loaded
+        const { moves, user } = this.state;
 
         return (
             <Router>
-                <div>
+                <>
                     <Row className="main-view justify-content-md-center">
                         <Route exact path="/" render={() => {
                             if (!user) return
-                            <Col>
-                                <LoginView onLoggedIn={user => this.onLoggedIn(user)} register={() => this.registerOn()} />
+                            <Col md={4}>
+                                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                             </Col>
                             return moves.map(m => (
                                 <Col md={3} key={m._id}>
                                     <CardGroup>
-                                        <MoveCard moveData={m} />
+                                        <MoveCard move={m} />
                                     </CardGroup>
                                 </Col>
                             ))
                         }} />
+                        <Route path="/register" render={() => {
+                            return <Col md={4}>
+                                <RegistrationView />
+                            </Col>
+                        }} />
                         <Route path="/moves/:moveId" render={({ match, history }) => {
+                            if (moves.length === 0) return <div className="main-view" />; // empty page is displayed if no moves could be loaded
                             return <Col md={8}>
                                 <MoveView move={moves.find(m => m._id === match.params.moveId)} onBackClick={() => history.goBack()} />
                             </Col>
@@ -135,13 +113,18 @@ export class MainView extends React.Component {
                         <Route exact path="/genres/:name" render={} />
                         */}
                     </Row>
-
-                    <Row>
-                        <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>
-                    </Row>
-                </div>
+                </>
             </Router>
         );
+        /*
+        {// Log out button
+            () => {
+                if (user) return
+                <Row>
+                    <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>
+                </Row>
+            }
+        }; */
     }
 }
 export default MainView; // without the "default" {} would be required when importing in index.jsx

@@ -6,8 +6,12 @@ body {
   font-family: "Glory", sans-serif;
 }
 
-.btn-primary, a {
+.btn-primary {
   background-color: #009688 !important;
+}
+
+a {
+  color: #009688 !important;
 }
 
 

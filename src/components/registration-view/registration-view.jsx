@@ -58,14 +58,15 @@ export function RegistrationView(props) {
     );
 }
 
+/*
 // validate prop data types
 RegistrationView.propTypes = {
     onLoggedIn: PropTypes.func.isRequired
-    /* see login-view for details on data validation
+    // see login-view for details on data validation
     userData: PropTypes.shape({
         Username: PropTypes.string.isRequired,
         Password: PropTypes.string.isRequired,
         Email: PropTypes.string.isRequired,
         Birthday: PropTypes.string // should be "date" (also in the form above), but that does not seem to be a valid data type
-    }) */
-};
+    })
+}; */
