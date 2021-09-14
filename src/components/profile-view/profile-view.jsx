@@ -12,7 +12,6 @@ export function RegistrationView(props) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
-    const [validated, setValidated] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
