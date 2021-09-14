@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 
 // import './registration-view.scss';
 
@@ -53,7 +54,10 @@ export function RegistrationView(props) {
                 <Form.Label>Birthday:</Form.Label>
                 <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+            <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{'  '}
+            <Link to={`/`}>
+                <Button variant="primary">Login</Button>
+            </Link>
         </Form>
     );
 }
@@ -62,7 +66,7 @@ export function RegistrationView(props) {
 // validate prop data types
 RegistrationView.propTypes = {
     onLoggedIn: PropTypes.func.isRequired
-    // see login-view for details on data validation
+    // see login-view for details on constraint based data validation
     userData: PropTypes.shape({
         Username: PropTypes.string.isRequired,
         Password: PropTypes.string.isRequired,

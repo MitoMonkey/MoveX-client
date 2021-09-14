@@ -9,10 +9,10 @@ import { MoveView } from '../move-view/move-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CardGroup from 'react-bootstrap/CardGroup';
-// import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button';
 
-import { BrowserRouter as Router, Route } from "react-router-dom"; // library module for state-based routing. "BrowserRouter" relates to <Router> in the render() block
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+// library module for state-based routing. "BrowserRouter" relates to <Router> in the render() block
+import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 
 import './main-view.scss';
 
@@ -45,8 +45,7 @@ export class MainView extends React.Component {
     onLoggedIn(authData) {
         console.log(authData);
         this.setState({
-            user: authData.user.Username,
-            registerRequest: false
+            user: authData.user.Username
         });
         // safe user data and token locally so they do not have to log again until they click the "log out" button
         localStorage.setItem('token', authData.token);
@@ -77,8 +76,8 @@ export class MainView extends React.Component {
         const { moves, user } = this.state;
 
         return (
-            <Router>
-                <>
+            <>
+                <Router>
                     <Row className="main-view justify-content-md-center">
                         <Route exact path="/" render={() => {
                             // make sure user is logged in
@@ -140,18 +139,25 @@ export class MainView extends React.Component {
                         <Route exact path="/genres/:name" render={} />
                         */}
                     </Row>
-                </>
-            </Router>
-        );
-        /*
-        {// Log out button
-            () => {
-                if (user) return
+                </Router>
+
                 <Row>
-                    <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>
+                    <div className="user-bar">
+                        <span>Logged in as {user}  </span>
+                        <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>{'  '}
+                        <Button variant="primary" >Edit profile</Button>
+                    </div>
                 </Row>
-            }
-        }; */
+
+            </>
+        );
+        /* To add for user-bar / navigation
+        // condition that userbar is only displayed after login. 
+            // Easiest solution: Integrate it into all other views.
+            // more optimized solution, but not valid like this:
+                {if (user) 
+                    // user bar
+                }; */
     }
 }
 export default MainView; // without the "default" {} would be required when importing in index.jsx
