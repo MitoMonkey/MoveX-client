@@ -17,6 +17,14 @@ export function RegistrationView(props) {
     const handleSubmit = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
 
+        // constraint validation
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+            console.log('invalid data: ' + e);
+        }
+        setValidated(true);
+
         // add user to database, and propt to root directory for login
         axios.post('https://move-x.herokuapp.com/users', {
             Username: username,
@@ -38,7 +46,7 @@ export function RegistrationView(props) {
     };
 
     return (
-        <Form>
+        <Form noValidate validated={validated}>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
                 <Form.Control type="text" required onChange={e => setUsername(e.target.value)} />
