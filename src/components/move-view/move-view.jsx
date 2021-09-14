@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 import { Link } from "react-router-dom";
 
-import './move-view.scss';
+// import './move-view.scss';
 
 export class MoveView extends React.Component {
     render() {

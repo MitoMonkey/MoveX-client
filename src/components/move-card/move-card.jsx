@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 
 import { Link } from "react-router-dom";
 
-import './move-card.scss';
+// import './move-card.scss';
 
 export class MoveCard extends React.Component {
     render() {
