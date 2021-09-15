@@ -22,6 +22,7 @@ export function LoginView(props) {
         if (form.checkValidity() === false) {
             e.stopPropagation();
             console.log('invalid data: ' + e);
+            return ('invalid data: ' + e);
         }
         setValidated(true);
 

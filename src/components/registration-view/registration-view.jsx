@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 // import './registration-view.scss';
 
 export function RegistrationView(props) {
-    // const [userData, setUserdata] = useState([]);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -36,7 +35,6 @@ export function RegistrationView(props) {
 
         // automaticaly log in
         // props.onLoggedIn(username);
-
     };
 
     return (
@@ -67,13 +65,7 @@ export function RegistrationView(props) {
 
 /*
 // validate prop data types
+// see login-view for details on constraint based data validation
 RegistrationView.propTypes = {
     onLoggedIn: PropTypes.func.isRequired
-    // see login-view for details on constraint based data validation
-    userData: PropTypes.shape({
-        Username: PropTypes.string.isRequired,
-        Password: PropTypes.string.isRequired,
-        Email: PropTypes.string.isRequired,
-        Birthday: PropTypes.string // should be "date" (also in the form above), but that does not seem to be a valid data type
-    })
 }; */

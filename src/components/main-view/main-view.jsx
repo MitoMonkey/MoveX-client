@@ -7,6 +7,7 @@ import { MoveCard } from '../move-card/move-card';
 import { MoveView } from '../move-view/move-view';
 import { StyleView } from '../style-view/style-view';
 import { SourceView } from '../source-view/source-view';
+import { ProfileView } from '../profile-view/profile-view';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,7 +15,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 
 // library module for state-based routing. "BrowserRouter" relates to <Router> in the render() block
-import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Link, BrowserRouter } from "react-router-dom";
 
 import './main-view.scss';
 
@@ -74,6 +75,27 @@ export class MainView extends React.Component {
         });
     }
 
+    updateUserdata(newUserData) {
+        let token = localStorage.getItem('token');
+        let user = localStorage.getItem('user');
+        axios.put('https://move-x.herokuapp.com/users/' + user, newUserData, { headers: { Authorization: `Bearer ${token}` } })
+            .then(response => {
+                const data = response.data;
+                console.log(data);
+                alert('Userdata successfully updated. Returning to login screen.')
+                this.onLoggedOut();
+                window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+            })
+            .catch(e => {
+                console.log('error updating the user data for ' + user)
+            });
+    }
+
+    deleteUser(username) {
+        let token = localStorage.getItem('token');
+        let user = localStorage.getItem('user');
+    }
+
     render() {
         const { moves, user } = this.state;
 
@@ -101,14 +123,33 @@ export class MainView extends React.Component {
                                 </CardGroup>
                             );
                         }} />
+
                         <Route path="/register" render={() => {
                             if (user) return <Redirect to="/" />
                             return (<Col md={4}>
                                 <RegistrationView />
                             </Col>);
                         }} />
-                        <Route path="/moves/:moveId" render={({ match, history }) => {
+                        <Route path="/users/:username" render={({ match, history }) => {
+                            // make sure user is logged in
+                            if (!user) return (
+                                <Col md={4}>
+                                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+                                </Col>);
 
+                            // make sure users can only see their own profile
+                            if (match.params.username === user) return (
+                                <Col md={8}>
+                                    <ProfileView user={user} updateUserdata={newUserData => this.updateUserdata(newUserData)} onBackClick={() => history.goBack()} />
+                                </Col>
+                            );
+
+                            return (
+                                console.log('Username does not match the user that is currently logged in.')
+                            );
+                        }} />
+
+                        <Route path="/moves/:moveId" render={({ match, history }) => {
                             // make sure user is logged in
                             if (!user) return (
                                 <Col md={4}>
@@ -160,7 +201,7 @@ export class MainView extends React.Component {
                     <div className="user-bar">
                         <span>Logged in as {user}  </span>
                         <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>{'  '}
-                        <Button variant="primary" >Edit profile</Button>
+                        <a href={`/users/` + user} className="btn btn-primary">Edit profile</a>
                     </div>
                 </Row>
 

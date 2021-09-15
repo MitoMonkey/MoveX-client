@@ -8,6 +8,10 @@ body {
   background-color: #f1f1f1 !important;
 }
 
+a {
+  color: #009688 !important;
+}
+
 .app-container {
   font-family: "Glory", sans-serif;
 }
@@ -15,6 +19,7 @@ body {
 .btn-primary {
   background-color: #009688 !important;
   margin: 10px !important;
+  color: white !important;
 }
 
 .btn-primary:hover {
@@ -24,10 +29,6 @@ body {
 .btn-link {
   color: #009688 !important;
   padding: 0 !important;
-}
-
-a {
-  color: #009688 !important;
 }
 
 .Card {
