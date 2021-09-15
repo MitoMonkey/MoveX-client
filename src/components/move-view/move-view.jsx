@@ -21,7 +21,7 @@ export class MoveView extends React.Component {
                 </Col>
                 <Col>
                     <div className="move-title">
-                        <h1 className="value">Move Title: {move.Title}</h1>
+                        <h3 className="value">Move Title: {move.Title}</h3>
                     </div>
                     <div>
                         <Link to={`/styles/${move.Style.Name}`}>

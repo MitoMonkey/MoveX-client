@@ -134,7 +134,7 @@ export class MainView extends React.Component {
 
                             return (
                                 <Col md={8}>
-                                    <StyleView style={moves.find(m => m.Style.Name === match.params.name).Style} onBackClick={() => history.goBack()} />
+                                    <StyleView style={moves.find(m => m.Style.Name === match.params.name).Style} moves={moves.filter(m => m.Style.Name === match.params.name)} onBackClick={() => history.goBack()} />
                                 </Col>);
                         }} />
                         <Route path="/sources/:name" render={({ match, history }) => {
@@ -149,7 +149,7 @@ export class MainView extends React.Component {
 
                             return (
                                 <Col md={8}>
-                                    <SourceView source={moves.find(m => m.Source.Name === match.params.name).Source} onBackClick={() => history.goBack()} />
+                                    <SourceView source={moves.find(m => m.Source.Name === match.params.name).Source} moves={moves.filter(m => m.Source.Name === match.params.name)} onBackClick={() => history.goBack()} />
                                 </Col>);
                         }} />
 

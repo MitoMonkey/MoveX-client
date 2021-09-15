@@ -23090,6 +23090,8 @@ class MainView extends _reactDefault.default.Component {
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_styleView.StyleView, {
                                             style: moves.find((m)=>m.Style.Name === match.params.name
                                             ).Style,
+                                            moves: moves.filter((m)=>m.Style.Name === match.params.name
+                                            ),
                                             onBackClick: ()=>history.goBack()
                                         })
                                     }));
@@ -23120,6 +23122,8 @@ class MainView extends _reactDefault.default.Component {
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_sourceView.SourceView, {
                                             source: moves.find((m)=>m.Source.Name === match.params.name
                                             ).Source,
+                                            moves: moves.filter((m)=>m.Source.Name === match.params.name
+                                            ),
                                             onBackClick: ()=>history.goBack()
                                         })
                                     }));
@@ -26857,7 +26861,7 @@ class MoveView extends _reactDefault.default.Component {
                                 lineNumber: 23
                             },
                             __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsxs("h1", {
+                            children: /*#__PURE__*/ _jsxRuntime.jsxs("h3", {
                                 className: "value",
                                 __source: {
                                     fileName: "src/components/move-view/move-view.jsx",
@@ -29867,7 +29871,6 @@ $parcel$ReactRefreshHelpers$5fa3.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-// import { Link } from "react-router-dom";
 // import './style-view.scss';
 parcelHelpers.export(exports, "StyleView", ()=>StyleView
 );
@@ -29876,26 +29879,30 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _moveCard = require("../move-card/move-card");
+var _cardGroup = require("react-bootstrap/CardGroup");
+var _cardGroupDefault = parcelHelpers.interopDefault(_cardGroup);
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _reactRouterDom = require("react-router-dom");
 class StyleView extends _reactDefault.default.Component {
     render() {
-        const { style , onBackClick  } = this.props;
+        const { moves , style , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
             className: "style-view justify-content-md-center",
             __source: {
                 fileName: "src/components/style-view/style-view.jsx",
-                lineNumber: 16
+                lineNumber: 18
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                 __source: {
                     fileName: "src/components/style-view/style-view.jsx",
-                    lineNumber: 17
+                    lineNumber: 19
                 },
                 __self: this,
                 children: [
@@ -29903,18 +29910,18 @@ class StyleView extends _reactDefault.default.Component {
                         className: "style-name",
                         __source: {
                             fileName: "src/components/style-view/style-view.jsx",
-                            lineNumber: 18
+                            lineNumber: 20
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsxs("h3", {
                             className: "value",
                             __source: {
                                 fileName: "src/components/style-view/style-view.jsx",
-                                lineNumber: 19
+                                lineNumber: 21
                             },
                             __self: this,
                             children: [
-                                "Style Name: ",
+                                "Style: ",
                                 style.Name
                             ]
                         })
@@ -29923,7 +29930,7 @@ class StyleView extends _reactDefault.default.Component {
                         className: "style-description",
                         __source: {
                             fileName: "src/components/style-view/style-view.jsx",
-                            lineNumber: 21
+                            lineNumber: 23
                         },
                         __self: this,
                         children: [
@@ -29931,19 +29938,61 @@ class StyleView extends _reactDefault.default.Component {
                                 className: "label",
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 22
+                                    lineNumber: 24
                                 },
                                 __self: this,
-                                children: "Description: "
+                                children: "Style description: "
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsx("span", {
                                 className: "value",
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 23
+                                    lineNumber: 25
                                 },
                                 __self: this,
                                 children: style.Description
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        __source: {
+                            fileName: "src/components/style-view/style-view.jsx",
+                            lineNumber: 27
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("h4", {
+                                className: "style-moves",
+                                __source: {
+                                    fileName: "src/components/style-view/style-view.jsx",
+                                    lineNumber: 28
+                                },
+                                __self: this,
+                                children: "All moves in this style"
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx(_cardGroupDefault.default, {
+                                className: "justify-content-md-center",
+                                __source: {
+                                    fileName: "src/components/style-view/style-view.jsx",
+                                    lineNumber: 29
+                                },
+                                __self: this,
+                                children: moves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        __source: {
+                                            fileName: "src/components/style-view/style-view.jsx",
+                                            lineNumber: 31
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                                            move: m,
+                                            __source: {
+                                                fileName: "src/components/style-view/style-view.jsx",
+                                                lineNumber: 32
+                                            },
+                                            __self: this
+                                        })
+                                    }, m._id)
+                                )
                             })
                         ]
                     }),
@@ -29955,10 +30004,28 @@ class StyleView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/style-view/style-view.jsx",
-                            lineNumber: 26
+                            lineNumber: 37
                         },
                         __self: this,
                         children: "Back"
+                    }),
+                    '  ',
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                        to: `/`,
+                        __source: {
+                            fileName: "src/components/style-view/style-view.jsx",
+                            lineNumber: 38
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                            variant: "primary",
+                            __source: {
+                                fileName: "src/components/style-view/style-view.jsx",
+                                lineNumber: 39
+                            },
+                            __self: this,
+                            children: "Home"
+                        })
                     })
                 ]
             })
@@ -29966,6 +30033,7 @@ class StyleView extends _reactDefault.default.Component {
     }
 }
 // validate data types
+// "moves" is not validated here, because it was already validated in MoveView
 StyleView.propTypes = {
     style: _propTypesDefault.default.shape({
         Name: _propTypesDefault.default.string.isRequired,
@@ -29979,7 +30047,7 @@ StyleView.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN"}],"1gdtE":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","react-bootstrap/CardGroup":"lNZc4","react-router-dom":"cpyQW"}],"1gdtE":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$c28f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29988,7 +30056,6 @@ $parcel$ReactRefreshHelpers$c28f.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-// import { Link } from "react-router-dom";
 // import './source-view.scss';
 parcelHelpers.export(exports, "SourceView", ()=>SourceView
 );
@@ -29997,26 +30064,30 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _moveCard = require("../move-card/move-card");
+var _cardGroup = require("react-bootstrap/CardGroup");
+var _cardGroupDefault = parcelHelpers.interopDefault(_cardGroup);
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _reactRouterDom = require("react-router-dom");
 class SourceView extends _reactDefault.default.Component {
     render() {
-        const { source , onBackClick  } = this.props;
+        const { moves , source , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
             className: "source-view justify-content-md-center",
             __source: {
                 fileName: "src/components/source-view/source-view.jsx",
-                lineNumber: 16
+                lineNumber: 18
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                 __source: {
                     fileName: "src/components/source-view/source-view.jsx",
-                    lineNumber: 17
+                    lineNumber: 19
                 },
                 __self: this,
                 children: [
@@ -30024,14 +30095,14 @@ class SourceView extends _reactDefault.default.Component {
                         className: "source-name",
                         __source: {
                             fileName: "src/components/source-view/source-view.jsx",
-                            lineNumber: 18
+                            lineNumber: 20
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsxs("h3", {
                             className: "value",
                             __source: {
                                 fileName: "src/components/source-view/source-view.jsx",
-                                lineNumber: 19
+                                lineNumber: 21
                             },
                             __self: this,
                             children: [
@@ -30044,7 +30115,7 @@ class SourceView extends _reactDefault.default.Component {
                         className: "source-weblink",
                         __source: {
                             fileName: "src/components/source-view/source-view.jsx",
-                            lineNumber: 21
+                            lineNumber: 23
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsxs("a", {
@@ -30052,7 +30123,7 @@ class SourceView extends _reactDefault.default.Component {
                             target: "_blank",
                             __source: {
                                 fileName: "src/components/source-view/source-view.jsx",
-                                lineNumber: 22
+                                lineNumber: 24
                             },
                             __self: this,
                             children: [
@@ -30060,6 +30131,48 @@ class SourceView extends _reactDefault.default.Component {
                                 source.Weblink
                             ]
                         })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        __source: {
+                            fileName: "src/components/source-view/source-view.jsx",
+                            lineNumber: 26
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("h4", {
+                                className: "source-moves",
+                                __source: {
+                                    fileName: "src/components/source-view/source-view.jsx",
+                                    lineNumber: 27
+                                },
+                                __self: this,
+                                children: "All moves from this source"
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx(_cardGroupDefault.default, {
+                                className: "justify-content-md-center",
+                                __source: {
+                                    fileName: "src/components/source-view/source-view.jsx",
+                                    lineNumber: 28
+                                },
+                                __self: this,
+                                children: moves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        __source: {
+                                            fileName: "src/components/source-view/source-view.jsx",
+                                            lineNumber: 30
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                                            move: m,
+                                            __source: {
+                                                fileName: "src/components/source-view/source-view.jsx",
+                                                lineNumber: 31
+                                            },
+                                            __self: this
+                                        })
+                                    }, m._id)
+                                )
+                            })
+                        ]
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                         variant: "primary",
@@ -30069,17 +30182,35 @@ class SourceView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/source-view/source-view.jsx",
-                            lineNumber: 25
+                            lineNumber: 36
                         },
                         __self: this,
                         children: "Back"
+                    }),
+                    '  ',
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                        to: `/`,
+                        __source: {
+                            fileName: "src/components/source-view/source-view.jsx",
+                            lineNumber: 37
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                            variant: "primary",
+                            __source: {
+                                fileName: "src/components/source-view/source-view.jsx",
+                                lineNumber: 38
+                            },
+                            __self: this,
+                            children: "Home"
+                        })
                     })
                 ]
             })
         }));
     }
 }
-// validate data types
+/* validate data types */ // "moves" is not validated here, because it was already validated in MoveView
 SourceView.propTypes = {
     source: _propTypesDefault.default.shape({
         Name: _propTypesDefault.default.string.isRequired,
@@ -30093,7 +30224,7 @@ SourceView.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN"}],"2PRIq":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","react-bootstrap/CardGroup":"lNZc4","react-router-dom":"cpyQW"}],"2PRIq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _extends = require("@babel/runtime/helpers/esm/extends");
