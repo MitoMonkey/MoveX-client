@@ -28569,7 +28569,10 @@ function LoginView(props) {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
         // constraint validation
         const form = e.currentTarget;
-        if (form.checkValidity() === false) e.stopPropagation();
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+            console.log('invalid data: ' + e);
+        }
         setValidated(true);
         /* Send a request to the server for authentication */ _axiosDefault.default.post('https://move-x.herokuapp.com/login', {
             Username: username,
@@ -28587,7 +28590,7 @@ function LoginView(props) {
         validated: validated,
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 43
+            lineNumber: 44
         },
         __self: this,
         children: [
@@ -28595,14 +28598,14 @@ function LoginView(props) {
                 controlId: "formUsername",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 44
+                    lineNumber: 45
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 45
+                            lineNumber: 46
                         },
                         __self: this,
                         children: "Username:"
@@ -28614,7 +28617,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 46
+                            lineNumber: 47
                         },
                         __self: this
                     })
@@ -28624,14 +28627,14 @@ function LoginView(props) {
                 controlId: "formPassword",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 48
+                    lineNumber: 49
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 49
+                            lineNumber: 50
                         },
                         __self: this,
                         children: "Password:"
@@ -28643,7 +28646,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 50
+                            lineNumber: 51
                         },
                         __self: this
                     })
@@ -28655,7 +28658,7 @@ function LoginView(props) {
                 onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 52
+                    lineNumber: 53
                 },
                 __self: this,
                 children: "Submit"
@@ -28665,14 +28668,14 @@ function LoginView(props) {
                 to: `/register`,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 53
+                    lineNumber: 54
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                     variant: "primary",
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 54
+                        lineNumber: 55
                     },
                     __self: this,
                     children: "Register as new user"
@@ -29534,6 +29537,8 @@ RegistrationView.propTypes = {
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios"); // library for AJAX operations
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 // import PropTypes from 'prop-types';
 var _form = require("react-bootstrap/Form");
 var _formDefault = parcelHelpers.interopDefault(_form);
@@ -29551,7 +29556,7 @@ function RegistrationView(props) {
     const handleSubmit = (e)=>{
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
         // add user to database, and propt to root directory for login
-        axios.post('https://move-x.herokuapp.com/users', {
+        _axiosDefault.default.post('https://move-x.herokuapp.com/users', {
             Username: username,
             Password: password,
             Email: email,
@@ -29569,7 +29574,7 @@ function RegistrationView(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
         __source: {
             fileName: "src/components/registration-view/registration-view.jsx",
-            lineNumber: 40
+            lineNumber: 43
         },
         __self: this,
         children: [
@@ -29577,14 +29582,14 @@ function RegistrationView(props) {
                 controlId: "formUsername",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 41
+                    lineNumber: 44
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 42
+                            lineNumber: 45
                         },
                         __self: this,
                         children: "Username:"
@@ -29596,7 +29601,7 @@ function RegistrationView(props) {
                         ,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 43
+                            lineNumber: 46
                         },
                         __self: this
                     })
@@ -29606,14 +29611,14 @@ function RegistrationView(props) {
                 controlId: "formPassword",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 45
+                    lineNumber: 48
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 46
+                            lineNumber: 49
                         },
                         __self: this,
                         children: "Password:"
@@ -29625,7 +29630,7 @@ function RegistrationView(props) {
                         ,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 47
+                            lineNumber: 50
                         },
                         __self: this
                     })
@@ -29635,14 +29640,14 @@ function RegistrationView(props) {
                 controlId: "formEmail",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 49
+                    lineNumber: 52
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 50
+                            lineNumber: 53
                         },
                         __self: this,
                         children: "Email:"
@@ -29654,7 +29659,7 @@ function RegistrationView(props) {
                         ,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 51
+                            lineNumber: 54
                         },
                         __self: this
                     })
@@ -29664,14 +29669,14 @@ function RegistrationView(props) {
                 controlId: "formBirthday",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 53
+                    lineNumber: 56
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 54
+                            lineNumber: 57
                         },
                         __self: this,
                         children: "Birthday:"
@@ -29682,7 +29687,7 @@ function RegistrationView(props) {
                         ,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 55
+                            lineNumber: 58
                         },
                         __self: this
                     })
@@ -29694,7 +29699,7 @@ function RegistrationView(props) {
                 onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 57
+                    lineNumber: 60
                 },
                 __self: this,
                 children: "Submit"
@@ -29704,17 +29709,17 @@ function RegistrationView(props) {
                 to: `/`,
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 58
+                    lineNumber: 61
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                     variant: "primary",
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 59
+                        lineNumber: 62
                     },
                     __self: this,
-                    children: "Login"
+                    children: "Switch to Login"
                 })
             })
         ]
@@ -29730,7 +29735,7 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT","react-router-dom":"cpyQW"}],"jyMAr":[function() {},{}],"lNZc4":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT","react-router-dom":"cpyQW","axios":"iYoWk"}],"jyMAr":[function() {},{}],"lNZc4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _createWithBsPrefix = require("./createWithBsPrefix");

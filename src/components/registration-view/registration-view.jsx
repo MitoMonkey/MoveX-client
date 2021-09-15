@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // library for AJAX operations
 // import PropTypes from 'prop-types';
+
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
@@ -12,18 +14,9 @@ export function RegistrationView(props) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
-    const [validated, setValidated] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
-
-        // constraint validation
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            e.stopPropagation();
-            console.log('invalid data: ' + e);
-        }
-        setValidated(true);
 
         // add user to database, and propt to root directory for login
         axios.post('https://move-x.herokuapp.com/users', {
@@ -39,14 +32,15 @@ export function RegistrationView(props) {
             })
             .catch(e => {
                 console.log('error registering the user')
-            });
+            })
 
         // automaticaly log in
         // props.onLoggedIn(username);
+
     };
 
     return (
-        <Form noValidate validated={validated}>
+        <Form>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
                 <Form.Control type="text" required onChange={e => setUsername(e.target.value)} />
@@ -65,7 +59,7 @@ export function RegistrationView(props) {
             </Form.Group>
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{'  '}
             <Link to={`/`}>
-                <Button variant="primary">Login</Button>
+                <Button variant="primary">Switch to Login</Button>
             </Link>
         </Form>
     );
