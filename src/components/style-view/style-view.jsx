@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 // import './style-view.scss';
 
@@ -15,7 +15,7 @@ export class StyleView extends React.Component {
         return (
             <Row className="style-view justify-content-md-center">
                 <Col>
-                    <div className="style-title">
+                    <div className="style-name">
                         <h3 className="value">Style Name: {style.Name}</h3>
                     </div>
                     <div className="style-description">

@@ -23,14 +23,16 @@ export class MoveView extends React.Component {
                     <div className="move-title">
                         <h1 className="value">Move Title: {move.Title}</h1>
                     </div>
-                    <Link to={`/styles/${move.Style.Name}`}>
-                        <Button variant="link">Style: {move.Style.Name}</Button>
-                    </Link>
-                    {/* those views are not available yet
-                    <Link to={`/sources/${move.Source.Name}`}>
-                        <Button variant="link">Source</Button>
-                    </Link>
-                    */}
+                    <div>
+                        <Link to={`/styles/${move.Style.Name}`}>
+                            <Button variant="link">Style: {move.Style.Name}</Button>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to={`/sources/${move.Source.Name}`}>
+                            <Button variant="link">Source: {move.Source.Name}</Button>
+                        </Link>
+                    </div>
                     <div className="move-cues">
                         <span className="label">Cues: </span>
                         <span className="value">{move.Cues}</span>
