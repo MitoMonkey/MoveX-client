@@ -14,9 +14,12 @@ body {
 .btn-primary {
   background-color: #009688 !important;
 }
-
 .btn-primary:hover {
   color: $orange !important;
+}
+.btn-link {
+  color: #009688 !important;
+  padding: 0 !important;
 }
 
 a {

@@ -5,6 +5,7 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MoveCard } from '../move-card/move-card';
 import { MoveView } from '../move-view/move-view';
+import { StyleView } from '../style-view/style-view';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -87,7 +88,7 @@ export class MainView extends React.Component {
                                 </Col>);
 
                             // Loading page is displayed if no moves could be loaded
-                            if (moves.length === 0) return <div className="main-view">Loading...</div>;
+                            if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
 
                             return (
                                 <CardGroup className="justify-content-md-center">
@@ -114,28 +115,28 @@ export class MainView extends React.Component {
                                 </Col>);
 
                             // Loading page is displayed if no moves could be loaded
-                            if (moves.length === 0) return <div className="main-view">Loading...</div>;
+                            if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
 
                             return (<Col md={8}>
                                 <MoveView move={moves.find(m => m._id === match.params.moveId)} onBackClick={() => history.goBack()} />
                             </Col>);
                         }} />
-                        {/* Routes that are not ready yet (Views are missing)
                         <Route path="/styles/:name" render={({ match, history }) => {
                             // make sure user is logged in
                             if (!user) return (
-                            <Col md={4}>
-                                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                            </Col>);
+                                <Col md={4}>
+                                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+                                </Col>);
 
                             // Loading page is displayed if no moves could be loaded
-                            if (moves.length === 0) return <div className="main-view">Loading...</div>;
+                            if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
 
                             return (
-                            <Col md={8}>
-                                <StylesView style={moves.find(m => m.Style.Name === match.params.name).Style} onBackClick={() => history.goBack()} />
-                            </Col> );
+                                <Col md={8}>
+                                    <StyleView style={moves.find(m => m.Style.Name === match.params.name).Style} onBackClick={() => history.goBack()} />
+                                </Col>);
                         }} />
+                        {/* Routes that are not ready yet (Views are missing)
                         <Route exact path="/genres/:name" render={} />
                         */}
                     </Row>
