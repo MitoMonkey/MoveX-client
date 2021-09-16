@@ -16,9 +16,12 @@ a {
   font-family: "Glory", sans-serif;
 }
 
+.btn {
+  margin: 10px !important;
+}
+
 .btn-primary {
   background-color: #009688 !important;
-  margin: 10px !important;
   color: white !important;
 }
 

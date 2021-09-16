@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 // import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
+import { MoveCard } from '../move-card/move-card';
+import CardGroup from 'react-bootstrap/CardGroup';
 
 // import './profile-view.scss';
 
@@ -12,7 +15,6 @@ export function ProfileView(props) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
-    const [deleted, setDeleted] = useState('');
 
     const handleUpdate = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
@@ -68,11 +70,22 @@ export function ProfileView(props) {
             </div>
             <div className="delete-account">
                 <h3>Delete user account</h3>
-                <Button variant="warning" type="button" onClick={deleteAccount}>Delete account</Button>{'  '}
-                <p className="confirmation">{deleted}</p>
+                <Button variant="danger" type="button" onClick={deleteAccount}>Delete account</Button>{'  '}
+            </div>
+            <div className="user-favorites">
+                <h3>Your favorite moves</h3>
+                {props.favMoves
+                    ? <p>You did not choose any favorites yet.</p>
+                    : <CardGroup className="justify-content-md-center">
+                        {props.favMoves.map(m => (
+                            <Col key={m._id}>
+                                <MoveCard move={m} />
+                            </Col>))
+                        }
+                    </CardGroup>}
             </div>
             <Link to={`/`}>
-                <Button variant="primary">Home</Button>
+                <Button variant="primary">Back to all moves</Button>
             </Link>
         </>
     );
