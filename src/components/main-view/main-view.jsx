@@ -82,18 +82,28 @@ export class MainView extends React.Component {
             .then(response => {
                 const data = response.data;
                 console.log(data);
-                alert('Userdata successfully updated. Returning to login screen.')
+                alert('Userdata successfully updated. Returning to login screen.');
                 this.onLoggedOut();
-                window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+                window.open('/', '_self');
             })
             .catch(e => {
                 console.log('error updating the user data for ' + user)
             });
     }
 
-    deleteUser(username) {
+    deleteUser() {
         let token = localStorage.getItem('token');
         let user = localStorage.getItem('user');
+        axios.delete('https://move-x.herokuapp.com/users/' + user, { headers: { Authorization: `Bearer ${token}` } })
+            .then(response => {
+                console.log(response);
+                alert('User account successfully deleted. Returning to login screen.');
+                this.onLoggedOut();
+                window.open('/', '_self');
+            })
+            .catch(e => {
+                console.log('error deleting the account')
+            });
     }
 
     render() {
@@ -140,7 +150,7 @@ export class MainView extends React.Component {
                             // make sure users can only see their own profile
                             if (match.params.username === user) return (
                                 <Col md={8}>
-                                    <ProfileView user={user} updateUserdata={newUserData => this.updateUserdata(newUserData)} onBackClick={() => history.goBack()} />
+                                    <ProfileView user={user} updateUserdata={newUserData => this.updateUserdata(newUserData)} deleteUser={() => this.deleteUser()} onBackClick={() => history.goBack()} />
                                 </Col>
                             );
 

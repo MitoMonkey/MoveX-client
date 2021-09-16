@@ -24,22 +24,11 @@ export function ProfileView(props) {
         }
         // update user data in database
         props.updateUserdata(newUserData);
-
-        // automaticaly log in
-        // props.onLoggedIn(username);
     };
 
     const deleteAccount = () => {
         if (confirm("Do you realy want to permanently delete your user account?")) {
-            axios.delete('https://move-x.herokuapp.com/users/' + { username })
-                .then(response => {
-                    console.log(response);
-                    setDeleted('Profile successfully deleted.');
-                    // window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
-                })
-                .catch(e => {
-                    console.log('error deleting the account')
-                });
+            props.deleteUser();
         }
     };
 
