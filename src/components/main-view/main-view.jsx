@@ -81,24 +81,76 @@ export class MainView extends React.Component {
             const token = localStorage.getItem('token');
             const user = localStorage.getItem('user');
 
-            let newFavs = favs.concat(',' + moveID);
-            localStorage.setItem('favs', newFavs);
-            this.setState({
-                favs: newFavs
-            });
-
             axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
                 .then(response => {
                     const data = response.data;
                     console.log(data);
-                    window.open('/user/' + user, '_self');
+
+                    if (favs.length === 0) {
+                        let newFavs = favs.concat(moveID);
+                        localStorage.setItem('favs', newFavs);
+                        this.setState({
+                            favs: newFavs
+                        });
+                    }
+                    else {
+                        let newFavs = favs.concat(',' + moveID);
+                        localStorage.setItem('favs', newFavs);
+                        this.setState({
+                            favs: newFavs
+                        });
+                    }
+
+                    window.open('/users/' + user, '_self');
                 })
                 .catch(e => {
                     console.log('error adding ' + moveID + ' to user profile ' + user);
                 });
         }
     }
+    removeFavorite(moveID) {
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
+        axios.delete('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
+            .then(response => {
+                const data = response.data;
+                /*
+                console.log('FavoriteMoves: ' + data.FavoriteMoves);
+                console.log('FavoriteMoves.length ' + data.FavoriteMoves.length);
+                console.log('FavoriteMoves.toString().length ' + data.FavoriteMoves.toString().length);
+                */
 
+                let favs = this.state.favs;
+                //console.log(favs.length);
+                let newFavs = null;
+                if (data.FavoriteMoves.toString().length === favs.length) {
+                    return console.log('failed to delete move in database');
+                }
+                else {
+                    // if it is the only move in the list
+                    if (!favs.includes(',')) {
+                        newFavs = favs.replace(moveID, '');
+                    }
+                    // if there are multiple entries and moveID is the first in the list
+                    if (favs.indexOf(moveID) === 0 && favs.includes(',')) {
+                        newFavs = favs.replace(moveID + ',', '');
+                    }
+                    // if it is the last move in the list OR anywhere in the middle
+                    if (favs.indexOf(moveID) > 0) {
+                        newFavs = favs.replace(',' + moveID, '');
+                    }
+                    localStorage.setItem('favs', newFavs);
+                    this.setState({
+                        favs: newFavs
+                    });
+
+                    window.open('/users/' + user, '_self');
+                }
+            })
+            .catch(e => {
+                console.log('error removing ' + moveID + ' to user profile ' + user);
+            });
+    }
 
     onLoggedOut() {
         localStorage.removeItem('token');
@@ -108,6 +160,7 @@ export class MainView extends React.Component {
             user: null,
             favs: null
         });
+        window.open('/', '_self');
     }
 
     updateUserdata(newUserData) {
@@ -188,6 +241,7 @@ export class MainView extends React.Component {
                                     <ProfileView
                                         user={user}
                                         favMoves={moves.filter(m => favs.includes(m._id))}
+                                        removeFavorite={(moveId) => this.removeFavorite(moveId)}
                                         updateUserdata={newUserData => this.updateUserdata(newUserData)}
                                         deleteUser={() => this.deleteUser()}
                                         onBackClick={() => history.goBack()}

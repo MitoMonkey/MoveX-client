@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 export class MoveCard extends React.Component {
     render() {
-        const { move } = this.props; // = short for this.props.move, retrieving the parameter from main-view
+        const { move, removeFavorite } = this.props; // = short for this.props.move, retrieving the parameter from main-view
 
         return (
             <Card className="Card" >
@@ -21,6 +21,10 @@ export class MoveCard extends React.Component {
                     <Link to={`/moves/${move._id}`}>
                         <Button variant="primary">View details</Button>
                     </Link>
+                    {(!removeFavorite)
+                        ? <div></div>
+                        : <Button variant="primary" onClick={() => removeFavorite()} >Remove favorite</Button>
+                    }
                 </Card.Body>
             </Card>
         );

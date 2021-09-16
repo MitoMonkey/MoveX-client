@@ -34,6 +34,8 @@ export function ProfileView(props) {
         }
     };
 
+    // const removeFavorite = (moveId) => props.removeFavorite(moveId);
+
     return (
         <>
             <div className="user-data">
@@ -54,15 +56,15 @@ export function ProfileView(props) {
                     </Form.Group>
                     <Form.Group controlId="formPassword">
                         <Form.Label>Password:</Form.Label>
-                        <Form.Control type="password" placeholder={password} onChange={e => setPassword(e.target.value)} />
+                        <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
                     </Form.Group>
                     <Form.Group controlId="formEmail">
                         <Form.Label>Email:</Form.Label>
-                        <Form.Control type="email" placeholder={email} onChange={e => setEmail(e.target.value)} />
+                        <Form.Control type="email" onChange={e => setEmail(e.target.value)} />
                     </Form.Group>
                     <Form.Group controlId="formBirthday">
                         <Form.Label>Birthday:</Form.Label>
-                        <Form.Control type="date" placeholder={birthday} onChange={e => setBirthday(e.target.value)} />
+                        <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
                     </Form.Group>
                     <Button variant="primary" type="submit" onClick={handleUpdate}>Safe changes</Button>{'  '}
 
@@ -79,7 +81,7 @@ export function ProfileView(props) {
                     : <CardGroup className="justify-content-md-center">
                         {props.favMoves.map(m => (
                             <Col key={m._id}>
-                                <MoveCard move={m} />
+                                <MoveCard move={m} removeFavorite={() => props.removeFavorite(m._id)} />
                             </Col>))
                         }
                     </CardGroup>}
@@ -90,6 +92,8 @@ export function ProfileView(props) {
         </>
     );
 }
+
+// removeFavorite={() => removeFavorite(m._id)}
 
 /*
 // validate prop data types
