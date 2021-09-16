@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 export class MoveView extends React.Component {
     render() {
-        const { move, onBackClick } = this.props;
+        const { move, onBackClick, addToFavorites } = this.props;
         return (
             <Row className="move-view justify-content-md-center">
                 <Col md={1}>
@@ -41,7 +41,8 @@ export class MoveView extends React.Component {
                         <span className="label">Video: </span>
                         <a className="value" href={move.VideoURL}>{move.VideoURL}</a>
                     </div>
-                    <Button variant="primary" type="button" onClick={() => { onBackClick(); }}>Back</Button>
+                    <Button variant="primary" type="button" onClick={() => { addToFavorites() }}>Add to favorites</Button>
+                    <Button variant="primary" type="button" onClick={() => { onBackClick() }}>Back</Button>
                 </Col>
             </Row>
         )
@@ -66,5 +67,6 @@ MoveView.propTypes = {
         ImgURL: PropTypes.string,
         Featured: PropTypes.bool
     }).isRequired,
-    onBackClick: PropTypes.func.isRequired
+    onBackClick: PropTypes.func.isRequired,
+    addToFavorites: PropTypes.func.isRequired
 };

@@ -74,7 +74,7 @@ export function ProfileView(props) {
             </div>
             <div className="user-favorites">
                 <h3>Your favorite moves</h3>
-                {props.favMoves
+                {(!props.favMoves)
                     ? <p>You did not choose any favorites yet.</p>
                     : <CardGroup className="justify-content-md-center">
                         {props.favMoves.map(m => (

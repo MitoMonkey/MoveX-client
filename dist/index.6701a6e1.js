@@ -22969,6 +22969,30 @@ class MainView extends _reactDefault.default.Component {
             this.getMoves(accessToken);
         }
     }
+    addToFavorites(moveID) {
+        let favs = this.state.favs;
+        if (favs.includes(moveID)) return alert('this move is already in your list of favorites');
+        else {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            let newFavs = favs.concat(',' + moveID);
+            localStorage.setItem('favs', newFavs);
+            this.setState({
+                favs: newFavs
+            });
+            _axiosDefault.default.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((response)=>{
+                const data = response.data;
+                console.log(data);
+                window.open('/user/' + user, '_self');
+            }).catch((e)=>{
+                console.log('error adding ' + moveID + ' to user profile ' + user);
+            });
+        }
+    }
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -23018,14 +23042,14 @@ class MainView extends _reactDefault.default.Component {
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 120
+                        lineNumber: 149
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
                         className: "main-view justify-content-md-center",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 121
+                            lineNumber: 150
                         },
                         __self: this,
                         children: [
@@ -23058,7 +23082,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 122
+                                    lineNumber: 151
                                 },
                                 __self: this
                             }),
@@ -23076,7 +23100,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 143
+                                    lineNumber: 172
                                 },
                                 __self: this
                             }),
@@ -23108,7 +23132,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 149
+                                    lineNumber: 178
                                 },
                                 __self: this
                             }),
@@ -23133,12 +23157,14 @@ class MainView extends _reactDefault.default.Component {
                                             move: moves.find((m)=>m._id === match.params.moveId
                                             ),
                                             onBackClick: ()=>history.goBack()
+                                            ,
+                                            addToFavorites: ()=>this.addToFavorites(match.params.moveId)
                                         })
                                     }));
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 174
+                                    lineNumber: 203
                                 },
                                 __self: this
                             }),
@@ -23170,7 +23196,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 188
+                                    lineNumber: 221
                                 },
                                 __self: this
                             }),
@@ -23202,7 +23228,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 203
+                                    lineNumber: 236
                                 },
                                 __self: this
                             })
@@ -23212,21 +23238,21 @@ class MainView extends _reactDefault.default.Component {
                 /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 222
+                        lineNumber: 255
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                         className: "user-bar",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 223
+                            lineNumber: 256
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsxs("span", {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 224
+                                    lineNumber: 257
                                 },
                                 __self: this,
                                 children: [
@@ -23242,7 +23268,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 225
+                                    lineNumber: 258
                                 },
                                 __self: this,
                                 children: "Logout"
@@ -23253,7 +23279,7 @@ class MainView extends _reactDefault.default.Component {
                                 className: "btn btn-primary",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 226
+                                    lineNumber: 259
                                 },
                                 __self: this,
                                 children: "Edit profile"
@@ -26887,7 +26913,7 @@ var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _reactRouterDom = require("react-router-dom");
 class MoveView extends _reactDefault.default.Component {
     render() {
-        const { move , onBackClick  } = this.props;
+        const { move , onBackClick , addToFavorites  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
             className: "move-view justify-content-md-center",
             __source: {
@@ -27062,11 +27088,24 @@ class MoveView extends _reactDefault.default.Component {
                             variant: "primary",
                             type: "button",
                             onClick: ()=>{
-                                onBackClick();
+                                addToFavorites();
                             },
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
                                 lineNumber: 44
+                            },
+                            __self: this,
+                            children: "Add to favorites"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                            variant: "primary",
+                            type: "button",
+                            onClick: ()=>{
+                                onBackClick();
+                            },
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 45
                             },
                             __self: this,
                             children: "Back"
@@ -27095,7 +27134,8 @@ MoveView.propTypes = {
         ImgURL: _propTypesDefault.default.string,
         Featured: _propTypesDefault.default.bool
     }).isRequired,
-    onBackClick: _propTypesDefault.default.func.isRequired
+    onBackClick: _propTypesDefault.default.func.isRequired,
+    addToFavorites: _propTypesDefault.default.func.isRequired
 };
 
   $parcel$ReactRefreshHelpers$233b.postlude(module);
@@ -30575,7 +30615,7 @@ function ProfileView(props) {
                         __self: this,
                         children: "Your favorite moves"
                     }),
-                    props.favMoves ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                    !props.favMoves ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
                             lineNumber: 78

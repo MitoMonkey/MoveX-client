@@ -71,6 +71,35 @@ export class MainView extends React.Component {
         }
     }
 
+    addToFavorites(moveID) {
+        let favs = this.state.favs;
+
+        if (favs.includes(moveID)) {
+            return alert('this move is already in your list of favorites');
+        }
+        else {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+
+            let newFavs = favs.concat(',' + moveID);
+            localStorage.setItem('favs', newFavs);
+            this.setState({
+                favs: newFavs
+            });
+
+            axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
+                .then(response => {
+                    const data = response.data;
+                    console.log(data);
+                    window.open('/user/' + user, '_self');
+                })
+                .catch(e => {
+                    console.log('error adding ' + moveID + ' to user profile ' + user);
+                });
+        }
+    }
+
+
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -182,7 +211,11 @@ export class MainView extends React.Component {
                             if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
 
                             return (<Col md={8}>
-                                <MoveView move={moves.find(m => m._id === match.params.moveId)} onBackClick={() => history.goBack()} />
+                                <MoveView
+                                    move={moves.find(m => m._id === match.params.moveId)}
+                                    onBackClick={() => history.goBack()}
+                                    addToFavorites={() => this.addToFavorites(match.params.moveId)}
+                                />
                             </Col>);
                         }} />
                         <Route path="/styles/:name" render={({ match, history }) => {
