@@ -25,7 +25,8 @@ export class MainView extends React.Component {
         super();
         this.state = {
             moves: [],
-            user: null
+            user: null,
+            favs: []
         }
     }
 
@@ -48,20 +49,23 @@ export class MainView extends React.Component {
     onLoggedIn(authData) {
         console.log(authData);
         this.setState({
-            user: authData.user.Username
+            user: authData.user.Username,
+            favs: authData.user.FavoriteMoves
         });
         // safe user data and token locally so they do not have to log again until they click the "log out" button
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
+        localStorage.setItem('favs', authData.user.FavoriteMoves);
         this.getMoves(authData.token);
     }
 
     // make login data persistent
     componentDidMount() {
-        let accessToken = localStorage.getItem('token');
+        const accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
             this.setState({
-                user: localStorage.getItem('user')
+                user: localStorage.getItem('user'),
+                favs: localStorage.getItem('favs')
             });
             this.getMoves(accessToken);
         }
@@ -70,14 +74,16 @@ export class MainView extends React.Component {
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        localStorage.removeItem('favs');
         this.setState({
-            user: null
+            user: null,
+            favs: null
         });
     }
 
     updateUserdata(newUserData) {
-        let token = localStorage.getItem('token');
-        let user = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
         axios.put('https://move-x.herokuapp.com/users/' + user, newUserData, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 const data = response.data;
@@ -92,8 +98,8 @@ export class MainView extends React.Component {
     }
 
     deleteUser() {
-        let token = localStorage.getItem('token');
-        let user = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
         axios.delete('https://move-x.herokuapp.com/users/' + user, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 console.log(response);
@@ -107,7 +113,7 @@ export class MainView extends React.Component {
     }
 
     render() {
-        const { moves, user } = this.state;
+        const { moves, user, favs } = this.state;
 
         return (
             <>
@@ -150,7 +156,13 @@ export class MainView extends React.Component {
                             // make sure users can only see their own profile
                             if (match.params.username === user) return (
                                 <Col md={8}>
-                                    <ProfileView user={user} updateUserdata={newUserData => this.updateUserdata(newUserData)} deleteUser={() => this.deleteUser()} onBackClick={() => history.goBack()} />
+                                    <ProfileView
+                                        user={user}
+                                        favMoves={moves.filter(m => favs.includes(m._id))}
+                                        updateUserdata={newUserData => this.updateUserdata(newUserData)}
+                                        deleteUser={() => this.deleteUser()}
+                                        onBackClick={() => history.goBack()}
+                                    />
                                 </Col>
                             );
 
