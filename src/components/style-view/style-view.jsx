@@ -20,11 +20,11 @@ export class StyleView extends React.Component {
                     <Col md={8}>
                         <h3>Style Details</h3>
                         <div className="style-name">
-                            <strong><span>Style name: </span>
+                            <strong><span className="label">Style name: </span>
                                 <span>{style.Name}</span></strong>
                         </div>
                         <div className="style-description">
-                            <span>{style.Description}</span>
+                            <span className="value">{style.Description}</span>
                         </div>
                     </Col>
                 </Row>

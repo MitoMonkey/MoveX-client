@@ -41,15 +41,24 @@ export function RegistrationView(props) {
         <Form>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
-                <Form.Control type="text" required onChange={e => setUsername(e.target.value)} />
+                <Form.Control type="text" placeholder={'Username'} required onChange={e => setUsername(e.target.value)} />
             </Form.Group>
             <Form.Group controlId="formPassword">
                 <Form.Label>Password:</Form.Label>
-                <Form.Control type="password" required onChange={e => setPassword(e.target.value)} />
+                <Form.Control
+                    type="password"
+                    aria-describedby="passwordHelpBlock"
+                    required
+                    placeholder={'Password'}
+                    onChange={e => setPassword(e.target.value)} />
+                <Form.Text id="passwordHelpBlock" muted>
+                    Your password must be 8-20 characters long, contain letters and numbers, and
+                    must not contain spaces, special characters, or emoji.
+                </Form.Text>
             </Form.Group>
             <Form.Group controlId="formEmail">
                 <Form.Label>Email:</Form.Label>
-                <Form.Control type="email" required onChange={e => setEmail(e.target.value)} />
+                <Form.Control type="email" required placeholder={'Email'} onChange={e => setEmail(e.target.value)} />
             </Form.Group>
             <Form.Group controlId="formBirthday">
                 <Form.Label>Birthday:</Form.Label>
@@ -58,10 +67,12 @@ export function RegistrationView(props) {
             <Form.Group className="mb-3" controlId="formTerms">
                 <Form.Check type="checkbox" label="I agree to the terms and conditions, as well as the data privacy statement." />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{'  '}
-            <Link to={`/`}>
-                <Button variant="primary">Switch to Login</Button>
-            </Link>
+            <div className="text-center">
+                <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{'  '}
+                <Link to={`/`}>
+                    <Button variant="primary">Switch to Login</Button>
+                </Link>
+            </div>
         </Form>
     );
 }

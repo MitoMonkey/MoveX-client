@@ -13,24 +13,29 @@ export class MoveView extends React.Component {
     render() {
         const { move, onBackClick, addToFavorites } = this.props;
         return (
-            <Row className="move-view justify-content-center">
+            <Row className="move-view justify-content-center text-center">
                 {/*<Col md={1}>
                     <div className="move-Poster">
                         <img src={move.ImgURL} />
                     </div>
                 </Col> */}
                 <Col sm={12} md={8}>
+                    <h3>Move details</h3>
                     <div className="move-title">
-                        <h3 className="value">Move Title: {move.Title}</h3>
+                        <strong><span className="label">Move Title: </span>
+                            <span className="value">{move.Title}</span>
+                        </strong>
                     </div>
-                    <div>
+                    <div className="move-style">
+                        <span className="label">Style: </span>
                         <Link to={`/styles/${move.Style.Name}`}>
-                            <Button variant="link">Style: {move.Style.Name}</Button>
+                            <Button variant="link">{move.Style.Name}</Button>
                         </Link>
                     </div>
-                    <div>
+                    <div className="move-source">
+                        <span className="label">Source: </span>
                         <Link to={`/sources/${move.Source.Name}`}>
-                            <Button variant="link">Source: {move.Source.Name}</Button>
+                            <Button variant="link">{move.Source.Name}</Button>
                         </Link>
                     </div>
                     <div className="move-cues">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -37,9 +37,8 @@ export function ProfileView(props) {
 
     return (
         <>
-
-            <Col className="user-data align-items-center" sm={12} lg={6}>
-                <h3>Currently logged in as:</h3>
+            <Col className="user-data text-center" sm={12} lg={6}>
+                <h3>User Profile</h3>
                 <p>Username: {props.user}</p>
                 {/* data that has not been transmitted through a prop
                     <p>Password: {password}</p>
@@ -48,8 +47,8 @@ export function ProfileView(props) {
                     */}
 
                 <h3>Update user data</h3>
-                <Form>
-                    <Row>
+                <Form className="userData-form text-left ">
+                    <Row className="justify-content-center justify-content-lg-start">
                         <Col sm={4} lg={6}>
                             <Form.Group controlId="formUsername">
                                 <Form.Label>Username:</Form.Label>
@@ -72,7 +71,7 @@ export function ProfileView(props) {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className="justify-content-center">
                         <Col sm={6} lg={8}>
                             <Form.Group controlId="formEmail">
                                 <Form.Label>Email:</Form.Label>
@@ -80,25 +79,27 @@ export function ProfileView(props) {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className="justify-content-center ">
                         <Col sm={4} lg={8}>
                             <Form.Group controlId="formBirthday">
                                 <Form.Label>Birthday:</Form.Label>
                                 <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
                             </Form.Group>
                         </Col>
+                    </Row>
+                    <Row className="justify-content-center text-center">
                         <Col >
                             <Button variant="primary" type="submit" onClick={handleUpdate}>Safe changes</Button>{'  '}
                         </Col>
                     </Row>
                 </Form>
-                <div className="delete-account">
+                <div className="delete-account text-center">
                     <h3>Delete user account</h3>
                     <Button variant="danger" type="button" onClick={deleteAccount}>Delete account</Button>{'  '}
                 </div>
             </Col>
 
-            <Col className="align-items-center">
+            <Col className="text-center">
                 <div className="user-favorites">
                     <h3>Your favorite moves</h3>
                     {(!props.favMoves)
@@ -119,11 +120,26 @@ export function ProfileView(props) {
     );
 }
 
-// removeFavorite={() => removeFavorite(m._id)}
-
-/*
 // validate prop data types
-RegistrationView.propTypes = {
-    onLoggedIn: PropTypes.func.isRequired
-    // see login-view for details on constraint based data validation
-}; */
+ProfileView.propTypes = {
+    user: PropTypes.string.isRequired,
+    updateUserdata: PropTypes.func.isRequired,
+    removeFavorite: PropTypes.func.isRequired,
+    deleteUser: PropTypes.func.isRequired,
+    favMoves: PropTypes.arrayOf(PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        Title: PropTypes.string.isRequired,
+        Cues: PropTypes.string.isRequired,
+        Style: PropTypes.shape({
+            Name: PropTypes.string.isRequired,
+            Description: PropTypes.string.isRequired
+        }).isRequired,
+        Source: PropTypes.shape({
+            Name: PropTypes.string.isRequired,
+            Weblink: PropTypes.string.isRequired
+        }).isRequired,
+        VideoURL: PropTypes.string.isRequired,
+        ImgURL: PropTypes.string,
+        Featured: PropTypes.bool
+    })).isRequired
+};

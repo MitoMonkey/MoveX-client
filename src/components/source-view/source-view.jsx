@@ -18,14 +18,15 @@ export class SourceView extends React.Component {
             <>
                 <Row className="justify-content-center text-center">
                     <Col md={8}>
-                        <h3 className="value">Source details</h3>
+                        <h3>Source details</h3>
                         <div className="source-name">
-                            <span>Source name: </span>
-                            <span className="value">{source.Name}</span>
+                            <strong><span className="label">Source name: </span>
+                                <span className="value">{source.Name}</span>
+                            </strong>
                         </div>
                         <div className="source-weblink">
-                            <span>Weblink: </span>
-                            <a href={source.Weblink} target="_blank">{source.Weblink}</a>
+                            <span className="label">Weblink: </span>
+                            <a className="value" href={source.Weblink} target="_blank">{source.Weblink}</a>
                         </div>
 
                     </Col>
