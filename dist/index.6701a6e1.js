@@ -953,6 +953,7 @@ var _indexScss = require("./index.scss");
 class MoveXApplication extends _reactDefault.default.Component {
     render() {
         return(/*#__PURE__*/ _jsxRuntime.jsx(_containerDefault.default, {
+            fluid: true,
             __source: {
                 fileName: "src/index.jsx",
                 lineNumber: 11
@@ -23010,12 +23011,7 @@ class MainView extends _reactDefault.default.Component {
             }
         }).then((response)=>{
             const data = response.data;
-            /*
-                console.log('FavoriteMoves: ' + data.FavoriteMoves);
-                console.log('FavoriteMoves.length ' + data.FavoriteMoves.length);
-                console.log('FavoriteMoves.toString().length ' + data.FavoriteMoves.toString().length);
-                */ let favs = this.state.favs;
-            //console.log(favs.length);
+            let favs = this.state.favs;
             let newFavs = null;
             if (data.FavoriteMoves.toString().length === favs.length) return console.log('failed to delete move in database');
             else {
@@ -23085,14 +23081,14 @@ class MainView extends _reactDefault.default.Component {
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 202
+                        lineNumber: 195
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
-                        className: "main-view justify-content-md-center",
+                        className: "main-view justify-content-center",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 203
+                            lineNumber: 196
                         },
                         __self: this,
                         children: [
@@ -23113,9 +23109,11 @@ class MainView extends _reactDefault.default.Component {
                                         children: "Failed to load the moves database. Check console for details."
                                     }));
                                     return(/*#__PURE__*/ _jsxRuntime.jsx(_cardGroupDefault.default, {
-                                        className: "justify-content-md-center",
+                                        className: "justify-content-center",
                                         children: moves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                                md: 3,
+                                                sm: 6,
+                                                md: 4,
+                                                lg: 3,
                                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
                                                     move: m
                                                 })
@@ -23125,7 +23123,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 204
+                                    lineNumber: 197
                                 },
                                 __self: this
                             }),
@@ -23143,7 +23141,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 225
+                                    lineNumber: 218
                                 },
                                 __self: this
                             }),
@@ -23158,26 +23156,23 @@ class MainView extends _reactDefault.default.Component {
                                         })
                                     }));
                                     // make sure users can only see their own profile
-                                    if (match.params.username === user) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                        md: 8,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_profileView.ProfileView, {
-                                            user: user,
-                                            favMoves: moves.filter((m)=>favs.includes(m._id)
-                                            ),
-                                            removeFavorite: (moveId)=>this.removeFavorite(moveId)
-                                            ,
-                                            updateUserdata: (newUserData)=>this.updateUserdata(newUserData)
-                                            ,
-                                            deleteUser: ()=>this.deleteUser()
-                                            ,
-                                            onBackClick: ()=>history.goBack()
-                                        })
+                                    if (match.params.username === user) return(/*#__PURE__*/ _jsxRuntime.jsx(_profileView.ProfileView, {
+                                        user: user,
+                                        favMoves: moves.filter((m)=>favs.includes(m._id)
+                                        ),
+                                        removeFavorite: (moveId)=>this.removeFavorite(moveId)
+                                        ,
+                                        updateUserdata: (newUserData)=>this.updateUserdata(newUserData)
+                                        ,
+                                        deleteUser: ()=>this.deleteUser()
+                                        ,
+                                        onBackClick: ()=>history.goBack()
                                     }));
                                     return console.log('Username does not match the user that is currently logged in.');
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 231
+                                    lineNumber: 224
                                 },
                                 __self: this
                             }),
@@ -23196,20 +23191,17 @@ class MainView extends _reactDefault.default.Component {
                                         className: "main-view",
                                         children: "Failed to load the moves database. Check console for details."
                                     }));
-                                    return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                        md: 8,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveView.MoveView, {
-                                            move: moves.find((m)=>m._id === match.params.moveId
-                                            ),
-                                            onBackClick: ()=>history.goBack()
-                                            ,
-                                            addToFavorites: ()=>this.addToFavorites(match.params.moveId)
-                                        })
+                                    return(/*#__PURE__*/ _jsxRuntime.jsx(_moveView.MoveView, {
+                                        move: moves.find((m)=>m._id === match.params.moveId
+                                        ),
+                                        onBackClick: ()=>history.goBack()
+                                        ,
+                                        addToFavorites: ()=>this.addToFavorites(match.params.moveId)
                                     }));
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 257
+                                    lineNumber: 250
                                 },
                                 __self: this
                             }),
@@ -23228,20 +23220,17 @@ class MainView extends _reactDefault.default.Component {
                                         className: "main-view",
                                         children: "Failed to load the moves database. Check console for details."
                                     }));
-                                    return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                        md: 8,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_styleView.StyleView, {
-                                            style: moves.find((m)=>m.Style.Name === match.params.name
-                                            ).Style,
-                                            moves: moves.filter((m)=>m.Style.Name === match.params.name
-                                            ),
-                                            onBackClick: ()=>history.goBack()
-                                        })
+                                    return(/*#__PURE__*/ _jsxRuntime.jsx(_styleView.StyleView, {
+                                        style: moves.find((m)=>m.Style.Name === match.params.name
+                                        ).Style,
+                                        moves: moves.filter((m)=>m.Style.Name === match.params.name
+                                        ),
+                                        onBackClick: ()=>history.goBack()
                                     }));
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 275
+                                    lineNumber: 268
                                 },
                                 __self: this
                             }),
@@ -23260,20 +23249,17 @@ class MainView extends _reactDefault.default.Component {
                                         className: "main-view",
                                         children: "Failed to load the moves database. Check console for details."
                                     }));
-                                    return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                        md: 8,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_sourceView.SourceView, {
-                                            source: moves.find((m)=>m.Source.Name === match.params.name
-                                            ).Source,
-                                            moves: moves.filter((m)=>m.Source.Name === match.params.name
-                                            ),
-                                            onBackClick: ()=>history.goBack()
-                                        })
+                                    return(/*#__PURE__*/ _jsxRuntime.jsx(_sourceView.SourceView, {
+                                        source: moves.find((m)=>m.Source.Name === match.params.name
+                                        ).Source,
+                                        moves: moves.filter((m)=>m.Source.Name === match.params.name
+                                        ),
+                                        onBackClick: ()=>history.goBack()
                                     }));
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 290
+                                    lineNumber: 282
                                 },
                                 __self: this
                             })
@@ -23281,23 +23267,24 @@ class MainView extends _reactDefault.default.Component {
                     })
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                    className: "justify-content-center",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 309
+                        lineNumber: 300
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                         className: "user-bar",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 310
+                            lineNumber: 301
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsxs("span", {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 311
+                                    lineNumber: 302
                                 },
                                 __self: this,
                                 children: [
@@ -23313,7 +23300,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 312
+                                    lineNumber: 303
                                 },
                                 __self: this,
                                 children: "Logout"
@@ -23324,7 +23311,7 @@ class MainView extends _reactDefault.default.Component {
                                 className: "btn btn-primary",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 313
+                                    lineNumber: 304
                                 },
                                 __self: this,
                                 children: "Edit profile"
@@ -26976,205 +26963,181 @@ var _reactRouterDom = require("react-router-dom");
 class MoveView extends _reactDefault.default.Component {
     render() {
         const { move , onBackClick , addToFavorites  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
-            className: "move-view justify-content-md-center",
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+            className: "move-view justify-content-center",
             __source: {
                 fileName: "src/components/move-view/move-view.jsx",
                 lineNumber: 16
             },
             __self: this,
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                    md: 1,
-                    __source: {
-                        fileName: "src/components/move-view/move-view.jsx",
-                        lineNumber: 17
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                        className: "move-Poster",
+            children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                sm: 12,
+                md: 8,
+                __source: {
+                    fileName: "src/components/move-view/move-view.jsx",
+                    lineNumber: 22
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        className: "move-title",
                         __source: {
                             fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 18
+                            lineNumber: 23
                         },
                         __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
-                            src: move.ImgURL,
+                        children: /*#__PURE__*/ _jsxRuntime.jsxs("h3", {
+                            className: "value",
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 19
-                            },
-                            __self: this
-                        })
-                    })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
-                    __source: {
-                        fileName: "src/components/move-view/move-view.jsx",
-                        lineNumber: 22
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            className: "move-title",
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 23
+                                lineNumber: 24
                             },
                             __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsxs("h3", {
-                                className: "value",
+                            children: [
+                                "Move Title: ",
+                                move.Title
+                            ]
+                        })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 26
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                            to: `/styles/${move.Style.Name}`,
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 27
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsxs(_buttonDefault.default, {
+                                variant: "link",
                                 __source: {
                                     fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 24
+                                    lineNumber: 28
                                 },
                                 __self: this,
                                 children: [
-                                    "Move Title: ",
-                                    move.Title
+                                    "Style: ",
+                                    move.Style.Name
                                 ]
                             })
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 26
-                            },
-                            __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                to: `/styles/${move.Style.Name}`,
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 27
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsxs(_buttonDefault.default, {
-                                    variant: "link",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 28
-                                    },
-                                    __self: this,
-                                    children: [
-                                        "Style: ",
-                                        move.Style.Name
-                                    ]
-                                })
-                            })
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 31
-                            },
-                            __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                to: `/sources/${move.Source.Name}`,
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 32
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsxs(_buttonDefault.default, {
-                                    variant: "link",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 33
-                                    },
-                                    __self: this,
-                                    children: [
-                                        "Source: ",
-                                        move.Source.Name
-                                    ]
-                                })
-                            })
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                            className: "move-cues",
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 36
-                            },
-                            __self: this,
-                            children: [
-                                /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                    className: "label",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 37
-                                    },
-                                    __self: this,
-                                    children: "Cues: "
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                    className: "value",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 38
-                                    },
-                                    __self: this,
-                                    children: move.Cues
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                            className: "move-videoLink",
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 40
-                            },
-                            __self: this,
-                            children: [
-                                /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                    className: "label",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 41
-                                    },
-                                    __self: this,
-                                    children: "Video: "
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                                    className: "value",
-                                    href: move.VideoURL,
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 42
-                                    },
-                                    __self: this,
-                                    children: move.VideoURL
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            variant: "primary",
-                            type: "button",
-                            onClick: ()=>{
-                                addToFavorites();
-                            },
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 44
-                            },
-                            __self: this,
-                            children: "Add to favorites"
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            variant: "primary",
-                            type: "button",
-                            onClick: ()=>{
-                                onBackClick();
-                            },
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 45
-                            },
-                            __self: this,
-                            children: "Back"
                         })
-                    ]
-                })
-            ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 31
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                            to: `/sources/${move.Source.Name}`,
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 32
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsxs(_buttonDefault.default, {
+                                variant: "link",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 33
+                                },
+                                __self: this,
+                                children: [
+                                    "Source: ",
+                                    move.Source.Name
+                                ]
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "move-cues",
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 36
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                className: "label",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 37
+                                },
+                                __self: this,
+                                children: "Cues: "
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                className: "value",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 38
+                                },
+                                __self: this,
+                                children: move.Cues
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "move-videoLink",
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 40
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                className: "label",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 41
+                                },
+                                __self: this,
+                                children: "Video: "
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx("a", {
+                                className: "value",
+                                href: move.VideoURL,
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 42
+                                },
+                                __self: this,
+                                children: move.VideoURL
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                        variant: "primary",
+                        type: "button",
+                        onClick: ()=>{
+                            addToFavorites();
+                        },
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 44
+                        },
+                        __self: this,
+                        children: "Add to favorites"
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                        variant: "primary",
+                        type: "button",
+                        onClick: ()=>{
+                            onBackClick();
+                        },
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 45
+                        },
+                        __self: this,
+                        children: "Back"
+                    })
+                ]
+            })
         }));
     }
 }
@@ -29982,13 +29945,31 @@ function RegistrationView(props) {
                     })
                 ]
             }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Group, {
+                className: "mb-3",
+                controlId: "formTerms",
+                __source: {
+                    fileName: "src/components/registration-view/registration-view.jsx",
+                    lineNumber: 58
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Check, {
+                    type: "checkbox",
+                    label: "I agree to the terms and conditions, as well as the data privacy statement.",
+                    __source: {
+                        fileName: "src/components/registration-view/registration-view.jsx",
+                        lineNumber: 59
+                    },
+                    __self: this
+                })
+            }),
             /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                 variant: "primary",
                 type: "submit",
                 onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 58
+                    lineNumber: 61
                 },
                 __self: this,
                 children: "Submit"
@@ -29998,14 +29979,14 @@ function RegistrationView(props) {
                 to: `/`,
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 59
+                    lineNumber: 62
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                     variant: "primary",
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 60
+                        lineNumber: 63
                     },
                     __self: this,
                     children: "Switch to Login"
@@ -30061,72 +30042,94 @@ var _reactRouterDom = require("react-router-dom");
 class StyleView extends _reactDefault.default.Component {
     render() {
         const { moves , style , onBackClick  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-            className: "style-view justify-content-md-center",
-            __source: {
-                fileName: "src/components/style-view/style-view.jsx",
-                lineNumber: 18
-            },
-            __self: this,
-            children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
-                __source: {
-                    fileName: "src/components/style-view/style-view.jsx",
-                    lineNumber: 19
-                },
-                __self: this,
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                        className: "style-name",
+        return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                    className: "justify-content-center",
+                    __source: {
+                        fileName: "src/components/style-view/style-view.jsx",
+                        lineNumber: 19
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                        md: 8,
                         __source: {
                             fileName: "src/components/style-view/style-view.jsx",
                             lineNumber: 20
                         },
                         __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsxs("h3", {
-                            className: "value",
-                            __source: {
-                                fileName: "src/components/style-view/style-view.jsx",
-                                lineNumber: 21
-                            },
-                            __self: this,
-                            children: [
-                                "Style: ",
-                                style.Name
-                            ]
-                        })
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "style-description",
-                        __source: {
-                            fileName: "src/components/style-view/style-view.jsx",
-                            lineNumber: 23
-                        },
-                        __self: this,
                         children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "label",
+                            /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 24
+                                    lineNumber: 21
                                 },
                                 __self: this,
-                                children: "Style description: "
+                                children: "Style Details"
                             }),
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "value",
+                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                className: "style-name",
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 25
+                                    lineNumber: 22
                                 },
                                 __self: this,
-                                children: style.Description
+                                children: /*#__PURE__*/ _jsxRuntime.jsxs("strong", {
+                                    __source: {
+                                        fileName: "src/components/style-view/style-view.jsx",
+                                        lineNumber: 23
+                                    },
+                                    __self: this,
+                                    children: [
+                                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                            __source: {
+                                                fileName: "src/components/style-view/style-view.jsx",
+                                                lineNumber: 23
+                                            },
+                                            __self: this,
+                                            children: "Style name: "
+                                        }),
+                                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                            __source: {
+                                                fileName: "src/components/style-view/style-view.jsx",
+                                                lineNumber: 24
+                                            },
+                                            __self: this,
+                                            children: style.Name
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                className: "style-description",
+                                __source: {
+                                    fileName: "src/components/style-view/style-view.jsx",
+                                    lineNumber: 26
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                    __source: {
+                                        fileName: "src/components/style-view/style-view.jsx",
+                                        lineNumber: 27
+                                    },
+                                    __self: this,
+                                    children: style.Description
+                                })
                             })
                         ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    })
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                    className: "justify-content-center text-center",
+                    __source: {
+                        fileName: "src/components/style-view/style-view.jsx",
+                        lineNumber: 31
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                         __source: {
                             fileName: "src/components/style-view/style-view.jsx",
-                            lineNumber: 27
+                            lineNumber: 32
                         },
                         __self: this,
                         children: [
@@ -30134,7 +30137,7 @@ class StyleView extends _reactDefault.default.Component {
                                 className: "style-moves",
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 28
+                                    lineNumber: 33
                                 },
                                 __self: this,
                                 children: "All moves in this style"
@@ -30143,61 +30146,64 @@ class StyleView extends _reactDefault.default.Component {
                                 className: "justify-content-md-center",
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 29
+                                    lineNumber: 34
                                 },
                                 __self: this,
                                 children: moves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        sm: 6,
+                                        md: 4,
+                                        lg: 3,
                                         __source: {
                                             fileName: "src/components/style-view/style-view.jsx",
-                                            lineNumber: 31
+                                            lineNumber: 36
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
                                             move: m,
                                             __source: {
                                                 fileName: "src/components/style-view/style-view.jsx",
-                                                lineNumber: 32
+                                                lineNumber: 37
                                             },
                                             __self: this
                                         })
                                     }, m._id)
                                 )
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                variant: "primary",
+                                type: "button",
+                                onClick: ()=>{
+                                    onBackClick();
+                                },
+                                __source: {
+                                    fileName: "src/components/style-view/style-view.jsx",
+                                    lineNumber: 41
+                                },
+                                __self: this,
+                                children: "Back"
+                            }),
+                            '  ',
+                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                to: `/`,
+                                __source: {
+                                    fileName: "src/components/style-view/style-view.jsx",
+                                    lineNumber: 42
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                    variant: "primary",
+                                    __source: {
+                                        fileName: "src/components/style-view/style-view.jsx",
+                                        lineNumber: 43
+                                    },
+                                    __self: this,
+                                    children: "Home"
+                                })
                             })
                         ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                        variant: "primary",
-                        type: "button",
-                        onClick: ()=>{
-                            onBackClick();
-                        },
-                        __source: {
-                            fileName: "src/components/style-view/style-view.jsx",
-                            lineNumber: 37
-                        },
-                        __self: this,
-                        children: "Back"
-                    }),
-                    '  ',
-                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                        to: `/`,
-                        __source: {
-                            fileName: "src/components/style-view/style-view.jsx",
-                            lineNumber: 38
-                        },
-                        __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            variant: "primary",
-                            __source: {
-                                fileName: "src/components/style-view/style-view.jsx",
-                                lineNumber: 39
-                            },
-                            __self: this,
-                            children: "Home"
-                        })
                     })
-                ]
-            })
+                })
+            ]
         }));
     }
 }
@@ -30246,65 +30252,101 @@ var _reactRouterDom = require("react-router-dom");
 class SourceView extends _reactDefault.default.Component {
     render() {
         const { moves , source , onBackClick  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-            className: "source-view justify-content-md-center",
-            __source: {
-                fileName: "src/components/source-view/source-view.jsx",
-                lineNumber: 18
-            },
-            __self: this,
-            children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
-                __source: {
-                    fileName: "src/components/source-view/source-view.jsx",
-                    lineNumber: 19
-                },
-                __self: this,
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                        className: "source-name",
+        return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                    className: "justify-content-center text-center",
+                    __source: {
+                        fileName: "src/components/source-view/source-view.jsx",
+                        lineNumber: 19
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                        md: 8,
                         __source: {
                             fileName: "src/components/source-view/source-view.jsx",
                             lineNumber: 20
                         },
                         __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsxs("h3", {
-                            className: "value",
-                            __source: {
-                                fileName: "src/components/source-view/source-view.jsx",
-                                lineNumber: 21
-                            },
-                            __self: this,
-                            children: [
-                                "Source Name: ",
-                                source.Name
-                            ]
-                        })
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                        className: "source-weblink",
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("h3", {
+                                className: "value",
+                                __source: {
+                                    fileName: "src/components/source-view/source-view.jsx",
+                                    lineNumber: 21
+                                },
+                                __self: this,
+                                children: "Source details"
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                className: "source-name",
+                                __source: {
+                                    fileName: "src/components/source-view/source-view.jsx",
+                                    lineNumber: 22
+                                },
+                                __self: this,
+                                children: [
+                                    /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                        __source: {
+                                            fileName: "src/components/source-view/source-view.jsx",
+                                            lineNumber: 23
+                                        },
+                                        __self: this,
+                                        children: "Source name: "
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                        className: "value",
+                                        __source: {
+                                            fileName: "src/components/source-view/source-view.jsx",
+                                            lineNumber: 24
+                                        },
+                                        __self: this,
+                                        children: source.Name
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                className: "source-weblink",
+                                __source: {
+                                    fileName: "src/components/source-view/source-view.jsx",
+                                    lineNumber: 26
+                                },
+                                __self: this,
+                                children: [
+                                    /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                        __source: {
+                                            fileName: "src/components/source-view/source-view.jsx",
+                                            lineNumber: 27
+                                        },
+                                        __self: this,
+                                        children: "Weblink: "
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsx("a", {
+                                        href: source.Weblink,
+                                        target: "_blank",
+                                        __source: {
+                                            fileName: "src/components/source-view/source-view.jsx",
+                                            lineNumber: 28
+                                        },
+                                        __self: this,
+                                        children: source.Weblink
+                                    })
+                                ]
+                            })
+                        ]
+                    })
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                    className: "justify-content-center text-center",
+                    __source: {
+                        fileName: "src/components/source-view/source-view.jsx",
+                        lineNumber: 33
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                         __source: {
                             fileName: "src/components/source-view/source-view.jsx",
-                            lineNumber: 23
-                        },
-                        __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsxs("a", {
-                            href: source.Weblink,
-                            target: "_blank",
-                            __source: {
-                                fileName: "src/components/source-view/source-view.jsx",
-                                lineNumber: 24
-                            },
-                            __self: this,
-                            children: [
-                                "Weblink: ",
-                                source.Weblink
-                            ]
-                        })
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        __source: {
-                            fileName: "src/components/source-view/source-view.jsx",
-                            lineNumber: 26
+                            lineNumber: 34
                         },
                         __self: this,
                         children: [
@@ -30312,7 +30354,7 @@ class SourceView extends _reactDefault.default.Component {
                                 className: "source-moves",
                                 __source: {
                                     fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 27
+                                    lineNumber: 35
                                 },
                                 __self: this,
                                 children: "All moves from this source"
@@ -30321,61 +30363,64 @@ class SourceView extends _reactDefault.default.Component {
                                 className: "justify-content-md-center",
                                 __source: {
                                     fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 28
+                                    lineNumber: 36
                                 },
                                 __self: this,
                                 children: moves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        sm: 6,
+                                        md: 4,
+                                        lg: 3,
                                         __source: {
                                             fileName: "src/components/source-view/source-view.jsx",
-                                            lineNumber: 30
+                                            lineNumber: 38
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
                                             move: m,
                                             __source: {
                                                 fileName: "src/components/source-view/source-view.jsx",
-                                                lineNumber: 31
+                                                lineNumber: 39
                                             },
                                             __self: this
                                         })
                                     }, m._id)
                                 )
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                variant: "primary",
+                                type: "button",
+                                onClick: ()=>{
+                                    onBackClick();
+                                },
+                                __source: {
+                                    fileName: "src/components/source-view/source-view.jsx",
+                                    lineNumber: 43
+                                },
+                                __self: this,
+                                children: "Back"
+                            }),
+                            '  ',
+                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                to: `/`,
+                                __source: {
+                                    fileName: "src/components/source-view/source-view.jsx",
+                                    lineNumber: 44
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                    variant: "primary",
+                                    __source: {
+                                        fileName: "src/components/source-view/source-view.jsx",
+                                        lineNumber: 45
+                                    },
+                                    __self: this,
+                                    children: "Home"
+                                })
                             })
                         ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                        variant: "primary",
-                        type: "button",
-                        onClick: ()=>{
-                            onBackClick();
-                        },
-                        __source: {
-                            fileName: "src/components/source-view/source-view.jsx",
-                            lineNumber: 36
-                        },
-                        __self: this,
-                        children: "Back"
-                    }),
-                    '  ',
-                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                        to: `/`,
-                        __source: {
-                            fileName: "src/components/source-view/source-view.jsx",
-                            lineNumber: 37
-                        },
-                        __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            variant: "primary",
-                            __source: {
-                                fileName: "src/components/source-view/source-view.jsx",
-                                lineNumber: 38
-                            },
-                            __self: this,
-                            children: "Home"
-                        })
                     })
-                ]
-            })
+                })
+            ]
         }));
     }
 }
@@ -30422,6 +30467,8 @@ var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
+var _row = require("react-bootstrap/Row");
+var _rowDefault = parcelHelpers.interopDefault(_row);
 var _reactRouterDom = require("react-router-dom");
 var _moveCard = require("../move-card/move-card");
 var _cardGroup = require("react-bootstrap/CardGroup");
@@ -30447,11 +30494,12 @@ function ProfileView(props) {
     const deleteAccount = ()=>{
         if (confirm("Do you realy want to permanently delete your user account?")) props.deleteUser();
     };
-    // const removeFavorite = (moveId) => props.removeFavorite(moveId);
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
         children: [
-            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                className: "user-data",
+            /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                className: "user-data align-items-center",
+                sm: 12,
+                lg: 6,
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
                     lineNumber: 41
@@ -30474,22 +30522,13 @@ function ProfileView(props) {
                         __self: this,
                         children: [
                             "Username: ",
-                            username
+                            props.user
                         ]
-                    })
-                ]
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                __source: {
-                    fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 50
-                },
-                __self: this,
-                children: [
+                    }),
                     /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 51
+                            lineNumber: 50
                         },
                         __self: this,
                         children: "Update user data"
@@ -30497,236 +30536,332 @@ function ProfileView(props) {
                     /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 52
+                            lineNumber: 51
                         },
                         __self: this,
                         children: [
-                            /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                                controlId: "formUsername",
+                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 53
+                                    lineNumber: 52
                                 },
                                 __self: this,
                                 children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        sm: 4,
+                                        lg: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 54
+                                            lineNumber: 53
                                         },
                                         __self: this,
-                                        children: "Username:"
+                                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
+                                            controlId: "formUsername",
+                                            __source: {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 54
+                                            },
+                                            __self: this,
+                                            children: [
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 55
+                                                    },
+                                                    __self: this,
+                                                    children: "Username:"
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+                                                    type: "text",
+                                                    required: true,
+                                                    placeholder: username,
+                                                    onChange: (e)=>setUsername(e.target.value)
+                                                    ,
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 56
+                                                    },
+                                                    __self: this
+                                                })
+                                            ]
+                                        })
                                     }),
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
-                                        type: "text",
-                                        placeholder: username,
-                                        onChange: (e)=>setUsername(e.target.value)
-                                        ,
-                                        __source: {
-                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 55
-                                        },
-                                        __self: this
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                                controlId: "formPassword",
-                                __source: {
-                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 57
-                                },
-                                __self: this,
-                                children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
-                                        __source: {
-                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 58
-                                        },
-                                        __self: this,
-                                        children: "Password:"
-                                    }),
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
-                                        type: "password",
-                                        onChange: (e)=>setPassword(e.target.value)
-                                        ,
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        sm: 4,
+                                        lg: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
                                             lineNumber: 59
                                         },
-                                        __self: this
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
+                                            controlId: "formPassword",
+                                            __source: {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 60
+                                            },
+                                            __self: this,
+                                            children: [
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 61
+                                                    },
+                                                    __self: this,
+                                                    children: "Password:"
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+                                                    type: "password",
+                                                    required: true,
+                                                    placeholder: 'Password',
+                                                    "aria-describedby": "passwordHelpBlock",
+                                                    onChange: (e)=>setPassword(e.target.value)
+                                                    ,
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 62
+                                                    },
+                                                    __self: this
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Text, {
+                                                    id: "passwordHelpBlock",
+                                                    muted: true,
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 68
+                                                    },
+                                                    __self: this,
+                                                    children: "Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji."
+                                                })
+                                            ]
+                                        })
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                                controlId: "formEmail",
+                            /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 61
+                                    lineNumber: 75
                                 },
                                 __self: this,
-                                children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                    sm: 6,
+                                    lg: 8,
+                                    __source: {
+                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                        lineNumber: 76
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
+                                        controlId: "formEmail",
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 62
+                                            lineNumber: 77
                                         },
                                         __self: this,
-                                        children: "Email:"
-                                    }),
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
-                                        type: "email",
-                                        onChange: (e)=>setEmail(e.target.value)
-                                        ,
-                                        __source: {
-                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 63
-                                        },
-                                        __self: this
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
+                                                __source: {
+                                                    fileName: "src/components/profile-view/profile-view.jsx",
+                                                    lineNumber: 78
+                                                },
+                                                __self: this,
+                                                children: "Email:"
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+                                                type: "email",
+                                                required: true,
+                                                placeholder: 'Enter Email',
+                                                onChange: (e)=>setEmail(e.target.value)
+                                                ,
+                                                __source: {
+                                                    fileName: "src/components/profile-view/profile-view.jsx",
+                                                    lineNumber: 79
+                                                },
+                                                __self: this
+                                            })
+                                        ]
                                     })
-                                ]
+                                })
                             }),
-                            /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                                controlId: "formBirthday",
+                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 65
+                                    lineNumber: 83
                                 },
                                 __self: this,
                                 children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        sm: 4,
+                                        lg: 8,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 66
+                                            lineNumber: 84
                                         },
                                         __self: this,
-                                        children: "Birthday:"
+                                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
+                                            controlId: "formBirthday",
+                                            __source: {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 85
+                                            },
+                                            __self: this,
+                                            children: [
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 86
+                                                    },
+                                                    __self: this,
+                                                    children: "Birthday:"
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+                                                    type: "date",
+                                                    onChange: (e)=>setBirthday(e.target.value)
+                                                    ,
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 87
+                                                    },
+                                                    __self: this
+                                                })
+                                            ]
+                                        })
                                     }),
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
-                                        type: "date",
-                                        onChange: (e)=>setBirthday(e.target.value)
-                                        ,
+                                    /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 67
+                                            lineNumber: 90
                                         },
-                                        __self: this
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                                variant: "primary",
+                                                type: "submit",
+                                                onClick: handleUpdate,
+                                                __source: {
+                                                    fileName: "src/components/profile-view/profile-view.jsx",
+                                                    lineNumber: 91
+                                                },
+                                                __self: this,
+                                                children: "Safe changes"
+                                            }),
+                                            '  '
+                                        ]
                                     })
                                 ]
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "delete-account",
+                        __source: {
+                            fileName: "src/components/profile-view/profile-view.jsx",
+                            lineNumber: 95
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("h3", {
+                                __source: {
+                                    fileName: "src/components/profile-view/profile-view.jsx",
+                                    lineNumber: 96
+                                },
+                                __self: this,
+                                children: "Delete user account"
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "primary",
-                                type: "submit",
-                                onClick: handleUpdate,
+                                variant: "danger",
+                                type: "button",
+                                onClick: deleteAccount,
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 69
+                                    lineNumber: 97
                                 },
                                 __self: this,
-                                children: "Safe changes"
+                                children: "Delete account"
                             }),
                             '  '
                         ]
                     })
                 ]
             }),
-            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                className: "delete-account",
+            /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                className: "align-items-center",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 73
+                    lineNumber: 101
                 },
                 __self: this,
                 children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx("h3", {
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "user-favorites",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 74
+                            lineNumber: 102
                         },
                         __self: this,
-                        children: "Delete user account"
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                        variant: "danger",
-                        type: "button",
-                        onClick: deleteAccount,
-                        __source: {
-                            fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 75
-                        },
-                        __self: this,
-                        children: "Delete account"
-                    }),
-                    '  '
-                ]
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                className: "user-favorites",
-                __source: {
-                    fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 77
-                },
-                __self: this,
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx("h3", {
-                        __source: {
-                            fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 78
-                        },
-                        __self: this,
-                        children: "Your favorite moves"
-                    }),
-                    !props.favMoves ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
-                        __source: {
-                            fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 80
-                        },
-                        __self: this,
-                        children: "You did not choose any favorites yet."
-                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_cardGroupDefault.default, {
-                        className: "justify-content-md-center",
-                        __source: {
-                            fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 81
-                        },
-                        __self: this,
-                        children: props.favMoves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 83
+                                    lineNumber: 103
                                 },
                                 __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
-                                    move: m,
-                                    removeFavorite: ()=>props.removeFavorite(m._id)
-                                    ,
-                                    __source: {
-                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 84
-                                    },
-                                    __self: this
-                                })
-                            }, m._id)
-                        )
+                                children: "Your favorite moves"
+                            }),
+                            !props.favMoves ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                                __source: {
+                                    fileName: "src/components/profile-view/profile-view.jsx",
+                                    lineNumber: 105
+                                },
+                                __self: this,
+                                children: "You did not choose any favorites yet."
+                            }) : /*#__PURE__*/ _jsxRuntime.jsx(_cardGroupDefault.default, {
+                                className: "justify-content-md-center",
+                                __source: {
+                                    fileName: "src/components/profile-view/profile-view.jsx",
+                                    lineNumber: 106
+                                },
+                                __self: this,
+                                children: props.favMoves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        __source: {
+                                            fileName: "src/components/profile-view/profile-view.jsx",
+                                            lineNumber: 108
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                                            move: m,
+                                            removeFavorite: ()=>props.removeFavorite(m._id)
+                                            ,
+                                            __source: {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 109
+                                            },
+                                            __self: this
+                                        })
+                                    }, m._id)
+                                )
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                        to: `/`,
+                        __source: {
+                            fileName: "src/components/profile-view/profile-view.jsx",
+                            lineNumber: 114
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                            variant: "primary",
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 115
+                            },
+                            __self: this,
+                            children: "Back to all moves"
+                        })
                     })
                 ]
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                to: `/`,
-                __source: {
-                    fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 89
-                },
-                __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                    variant: "primary",
-                    __source: {
-                        fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 90
-                    },
-                    __self: this,
-                    children: "Back to all moves"
-                })
             })
         ]
     }));
@@ -30741,7 +30876,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","react-bootstrap/CardGroup":"lNZc4","react-bootstrap/Col":"fbam0"}],"2PRIq":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","react-bootstrap/CardGroup":"lNZc4","react-bootstrap/Col":"fbam0","react-bootstrap/Row":"c0x1x"}],"2PRIq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _extends = require("@babel/runtime/helpers/esm/extends");

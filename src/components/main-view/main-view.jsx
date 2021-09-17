@@ -80,7 +80,6 @@ export class MainView extends React.Component {
         else {
             const token = localStorage.getItem('token');
             const user = localStorage.getItem('user');
-
             axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
                 .then(response => {
                     const data = response.data;
@@ -114,14 +113,8 @@ export class MainView extends React.Component {
         axios.delete('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 const data = response.data;
-                /*
-                console.log('FavoriteMoves: ' + data.FavoriteMoves);
-                console.log('FavoriteMoves.length ' + data.FavoriteMoves.length);
-                console.log('FavoriteMoves.toString().length ' + data.FavoriteMoves.toString().length);
-                */
 
                 let favs = this.state.favs;
-                //console.log(favs.length);
                 let newFavs = null;
                 if (data.FavoriteMoves.toString().length === favs.length) {
                     return console.log('failed to delete move in database');
@@ -200,7 +193,7 @@ export class MainView extends React.Component {
         return (
             <>
                 <Router>
-                    <Row className="main-view justify-content-md-center">
+                    <Row className="main-view justify-content-center">
                         <Route exact path="/" render={() => {
                             // make sure user is logged in
                             if (!user) return (
@@ -212,9 +205,9 @@ export class MainView extends React.Component {
                             if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
 
                             return (
-                                <CardGroup className="justify-content-md-center">
+                                <CardGroup className="justify-content-center">
                                     {moves.map(m => (
-                                        <Col md={3} key={m._id}>
+                                        <Col sm={6} md={4} lg={3} key={m._id}>
                                             <MoveCard move={m} />
                                         </Col>
                                     ))}
@@ -237,16 +230,16 @@ export class MainView extends React.Component {
 
                             // make sure users can only see their own profile
                             if (match.params.username === user) return (
-                                <Col md={8}>
-                                    <ProfileView
-                                        user={user}
-                                        favMoves={moves.filter(m => favs.includes(m._id))}
-                                        removeFavorite={(moveId) => this.removeFavorite(moveId)}
-                                        updateUserdata={newUserData => this.updateUserdata(newUserData)}
-                                        deleteUser={() => this.deleteUser()}
-                                        onBackClick={() => history.goBack()}
-                                    />
-                                </Col>
+
+                                <ProfileView
+                                    user={user}
+                                    favMoves={moves.filter(m => favs.includes(m._id))}
+                                    removeFavorite={(moveId) => this.removeFavorite(moveId)}
+                                    updateUserdata={newUserData => this.updateUserdata(newUserData)}
+                                    deleteUser={() => this.deleteUser()}
+                                    onBackClick={() => history.goBack()}
+                                />
+
                             );
 
                             return (
@@ -264,13 +257,13 @@ export class MainView extends React.Component {
                             // Loading page is displayed if no moves could be loaded
                             if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
 
-                            return (<Col md={8}>
+                            return (
                                 <MoveView
                                     move={moves.find(m => m._id === match.params.moveId)}
                                     onBackClick={() => history.goBack()}
                                     addToFavorites={() => this.addToFavorites(match.params.moveId)}
                                 />
-                            </Col>);
+                            );
                         }} />
                         <Route path="/styles/:name" render={({ match, history }) => {
                             // make sure user is logged in
@@ -283,9 +276,8 @@ export class MainView extends React.Component {
                             if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
 
                             return (
-                                <Col md={8}>
-                                    <StyleView style={moves.find(m => m.Style.Name === match.params.name).Style} moves={moves.filter(m => m.Style.Name === match.params.name)} onBackClick={() => history.goBack()} />
-                                </Col>);
+                                <StyleView style={moves.find(m => m.Style.Name === match.params.name).Style} moves={moves.filter(m => m.Style.Name === match.params.name)} onBackClick={() => history.goBack()} />
+                            );
                         }} />
                         <Route path="/sources/:name" render={({ match, history }) => {
                             // make sure user is logged in
@@ -298,15 +290,14 @@ export class MainView extends React.Component {
                             if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
 
                             return (
-                                <Col md={8}>
-                                    <SourceView source={moves.find(m => m.Source.Name === match.params.name).Source} moves={moves.filter(m => m.Source.Name === match.params.name)} onBackClick={() => history.goBack()} />
-                                </Col>);
+                                <SourceView source={moves.find(m => m.Source.Name === match.params.name).Source} moves={moves.filter(m => m.Source.Name === match.params.name)} onBackClick={() => history.goBack()} />
+                            );
                         }} />
 
                     </Row>
                 </Router>
 
-                <Row>
+                <Row className="justify-content-center">
                     <div className="user-bar">
                         <span>Logged in as {user}  </span>
                         <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>{'  '}

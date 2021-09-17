@@ -55,6 +55,9 @@ export function RegistrationView(props) {
                 <Form.Label>Birthday:</Form.Label>
                 <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
             </Form.Group>
+            <Form.Group className="mb-3" controlId="formTerms">
+                <Form.Check type="checkbox" label="I agree to the terms and conditions, as well as the data privacy statement." />
+            </Form.Group>
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{'  '}
             <Link to={`/`}>
                 <Button variant="primary">Switch to Login</Button>

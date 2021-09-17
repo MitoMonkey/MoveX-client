@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { Link } from "react-router-dom";
 import { MoveCard } from '../move-card/move-card';
 import CardGroup from 'react-bootstrap/CardGroup';
@@ -34,61 +35,86 @@ export function ProfileView(props) {
         }
     };
 
-    // const removeFavorite = (moveId) => props.removeFavorite(moveId);
-
     return (
         <>
-            <div className="user-data">
+
+            <Col className="user-data align-items-center" sm={12} lg={6}>
                 <h3>Currently logged in as:</h3>
-                <p>Username: {username}</p>
+                <p>Username: {props.user}</p>
                 {/* data that has not been transmitted through a prop
-                <p>Password: {password}</p>
-                <p>Email: {email}</p>
-                <p>Birthday: {birthday}</p> 
-                */}
-            </div>
-            <div>
+                    <p>Password: {password}</p>
+                    <p>Email: {email}</p>
+                    <p>Birthday: {birthday}</p> 
+                    */}
+
                 <h3>Update user data</h3>
                 <Form>
-                    <Form.Group controlId="formUsername">
-                        <Form.Label>Username:</Form.Label>
-                        <Form.Control type="text" placeholder={username} onChange={e => setUsername(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group controlId="formPassword">
-                        <Form.Label>Password:</Form.Label>
-                        <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group controlId="formEmail">
-                        <Form.Label>Email:</Form.Label>
-                        <Form.Control type="email" onChange={e => setEmail(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group controlId="formBirthday">
-                        <Form.Label>Birthday:</Form.Label>
-                        <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
-                    </Form.Group>
-                    <Button variant="primary" type="submit" onClick={handleUpdate}>Safe changes</Button>{'  '}
-
+                    <Row>
+                        <Col sm={4} lg={6}>
+                            <Form.Group controlId="formUsername">
+                                <Form.Label>Username:</Form.Label>
+                                <Form.Control type="text" required placeholder={username} onChange={e => setUsername(e.target.value)} />
+                            </Form.Group>
+                        </Col>
+                        <Col sm={4} lg={6}>
+                            <Form.Group controlId="formPassword">
+                                <Form.Label>Password:</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    required
+                                    placeholder={'Password'}
+                                    aria-describedby="passwordHelpBlock"
+                                    onChange={e => setPassword(e.target.value)} />
+                                <Form.Text id="passwordHelpBlock" muted>
+                                    Your password must be 8-20 characters long, contain letters and numbers, and
+                                    must not contain spaces, special characters, or emoji.
+                                </Form.Text>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={6} lg={8}>
+                            <Form.Group controlId="formEmail">
+                                <Form.Label>Email:</Form.Label>
+                                <Form.Control type="email" required placeholder={'Enter Email'} onChange={e => setEmail(e.target.value)} />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={4} lg={8}>
+                            <Form.Group controlId="formBirthday">
+                                <Form.Label>Birthday:</Form.Label>
+                                <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
+                            </Form.Group>
+                        </Col>
+                        <Col >
+                            <Button variant="primary" type="submit" onClick={handleUpdate}>Safe changes</Button>{'  '}
+                        </Col>
+                    </Row>
                 </Form>
-            </div>
-            <div className="delete-account">
-                <h3>Delete user account</h3>
-                <Button variant="danger" type="button" onClick={deleteAccount}>Delete account</Button>{'  '}
-            </div>
-            <div className="user-favorites">
-                <h3>Your favorite moves</h3>
-                {(!props.favMoves)
-                    ? <p>You did not choose any favorites yet.</p>
-                    : <CardGroup className="justify-content-md-center">
-                        {props.favMoves.map(m => (
-                            <Col key={m._id}>
-                                <MoveCard move={m} removeFavorite={() => props.removeFavorite(m._id)} />
-                            </Col>))
-                        }
-                    </CardGroup>}
-            </div>
-            <Link to={`/`}>
-                <Button variant="primary">Back to all moves</Button>
-            </Link>
+                <div className="delete-account">
+                    <h3>Delete user account</h3>
+                    <Button variant="danger" type="button" onClick={deleteAccount}>Delete account</Button>{'  '}
+                </div>
+            </Col>
+
+            <Col className="align-items-center">
+                <div className="user-favorites">
+                    <h3>Your favorite moves</h3>
+                    {(!props.favMoves)
+                        ? <p>You did not choose any favorites yet.</p>
+                        : <CardGroup className="justify-content-md-center">
+                            {props.favMoves.map(m => (
+                                <Col key={m._id}>
+                                    <MoveCard move={m} removeFavorite={() => props.removeFavorite(m._id)} />
+                                </Col>))
+                            }
+                        </CardGroup>}
+                </div>
+                <Link to={`/`}>
+                    <Button variant="primary">Back to all moves</Button>
+                </Link>
+            </Col>
         </>
     );
 }

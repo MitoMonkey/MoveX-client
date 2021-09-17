@@ -13,13 +13,13 @@ export class MoveView extends React.Component {
     render() {
         const { move, onBackClick, addToFavorites } = this.props;
         return (
-            <Row className="move-view justify-content-md-center">
-                <Col md={1}>
+            <Row className="move-view justify-content-center">
+                {/*<Col md={1}>
                     <div className="move-Poster">
                         <img src={move.ImgURL} />
                     </div>
-                </Col>
-                <Col>
+                </Col> */}
+                <Col sm={12} md={8}>
                     <div className="move-title">
                         <h3 className="value">Move Title: {move.Title}</h3>
                     </div>

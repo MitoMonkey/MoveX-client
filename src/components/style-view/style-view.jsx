@@ -15,31 +15,36 @@ export class StyleView extends React.Component {
     render() {
         const { moves, style, onBackClick } = this.props;
         return (
-            <Row className="style-view justify-content-md-center">
-                <Col>
-                    <div className="style-name">
-                        <h3 className="value">Style: {style.Name}</h3>
-                    </div>
-                    <div className="style-description">
-                        <span className="label">Style description: </span>
-                        <span className="value">{style.Description}</span>
-                    </div>
-                    <div>
+            <>
+                <Row className="justify-content-center">
+                    <Col md={8}>
+                        <h3>Style Details</h3>
+                        <div className="style-name">
+                            <strong><span>Style name: </span>
+                                <span>{style.Name}</span></strong>
+                        </div>
+                        <div className="style-description">
+                            <span>{style.Description}</span>
+                        </div>
+                    </Col>
+                </Row>
+                <Row className="justify-content-center text-center">
+                    <Col>
                         <h4 className="style-moves">All moves in this style</h4>
                         <CardGroup className="justify-content-md-center">
                             {moves.map(m => (
-                                <Col key={m._id}>
+                                <Col sm={6} md={4} lg={3} key={m._id}>
                                     <MoveCard move={m} />
                                 </Col>
                             ))}
                         </CardGroup>
-                    </div>
-                    <Button variant="primary" type="button" onClick={() => { onBackClick(); }}>Back</Button>{'  '}
-                    <Link to={`/`}>
-                        <Button variant="primary">Home</Button>
-                    </Link>
-                </Col>
-            </Row>
+                        <Button variant="primary" type="button" onClick={() => { onBackClick(); }}>Back</Button>{'  '}
+                        <Link to={`/`}>
+                            <Button variant="primary">Home</Button>
+                        </Link>
+                    </Col>
+                </Row>
+            </>
         )
     }
 }
