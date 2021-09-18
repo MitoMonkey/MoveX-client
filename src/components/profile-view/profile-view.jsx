@@ -112,9 +112,6 @@ export function ProfileView(props) {
                             }
                         </CardGroup>}
                 </div>
-                <Link to={`/`}>
-                    <Button variant="primary">Back to all moves</Button>
-                </Link>
             </Col>
         </>
     );

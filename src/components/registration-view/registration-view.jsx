@@ -77,7 +77,6 @@ export function RegistrationView(props) {
         return true;
     }
 
-
     const handleSubmit = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
 
@@ -141,9 +140,6 @@ export function RegistrationView(props) {
             </Form.Group>
             <div className="text-center">
                 <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{'  '}
-                <Link to={`/`}>
-                    <Button variant="primary">Switch to Login</Button>
-                </Link>
             </div>
         </Form>
     );
