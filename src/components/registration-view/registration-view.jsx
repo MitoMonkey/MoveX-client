@@ -17,6 +17,7 @@ export function RegistrationView(props) {
     const [emailInvalid, setEmailInvalid] = useState('');
     const [birthday, setBirthday] = useState('');
     const [TOC, setTOC] = useState(false);
+    const [formInvalid, setFormInvalid] = userState('');
 
     // instant form validation
     function validateUsername(inputValue) {
@@ -93,15 +94,16 @@ export function RegistrationView(props) {
                     console.log(data);
                     window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
                 })
-                .catch(e => {
-                    console.log('error registering the user')
+                .catch(error => {
+                    console.log('error registering the user');
+                    setFormInvalid(error);
                 })
 
             // automaticaly log in
             // props.onLoggedIn(username);
         }
         else {
-            alert('Some values in the form are not valid: ' + usernameInvalid + ' ' + passwordInvalid + ' ' + emailInvalid);
+            setFormInvalid('Some values in the form are not valid: ' + usernameInvalid + ' ' + passwordInvalid + ' ' + emailInvalid);
         }
     };
 
@@ -139,7 +141,8 @@ export function RegistrationView(props) {
                 />
             </Form.Group>
             <div className="text-center">
-                <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>{'  '}
+                <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+                <Form.Text className="invalid">{formInvalid}</Form.Text>
             </div>
         </Form>
     );

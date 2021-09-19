@@ -35,8 +35,9 @@ export function LoginView(props) {
                 const data = response.data;
                 props.onLoggedIn(data);
             })
-            .catch(e => {
-                console.log('No such user. Error: ' + e)
+            .catch(error => {
+                console.log('No such user. Error: ' + error);
+                alert(error);
             });
     };
 

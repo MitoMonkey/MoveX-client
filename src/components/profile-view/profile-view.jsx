@@ -62,25 +62,18 @@ export function ProfileView(props) {
                                     type="password"
                                     required
                                     placeholder={'Password'}
-                                    aria-describedby="passwordHelpBlock"
                                     onChange={e => setPassword(e.target.value)} />
-                                <Form.Text id="passwordHelpBlock" muted>
-                                    Your password must be 8-20 characters long, contain letters and numbers, and
-                                    must not contain spaces, special characters, or emoji.
-                                </Form.Text>
                             </Form.Group>
                         </Col>
                     </Row>
                     <Row className="justify-content-center">
-                        <Col sm={6} lg={8}>
+                        <Col sm={4} lg={6}>
                             <Form.Group controlId="formEmail">
                                 <Form.Label>Email:</Form.Label>
                                 <Form.Control type="email" required placeholder={'Enter Email'} onChange={e => setEmail(e.target.value)} />
                             </Form.Group>
                         </Col>
-                    </Row>
-                    <Row className="justify-content-center ">
-                        <Col sm={4} lg={8}>
+                        <Col sm={4} lg={6}>
                             <Form.Group controlId="formBirthday">
                                 <Form.Label>Birthday:</Form.Label>
                                 <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
@@ -106,7 +99,7 @@ export function ProfileView(props) {
                         ? <p>You did not choose any favorites yet.</p>
                         : <CardGroup className="justify-content-md-center">
                             {props.favMoves.map(m => (
-                                <Col key={m._id}>
+                                <Col sm={12} md={6} key={m._id}>
                                     <MoveCard move={m} removeFavorite={() => props.removeFavorite(m._id)} />
                                 </Col>))
                             }

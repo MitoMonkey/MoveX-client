@@ -40,8 +40,9 @@ export class MainView extends React.Component {
                     moves: response.data
                 });
             })
-            .catch(function (error) {
-                console.log(error);
+            .catch(function (e) {
+                console.log(e);
+                alert(e);
             });
     }
 
@@ -80,7 +81,7 @@ export class MainView extends React.Component {
         else {
             const token = localStorage.getItem('token');
             const user = localStorage.getItem('user');
-            axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
+            axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {}, { headers: { Authorization: `Bearer ${token}` } })
                 .then(response => {
                     const data = response.data;
                     console.log(data);
@@ -104,6 +105,7 @@ export class MainView extends React.Component {
                 })
                 .catch(e => {
                     console.log('error adding ' + moveID + ' to user profile ' + user);
+                    alert(e);
                 });
         }
     }
@@ -142,6 +144,7 @@ export class MainView extends React.Component {
             })
             .catch(e => {
                 console.log('error removing ' + moveID + ' to user profile ' + user);
+                alert(e);
             });
     }
 
@@ -168,7 +171,8 @@ export class MainView extends React.Component {
                 window.open('/', '_self');
             })
             .catch(e => {
-                console.log('error updating the user data for ' + user)
+                console.log('error updating the user data for ' + user);
+                alert(e);
             });
     }
 
@@ -183,7 +187,8 @@ export class MainView extends React.Component {
                 window.open('/', '_self');
             })
             .catch(e => {
-                console.log('error deleting the account')
+                console.log('error deleting the account');
+                alert(e);
             });
     }
 
