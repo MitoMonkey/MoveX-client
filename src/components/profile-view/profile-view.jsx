@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { MoveCard } from '../move-card/move-card';
 import CardGroup from 'react-bootstrap/CardGroup';
 
@@ -47,8 +47,8 @@ export function ProfileView(props) {
                     */}
 
                 <h3>Update user data</h3>
-                <Form className="userData-form text-left ">
-                    <Row className="justify-content-center justify-content-lg-start">
+                <Form className="userData-form text-left">
+                    <Row className="justify-content-center">
                         <Col sm={4} lg={6}>
                             <Form.Group controlId="formUsername">
                                 <Form.Label>Username:</Form.Label>
@@ -99,7 +99,7 @@ export function ProfileView(props) {
                         ? <p>You did not choose any favorites yet.</p>
                         : <CardGroup className="justify-content-md-center">
                             {props.favMoves.map(m => (
-                                <Col sm={12} md={6} key={m._id}>
+                                <Col sm={12} md={8} key={m._id}>
                                     <MoveCard move={m} removeFavorite={() => props.removeFavorite(m._id)} />
                                 </Col>))
                             }
