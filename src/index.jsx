@@ -8,12 +8,16 @@ import moviesApp from './reducers/reducers';
 
 import './index.scss';
 
+const store = createStore(moviesApp);
+
 class MoveXApplication extends React.Component {
     render() {
         return (
-            <Container fluid>
-                <MainView />
-            </Container>
+            <Provider store={store}>
+                <Container fluid>
+                    <MainView />
+                </Container>
+            </Provider>
         );
     }
 }
