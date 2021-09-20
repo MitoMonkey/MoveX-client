@@ -1,9 +1,16 @@
 import React from 'react';
 import axios from 'axios'; // library for AJAX operations
 
+// library module for state-based routing. "BrowserRouter" relates to <Router> in the render() block
+import { BrowserRouter as Router, Route, Redirect, Link, BrowserRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+
+import { setMoves } from '../../actions/actions';
+import MovesList from '../moves-list/moves-list';
+
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-import { MoveCard } from '../move-card/move-card';
+// import { MoveCard } from '../move-card/move-card'; Now included in MovesList
 import { MoveView } from '../move-view/move-view';
 import { StyleView } from '../style-view/style-view';
 import { SourceView } from '../source-view/source-view';
@@ -14,17 +21,13 @@ import Col from 'react-bootstrap/Col';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 
-// library module for state-based routing. "BrowserRouter" relates to <Router> in the render() block
-import { BrowserRouter as Router, Route, Redirect, Link, BrowserRouter } from "react-router-dom";
-
 import './main-view.scss';
 
-export class MainView extends React.Component {
-
+class MainView extends React.Component {
     constructor() {
         super();
         this.state = {
-            moves: [],
+            // moves: [],
             user: null,
             favs: []
         }
@@ -36,9 +39,10 @@ export class MainView extends React.Component {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => {
-                this.setState({
+                this.props.setMoves(response.data);
+                /*this.setState({
                     moves: response.data
-                });
+                }); */
             })
             .catch(function (e) {
                 console.log(e);
@@ -193,7 +197,8 @@ export class MainView extends React.Component {
     }
 
     render() {
-        const { moves, user, favs } = this.state;
+        const { user, favs } = this.state;
+        let { moves } = this.props;
 
         return (
             <>
@@ -209,15 +214,14 @@ export class MainView extends React.Component {
                             // Loading page is displayed if no moves could be loaded
                             if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
 
-                            return (
-                                <CardGroup className="justify-content-center">
+                            return <MovesList moves={moves} />;
+                            {/* ( <CardGroup className="justify-content-center">
                                     {moves.map(m => (
                                         <Col sm={6} md={4} lg={3} key={m._id}>
                                             <MoveCard move={m} />
                                         </Col>
                                     ))}
-                                </CardGroup>
-                            );
+                                </CardGroup> ); */}
                         }} />
 
                         <Route path="/register" render={() => {
@@ -317,16 +321,10 @@ export class MainView extends React.Component {
 
                     }
                 </Row>
-
             </>
         );
-        /* To add for user-bar / navigation
-        // condition that userbar is only displayed after login. 
-            // Easiest solution: Integrate it into all other views.
-            // more optimized solution, but not valid like this:
-                {if (user) 
-                    // user bar
-                }; */
     }
 }
-export default MainView; // without the "default" {} would be required when importing in index.jsx
+
+let mapStateToProps = state => { return { moves: state.moves } } // retrieve the moves from the store (via connect function below)
+export default connect(mapStateToProps, { setMoves })(MainView);
