@@ -31003,7 +31003,7 @@ function ProfileView(props) {
                             __self: this,
                             children: props.favMoves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                     sm: 12,
-                                    md: 8,
+                                    md: 6,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
                                         lineNumber: 102

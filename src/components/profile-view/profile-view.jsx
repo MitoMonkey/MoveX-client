@@ -99,7 +99,7 @@ export function ProfileView(props) {
                         ? <p>You did not choose any favorites yet.</p>
                         : <CardGroup className="justify-content-md-center">
                             {props.favMoves.map(m => (
-                                <Col sm={12} md={8} key={m._id}>
+                                <Col sm={12} md={6} key={m._id}>
                                     <MoveCard move={m} removeFavorite={() => props.removeFavorite(m._id)} />
                                 </Col>))
                             }
