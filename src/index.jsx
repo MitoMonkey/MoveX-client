@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import MainView from './components/main-view/main-view';
 import Container from 'react-bootstrap/Container';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import movesApp from './reducers/reducers';
+import { Provider } from 'react-redux'; // to make the store available to the components
+import movesApp from './reducers/reducers'; // combined reducer
 import { devToolsEnhancer } from 'redux-devtools-extension';
 
 import './index.scss';
@@ -14,7 +14,7 @@ const store = createStore(movesApp, devToolsEnhancer());
 class MoveXApplication extends React.Component {
     render() {
         return (
-            <Provider store={store}>
+            <Provider store={store}> {/* all components that need to access the state, need to be wrapped in the provider */}
                 <Container fluid>
                     <MainView />
                 </Container>

@@ -18,7 +18,7 @@ import { ProfileView } from '../profile-view/profile-view';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import CardGroup from 'react-bootstrap/CardGroup';
+// import CardGroup from 'react-bootstrap/CardGroup'; Was only used in MoveCard
 import Button from 'react-bootstrap/Button';
 
 import './main-view.scss';
@@ -198,7 +198,7 @@ class MainView extends React.Component {
 
     render() {
         const { user, favs } = this.state;
-        let { moves } = this.props;
+        let { moves } = this.props; // passed from the store by mapStateToProps
 
         return (
             <>
@@ -327,4 +327,4 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = state => { return { moves: state.moves } } // retrieve the moves from the store (via connect function below)
-export default connect(mapStateToProps, { setMoves })(MainView);
+export default connect(mapStateToProps, { setMoves })(MainView); // second argument connects the action creator setMoves also as a prop to this component
