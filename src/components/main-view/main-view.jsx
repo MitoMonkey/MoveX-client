@@ -320,13 +320,6 @@ export class MainView extends React.Component {
 
             </>
         );
-        /* To add for user-bar / navigation
-        // condition that userbar is only displayed after login. 
-            // Easiest solution: Integrate it into all other views.
-            // more optimized solution, but not valid like this:
-                {if (user) 
-                    // user bar
-                }; */
     }
 }
 export default MainView; // without the "default" {} would be required when importing in index.jsx

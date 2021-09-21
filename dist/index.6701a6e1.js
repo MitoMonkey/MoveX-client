@@ -23368,13 +23368,7 @@ class MainView extends _reactDefault.default.Component {
                 })
             ]
         }));
-    /* To add for user-bar / navigation
-        // condition that userbar is only displayed after login. 
-            // Easiest solution: Integrate it into all other views.
-            // more optimized solution, but not valid like this:
-                {if (user) 
-                    // user bar
-                }; */ }
+    }
 }
 exports.default = MainView; // without the "default" {} would be required when importing in index.jsx
 
@@ -23383,132 +23377,254 @@ exports.default = MainView; // without the "default" {} would be required when i
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","../move-view/move-view":"iUGEL","axios":"iYoWk","../login-view/login-view":"054li","../registration-view/registration-view":"aP2YV","./main-view.scss":"jyMAr","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/CardGroup":"lNZc4","react-router-dom":"cpyQW","react-bootstrap/Button":"9CzHT","../style-view/style-view":"lHPne","../source-view/source-view":"1gdtE","../profile-view/profile-view":"2E7Aw"}],"b3Zmr":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$7140 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-view/move-view":"iUGEL","axios":"iYoWk","../login-view/login-view":"054li","../registration-view/registration-view":"aP2YV","./main-view.scss":"jyMAr","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/CardGroup":"lNZc4","react-router-dom":"cpyQW","react-bootstrap/Button":"9CzHT","../style-view/style-view":"lHPne","../source-view/source-view":"1gdtE","../profile-view/profile-view":"2E7Aw","../move-card/move-card":"b3Zmr"}],"iUGEL":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$233b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$7140.prelude(module);
+$parcel$ReactRefreshHelpers$233b.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-// import './move-card.scss';
-parcelHelpers.export(exports, "MoveCard", ()=>MoveCard
+// import './move-view.scss';
+parcelHelpers.export(exports, "MoveView", ()=>MoveView
 );
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _row = require("react-bootstrap/Row");
+var _rowDefault = parcelHelpers.interopDefault(_row);
+var _col = require("react-bootstrap/Col");
+var _colDefault = parcelHelpers.interopDefault(_col);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
-var _card = require("react-bootstrap/Card");
-var _cardDefault = parcelHelpers.interopDefault(_card);
 var _reactRouterDom = require("react-router-dom");
-class MoveCard extends _reactDefault.default.Component {
+class MoveView extends _reactDefault.default.Component {
     render() {
-        const { move , removeFavorite  } = this.props; // = short for this.props.move, retrieving the parameter from main-view
-        return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
-            className: "Card",
+        const { move , onBackClick , addToFavorites  } = this.props;
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+            className: "move-view justify-content-center text-center",
             __source: {
-                fileName: "src/components/move-card/move-card.jsx",
+                fileName: "src/components/move-view/move-view.jsx",
                 lineNumber: 16
             },
             __self: this,
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
-                    variant: "top",
-                    src: move.ImgURL,
-                    __source: {
-                        fileName: "src/components/move-card/move-card.jsx",
-                        lineNumber: 17
-                    },
-                    __self: this
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
-                    __source: {
-                        fileName: "src/components/move-card/move-card.jsx",
-                        lineNumber: 18
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+            children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                sm: 12,
+                md: 8,
+                __source: {
+                    fileName: "src/components/move-view/move-view.jsx",
+                    lineNumber: 22
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx("h3", {
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 23
+                        },
+                        __self: this,
+                        children: "Move details"
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        className: "move-title",
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 24
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsxs("strong", {
                             __source: {
-                                fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 19
-                            },
-                            __self: this,
-                            children: move.Title
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
-                            __source: {
-                                fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 20
-                            },
-                            __self: this,
-                            children: move.Cues
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                            to: `/moves/${move._id}`,
-                            __source: {
-                                fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 21
-                            },
-                            __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "primary",
-                                __source: {
-                                    fileName: "src/components/move-card/move-card.jsx",
-                                    lineNumber: 22
-                                },
-                                __self: this,
-                                children: "View details"
-                            })
-                        }),
-                        !removeFavorite ? /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            __source: {
-                                fileName: "src/components/move-card/move-card.jsx",
+                                fileName: "src/components/move-view/move-view.jsx",
                                 lineNumber: 25
                             },
-                            __self: this
-                        }) : /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            variant: "primary",
-                            onClick: ()=>removeFavorite()
-                            ,
-                            __source: {
-                                fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 26
-                            },
                             __self: this,
-                            children: "Remove favorite"
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                    className: "label",
+                                    __source: {
+                                        fileName: "src/components/move-view/move-view.jsx",
+                                        lineNumber: 25
+                                    },
+                                    __self: this,
+                                    children: "Move Title: "
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                    className: "value",
+                                    __source: {
+                                        fileName: "src/components/move-view/move-view.jsx",
+                                        lineNumber: 26
+                                    },
+                                    __self: this,
+                                    children: move.Title
+                                })
+                            ]
                         })
-                    ]
-                })
-            ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "move-style",
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 29
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                className: "label",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 30
+                                },
+                                __self: this,
+                                children: "Style: "
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                to: `/styles/${move.Style.Name}`,
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 31
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                    variant: "link",
+                                    __source: {
+                                        fileName: "src/components/move-view/move-view.jsx",
+                                        lineNumber: 32
+                                    },
+                                    __self: this,
+                                    children: move.Style.Name
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "move-source",
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 35
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                className: "label",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 36
+                                },
+                                __self: this,
+                                children: "Source: "
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                to: `/sources/${move.Source.Name}`,
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 37
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                    variant: "link",
+                                    __source: {
+                                        fileName: "src/components/move-view/move-view.jsx",
+                                        lineNumber: 38
+                                    },
+                                    __self: this,
+                                    children: move.Source.Name
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "move-cues",
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 41
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                className: "label",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 42
+                                },
+                                __self: this,
+                                children: "Cues: "
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                className: "value",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 43
+                                },
+                                __self: this,
+                                children: move.Cues
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "move-videoLink",
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 45
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                className: "label",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 46
+                                },
+                                __self: this,
+                                children: "Video: "
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx("a", {
+                                className: "value",
+                                href: move.VideoURL,
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 47
+                                },
+                                __self: this,
+                                children: move.VideoURL
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                        variant: "primary",
+                        type: "button",
+                        onClick: ()=>{
+                            addToFavorites();
+                        },
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 49
+                        },
+                        __self: this,
+                        children: "Add to favorites"
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                        variant: "primary",
+                        type: "button",
+                        onClick: ()=>{
+                            onBackClick();
+                        },
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 50
+                        },
+                        __self: this,
+                        children: "Back"
+                    })
+                ]
+            })
         }));
     }
 }
-/* pre react-router-dom
-export class MoveCard extends React.Component {
-    render() {
-        // const { moveData } = this.props; = short for this.props.moveData, retrieving the parameter from main-view > moves.map() 
-        const { moveData, onMoveClick } = this.props;
-
-        return (
-            // <div className="move-card" onClick={() => { onMoveClick(moveData); }}>{moveData.Title}</div>;
-            <Card>
-                <Card.Img variant="top" src={moveData.ImgURL} />
-                <Card.Body>
-                    <Card.Title>{moveData.Title}</Card.Title>
-                    <Card.Text>{moveData.Cues}</Card.Text>
-                    <Button variant="primary" onClick={() => onMoveClick(moveData)} >Open</Button>
-                </Card.Body>
-            </Card>
-        );
-    }
-}
-*/ // validate data types
-MoveCard.propTypes = {
+// validate data types
+MoveView.propTypes = {
     move: _propTypesDefault.default.shape({
         _id: _propTypesDefault.default.string.isRequired,
         Title: _propTypesDefault.default.string.isRequired,
@@ -23524,15 +23640,17 @@ MoveCard.propTypes = {
         VideoURL: _propTypesDefault.default.string.isRequired,
         ImgURL: _propTypesDefault.default.string,
         Featured: _propTypesDefault.default.bool
-    }).isRequired
+    }).isRequired,
+    onBackClick: _propTypesDefault.default.func.isRequired,
+    addToFavorites: _propTypesDefault.default.func.isRequired
 };
 
-  $parcel$ReactRefreshHelpers$7140.postlude(module);
+  $parcel$ReactRefreshHelpers$233b.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","prop-types":"1tgq3","react-bootstrap/Button":"9CzHT","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW"}],"1tgq3":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","react-router-dom":"cpyQW"}],"1tgq3":[function(require,module,exports) {
 var ReactIs = require('react-is');
 // By explicitly using `prop-types` you are opting into new development behavior.
 // http://fb.me/prop-types-in-prod
@@ -24211,7 +24329,7 @@ printWarning = function(text) {
 };
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":"lYuBM"}],"9CzHT":[function(require,module,exports) {
+},{"./lib/ReactPropTypesSecret":"lYuBM"}],"c0x1x":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _extends = require("@babel/runtime/helpers/esm/extends");
@@ -24223,47 +24341,51 @@ var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _themeProvider = require("./ThemeProvider");
-var _safeAnchor = require("./SafeAnchor");
-var _safeAnchorDefault = parcelHelpers.interopDefault(_safeAnchor);
 var _excluded = [
     "bsPrefix",
-    "variant",
-    "size",
-    "active",
     "className",
-    "block",
-    "type",
+    "noGutters",
     "as"
 ];
+var DEVICE_SIZES = [
+    'xl',
+    'lg',
+    'md',
+    'sm',
+    'xs'
+];
 var defaultProps = {
-    variant: 'primary',
-    active: false,
-    disabled: false
+    noGutters: false
 };
-var Button = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
-    var bsPrefix = _ref.bsPrefix, variant = _ref.variant, size = _ref.size, active = _ref.active, className = _ref.className, block = _ref.block, type = _ref.type, as = _ref.as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
-    var prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'btn');
-    var classes = _classnamesDefault.default(className, prefix, active && 'active', variant && prefix + "-" + variant, block && prefix + "-block", size && prefix + "-" + size);
-    if (props.href) return(/*#__PURE__*/ _reactDefault.default.createElement(_safeAnchorDefault.default, _extendsDefault.default({
-    }, props, {
-        as: as,
-        ref: ref,
-        className: _classnamesDefault.default(classes, props.disabled && 'disabled')
-    })));
-    if (ref) props.ref = ref;
-    if (type) props.type = type;
-    else if (!as) props.type = 'button';
-    var Component = as || 'button';
+var Row = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
+    var bsPrefix = _ref.bsPrefix, className = _ref.className, noGutters = _ref.noGutters, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
+    var decoratedBsPrefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'row');
+    var sizePrefix = decoratedBsPrefix + "-cols";
+    var classes = [];
+    DEVICE_SIZES.forEach(function(brkPoint) {
+        var propValue = props[brkPoint];
+        delete props[brkPoint];
+        var cols;
+        if (propValue != null && typeof propValue === 'object') cols = propValue.cols;
+        else cols = propValue;
+        var infix = brkPoint !== 'xs' ? "-" + brkPoint : '';
+        if (cols != null) classes.push("" + sizePrefix + infix + "-" + cols);
+    });
     return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
+        ref: ref
     }, props, {
-        className: classes
+        className: _classnamesDefault.default.apply(void 0, [
+            className,
+            decoratedBsPrefix,
+            noGutters && 'no-gutters'
+        ].concat(classes))
     })));
 });
-Button.displayName = 'Button';
-Button.defaultProps = defaultProps;
-exports.default = Button;
+Row.displayName = 'Row';
+Row.defaultProps = defaultProps;
+exports.default = Row;
 
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","./SafeAnchor":"2oMxS","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"bKAu6":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"bKAu6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function _extends() {
@@ -24384,7 +24506,117 @@ function createBootstrapComponent(Component, opts) {
 }
 exports.default = ThemeProvider;
 
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"2oMxS":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"fbam0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _themeProvider = require("./ThemeProvider");
+var _excluded = [
+    "bsPrefix",
+    "className",
+    "as"
+];
+var DEVICE_SIZES = [
+    'xl',
+    'lg',
+    'md',
+    'sm',
+    'xs'
+];
+var Col = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
+    var bsPrefix = _ref.bsPrefix, className = _ref.className, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
+    var prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'col');
+    var spans = [];
+    var classes = [];
+    DEVICE_SIZES.forEach(function(brkPoint) {
+        var propValue = props[brkPoint];
+        delete props[brkPoint];
+        var span;
+        var offset;
+        var order;
+        if (typeof propValue === 'object' && propValue != null) {
+            var _propValue$span = propValue.span;
+            span = _propValue$span === void 0 ? true : _propValue$span;
+            offset = propValue.offset;
+            order = propValue.order;
+        } else span = propValue;
+        var infix = brkPoint !== 'xs' ? "-" + brkPoint : '';
+        if (span) spans.push(span === true ? "" + prefix + infix : "" + prefix + infix + "-" + span);
+        if (order != null) classes.push("order" + infix + "-" + order);
+        if (offset != null) classes.push("offset" + infix + "-" + offset);
+    });
+    if (!spans.length) spans.push(prefix); // plain 'col'
+    return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
+    }, props, {
+        ref: ref,
+        className: _classnamesDefault.default.apply(void 0, [
+            className
+        ].concat(spans, classes))
+    })));
+});
+Col.displayName = 'Col';
+exports.default = Col;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"9CzHT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _themeProvider = require("./ThemeProvider");
+var _safeAnchor = require("./SafeAnchor");
+var _safeAnchorDefault = parcelHelpers.interopDefault(_safeAnchor);
+var _excluded = [
+    "bsPrefix",
+    "variant",
+    "size",
+    "active",
+    "className",
+    "block",
+    "type",
+    "as"
+];
+var defaultProps = {
+    variant: 'primary',
+    active: false,
+    disabled: false
+};
+var Button = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
+    var bsPrefix = _ref.bsPrefix, variant = _ref.variant, size = _ref.size, active = _ref.active, className = _ref.className, block = _ref.block, type = _ref.type, as = _ref.as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
+    var prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'btn');
+    var classes = _classnamesDefault.default(className, prefix, active && 'active', variant && prefix + "-" + variant, block && prefix + "-block", size && prefix + "-" + size);
+    if (props.href) return(/*#__PURE__*/ _reactDefault.default.createElement(_safeAnchorDefault.default, _extendsDefault.default({
+    }, props, {
+        as: as,
+        ref: ref,
+        className: _classnamesDefault.default(classes, props.disabled && 'disabled')
+    })));
+    if (ref) props.ref = ref;
+    if (type) props.type = type;
+    else if (!as) props.type = 'button';
+    var Component = as || 'button';
+    return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
+    }, props, {
+        className: classes
+    })));
+});
+Button.displayName = 'Button';
+Button.defaultProps = defaultProps;
+exports.default = Button;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","./SafeAnchor":"2oMxS","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"2oMxS":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _extends = require("@babel/runtime/helpers/esm/extends");
@@ -24473,201 +24705,7 @@ parcelHelpers.defineInteropFlag(exports);
 }
 exports.default = createChainedFunction;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"MoOk8":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
-var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
-var _classnames = require("classnames");
-var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _themeProvider = require("./ThemeProvider");
-var _createWithBsPrefix = require("./createWithBsPrefix");
-var _createWithBsPrefixDefault = parcelHelpers.interopDefault(_createWithBsPrefix);
-var _divWithClassName = require("./divWithClassName");
-var _divWithClassNameDefault = parcelHelpers.interopDefault(_divWithClassName);
-var _cardContext = require("./CardContext");
-var _cardContextDefault = parcelHelpers.interopDefault(_cardContext);
-var _cardImg = require("./CardImg");
-var _cardImgDefault = parcelHelpers.interopDefault(_cardImg);
-var _excluded = [
-    "bsPrefix",
-    "className",
-    "bg",
-    "text",
-    "border",
-    "body",
-    "children",
-    "as"
-];
-var DivStyledAsH5 = _divWithClassNameDefault.default('h5');
-var DivStyledAsH6 = _divWithClassNameDefault.default('h6');
-var CardBody = _createWithBsPrefixDefault.default('card-body');
-var CardTitle = _createWithBsPrefixDefault.default('card-title', {
-    Component: DivStyledAsH5
-});
-var CardSubtitle = _createWithBsPrefixDefault.default('card-subtitle', {
-    Component: DivStyledAsH6
-});
-var CardLink = _createWithBsPrefixDefault.default('card-link', {
-    Component: 'a'
-});
-var CardText = _createWithBsPrefixDefault.default('card-text', {
-    Component: 'p'
-});
-var CardHeader = _createWithBsPrefixDefault.default('card-header');
-var CardFooter = _createWithBsPrefixDefault.default('card-footer');
-var CardImgOverlay = _createWithBsPrefixDefault.default('card-img-overlay');
-var defaultProps = {
-    body: false
-};
-var Card = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
-    var bsPrefix = _ref.bsPrefix, className = _ref.className, bg = _ref.bg, text = _ref.text, border = _ref.border, body = _ref.body, children = _ref.children, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
-    var prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'card');
-    var cardContext = _react.useMemo(function() {
-        return {
-            cardHeaderBsPrefix: prefix + "-header"
-        };
-    }, [
-        prefix
-    ]);
-    return(/*#__PURE__*/ _reactDefault.default.createElement(_cardContextDefault.default.Provider, {
-        value: cardContext
-    }, /*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
-        ref: ref
-    }, props, {
-        className: _classnamesDefault.default(className, prefix, bg && "bg-" + bg, text && "text-" + text, border && "border-" + border)
-    }), body ? /*#__PURE__*/ // @ts-ignore
-    _reactDefault.default.createElement(CardBody, null, children) : children)));
-});
-Card.displayName = 'Card';
-Card.defaultProps = defaultProps;
-Card.Img = _cardImgDefault.default;
-Card.Title = CardTitle;
-Card.Subtitle = CardSubtitle;
-Card.Body = CardBody;
-Card.Link = CardLink;
-Card.Text = CardText;
-Card.Header = CardHeader;
-Card.Footer = CardFooter;
-Card.ImgOverlay = CardImgOverlay;
-exports.default = Card;
-
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","./createWithBsPrefix":"8AqEH","./divWithClassName":"GBmBH","./CardContext":"9AVwu","./CardImg":"5GKOF","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"8AqEH":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
-var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
-var _classnames = require("classnames");
-var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
-var _camelize = require("dom-helpers/camelize");
-var _camelizeDefault = parcelHelpers.interopDefault(_camelize);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _themeProvider = require("./ThemeProvider");
-var _excluded = [
-    "className",
-    "bsPrefix",
-    "as"
-];
-var pascalCase = function pascalCase1(str) {
-    return str[0].toUpperCase() + _camelizeDefault.default(str).slice(1);
-};
-function createWithBsPrefix(prefix, _temp) {
-    var _ref = _temp === void 0 ? {
-    } : _temp, _ref$displayName = _ref.displayName, displayName = _ref$displayName === void 0 ? pascalCase(prefix) : _ref$displayName, Component = _ref.Component, defaultProps = _ref.defaultProps;
-    var BsComponent = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref2, ref) {
-        var className = _ref2.className, bsPrefix = _ref2.bsPrefix, _ref2$as = _ref2.as, Tag = _ref2$as === void 0 ? Component || 'div' : _ref2$as, props = _objectWithoutPropertiesLooseDefault.default(_ref2, _excluded);
-        var resolvedPrefix = _themeProvider.useBootstrapPrefix(bsPrefix, prefix);
-        return(/*#__PURE__*/ _reactDefault.default.createElement(Tag, _extendsDefault.default({
-            ref: ref,
-            className: _classnamesDefault.default(className, resolvedPrefix)
-        }, props)));
-    });
-    BsComponent.defaultProps = defaultProps;
-    BsComponent.displayName = displayName;
-    return BsComponent;
-}
-exports.default = createWithBsPrefix;
-
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","dom-helpers/camelize":"aJYM3","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"aJYM3":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var rHyphen = /-(.)/g;
-function camelize(string) {
-    return string.replace(rHyphen, function(_, chr) {
-        return chr.toUpperCase();
-    });
-}
-exports.default = camelize;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"GBmBH":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _classnames = require("classnames");
-var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
-exports.default = function(className) {
-    return(/*#__PURE__*/ _reactDefault.default.forwardRef(function(p, ref) {
-        return(/*#__PURE__*/ _reactDefault.default.createElement("div", _extendsDefault.default({
-        }, p, {
-            ref: ref,
-            className: _classnamesDefault.default(p.className, className)
-        })));
-    }));
-};
-
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","classnames":"bOXOh","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"9AVwu":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var context = /*#__PURE__*/ _reactDefault.default.createContext(null);
-context.displayName = 'CardContext';
-exports.default = context;
-
-},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"5GKOF":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
-var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
-var _classnames = require("classnames");
-var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _themeProvider = require("./ThemeProvider");
-var _excluded = [
-    "bsPrefix",
-    "className",
-    "variant",
-    "as"
-];
-var defaultProps = {
-    variant: null
-};
-var CardImg = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
-    var bsPrefix = _ref.bsPrefix, className = _ref.className, variant = _ref.variant, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'img' : _ref$as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
-    var prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'card-img');
-    return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
-        ref: ref,
-        className: _classnamesDefault.default(variant ? prefix + "-" + variant : prefix, className)
-    }, props)));
-});
-CardImg.displayName = 'CardImg';
-CardImg.defaultProps = defaultProps;
-exports.default = CardImg;
-
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"cpyQW":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"cpyQW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MemoryRouter", ()=>_reactRouter.MemoryRouter
@@ -26983,394 +27021,7 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 }
 module.exports = hoistNonReactStatics;
 
-},{"react-is":"5wFcP"}],"iUGEL":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$233b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$233b.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-// import './move-view.scss';
-parcelHelpers.export(exports, "MoveView", ()=>MoveView
-);
-var _jsxRuntime = require("react/jsx-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _row = require("react-bootstrap/Row");
-var _rowDefault = parcelHelpers.interopDefault(_row);
-var _col = require("react-bootstrap/Col");
-var _colDefault = parcelHelpers.interopDefault(_col);
-var _button = require("react-bootstrap/Button");
-var _buttonDefault = parcelHelpers.interopDefault(_button);
-var _reactRouterDom = require("react-router-dom");
-class MoveView extends _reactDefault.default.Component {
-    render() {
-        const { move , onBackClick , addToFavorites  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-            className: "move-view justify-content-center text-center",
-            __source: {
-                fileName: "src/components/move-view/move-view.jsx",
-                lineNumber: 16
-            },
-            __self: this,
-            children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
-                sm: 12,
-                md: 8,
-                __source: {
-                    fileName: "src/components/move-view/move-view.jsx",
-                    lineNumber: 22
-                },
-                __self: this,
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx("h3", {
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 23
-                        },
-                        __self: this,
-                        children: "Move details"
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                        className: "move-title",
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 24
-                        },
-                        __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsxs("strong", {
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 25
-                            },
-                            __self: this,
-                            children: [
-                                /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                    className: "label",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 25
-                                    },
-                                    __self: this,
-                                    children: "Move Title: "
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                    className: "value",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 26
-                                    },
-                                    __self: this,
-                                    children: move.Title
-                                })
-                            ]
-                        })
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "move-style",
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 29
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 30
-                                },
-                                __self: this,
-                                children: "Style: "
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                to: `/styles/${move.Style.Name}`,
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 31
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                    variant: "link",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 32
-                                    },
-                                    __self: this,
-                                    children: move.Style.Name
-                                })
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "move-source",
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 35
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 36
-                                },
-                                __self: this,
-                                children: "Source: "
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                to: `/sources/${move.Source.Name}`,
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 37
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                    variant: "link",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 38
-                                    },
-                                    __self: this,
-                                    children: move.Source.Name
-                                })
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "move-cues",
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 41
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 42
-                                },
-                                __self: this,
-                                children: "Cues: "
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "value",
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 43
-                                },
-                                __self: this,
-                                children: move.Cues
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "move-videoLink",
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 45
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 46
-                                },
-                                __self: this,
-                                children: "Video: "
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                                className: "value",
-                                href: move.VideoURL,
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 47
-                                },
-                                __self: this,
-                                children: move.VideoURL
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                        variant: "primary",
-                        type: "button",
-                        onClick: ()=>{
-                            addToFavorites();
-                        },
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 49
-                        },
-                        __self: this,
-                        children: "Add to favorites"
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                        variant: "primary",
-                        type: "button",
-                        onClick: ()=>{
-                            onBackClick();
-                        },
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 50
-                        },
-                        __self: this,
-                        children: "Back"
-                    })
-                ]
-            })
-        }));
-    }
-}
-// validate data types
-MoveView.propTypes = {
-    move: _propTypesDefault.default.shape({
-        _id: _propTypesDefault.default.string.isRequired,
-        Title: _propTypesDefault.default.string.isRequired,
-        Cues: _propTypesDefault.default.string.isRequired,
-        Style: _propTypesDefault.default.shape({
-            Name: _propTypesDefault.default.string.isRequired,
-            Description: _propTypesDefault.default.string.isRequired
-        }).isRequired,
-        Source: _propTypesDefault.default.shape({
-            Name: _propTypesDefault.default.string.isRequired,
-            Weblink: _propTypesDefault.default.string.isRequired
-        }).isRequired,
-        VideoURL: _propTypesDefault.default.string.isRequired,
-        ImgURL: _propTypesDefault.default.string,
-        Featured: _propTypesDefault.default.bool
-    }).isRequired,
-    onBackClick: _propTypesDefault.default.func.isRequired,
-    addToFavorites: _propTypesDefault.default.func.isRequired
-};
-
-  $parcel$ReactRefreshHelpers$233b.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","react-router-dom":"cpyQW"}],"c0x1x":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
-var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
-var _classnames = require("classnames");
-var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _themeProvider = require("./ThemeProvider");
-var _excluded = [
-    "bsPrefix",
-    "className",
-    "noGutters",
-    "as"
-];
-var DEVICE_SIZES = [
-    'xl',
-    'lg',
-    'md',
-    'sm',
-    'xs'
-];
-var defaultProps = {
-    noGutters: false
-};
-var Row = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
-    var bsPrefix = _ref.bsPrefix, className = _ref.className, noGutters = _ref.noGutters, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
-    var decoratedBsPrefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'row');
-    var sizePrefix = decoratedBsPrefix + "-cols";
-    var classes = [];
-    DEVICE_SIZES.forEach(function(brkPoint) {
-        var propValue = props[brkPoint];
-        delete props[brkPoint];
-        var cols;
-        if (propValue != null && typeof propValue === 'object') cols = propValue.cols;
-        else cols = propValue;
-        var infix = brkPoint !== 'xs' ? "-" + brkPoint : '';
-        if (cols != null) classes.push("" + sizePrefix + infix + "-" + cols);
-    });
-    return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
-        ref: ref
-    }, props, {
-        className: _classnamesDefault.default.apply(void 0, [
-            className,
-            decoratedBsPrefix,
-            noGutters && 'no-gutters'
-        ].concat(classes))
-    })));
-});
-Row.displayName = 'Row';
-Row.defaultProps = defaultProps;
-exports.default = Row;
-
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"fbam0":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
-var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
-var _classnames = require("classnames");
-var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _themeProvider = require("./ThemeProvider");
-var _excluded = [
-    "bsPrefix",
-    "className",
-    "as"
-];
-var DEVICE_SIZES = [
-    'xl',
-    'lg',
-    'md',
-    'sm',
-    'xs'
-];
-var Col = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
-    var bsPrefix = _ref.bsPrefix, className = _ref.className, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
-    var prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'col');
-    var spans = [];
-    var classes = [];
-    DEVICE_SIZES.forEach(function(brkPoint) {
-        var propValue = props[brkPoint];
-        delete props[brkPoint];
-        var span;
-        var offset;
-        var order;
-        if (typeof propValue === 'object' && propValue != null) {
-            var _propValue$span = propValue.span;
-            span = _propValue$span === void 0 ? true : _propValue$span;
-            offset = propValue.offset;
-            order = propValue.order;
-        } else span = propValue;
-        var infix = brkPoint !== 'xs' ? "-" + brkPoint : '';
-        if (span) spans.push(span === true ? "" + prefix + infix : "" + prefix + infix + "-" + span);
-        if (order != null) classes.push("order" + infix + "-" + order);
-        if (offset != null) classes.push("offset" + infix + "-" + offset);
-    });
-    if (!spans.length) spans.push(prefix); // plain 'col'
-    return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
-    }, props, {
-        ref: ref,
-        className: _classnamesDefault.default.apply(void 0, [
-            className
-        ].concat(spans, classes))
-    })));
-});
-Col.displayName = 'Col';
-exports.default = Col;
-
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"iYoWk":[function(require,module,exports) {
+},{"react-is":"5wFcP"}],"iYoWk":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"3QmO2"}],"3QmO2":[function(require,module,exports) {
@@ -29852,7 +29503,57 @@ Switch.Input = _formCheckDefault.default.Input;
 Switch.Label = _formCheckDefault.default.Label;
 exports.default = Switch;
 
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","./FormCheck":"27gi5","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"aP2YV":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","./FormCheck":"27gi5","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"8AqEH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _camelize = require("dom-helpers/camelize");
+var _camelizeDefault = parcelHelpers.interopDefault(_camelize);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _themeProvider = require("./ThemeProvider");
+var _excluded = [
+    "className",
+    "bsPrefix",
+    "as"
+];
+var pascalCase = function pascalCase1(str) {
+    return str[0].toUpperCase() + _camelizeDefault.default(str).slice(1);
+};
+function createWithBsPrefix(prefix, _temp) {
+    var _ref = _temp === void 0 ? {
+    } : _temp, _ref$displayName = _ref.displayName, displayName = _ref$displayName === void 0 ? pascalCase(prefix) : _ref$displayName, Component = _ref.Component, defaultProps = _ref.defaultProps;
+    var BsComponent = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref2, ref) {
+        var className = _ref2.className, bsPrefix = _ref2.bsPrefix, _ref2$as = _ref2.as, Tag = _ref2$as === void 0 ? Component || 'div' : _ref2$as, props = _objectWithoutPropertiesLooseDefault.default(_ref2, _excluded);
+        var resolvedPrefix = _themeProvider.useBootstrapPrefix(bsPrefix, prefix);
+        return(/*#__PURE__*/ _reactDefault.default.createElement(Tag, _extendsDefault.default({
+            ref: ref,
+            className: _classnamesDefault.default(className, resolvedPrefix)
+        }, props)));
+    });
+    BsComponent.defaultProps = defaultProps;
+    BsComponent.displayName = displayName;
+    return BsComponent;
+}
+exports.default = createWithBsPrefix;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","dom-helpers/camelize":"aJYM3","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"aJYM3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var rHyphen = /-(.)/g;
+function camelize(string) {
+    return string.replace(rHyphen, function(_, chr) {
+        return chr.toUpperCase();
+    });
+}
+exports.default = camelize;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"aP2YV":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$8dd4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -30404,7 +30105,300 @@ StyleView.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","react-bootstrap/CardGroup":"lNZc4","react-router-dom":"cpyQW"}],"1gdtE":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","react-bootstrap/CardGroup":"lNZc4","react-router-dom":"cpyQW"}],"b3Zmr":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$7140 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$7140.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+// import './move-card.scss';
+parcelHelpers.export(exports, "MoveCard", ()=>MoveCard
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _card = require("react-bootstrap/Card");
+var _cardDefault = parcelHelpers.interopDefault(_card);
+var _reactRouterDom = require("react-router-dom");
+class MoveCard extends _reactDefault.default.Component {
+    render() {
+        const { move , removeFavorite  } = this.props; // = short for this.props.move, retrieving the parameter from main-view
+        return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
+            className: "Card",
+            __source: {
+                fileName: "src/components/move-card/move-card.jsx",
+                lineNumber: 16
+            },
+            __self: this,
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
+                    variant: "top",
+                    src: move.ImgURL,
+                    __source: {
+                        fileName: "src/components/move-card/move-card.jsx",
+                        lineNumber: 17
+                    },
+                    __self: this
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
+                    __source: {
+                        fileName: "src/components/move-card/move-card.jsx",
+                        lineNumber: 18
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+                            __source: {
+                                fileName: "src/components/move-card/move-card.jsx",
+                                lineNumber: 19
+                            },
+                            __self: this,
+                            children: move.Title
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
+                            __source: {
+                                fileName: "src/components/move-card/move-card.jsx",
+                                lineNumber: 20
+                            },
+                            __self: this,
+                            children: move.Cues
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                            to: `/moves/${move._id}`,
+                            __source: {
+                                fileName: "src/components/move-card/move-card.jsx",
+                                lineNumber: 21
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                variant: "primary",
+                                __source: {
+                                    fileName: "src/components/move-card/move-card.jsx",
+                                    lineNumber: 22
+                                },
+                                __self: this,
+                                children: "View details"
+                            })
+                        }),
+                        !removeFavorite ? /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                            __source: {
+                                fileName: "src/components/move-card/move-card.jsx",
+                                lineNumber: 25
+                            },
+                            __self: this
+                        }) : /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                            variant: "primary",
+                            onClick: ()=>removeFavorite()
+                            ,
+                            __source: {
+                                fileName: "src/components/move-card/move-card.jsx",
+                                lineNumber: 26
+                            },
+                            __self: this,
+                            children: "Remove favorite"
+                        })
+                    ]
+                })
+            ]
+        }));
+    }
+}
+/* pre react-router-dom
+export class MoveCard extends React.Component {
+    render() {
+        // const { moveData } = this.props; = short for this.props.moveData, retrieving the parameter from main-view > moves.map() 
+        const { moveData, onMoveClick } = this.props;
+
+        return (
+            // <div className="move-card" onClick={() => { onMoveClick(moveData); }}>{moveData.Title}</div>;
+            <Card>
+                <Card.Img variant="top" src={moveData.ImgURL} />
+                <Card.Body>
+                    <Card.Title>{moveData.Title}</Card.Title>
+                    <Card.Text>{moveData.Cues}</Card.Text>
+                    <Button variant="primary" onClick={() => onMoveClick(moveData)} >Open</Button>
+                </Card.Body>
+            </Card>
+        );
+    }
+}
+*/ // validate data types
+MoveCard.propTypes = {
+    move: _propTypesDefault.default.shape({
+        _id: _propTypesDefault.default.string.isRequired,
+        Title: _propTypesDefault.default.string.isRequired,
+        Cues: _propTypesDefault.default.string.isRequired,
+        Style: _propTypesDefault.default.shape({
+            Name: _propTypesDefault.default.string.isRequired,
+            Description: _propTypesDefault.default.string.isRequired
+        }).isRequired,
+        Source: _propTypesDefault.default.shape({
+            Name: _propTypesDefault.default.string.isRequired,
+            Weblink: _propTypesDefault.default.string.isRequired
+        }).isRequired,
+        VideoURL: _propTypesDefault.default.string.isRequired,
+        ImgURL: _propTypesDefault.default.string,
+        Featured: _propTypesDefault.default.bool
+    }).isRequired
+};
+
+  $parcel$ReactRefreshHelpers$7140.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","prop-types":"1tgq3","react-bootstrap/Button":"9CzHT","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW"}],"MoOk8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _themeProvider = require("./ThemeProvider");
+var _createWithBsPrefix = require("./createWithBsPrefix");
+var _createWithBsPrefixDefault = parcelHelpers.interopDefault(_createWithBsPrefix);
+var _divWithClassName = require("./divWithClassName");
+var _divWithClassNameDefault = parcelHelpers.interopDefault(_divWithClassName);
+var _cardContext = require("./CardContext");
+var _cardContextDefault = parcelHelpers.interopDefault(_cardContext);
+var _cardImg = require("./CardImg");
+var _cardImgDefault = parcelHelpers.interopDefault(_cardImg);
+var _excluded = [
+    "bsPrefix",
+    "className",
+    "bg",
+    "text",
+    "border",
+    "body",
+    "children",
+    "as"
+];
+var DivStyledAsH5 = _divWithClassNameDefault.default('h5');
+var DivStyledAsH6 = _divWithClassNameDefault.default('h6');
+var CardBody = _createWithBsPrefixDefault.default('card-body');
+var CardTitle = _createWithBsPrefixDefault.default('card-title', {
+    Component: DivStyledAsH5
+});
+var CardSubtitle = _createWithBsPrefixDefault.default('card-subtitle', {
+    Component: DivStyledAsH6
+});
+var CardLink = _createWithBsPrefixDefault.default('card-link', {
+    Component: 'a'
+});
+var CardText = _createWithBsPrefixDefault.default('card-text', {
+    Component: 'p'
+});
+var CardHeader = _createWithBsPrefixDefault.default('card-header');
+var CardFooter = _createWithBsPrefixDefault.default('card-footer');
+var CardImgOverlay = _createWithBsPrefixDefault.default('card-img-overlay');
+var defaultProps = {
+    body: false
+};
+var Card = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
+    var bsPrefix = _ref.bsPrefix, className = _ref.className, bg = _ref.bg, text = _ref.text, border = _ref.border, body = _ref.body, children = _ref.children, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
+    var prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'card');
+    var cardContext = _react.useMemo(function() {
+        return {
+            cardHeaderBsPrefix: prefix + "-header"
+        };
+    }, [
+        prefix
+    ]);
+    return(/*#__PURE__*/ _reactDefault.default.createElement(_cardContextDefault.default.Provider, {
+        value: cardContext
+    }, /*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
+        ref: ref
+    }, props, {
+        className: _classnamesDefault.default(className, prefix, bg && "bg-" + bg, text && "text-" + text, border && "border-" + border)
+    }), body ? /*#__PURE__*/ // @ts-ignore
+    _reactDefault.default.createElement(CardBody, null, children) : children)));
+});
+Card.displayName = 'Card';
+Card.defaultProps = defaultProps;
+Card.Img = _cardImgDefault.default;
+Card.Title = CardTitle;
+Card.Subtitle = CardSubtitle;
+Card.Body = CardBody;
+Card.Link = CardLink;
+Card.Text = CardText;
+Card.Header = CardHeader;
+Card.Footer = CardFooter;
+Card.ImgOverlay = CardImgOverlay;
+exports.default = Card;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","./createWithBsPrefix":"8AqEH","./divWithClassName":"GBmBH","./CardContext":"9AVwu","./CardImg":"5GKOF","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"GBmBH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+exports.default = function(className) {
+    return(/*#__PURE__*/ _reactDefault.default.forwardRef(function(p, ref) {
+        return(/*#__PURE__*/ _reactDefault.default.createElement("div", _extendsDefault.default({
+        }, p, {
+            ref: ref,
+            className: _classnamesDefault.default(p.className, className)
+        })));
+    }));
+};
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","classnames":"bOXOh","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"9AVwu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var context = /*#__PURE__*/ _reactDefault.default.createContext(null);
+context.displayName = 'CardContext';
+exports.default = context;
+
+},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"5GKOF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _themeProvider = require("./ThemeProvider");
+var _excluded = [
+    "bsPrefix",
+    "className",
+    "variant",
+    "as"
+];
+var defaultProps = {
+    variant: null
+};
+var CardImg = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
+    var bsPrefix = _ref.bsPrefix, className = _ref.className, variant = _ref.variant, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'img' : _ref$as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
+    var prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'card-img');
+    return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
+        ref: ref,
+        className: _classnamesDefault.default(variant ? prefix + "-" + variant : prefix, className)
+    }, props)));
+});
+CardImg.displayName = 'CardImg';
+CardImg.defaultProps = defaultProps;
+exports.default = CardImg;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks"}],"1gdtE":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$c28f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -30644,7 +30638,8 @@ parcelHelpers.export(exports, "ProfileView", ()=>ProfileView
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-// import axios from 'axios';
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _form = require("react-bootstrap/Form");
@@ -30680,6 +30675,18 @@ function ProfileView(props) {
     const deleteAccount = ()=>{
         if (confirm("Do you realy want to permanently delete your user account?")) props.deleteUser();
     };
+    _reactDefault.default.useEffect(()=>{
+        const token = localStorage.getItem('token');
+        _axiosDefault.default.get('https://move-x.herokuapp.com/users/' + username, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            setUsername(response.data.Username);
+            setEmail(response.data.Email);
+            setBirthday(response.data.Birthday);
+        });
+    }, []);
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
         children: [
             /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
@@ -30688,14 +30695,14 @@ function ProfileView(props) {
                 lg: 6,
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 40
+                    lineNumber: 49
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 41
+                            lineNumber: 50
                         },
                         __self: this,
                         children: "User Profile"
@@ -30703,7 +30710,7 @@ function ProfileView(props) {
                     /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 42
+                            lineNumber: 51
                         },
                         __self: this,
                         children: [
@@ -30711,10 +30718,38 @@ function ProfileView(props) {
                             props.user
                         ]
                     }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("p", {
+                        __source: {
+                            fileName: "src/components/profile-view/profile-view.jsx",
+                            lineNumber: 52
+                        },
+                        __self: this,
+                        children: [
+                            "Email: ",
+                            email
+                        ]
+                    }),
+                    birthday ? /*#__PURE__*/ _jsxRuntime.jsxs("p", {
+                        __source: {
+                            fileName: "src/components/profile-view/profile-view.jsx",
+                            lineNumber: 54
+                        },
+                        __self: this,
+                        children: [
+                            "Birthday: ",
+                            birthday
+                        ]
+                    }) : /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                        __source: {
+                            fileName: "src/components/profile-view/profile-view.jsx",
+                            lineNumber: 55
+                        },
+                        __self: this
+                    }),
                     /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 49
+                            lineNumber: 58
                         },
                         __self: this,
                         children: "Update user data"
@@ -30723,7 +30758,7 @@ function ProfileView(props) {
                         className: "userData-form text-left",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 50
+                            lineNumber: 59
                         },
                         __self: this,
                         children: [
@@ -30731,7 +30766,7 @@ function ProfileView(props) {
                                 className: "justify-content-center",
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 51
+                                    lineNumber: 60
                                 },
                                 __self: this,
                                 children: [
@@ -30740,21 +30775,21 @@ function ProfileView(props) {
                                         lg: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 52
+                                            lineNumber: 61
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                                             controlId: "formUsername",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 53
+                                                lineNumber: 62
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 54
+                                                        lineNumber: 63
                                                     },
                                                     __self: this,
                                                     children: "Username:"
@@ -30767,7 +30802,7 @@ function ProfileView(props) {
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 55
+                                                        lineNumber: 64
                                                     },
                                                     __self: this
                                                 })
@@ -30779,21 +30814,21 @@ function ProfileView(props) {
                                         lg: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 58
+                                            lineNumber: 67
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                                             controlId: "formPassword",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 59
+                                                lineNumber: 68
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 60
+                                                        lineNumber: 69
                                                     },
                                                     __self: this,
                                                     children: "Password:"
@@ -30806,7 +30841,7 @@ function ProfileView(props) {
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 61
+                                                        lineNumber: 70
                                                     },
                                                     __self: this
                                                 })
@@ -30819,7 +30854,7 @@ function ProfileView(props) {
                                 className: "justify-content-center",
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 69
+                                    lineNumber: 78
                                 },
                                 __self: this,
                                 children: [
@@ -30828,21 +30863,21 @@ function ProfileView(props) {
                                         lg: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 70
+                                            lineNumber: 79
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                                             controlId: "formEmail",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 71
+                                                lineNumber: 80
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 72
+                                                        lineNumber: 81
                                                     },
                                                     __self: this,
                                                     children: "Email:"
@@ -30850,12 +30885,12 @@ function ProfileView(props) {
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                                                     type: "email",
                                                     required: true,
-                                                    placeholder: 'Enter Email',
+                                                    placeholder: email,
                                                     onChange: (e)=>setEmail(e.target.value)
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 73
+                                                        lineNumber: 82
                                                     },
                                                     __self: this
                                                 })
@@ -30867,32 +30902,33 @@ function ProfileView(props) {
                                         lg: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 76
+                                            lineNumber: 85
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                                             controlId: "formBirthday",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 77
+                                                lineNumber: 86
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 78
+                                                        lineNumber: 87
                                                     },
                                                     __self: this,
                                                     children: "Birthday:"
                                                 }),
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                                                     type: "date",
+                                                    placeholder: birthday,
                                                     onChange: (e)=>setBirthday(e.target.value)
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 79
+                                                        lineNumber: 88
                                                     },
                                                     __self: this
                                                 })
@@ -30905,13 +30941,13 @@ function ProfileView(props) {
                                 className: "justify-content-center text-center",
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 83
+                                    lineNumber: 92
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 84
+                                        lineNumber: 93
                                     },
                                     __self: this,
                                     children: [
@@ -30921,7 +30957,7 @@ function ProfileView(props) {
                                             onClick: handleUpdate,
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 85
+                                                lineNumber: 94
                                             },
                                             __self: this,
                                             children: "Safe changes"
@@ -30936,14 +30972,14 @@ function ProfileView(props) {
                         className: "delete-account text-center",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 89
+                            lineNumber: 98
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 90
+                                    lineNumber: 99
                                 },
                                 __self: this,
                                 children: "Delete user account"
@@ -30954,7 +30990,7 @@ function ProfileView(props) {
                                 onClick: deleteAccount,
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 91
+                                    lineNumber: 100
                                 },
                                 __self: this,
                                 children: "Delete account"
@@ -30968,21 +31004,21 @@ function ProfileView(props) {
                 className: "text-center",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 95
+                    lineNumber: 104
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                     className: "user-favorites",
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 96
+                        lineNumber: 105
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 97
+                                lineNumber: 106
                             },
                             __self: this,
                             children: "Your favorite moves"
@@ -30990,7 +31026,7 @@ function ProfileView(props) {
                         !props.favMoves ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 99
+                                lineNumber: 108
                             },
                             __self: this,
                             children: "You did not choose any favorites yet."
@@ -30998,7 +31034,7 @@ function ProfileView(props) {
                             className: "justify-content-md-center",
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 100
+                                lineNumber: 109
                             },
                             __self: this,
                             children: props.favMoves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -31006,7 +31042,7 @@ function ProfileView(props) {
                                     md: 6,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 102
+                                        lineNumber: 111
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
@@ -31015,7 +31051,7 @@ function ProfileView(props) {
                                         ,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 103
+                                            lineNumber: 112
                                         },
                                         __self: this
                                     })
@@ -31028,7 +31064,7 @@ function ProfileView(props) {
         ]
     }));
 }
-_s(ProfileView, "K0E174bFtDN6fBbqmrE4U9/S+yg=");
+_s(ProfileView, "vIEUPCwwsfWis9epgJm8Ei++vCo=");
 _c = ProfileView;
 // validate prop data types
 ProfileView.propTypes = {
@@ -31061,7 +31097,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","react-bootstrap/CardGroup":"lNZc4","react-bootstrap/Col":"fbam0","react-bootstrap/Row":"c0x1x","prop-types":"1tgq3"}],"2PRIq":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../move-card/move-card":"b3Zmr","react-bootstrap/CardGroup":"lNZc4","react-bootstrap/Col":"fbam0","react-bootstrap/Row":"c0x1x","prop-types":"1tgq3","axios":"iYoWk"}],"2PRIq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _extends = require("@babel/runtime/helpers/esm/extends");

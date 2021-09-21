@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -35,16 +35,25 @@ export function ProfileView(props) {
         }
     };
 
+    React.useEffect(() => {
+        const token = localStorage.getItem('token');
+        axios.get('https://move-x.herokuapp.com/users/' + username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
+            setUsername(response.data.Username);
+            setEmail(response.data.Email);
+            setBirthday(response.data.Birthday);
+        })
+    }, []);
+
     return (
         <>
             <Col className="user-data text-center" sm={12} lg={6}>
                 <h3>User Profile</h3>
                 <p>Username: {props.user}</p>
-                {/* data that has not been transmitted through a prop
-                    <p>Password: {password}</p>
-                    <p>Email: {email}</p>
-                    <p>Birthday: {birthday}</p> 
-                    */}
+                <p>Email: {email}</p>
+                {(birthday)
+                    ? <p>Birthday: {birthday}</p>
+                    : <span></span>
+                }
 
                 <h3>Update user data</h3>
                 <Form className="userData-form text-left">
@@ -70,13 +79,13 @@ export function ProfileView(props) {
                         <Col sm={4} lg={6}>
                             <Form.Group controlId="formEmail">
                                 <Form.Label>Email:</Form.Label>
-                                <Form.Control type="email" required placeholder={'Enter Email'} onChange={e => setEmail(e.target.value)} />
+                                <Form.Control type="email" required placeholder={email} onChange={e => setEmail(e.target.value)} />
                             </Form.Group>
                         </Col>
                         <Col sm={4} lg={6}>
                             <Form.Group controlId="formBirthday">
                                 <Form.Label>Birthday:</Form.Label>
-                                <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
+                                <Form.Control type="date" placeholder={birthday} onChange={e => setBirthday(e.target.value)} />
                             </Form.Group>
                         </Col>
                     </Row>
