@@ -32470,8 +32470,12 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
+var _row = require("react-bootstrap/Row");
+var _rowDefault = parcelHelpers.interopDefault(_row);
 var _reactRedux = require("react-redux");
 var _moveCard = require("../move-card/move-card");
+var _visibilityFilterInput = require("../visibility-filter-input/visibility-filter-input");
+var _visibilityFilterInputDefault = parcelHelpers.interopDefault(_visibilityFilterInput);
 const mapStateToProps = (state)=>{
     const { visibilityFilter  } = state;
     return {
@@ -32487,30 +32491,76 @@ function MovesList(props) {
         className: "main-view",
         __source: {
             fileName: "src/components/moves-list/moves-list.jsx",
-            lineNumber: 20
+            lineNumber: 22
         },
         __self: this,
         children: "Loading the moves from the database. Check console for errors if it does not finish loading."
     }));
-    return filteredMoves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-            sm: 6,
-            md: 4,
-            lg: 3,
-            __source: {
-                fileName: "src/components/moves-list/moves-list.jsx",
-                lineNumber: 23
-            },
-            __self: this,
-            children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
-                move: m,
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+        __source: {
+            fileName: "src/components/moves-list/moves-list.jsx",
+            lineNumber: 25
+        },
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                className: "visibility-filter justify-content-center",
                 __source: {
                     fileName: "src/components/moves-list/moves-list.jsx",
-                    lineNumber: 24
+                    lineNumber: 26
                 },
-                __self: this
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                    xs: 12,
+                    sm: 6,
+                    lg: 4,
+                    style: {
+                        margin: '1em'
+                    },
+                    __source: {
+                        fileName: "src/components/moves-list/moves-list.jsx",
+                        lineNumber: 27
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_visibilityFilterInputDefault.default, {
+                        visibilityFilter: visibilityFilter,
+                        __source: {
+                            fileName: "src/components/moves-list/moves-list.jsx",
+                            lineNumber: 28
+                        },
+                        __self: this
+                    })
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                className: "moves-list justify-content-center",
+                __source: {
+                    fileName: "src/components/moves-list/moves-list.jsx",
+                    lineNumber: 31
+                },
+                __self: this,
+                children: filteredMoves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                        sm: 6,
+                        md: 4,
+                        lg: 3,
+                        __source: {
+                            fileName: "src/components/moves-list/moves-list.jsx",
+                            lineNumber: 33
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                            move: m,
+                            __source: {
+                                fileName: "src/components/moves-list/moves-list.jsx",
+                                lineNumber: 34
+                            },
+                            __self: this
+                        })
+                    }, m._id)
+                )
             })
-        }, m._id)
-    );
+        ]
+    }));
 }
 _c = MovesList;
 exports.default = _reactRedux.connect(mapStateToProps)(MovesList);
@@ -32522,7 +32572,48 @@ $RefreshReg$(_c, "MovesList");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Col":"fbam0","react-redux":"2L0if","../move-card/move-card":"b3Zmr","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN"}],"2PRIq":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Col":"fbam0","react-redux":"2L0if","../move-card/move-card":"b3Zmr","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN","../visibility-filter-input/visibility-filter-input":"7ZxGS","react-bootstrap/Row":"c0x1x"}],"7ZxGS":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$9bc3 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$9bc3.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRedux = require("react-redux");
+var _form = require("react-bootstrap/Form");
+var _formDefault = parcelHelpers.interopDefault(_form);
+var _actions = require("../../actions/actions");
+function VisibilityFilterInput(props) {
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+        onChange: (e)=>props.setFilter(e.target.value)
+        ,
+        value: props.visibilityFilter,
+        placeholder: "filter",
+        __source: {
+            fileName: "src/components/visibility-filter-input/visibility-filter-input.jsx",
+            lineNumber: 9
+        },
+        __self: this
+    }));
+}
+_c = VisibilityFilterInput;
+exports.default = _reactRedux.connect(null, {
+    setFilter: _actions.setFilter
+})(VisibilityFilterInput);
+var _c;
+$RefreshReg$(_c, "VisibilityFilterInput");
+
+  $parcel$ReactRefreshHelpers$9bc3.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-redux":"2L0if","react-bootstrap/Form":"5ykgY","../../actions/actions":"1Ttfj","@parcel/transformer-js/src/esmodule-helpers.js":"g5Oks","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"hVenN"}],"2PRIq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _extends = require("@babel/runtime/helpers/esm/extends");
