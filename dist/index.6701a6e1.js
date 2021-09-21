@@ -30835,8 +30835,7 @@ function ProfileView(props) {
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                        sm: 4,
-                                        lg: 6,
+                                        sm: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
                                             lineNumber: 130
@@ -30883,8 +30882,7 @@ function ProfileView(props) {
                                         })
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                        sm: 4,
-                                        lg: 6,
+                                        sm: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
                                             lineNumber: 137
@@ -30941,8 +30939,7 @@ function ProfileView(props) {
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                        sm: 4,
-                                        lg: 6,
+                                        sm: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
                                             lineNumber: 150
@@ -30989,8 +30986,7 @@ function ProfileView(props) {
                                         })
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                        sm: 4,
-                                        lg: 6,
+                                        sm: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
                                             lineNumber: 157

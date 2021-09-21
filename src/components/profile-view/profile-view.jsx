@@ -127,14 +127,14 @@ export function ProfileView(props) {
                 <h3>Update user data</h3>
                 <Form className="userData-form text-left">
                     <Row className="justify-content-center">
-                        <Col sm={4} lg={6}>
+                        <Col sm={6}>
                             <Form.Group controlId="formUsername">
                                 <Form.Label>Username:</Form.Label>
                                 <Form.Control type="text" required placeholder={username} onChange={e => validateUsername(e.target.value)} />
                                 <Form.Text className="invalid">{usernameInvalid}</Form.Text>
                             </Form.Group>
                         </Col>
-                        <Col sm={4} lg={6}>
+                        <Col sm={6}>
                             <Form.Group controlId="formPassword">
                                 <Form.Label>Password:</Form.Label>
                                 <Form.Control
@@ -147,14 +147,14 @@ export function ProfileView(props) {
                         </Col>
                     </Row>
                     <Row className="justify-content-center">
-                        <Col sm={4} lg={6}>
+                        <Col sm={6}>
                             <Form.Group controlId="formEmail">
                                 <Form.Label>Email:</Form.Label>
                                 <Form.Control type="email" required placeholder={email} onChange={e => validateEmail(e.target.value)} />
                                 <Form.Text className="invalid">{emailInvalid}</Form.Text>
                             </Form.Group>
                         </Col>
-                        <Col sm={4} lg={6}>
+                        <Col sm={6}>
                             <Form.Group controlId="formBirthday">
                                 <Form.Label>Birthday:</Form.Label>
                                 <Form.Control type="date" placeholder={birthday} onChange={e => setBirthday(e.target.value)} />
