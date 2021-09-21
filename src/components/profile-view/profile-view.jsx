@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -13,20 +13,89 @@ import CardGroup from 'react-bootstrap/CardGroup';
 
 export function ProfileView(props) {
     const [username, setUsername] = useState(props.user);
+    const [usernameInvalid, setUsernameInvalid] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordInvalid, setPasswordInvalid] = useState('');
     const [email, setEmail] = useState('');
+    const [emailInvalid, setEmailInvalid] = useState('');
     const [birthday, setBirthday] = useState('');
+    const [formInvalid, setFormInvalid] = useState('');
+
+    // instant form validation
+    function validateUsername(inputValue) {
+        if (!inputValue) {
+            setUsernameInvalid('Username is a required field.');
+            return false;
+        }
+        if (inputValue.length < 5) {
+            setUsernameInvalid('Username needs to be at least 5 characters long.');
+            return false;
+        }
+        if (!/^[a-z0-9]+$/i.test(inputValue)) {
+            setUsernameInvalid('Username has to be purely alphanumeric.');
+            return false;
+        }
+        // Missing: setUsernameInvalid('This username is already taken.'); needs to be based on the server response
+        setUsername(inputValue);
+        setUsernameInvalid('');
+        return true;
+    }
+    function validateEmail(inputValue) {
+        if (!inputValue) {
+            setEmailInvalid('Email is a required field.');
+            return false;
+        }
+        // there must be at least 1 char before the @ , at least 1 char after the @ and at least 2 chars after the .
+        if (inputValue.indexOf('@') < 1 || inputValue.indexOf('.') < inputValue.indexOf('@') + 2 || inputValue.indexOf('.') + 2 >= inputValue.length) {
+            setEmailInvalid('You must enter a valid email address.');
+            return false;
+        }
+        setEmail(inputValue);
+        setEmailInvalid('');
+        return true;
+    }
+    function validatePassword(inputValue) {
+        if (!inputValue) {
+            setPasswordInvalid('Password is a required field.');
+            return false;
+        }
+        if (inputValue.length < 5) {
+            setPasswordInvalid('Password needs to be at least 5 characters long.');
+            return false;
+        }
+        if (inputValue.indexOf(' ') > -1) {
+            setPasswordInvalid('Password can not contain spaces.');
+            return false;
+        }
+        if (!/\d/.test(inputValue)) {
+            setPasswordInvalid('Password must have at least one number.');
+            return false;
+        }
+        if (!/[a-zA-Z]/.test(inputValue)) {
+            setPasswordInvalid('Password must have at least one letter.');
+            return false;
+        }
+        setPassword(inputValue);
+        setPasswordInvalid('');
+        return true;
+    }
 
     const handleUpdate = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
-        let newUserData = {
-            Username: username,
-            Password: password,
-            Email: email,
-            Birthday: birthday
+
+        if (!passwordInvalid && !emailInvalid && !usernameInvalid) {
+            let newUserData = {
+                Username: username,
+                Password: password,
+                Email: email,
+                Birthday: birthday
+            }
+            // update user data in database
+            props.updateUserdata(newUserData);
         }
-        // update user data in database
-        props.updateUserdata(newUserData);
+        else {
+            setFormInvalid('Some values in the form are not valid: ' + usernameInvalid + ' ' + passwordInvalid + ' ' + emailInvalid);
+        }
     };
 
     const deleteAccount = () => {
@@ -35,54 +104,67 @@ export function ProfileView(props) {
         }
     };
 
+    React.useEffect(() => { // load user data into state (and as placeholders) when component is mounted
+        const token = localStorage.getItem('token');
+        axios.get('https://move-x.herokuapp.com/users/' + username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
+            setUsername(response.data.Username);
+            setEmail(response.data.Email);
+            setBirthday(response.data.Birthday);
+        })
+    }, []);
+
     return (
         <>
             <Col className="user-data text-center" sm={12} lg={6}>
                 <h3>User Profile</h3>
                 <p>Username: {props.user}</p>
-                {/* data that has not been transmitted through a prop
-                    <p>Password: {password}</p>
-                    <p>Email: {email}</p>
-                    <p>Birthday: {birthday}</p> 
-                    */}
+                <p>Email: {email}</p>
+                {(birthday)
+                    ? <p>Birthday: {birthday}</p>
+                    : <span></span>
+                }
 
                 <h3>Update user data</h3>
                 <Form className="userData-form text-left">
                     <Row className="justify-content-center">
-                        <Col sm={4} lg={6}>
+                        <Col sm={6}>
                             <Form.Group controlId="formUsername">
                                 <Form.Label>Username:</Form.Label>
-                                <Form.Control type="text" required placeholder={username} onChange={e => setUsername(e.target.value)} />
+                                <Form.Control type="text" required placeholder={username} onChange={e => validateUsername(e.target.value)} />
+                                <Form.Text className="invalid">{usernameInvalid}</Form.Text>
                             </Form.Group>
                         </Col>
-                        <Col sm={4} lg={6}>
+                        <Col sm={6}>
                             <Form.Group controlId="formPassword">
                                 <Form.Label>Password:</Form.Label>
                                 <Form.Control
                                     type="password"
                                     required
                                     placeholder={'Password'}
-                                    onChange={e => setPassword(e.target.value)} />
+                                    onChange={e => validatePassword(e.target.value)} />
+                                <Form.Text className="invalid">{passwordInvalid}</Form.Text>
                             </Form.Group>
                         </Col>
                     </Row>
                     <Row className="justify-content-center">
-                        <Col sm={4} lg={6}>
+                        <Col sm={6}>
                             <Form.Group controlId="formEmail">
                                 <Form.Label>Email:</Form.Label>
-                                <Form.Control type="email" required placeholder={'Enter Email'} onChange={e => setEmail(e.target.value)} />
+                                <Form.Control type="email" required placeholder={email} onChange={e => validateEmail(e.target.value)} />
+                                <Form.Text className="invalid">{emailInvalid}</Form.Text>
                             </Form.Group>
                         </Col>
-                        <Col sm={4} lg={6}>
+                        <Col sm={6}>
                             <Form.Group controlId="formBirthday">
                                 <Form.Label>Birthday:</Form.Label>
-                                <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
+                                <Form.Control type="date" placeholder={birthday} onChange={e => setBirthday(e.target.value)} />
                             </Form.Group>
                         </Col>
                     </Row>
                     <Row className="justify-content-center text-center">
                         <Col >
-                            <Button variant="primary" type="submit" onClick={handleUpdate}>Safe changes</Button>{'  '}
+                            <Button variant="primary" type="submit" onClick={handleUpdate}>Safe changes</Button>
+                            <Form.Text className="invalid">{formInvalid}</Form.Text>
                         </Col>
                     </Row>
                 </Form>
