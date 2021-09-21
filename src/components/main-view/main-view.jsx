@@ -212,7 +212,7 @@ class MainView extends React.Component {
                                 </Col>);
 
                             // Loading page is displayed if no moves could be loaded
-                            if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
+                            if (moves.length === 0) return <div className="main-view">Loading the moves from the database. Check console for errors if it does not finish loading.</div>;
 
                             return <MovesList moves={moves} />;
                             {/* ( <CardGroup className="justify-content-center">
@@ -264,7 +264,7 @@ class MainView extends React.Component {
                                 </Col>);
 
                             // Loading page is displayed if no moves could be loaded
-                            if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
+                            if (moves.length === 0) return <div className="main-view">Loading the moves from the database. Check console for errors if it does not finish loading.</div>;
 
                             return (
                                 <MoveView
@@ -282,7 +282,7 @@ class MainView extends React.Component {
                                 </Col>);
 
                             // Loading page is displayed if no moves could be loaded
-                            if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
+                            if (moves.length === 0) return <div className="main-view">Loading the moves from the database. Check console for errors if it does not finish loading.</div>;
 
                             return (
                                 <StyleView style={moves.find(m => m.Style.Name === match.params.name).Style} moves={moves.filter(m => m.Style.Name === match.params.name)} onBackClick={() => history.goBack()} />
@@ -296,7 +296,7 @@ class MainView extends React.Component {
                                 </Col>);
 
                             // Loading page is displayed if no moves could be loaded
-                            if (moves.length === 0) return <div className="main-view">Failed to load the moves database. Check console for details.</div>;
+                            if (moves.length === 0) return <div className="main-view">Loading the moves from the database. Check console for errors if it does not finish loading.</div>;
 
                             return (
                                 <SourceView source={moves.find(m => m.Source.Name === match.params.name).Source} moves={moves.filter(m => m.Source.Name === match.params.name)} onBackClick={() => history.goBack()} />
