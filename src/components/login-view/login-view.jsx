@@ -5,29 +5,19 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 // import './login-view.scss';
 
 export function LoginView(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [validated, setValidated] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
 
-        // constraint validation
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            e.stopPropagation();
-            console.log('invalid data: ' + e);
-            return ('invalid data: ' + e);
-        }
-        setValidated(true);
-
         /* Send a request to the server for authentication */
-        axios.post('https://move-x.herokuapp.com/login', { // http://localhost:8080/login
+        axios.post('https://move-x.herokuapp.com/login', {
             Username: username,
             Password: password
         })
@@ -37,13 +27,12 @@ export function LoginView(props) {
             })
             .catch(error => {
                 console.log('No such user. Error: ' + error);
-                alert(error);
             });
     };
 
     // noValidate attribute to disable HTML5 validations by default and access Constraint API
     return (
-        <Form noValidate validated={validated}>
+        <Form>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
                 <Form.Control required type="text" onChange={e => setUsername(e.target.value)} />

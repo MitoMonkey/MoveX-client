@@ -112,7 +112,12 @@ export function ProfileView(props) {
             setBirthday(response.data.Birthday);
         })
     }, []);
-
+    /*
+        function stringToDate(birthdayString) {
+            var pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
+            return new Date(birthdayString.replace(pattern, '$1-$2-$3'));
+        }
+    */
     return (
         <>
             <Col className="user-data text-center" sm={12} lg={6}>
@@ -120,7 +125,7 @@ export function ProfileView(props) {
                 <p>Username: {props.user}</p>
                 <p>Email: {email}</p>
                 {(birthday)
-                    ? <p>Birthday: {birthday}</p>
+                    ? <p>Birthday: {birthday.slice(0, 10)}</p>
                     : <span></span>
                 }
 
@@ -130,7 +135,7 @@ export function ProfileView(props) {
                         <Col sm={6}>
                             <Form.Group controlId="formUsername">
                                 <Form.Label>Username:</Form.Label>
-                                <Form.Control type="text" required placeholder={username} onChange={e => validateUsername(e.target.value)} />
+                                <Form.Control type="text" required value={username} onChange={e => validateUsername(e.target.value)} />
                                 <Form.Text className="invalid">{usernameInvalid}</Form.Text>
                             </Form.Group>
                         </Col>
@@ -150,14 +155,14 @@ export function ProfileView(props) {
                         <Col sm={6}>
                             <Form.Group controlId="formEmail">
                                 <Form.Label>Email:</Form.Label>
-                                <Form.Control type="email" required placeholder={email} onChange={e => validateEmail(e.target.value)} />
+                                <Form.Control type="email" required value={email} onChange={e => validateEmail(e.target.value)} />
                                 <Form.Text className="invalid">{emailInvalid}</Form.Text>
                             </Form.Group>
                         </Col>
                         <Col sm={6}>
                             <Form.Group controlId="formBirthday">
                                 <Form.Label>Birthday:</Form.Label>
-                                <Form.Control type="date" placeholder={birthday} onChange={e => setBirthday(e.target.value)} />
+                                <Form.Control type="date" value={birthday.slice(0, 10)} onChange={e => setBirthday(e.target.value)} />
                             </Form.Group>
                         </Col>
                     </Row>
