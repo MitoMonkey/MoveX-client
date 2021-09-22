@@ -104,28 +104,43 @@ export function ProfileView(props) {
         }
     };
 
+    let current_email = '';
+    let current_birthday = '';
     React.useEffect(() => { // load user data into state (and as placeholders) when component is mounted
         const token = localStorage.getItem('token');
         axios.get('https://move-x.herokuapp.com/users/' + username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
             setUsername(response.data.Username);
             setEmail(response.data.Email);
+            current_email = response.data.Email;
+            console.log(current_email);
             setBirthday(response.data.Birthday);
+            current_birthday = response.data.Birthday.split("T")[0];
         })
     }, []);
     /*
-        function stringToDate(birthdayString) {
-            var pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
-            return new Date(birthdayString.replace(pattern, '$1-$2-$3'));
-        }
+    function stringToDate(birthdayString) {
+        var pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
+        return new Date(birthdayString.replace(pattern, '$1-$2-$3'));
+    }
+    birthday.slice(0, 10)
+    
+    function changeBirthday(newB) {
+        console.log('current field value: ' + newB);
+        console.log('current value of {birthday}' + birthday);
+        let newDate = newB + 'T00:00:00.000Z';
+        console.log('with added time: ' + newDate);
+        setBirthday(newDate);
+    }
     */
+
     return (
         <>
             <Col className="user-data text-center" sm={12} lg={6}>
                 <h3>User Profile</h3>
                 <p>Username: {props.user}</p>
-                <p>Email: {email}</p>
+                <p>Email: {current_email}</p>
                 {(birthday)
-                    ? <p>Birthday: {birthday.slice(0, 10)}</p>
+                    ? <p>Birthday: {current_birthday}</p>
                     : <span></span>
                 }
 
@@ -162,7 +177,7 @@ export function ProfileView(props) {
                         <Col sm={6}>
                             <Form.Group controlId="formBirthday">
                                 <Form.Label>Birthday:</Form.Label>
-                                <Form.Control type="date" value={birthday.slice(0, 10)} onChange={e => setBirthday(e.target.value)} />
+                                <Form.Control type="date" value={birthday.split("T")[0]} onChange={e => setBirthday(e.target.value)} />
                             </Form.Group>
                         </Col>
                     </Row>
