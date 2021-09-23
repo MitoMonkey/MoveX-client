@@ -9,7 +9,16 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
 
 import './index.scss';
 
-const store = createStore(movesApp, devToolsEnhancer());
+let preloadedState;
+const storedUsername = localStorage.getItem('user');
+const storedFavs = localStorage.getItem('favs');
+if (storedUsername || storedFavs) {
+    preloadedState = {
+        username: storedUsername,
+        favs: storedFavs
+    }
+}
+const store = createStore(movesApp, preloadedState, devToolsEnhancer());
 
 class MoveXApplication extends React.Component {
     render() {

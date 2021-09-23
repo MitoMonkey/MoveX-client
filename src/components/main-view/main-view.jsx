@@ -5,7 +5,7 @@ import axios from 'axios'; // library for AJAX operations
 import { BrowserRouter as Router, Route, Redirect, Link, BrowserRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 
-import { setMoves } from '../../actions/actions';
+import { setMoves, setUser } from '../../actions/actions';
 import MovesList from '../moves-list/moves-list';
 
 import { LoginView } from '../login-view/login-view';
@@ -26,11 +26,27 @@ import './main-view.scss';
 class MainView extends React.Component {
     constructor() {
         super();
+        /* PRE_REDUX
         this.state = {
             // moves: [],
             user: null,
             favs: []
+        } */
+        /*
+        Reduxstate = {
+            moves: [
+                _id: int,
+                Title: string,
+                ...
+            ],
+            user: [
+                username: string,
+                favs: string (_id1,_id2,...)
+            ],
+            visibilityFilter: string (move title)
         }
+
+        */
     }
 
     // import the moves from the backend
@@ -53,8 +69,8 @@ class MainView extends React.Component {
     // Method once a user is successfully logged in
     onLoggedIn(authData) {
         console.log(authData);
-        this.setState({
-            user: authData.user.Username,
+        this.props.setUser({
+            username: authData.user.Username,
             favs: authData.user.FavoriteMoves
         });
         // safe user data and token locally so they do not have to log again until they click the "log out" button
@@ -68,96 +84,99 @@ class MainView extends React.Component {
     componentDidMount() {
         const accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
-            this.setState({
-                user: localStorage.getItem('user'),
+            this.props.setUser({
+                username: localStorage.getItem('user'),
                 favs: localStorage.getItem('favs')
             });
             this.getMoves(accessToken);
         }
     }
-
-    addToFavorites(moveID) {
-        let favs = this.state.favs;
-
-        if (favs.includes(moveID)) {
-            return alert('this move is already in your list of favorites');
+    /*
+        addToFavorites(moveID) {
+            let favs = this.state.favs;
+    
+            if (favs.includes(moveID)) {
+                return alert('this move is already in your list of favorites');
+            }
+            else {
+                const token = localStorage.getItem('token');
+                const user = localStorage.getItem('user');
+                axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {}, { headers: { Authorization: `Bearer ${token}` } })
+                    .then(response => {
+                        const data = response.data;
+                        console.log(data);
+                        
+                        /* MOVED TO REDUCERS; EXCEPT SETTING LOCAL STORAGE
+                        if (favs.length === 0) {
+                            let newFavs = favs.concat(moveID);
+                            localStorage.setItem('favs', newFavs);
+                            this.setState({
+                                favs: newFavs
+                            });
+                        }
+                        else {
+                            let newFavs = favs.concat(',' + moveID);
+                            localStorage.setItem('favs', newFavs);
+                            this.setState({
+                                favs: newFavs
+                            });
+                        }
+                        * /
+                        window.open('/users/' + user, '_self');
+                    })
+                    .catch(e => {
+                        console.log('error adding ' + moveID + ' to user profile ' + user);
+                        alert(e);
+                    });
+            }
         }
-        else {
+        removeFavorite(moveID) {
             const token = localStorage.getItem('token');
             const user = localStorage.getItem('user');
-            axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {}, { headers: { Authorization: `Bearer ${token}` } })
+            axios.delete('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
                 .then(response => {
                     const data = response.data;
-                    console.log(data);
-
-                    if (favs.length === 0) {
-                        let newFavs = favs.concat(moveID);
-                        localStorage.setItem('favs', newFavs);
-                        this.setState({
-                            favs: newFavs
-                        });
+    
+                    let favs = this.state.favs;
+                    let newFavs = null;
+                    if (data.FavoriteMoves.toString().length === favs.length) {
+                        return console.log('failed to delete move in database');
                     }
+                    /* MOVED TO REDUCERS; EXCEPT SETTING LOCAL STORAGE
                     else {
-                        let newFavs = favs.concat(',' + moveID);
+                        // if it is the only move in the list
+                        if (!favs.includes(',')) {
+                            newFavs = favs.replace(moveID, '');
+                        }
+                        // if there are multiple entries and moveID is the first in the list
+                        if (favs.indexOf(moveID) === 0 && favs.includes(',')) {
+                            newFavs = favs.replace(moveID + ',', '');
+                        }
+                        // if it is the last move in the list OR anywhere in the middle
+                        if (favs.indexOf(moveID) > 0) {
+                            newFavs = favs.replace(',' + moveID, '');
+                        } 
+                        * /
                         localStorage.setItem('favs', newFavs);
                         this.setState({
                             favs: newFavs
                         });
+    
+                        window.open('/users/' + user, '_self');
                     }
-
-                    window.open('/users/' + user, '_self');
                 })
                 .catch(e => {
-                    console.log('error adding ' + moveID + ' to user profile ' + user);
+                    console.log('error removing ' + moveID + ' to user profile ' + user);
                     alert(e);
                 });
         }
-    }
-    removeFavorite(moveID) {
-        const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user');
-        axios.delete('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
-            .then(response => {
-                const data = response.data;
-
-                let favs = this.state.favs;
-                let newFavs = null;
-                if (data.FavoriteMoves.toString().length === favs.length) {
-                    return console.log('failed to delete move in database');
-                }
-                else {
-                    // if it is the only move in the list
-                    if (!favs.includes(',')) {
-                        newFavs = favs.replace(moveID, '');
-                    }
-                    // if there are multiple entries and moveID is the first in the list
-                    if (favs.indexOf(moveID) === 0 && favs.includes(',')) {
-                        newFavs = favs.replace(moveID + ',', '');
-                    }
-                    // if it is the last move in the list OR anywhere in the middle
-                    if (favs.indexOf(moveID) > 0) {
-                        newFavs = favs.replace(',' + moveID, '');
-                    }
-                    localStorage.setItem('favs', newFavs);
-                    this.setState({
-                        favs: newFavs
-                    });
-
-                    window.open('/users/' + user, '_self');
-                }
-            })
-            .catch(e => {
-                console.log('error removing ' + moveID + ' to user profile ' + user);
-                alert(e);
-            });
-    }
-
+    */
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         localStorage.removeItem('favs');
-        this.setState({
-            user: null,
+        this.props.setUser({ // couldn't it just be this.props.setUser({}); ?
+            username: null,
             favs: null
         });
         window.open('/', '_self');
@@ -197,8 +216,8 @@ class MainView extends React.Component {
     }
 
     render() {
-        const { user, favs } = this.state;
-        let { moves } = this.props; // passed from the store by mapStateToProps
+        // const { user, favs } = this.state;
+        const { moves, user } = this.props; // passed from the store by mapStateToProps
 
         return (
             <>
@@ -215,13 +234,6 @@ class MainView extends React.Component {
                             if (moves.length === 0) return <div className="main-view">Loading the moves from the database. Check console for errors if it does not finish loading.</div>;
 
                             return <MovesList moves={moves} />;
-                            {/* ( <CardGroup className="justify-content-center">
-                                    {moves.map(m => (
-                                        <Col sm={6} md={4} lg={3} key={m._id}>
-                                            <MoveCard move={m} />
-                                        </Col>
-                                    ))}
-                                </CardGroup> ); */}
                         }} />
 
                         <Route path="/register" render={() => {
@@ -238,11 +250,11 @@ class MainView extends React.Component {
                                 </Col>);
 
                             // make sure users can only see their own profile
-                            if (match.params.username === user) return (
+                            if (match.params.username === user.username) return (
 
                                 <ProfileView
-                                    user={user}
-                                    favMoves={moves.filter(m => favs.includes(m._id))}
+                                    user={user.username}
+                                    favMoves={moves.filter(m => user.favs.includes(m._id))}
                                     removeFavorite={(moveId) => this.removeFavorite(moveId)}
                                     updateUserdata={newUserData => this.updateUserdata(newUserData)}
                                     deleteUser={() => this.deleteUser()}
@@ -250,7 +262,6 @@ class MainView extends React.Component {
                                 />
 
                             );
-
                             return (
                                 console.log('Username does not match the user that is currently logged in.')
                             );
@@ -270,7 +281,7 @@ class MainView extends React.Component {
                                 <MoveView
                                     move={moves.find(m => m._id === match.params.moveId)}
                                     onBackClick={() => history.goBack()}
-                                    addToFavorites={() => this.addToFavorites(match.params.moveId)}
+                                // addToFavorites={() => this.addToFavorites(match.params.moveId)}
                                 />
                             );
                         }} />
@@ -285,7 +296,10 @@ class MainView extends React.Component {
                             if (moves.length === 0) return <div className="main-view">Loading the moves from the database. Check console for errors if it does not finish loading.</div>;
 
                             return (
-                                <StyleView style={moves.find(m => m.Style.Name === match.params.name).Style} moves={moves.filter(m => m.Style.Name === match.params.name)} onBackClick={() => history.goBack()} />
+                                <StyleView
+                                    style={moves.find(m => m.Style.Name === match.params.name).Style}
+                                    moves={moves.filter(m => m.Style.Name === match.params.name)}
+                                    onBackClick={() => history.goBack()} />
                             );
                         }} />
                         <Route path="/sources/:name" render={({ match, history }) => {
@@ -299,7 +313,10 @@ class MainView extends React.Component {
                             if (moves.length === 0) return <div className="main-view">Loading the moves from the database. Check console for errors if it does not finish loading.</div>;
 
                             return (
-                                <SourceView source={moves.find(m => m.Source.Name === match.params.name).Source} moves={moves.filter(m => m.Source.Name === match.params.name)} onBackClick={() => history.goBack()} />
+                                <SourceView
+                                    source={moves.find(m => m.Source.Name === match.params.name).Source}
+                                    moves={moves.filter(m => m.Source.Name === match.params.name)}
+                                    onBackClick={() => history.goBack()} />
                             );
                         }} />
 
@@ -309,10 +326,10 @@ class MainView extends React.Component {
                 <Row className="justify-content-center">
                     {(user)
                         ? <div className="user-bar">
-                            <span>Logged in as {user}  </span>
+                            <span>Logged in as {user.username}  </span>
                             <a href={`/`} className="btn btn-primary">Home</a>{'  '}
                             <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>{'  '}
-                            <a href={`/users/` + user} className="btn btn-primary">Edit profile</a>
+                            <a href={`/users/` + user.username} className="btn btn-primary">Edit profile</a>
                         </div>
                         : <div className="user-bar">
                             <a href={`/`} className="btn btn-primary">Login</a>{'  '}
@@ -326,5 +343,6 @@ class MainView extends React.Component {
     }
 }
 
-let mapStateToProps = state => { return { moves: state.moves } } // retrieve the moves from the store (via connect function below)
-export default connect(mapStateToProps, { setMoves })(MainView); // second argument connects the action creator setMoves also as a prop to this component
+let mapStateToProps = state => { return { moves: state.moves, user: state.user } } // retrieve the moves and user from the store (via connect function below)
+export default connect(mapStateToProps, { setMoves, setUser })(MainView);
+// second argument connects the action creators as a prop to this component, so it can be used to dispatch actions by "this.props.setMoves()"
