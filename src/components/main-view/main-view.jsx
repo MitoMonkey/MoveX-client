@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios'; // library for AJAX operations
 
 // library module for state-based routing. "BrowserRouter" relates to <Router> in the render() block
-import { BrowserRouter as Router, Route, Redirect, Link, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
+
 import { connect } from 'react-redux';
+import { setMoves, setUser, setFavs } from '../../actions/actions'; //setUser is required for the nav-bar "logout" button
 
-import { setMoves, setUser } from '../../actions/actions';
 import MovesList from '../moves-list/moves-list';
-
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 // import { MoveCard } from '../move-card/move-card'; Now included in MovesList
@@ -23,6 +23,19 @@ import Button from 'react-bootstrap/Button';
 
 import './main-view.scss';
 
+/*
+Reduxstate format = {
+    moves: [
+        _id: int,
+        Title: string,
+        ...
+    ],
+    user: string (username),
+    favs: string (_id1,_id2,...),
+    visibilityFilter: string (move title)
+}
+*/
+
 class MainView extends React.Component {
     constructor() {
         super();
@@ -32,21 +45,6 @@ class MainView extends React.Component {
             user: null,
             favs: []
         } */
-        /*
-        Reduxstate = {
-            moves: [
-                _id: int,
-                Title: string,
-                ...
-            ],
-            user: [
-                username: string,
-                favs: string (_id1,_id2,...)
-            ],
-            visibilityFilter: string (move title)
-        }
-
-        */
     }
 
     // import the moves from the backend
@@ -56,9 +54,6 @@ class MainView extends React.Component {
         })
             .then(response => {
                 this.props.setMoves(response.data);
-                /*this.setState({
-                    moves: response.data
-                }); */
             })
             .catch(function (e) {
                 console.log(e);
@@ -69,10 +64,11 @@ class MainView extends React.Component {
     // Method once a user is successfully logged in
     onLoggedIn(authData) {
         console.log(authData);
-        this.props.setUser({
-            username: authData.user.Username,
-            favs: authData.user.FavoriteMoves
-        });
+
+        // safe username and favorite moves to store/state
+        this.props.setUser(authData.user.Username);
+        this.props.setFavs(authData.user.FavoriteMoves);
+
         // safe user data and token locally so they do not have to log again until they click the "log out" button
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
@@ -84,101 +80,18 @@ class MainView extends React.Component {
     componentDidMount() {
         const accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
-            this.props.setUser({
-                username: localStorage.getItem('user'),
-                favs: localStorage.getItem('favs')
-            });
+            this.props.setUser(localStorage.getItem('user'));
+            this.props.setFavs(localStorage.getItem('favs'));
             this.getMoves(accessToken);
         }
     }
-    /*
-        addToFavorites(moveID) {
-            let favs = this.state.favs;
-    
-            if (favs.includes(moveID)) {
-                return alert('this move is already in your list of favorites');
-            }
-            else {
-                const token = localStorage.getItem('token');
-                const user = localStorage.getItem('user');
-                axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {}, { headers: { Authorization: `Bearer ${token}` } })
-                    .then(response => {
-                        const data = response.data;
-                        console.log(data);
-                        
-                        /* MOVED TO REDUCERS; EXCEPT SETTING LOCAL STORAGE
-                        if (favs.length === 0) {
-                            let newFavs = favs.concat(moveID);
-                            localStorage.setItem('favs', newFavs);
-                            this.setState({
-                                favs: newFavs
-                            });
-                        }
-                        else {
-                            let newFavs = favs.concat(',' + moveID);
-                            localStorage.setItem('favs', newFavs);
-                            this.setState({
-                                favs: newFavs
-                            });
-                        }
-                        * /
-                        window.open('/users/' + user, '_self');
-                    })
-                    .catch(e => {
-                        console.log('error adding ' + moveID + ' to user profile ' + user);
-                        alert(e);
-                    });
-            }
-        }
-        removeFavorite(moveID) {
-            const token = localStorage.getItem('token');
-            const user = localStorage.getItem('user');
-            axios.delete('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
-                .then(response => {
-                    const data = response.data;
-    
-                    let favs = this.state.favs;
-                    let newFavs = null;
-                    if (data.FavoriteMoves.toString().length === favs.length) {
-                        return console.log('failed to delete move in database');
-                    }
-                    /* MOVED TO REDUCERS; EXCEPT SETTING LOCAL STORAGE
-                    else {
-                        // if it is the only move in the list
-                        if (!favs.includes(',')) {
-                            newFavs = favs.replace(moveID, '');
-                        }
-                        // if there are multiple entries and moveID is the first in the list
-                        if (favs.indexOf(moveID) === 0 && favs.includes(',')) {
-                            newFavs = favs.replace(moveID + ',', '');
-                        }
-                        // if it is the last move in the list OR anywhere in the middle
-                        if (favs.indexOf(moveID) > 0) {
-                            newFavs = favs.replace(',' + moveID, '');
-                        } 
-                        * /
-                        localStorage.setItem('favs', newFavs);
-                        this.setState({
-                            favs: newFavs
-                        });
-    
-                        window.open('/users/' + user, '_self');
-                    }
-                })
-                .catch(e => {
-                    console.log('error removing ' + moveID + ' to user profile ' + user);
-                    alert(e);
-                });
-        }
-    */
+
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         localStorage.removeItem('favs');
-        this.props.setUser({ // couldn't it just be this.props.setUser({}); ?
-            username: null,
-            favs: null
-        });
+        this.props.setUser('');
+        this.props.setFavs('');
         window.open('/', '_self');
     }
 
@@ -216,8 +129,7 @@ class MainView extends React.Component {
     }
 
     render() {
-        // const { user, favs } = this.state;
-        const { moves, user } = this.props; // passed from the store by mapStateToProps
+        const { moves, user, favs } = this.props; // passed from the store by mapStateToProps
 
         return (
             <>
@@ -255,7 +167,7 @@ class MainView extends React.Component {
                                 <ProfileView
                                     user={user.username}
                                     favMoves={moves.filter(m => user.favs.includes(m._id))}
-                                    removeFavorite={(moveId) => this.removeFavorite(moveId)}
+                                    // removeFavorite={(moveId) => this.removeFavorite(moveId)}
                                     updateUserdata={newUserData => this.updateUserdata(newUserData)}
                                     deleteUser={() => this.deleteUser()}
                                     onBackClick={() => history.goBack()}
@@ -343,6 +255,6 @@ class MainView extends React.Component {
     }
 }
 
-let mapStateToProps = state => { return { moves: state.moves, user: state.user } } // retrieve the moves and user from the store (via connect function below)
-export default connect(mapStateToProps, { setMoves, setUser })(MainView);
-// second argument connects the action creators as a prop to this component, so it can be used to dispatch actions by "this.props.setMoves()"
+let mapStateToProps = state => { return { moves: state.moves, user: state.user, favs: state.favs } } // retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
+export default connect(mapStateToProps, { setMoves, setUser, setFavs })(MainView);
+// second argument (=mapDispatchToProps) connects the action creators as a prop to this component, so it can be used to dispatch actions by "this.props.setMoves()"

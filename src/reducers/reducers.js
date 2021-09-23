@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { SET_FILTER, SET_MOVES, SET_USER, ADD_FAV, REM_FAV } from '../actions/actions';
+import { SET_FILTER, SET_MOVES, SET_USER, SET_FAVS, ADD_FAV, REM_FAV } from '../actions/actions';
 
 function visibilityFilter(state = '', action) {
     switch (action.type) {
@@ -30,6 +30,8 @@ function user(state = '', action) {
 }
 function favs(state = '', action) { // the local "state" is the global state.favs, due to the combined reducer
     switch (action.type) {
+        case SET_FAVS:
+            return action.value;
         case ADD_FAV:
             if (state.includes(action.id)) {
                 return state;
@@ -38,6 +40,7 @@ function favs(state = '', action) { // the local "state" is the global state.fav
             if (state.length === 0) {
                 return state.concat(action.id);
             }
+            // if there are already others, add it to the end of the string
             else {
                 return state.concat(',' + action.id);
             }

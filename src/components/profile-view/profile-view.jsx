@@ -202,7 +202,10 @@ export function ProfileView(props) {
                         : <CardGroup className="justify-content-md-center">
                             {props.favMoves.map(m => (
                                 <Col sm={12} md={6} key={m._id}>
-                                    <MoveCard move={m} removeFavorite={() => props.removeFavorite(m._id)} />
+                                    <MoveCard
+                                        move={m}
+                                    // removeFavorite={() => props.removeFavorite(m._id)} 
+                                    />
                                 </Col>))
                             }
                         </CardGroup>}

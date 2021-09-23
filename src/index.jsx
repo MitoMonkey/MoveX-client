@@ -14,7 +14,7 @@ const storedUsername = localStorage.getItem('user');
 const storedFavs = localStorage.getItem('favs');
 if (storedUsername || storedFavs) {
     preloadedState = {
-        username: storedUsername,
+        username: storedUsername, // JSON.parse(storedUsername)
         favs: storedFavs
     }
 }
