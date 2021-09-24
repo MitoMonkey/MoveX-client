@@ -67,5 +67,5 @@ MovesList.propTypes = {
     })).isRequired,
     // removeFavorite: PropTypes.func.isRequired,
     // addFavorite: PropTypes.func.isRequired,
-    visibilityFilter: PropTypes.func.isRequired
+    visibilityFilter: PropTypes.string
 };

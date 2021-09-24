@@ -5,7 +5,7 @@ import axios from 'axios'; // library for AJAX operations
 import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 
 import { connect } from 'react-redux';
-import { setMoves, setUser, setFavs, addFav, remFav } from '../../actions/actions'; //setUser is required for the nav-bar "logout" button
+import { setMoves, setUser, setFavs } from '../../actions/actions'; //setUser is required for the nav-bar "logout" button
 
 import MovesList from '../moves-list/moves-list';
 import { LoginView } from '../login-view/login-view';
@@ -15,8 +15,6 @@ import { MoveView } from '../move-view/move-view';
 import { StyleView } from '../style-view/style-view';
 import { SourceView } from '../source-view/source-view';
 import { ProfileView } from '../profile-view/profile-view';
-// import AddFavorite from '../add-favorite/add-favorite';
-// import RemoveFavorite from '../remove-favorite/remove-favorite';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -125,7 +123,7 @@ class MainView extends React.Component {
     }
 
     render() {
-        const { moves, user, favs } = this.props; // passed from the store by mapStateToProps
+        const { moves, user } = this.props; // passed from the store by mapStateToProps
 
         return (
             <>
@@ -252,5 +250,5 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = state => { return { moves: state.moves, user: state.user, favs: state.favs } } // retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
-export default connect(mapStateToProps, { setMoves, setUser, setFavs, addFav, remFav })(MainView);
+export default connect(mapStateToProps, { setMoves, setUser, setFavs })(MainView);
 // second argument (=mapDispatchToProps) connects the action creators as a prop to this component, so it can be used to dispatch actions by "this.props.setMoves()"

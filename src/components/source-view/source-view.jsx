@@ -6,7 +6,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-
+// import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
 // import './source-view.scss';
@@ -56,8 +56,8 @@ export class SourceView extends React.Component {
     }
 }
 
-let mapStateToProps = state => { return { moves: state.moves } }
-export default connect(mapStateToProps)(MainView);
+// let mapStateToProps = state => { return { moves: state.moves } }
+// export default connect(mapStateToProps)(SourceView);
 
 /* validate data types */
 // "moves" is not validated here, because it was already validated in MoveView

@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 // import { Link } from "react-router-dom";
 import { MoveCard } from '../move-card/move-card';
 import CardGroup from 'react-bootstrap/CardGroup';
+import { connect } from 'react-redux';
 
 // import './profile-view.scss';
 
@@ -216,6 +217,9 @@ export function ProfileView(props) {
         </>
     );
 }
+
+let mapStateToProps = state => { return { moves: state.moves, user: state.user, favs: state.favs } } // retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
+export default connect(mapStateToProps)(ProfileView);
 
 // validate prop data types
 ProfileView.propTypes = {
