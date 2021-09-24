@@ -37,7 +37,11 @@ export class SourceView extends React.Component {
                         <CardGroup className="justify-content-md-center">
                             {moves.map(m => (
                                 <Col sm={6} md={4} lg={3} key={m._id}>
-                                    <MoveCard move={m} />
+                                    <MoveCard
+                                        move={m}
+                                    // removeFavorite={(moveId) => removeFavorite(moveId)}
+                                    // addFavorite={(moveId) => addFavorite(moveId)}
+                                    />
                                 </Col>
                             ))}
                         </CardGroup>
@@ -51,6 +55,9 @@ export class SourceView extends React.Component {
         )
     }
 }
+
+let mapStateToProps = state => { return { moves: state.moves } }
+export default connect(mapStateToProps)(MainView);
 
 /* validate data types */
 // "moves" is not validated here, because it was already validated in MoveView

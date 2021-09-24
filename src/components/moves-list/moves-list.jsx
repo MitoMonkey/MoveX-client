@@ -2,9 +2,12 @@ import React from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { MoveCard } from '../move-card/move-card';
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
+// import AddFavorite from '../add-favorite/add-favorite';
+// import RemoveFavorite from '../remove-favorite/remove-favorite';
 
 const mapStateToProps = state => {
     const { visibilityFilter } = state;
@@ -31,7 +34,11 @@ function MovesList(props) {
             <Row className="moves-list justify-content-center">
                 {filteredMoves.map(m => (
                     <Col sm={6} md={4} lg={3} key={m._id}>
-                        <MoveCard move={m} />
+                        <MoveCard
+                            move={m}
+                        // removeFavorite={(moveId) => RemoveFavorite(moveId)}
+                        // addFavorite={(moveId) => AddFavorite(moveId)}
+                        />
                     </Col>
                 ))}
             </Row>
@@ -39,3 +46,26 @@ function MovesList(props) {
 }
 
 export default connect(mapStateToProps)(MovesList);
+
+// validate data types
+MovesList.propTypes = {
+    moves: PropTypes.arrayOf(PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        Title: PropTypes.string.isRequired,
+        Cues: PropTypes.string.isRequired,
+        Style: PropTypes.shape({
+            Name: PropTypes.string.isRequired,
+            Description: PropTypes.string.isRequired
+        }).isRequired,
+        Source: PropTypes.shape({
+            Name: PropTypes.string.isRequired,
+            Weblink: PropTypes.string.isRequired
+        }).isRequired,
+        VideoURL: PropTypes.string.isRequired,
+        ImgURL: PropTypes.string,
+        Featured: PropTypes.bool
+    })).isRequired,
+    // removeFavorite: PropTypes.func.isRequired,
+    // addFavorite: PropTypes.func.isRequired,
+    visibilityFilter: PropTypes.func.isRequired
+};

@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+import AddFavorite from '../add-favorite/add-favorite';
+import RemoveFavorite from '../remove-favorite/remove-favorite';
+
 import { Link } from "react-router-dom";
 
 // import './move-card.scss';
@@ -11,7 +14,7 @@ import { Link } from "react-router-dom";
 export class MoveCard extends React.Component {
 
     render() {
-        const { move, favs, addFavorite, removeFavorite } = this.props;
+        const { move, favs } = this.props;
 
         return (
             <Card className="Card" >
@@ -23,8 +26,8 @@ export class MoveCard extends React.Component {
                         <Button variant="primary">View details</Button>
                     </Link>
                     {(favs.includes(move._id))
-                        ? <Button variant="primary" onClick={() => removeFavorite(move._id)} >Remove favorite</Button>
-                        : <Button variant="primary" onClick={() => addFavorite(move._id)} >Add favorite</Button>
+                        ? <Button variant="primary" onClick={() => RemoveFavorite(move._id)} >Remove favorite</Button>
+                        : <Button variant="primary" onClick={() => AddFavorite(move._id)} >Add favorite</Button>
                     }
                 </Card.Body>
             </Card>
@@ -53,7 +56,7 @@ MoveCard.propTypes = {
         ImgURL: PropTypes.string,
         Featured: PropTypes.bool
     }).isRequired,
-    removeFavorite: PropTypes.func.isRequired,
-    addFavorite: PropTypes.func.isRequired,
+    // removeFavorite: PropTypes.func.isRequired,
+    // addFavorite: PropTypes.func.isRequired,
     favs: PropTypes.string.isRequired
 };

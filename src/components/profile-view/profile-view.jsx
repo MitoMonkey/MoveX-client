@@ -204,8 +204,8 @@ export function ProfileView(props) {
                                 <Col sm={12} md={6} key={m._id}>
                                     <MoveCard
                                         move={m}
-                                        removeFavorite={(moveId) => this.props.removeFavorite(moveId)}
-                                        addFavorite={(moveId) => this.props.addFavorite(moveId)}
+                                    // removeFavorite={(moveId) => RemoveFavorite(moveId)}
+                                    // addFavorite={(moveId) => AddFavorite(moveId)}
                                     // removeFavorite={() => props.removeFavorite(m._id)} 
                                     />
                                 </Col>))
@@ -221,8 +221,8 @@ export function ProfileView(props) {
 ProfileView.propTypes = {
     user: PropTypes.string.isRequired,
     updateUserdata: PropTypes.func.isRequired,
-    removeFavorite: PropTypes.func.isRequired,
-    addFavorite: PropTypes.func.isRequired,
+    // removeFavorite: PropTypes.func.isRequired,
+    // addFavorite: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
     favMoves: PropTypes.arrayOf(PropTypes.shape({
         _id: PropTypes.string.isRequired,

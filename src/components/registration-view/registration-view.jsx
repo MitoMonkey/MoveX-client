@@ -147,11 +147,3 @@ export function RegistrationView(props) {
         </Form>
     );
 }
-
-/*
-<Button variant="primary" type="button" onClick={test}>test</Button>{'  '}
-// validate prop data types
-// see login-view for details on constraint based data validation
-RegistrationView.propTypes = {
-    onLoggedIn: PropTypes.func.isRequired
-}; */
