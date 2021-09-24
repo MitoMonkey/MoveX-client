@@ -5,7 +5,7 @@ import axios from 'axios'; // library for AJAX operations
 import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 
 import { connect } from 'react-redux';
-import { setMoves, setUser, setFavs } from '../../actions/actions'; //setUser is required for the nav-bar "logout" button
+import { setMoves, setUser, setFavs, addFav, remFav } from '../../actions/actions'; //setUser is required for the nav-bar "logout" button
 
 import MovesList from '../moves-list/moves-list';
 import { LoginView } from '../login-view/login-view';
@@ -39,12 +39,6 @@ Reduxstate format = {
 class MainView extends React.Component {
     constructor() {
         super();
-        /* PRE_REDUX
-        this.state = {
-            // moves: [],
-            user: null,
-            favs: []
-        } */
     }
 
     // import the moves from the backend
@@ -128,6 +122,80 @@ class MainView extends React.Component {
             });
     }
 
+    removeFavorite(moveID) {
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
+        axios.delete('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
+            .then(response => {
+                const data = response.data;
+                // console.log(data);
+
+                this.props.remFav(moveID); // dispatch the action
+
+                let favs = this.props.favs;
+                let newFavs = null;
+                if (data.FavoriteMoves.toString().length === favs.length) {
+                    return console.log('failed to delete move in database');
+                }
+                /* SAME LOGIC IN REDUCERS. HERE ONLY TO SET LOCAL STORAGE > USE applyMiddleware TO COMBINE IT? */
+                else {
+                    // if it is the only move in the list
+                    if (!favs.includes(',')) {
+                        newFavs = favs.replace(moveID, '');
+                    }
+                    // if there are multiple entries and moveID is the first in the list
+                    if (favs.indexOf(moveID) === 0 && favs.includes(',')) {
+                        newFavs = favs.replace(moveID + ',', '');
+                    }
+                    // if it is the last move in the list OR anywhere in the middle
+                    if (favs.indexOf(moveID) > 0) {
+                        newFavs = favs.replace(',' + moveID, '');
+                    }
+
+                    localStorage.setItem('favs', newFavs);
+
+                    window.open('/users/' + user, '_self');
+                }
+            })
+            .catch(e => {
+                console.log('error removing ' + moveID + ' to user profile ' + user);
+                alert(e);
+            });
+    }
+
+    addFavorite(moveID) {
+        let favs = this.props.favs;
+        if (favs.includes(moveID)) {
+            return alert('this move is already in your list of favorites');
+        }
+        else {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {}, { headers: { Authorization: `Bearer ${token}` } })
+                .then(response => {
+                    const data = response.data;
+                    // console.log(data);
+
+                    this.props.addFav(moveID); // dispatch the action
+
+                    /* SAME LOGIC IN REDUCERS. HERE ONLY TO SET LOCAL STORAGE > USE applyMiddleware TO COMBINE IT? */
+                    if (favs.length === 0) {
+                        let newFavs = favs.concat(moveID);
+                        localStorage.setItem('favs', newFavs);
+                    }
+                    else {
+                        let newFavs = favs.concat(',' + moveID);
+                        localStorage.setItem('favs', newFavs);
+                    }
+                    window.open('/users/' + user, '_self');
+                })
+                .catch(e => {
+                    console.log('error adding ' + moveID + ' to user profile ' + user);
+                    alert(e);
+                });
+        }
+    }
+
     render() {
         const { moves, user, favs } = this.props; // passed from the store by mapStateToProps
 
@@ -167,7 +235,8 @@ class MainView extends React.Component {
                                 <ProfileView
                                     user={user.username}
                                     favMoves={moves.filter(m => user.favs.includes(m._id))}
-                                    // removeFavorite={(moveId) => this.removeFavorite(moveId)}
+                                    removeFavorite={(moveId) => this.removeFavorite(moveId)}
+                                    addFavorite={(moveId) => this.addFavorite(moveId)}
                                     updateUserdata={newUserData => this.updateUserdata(newUserData)}
                                     deleteUser={() => this.deleteUser()}
                                     onBackClick={() => history.goBack()}
@@ -193,6 +262,8 @@ class MainView extends React.Component {
                                 <MoveView
                                     move={moves.find(m => m._id === match.params.moveId)}
                                     onBackClick={() => history.goBack()}
+                                    removeFavorite={(moveId) => this.removeFavorite(moveId)}
+                                    addFavorite={(moveId) => this.addFavorite(moveId)}
                                 // addToFavorites={() => this.addToFavorites(match.params.moveId)}
                                 />
                             );
@@ -256,5 +327,5 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = state => { return { moves: state.moves, user: state.user, favs: state.favs } } // retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
-export default connect(mapStateToProps, { setMoves, setUser, setFavs })(MainView);
+export default connect(mapStateToProps, { setMoves, setUser, setFavs, addFav, remFav })(MainView);
 // second argument (=mapDispatchToProps) connects the action creators as a prop to this component, so it can be used to dispatch actions by "this.props.setMoves()"

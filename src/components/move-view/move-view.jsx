@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-
 import { Link } from "react-router-dom";
 
 // import './move-view.scss';
 
 export class MoveView extends React.Component {
+
     render() {
-        const { move, onBackClick, addToFavorites } = this.props;
+        const { move, onBackClick, favs, addFavorite, removeFavorite } = this.props;
         return (
             <Row className="move-view justify-content-center text-center">
                 {/*<Col md={1}>
@@ -46,13 +47,19 @@ export class MoveView extends React.Component {
                         <span className="label">Video: </span>
                         <a className="value" href={move.VideoURL}>{move.VideoURL}</a>
                     </div>
-                    <Button variant="primary" type="button" onClick={() => { addToFavorites() }}>Add to favorites</Button>
+                    {(favs.includes(move._id))
+                        ? <Button variant="primary" onClick={() => removeFavorite(move._id)} >Remove favorite</Button>
+                        : <Button variant="primary" onClick={() => addFavorite(move._id)} >Add favorite</Button>
+                    }
                     <Button variant="primary" type="button" onClick={() => { onBackClick() }}>Back</Button>
                 </Col>
             </Row>
         )
     }
 }
+
+let mapStateToProps = state => { return { favs: state.favs } }
+export default connect(mapStateToProps)(MoveView);
 
 // validate data types
 MoveView.propTypes = {
@@ -73,5 +80,7 @@ MoveView.propTypes = {
         Featured: PropTypes.bool
     }).isRequired,
     onBackClick: PropTypes.func.isRequired,
-    addToFavorites: PropTypes.func.isRequired
+    removeFavorite: PropTypes.func.isRequired,
+    addFavorite: PropTypes.func.isRequired,
+    favs: PropTypes.string.isRequired
 };
