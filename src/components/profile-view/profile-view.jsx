@@ -17,7 +17,6 @@ let mapStateToProps = state => { return { moves: state.moves, user: state.user, 
 function ProfileView(props) {
     const { favs, moves, user } = props;
     let favMoves = moves.filter(m => favs.includes(m._id));
-    console.log(favMoves);
 
     const [username, setUsername] = useState(user);
     const [usernameInvalid, setUsernameInvalid] = useState('');
@@ -228,8 +227,6 @@ export default connect(mapStateToProps)(ProfileView);
 ProfileView.propTypes = {
     user: PropTypes.string.isRequired,
     updateUserdata: PropTypes.func.isRequired,
-    // removeFavorite: PropTypes.func.isRequired,
-    // addFavorite: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
     moves: PropTypes.arrayOf(PropTypes.shape({
         _id: PropTypes.string.isRequired,
