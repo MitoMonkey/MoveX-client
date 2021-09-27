@@ -7,8 +7,6 @@ import Button from 'react-bootstrap/Button';
 
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router-dom';
-
 let mapStateToProps = state => { return { user: state.user } }
 
 function NavBar(props) {
@@ -20,8 +18,8 @@ function NavBar(props) {
             <Container>
                 <Navbar.Brand>Move-X</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="container-fluid">
+                <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
+                    <Nav className="container-fluid  align-items-center">
                         {(user)
                             ? <Nav.Item>
                                 <a href={`/`} className="btn btn-primary">Home</a>
@@ -44,7 +42,11 @@ function NavBar(props) {
                             </Nav.Item>
                             : <span></span>
                         }
-                        <span className="navbar-text"> Logged in as {user} </span>
+                    </Nav>
+                    <Nav className="me-auto align-items-center">
+                        <Navbar.Text>
+                            Logged in as {user}
+                        </Navbar.Text>
                         <Nav.Item>
                             <Button variant="primary" onClick={() => { onBackClick() }}>Back</Button>
                         </Nav.Item>

@@ -118,12 +118,16 @@ function ProfileView(props) {
         axios.get('https://move-x.herokuapp.com/users/' + username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
             setUsername(response.data.Username);
             setEmail(response.data.Email);
+            // console.log(response.data.Email);
             current_email = response.data.Email;
-            console.log(current_email);
+            // console.log(current_email);
             setBirthday(response.data.Birthday);
             current_birthday = response.data.Birthday.split("T")[0];
         })
     }, []);
+
+    console.log("my email is " + email);
+    console.log("my email is " + current_email);
     /*
     function stringToDate(birthdayString) {
         var pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
