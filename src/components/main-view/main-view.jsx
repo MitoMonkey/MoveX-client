@@ -31,7 +31,7 @@ Reduxstate format = {
         ...
     ],
     user: string (username),
-    favs: string (_id1,_id2,...),
+    favs: array [_id1,_id2,...],
     visibilityFilter: string (move title)
 }
 */
@@ -85,7 +85,7 @@ class MainView extends React.Component {
         localStorage.removeItem('user');
         localStorage.removeItem('favs');
         this.props.setUser('');
-        this.props.setFavs('');
+        this.props.setFavs([]);
         window.open('/', '_self');
     }
 
@@ -125,11 +125,11 @@ class MainView extends React.Component {
     render() {
         const { moves, user } = this.props; // passed from the store by mapStateToProps
 
-        const nav = <NavBar onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.goBack()} />
+        //const nav = 
 
         return (
             <>
-                {nav}
+                <NavBar onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.goBack()} />
                 <Router>
                     <Row className="main-view justify-content-center">
                         <Route exact path="/" render={() => {

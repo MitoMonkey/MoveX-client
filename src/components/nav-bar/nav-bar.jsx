@@ -30,7 +30,7 @@ function NavBar(props) {
                         }
                         {(user)
                             ? <Nav.Item>
-                                <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>
+                                <Button variant="primary" onClick={() => { onLoggedOut() }}>Logout</Button>
                             </Nav.Item>
                             : <Nav.Item>
                                 <a href={`/register`} className="btn btn-primary">Register</a>
@@ -61,5 +61,6 @@ export default connect(mapStateToProps)(NavBar);
 
 NavBar.propTypes = {
     user: PropTypes.string,
-    onLoggedOut: PropTypes.func.isRequired
+    onLoggedOut: PropTypes.func.isRequired,
+    onBackClick: PropTypes.func.isRequired
 };

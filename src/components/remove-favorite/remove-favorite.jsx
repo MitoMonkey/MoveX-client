@@ -17,13 +17,13 @@ function RemoveFavorite(props) {
                 const data = response.data;
                 // console.log(data);
 
-                if (data.FavoriteMoves.toString().length === favs.length) {
+                if (data.FavoriteMoves.toString().length === favs.toString().length) {
                     return console.log('failed to delete move in database');
                 }
 
                 else {
-                    localStorage.setItem('favs', data.FavoriteMoves.toString());
-                    setFavs(data.FavoriteMoves.toString());
+                    localStorage.setItem('favs', data.FavoriteMoves);
+                    setFavs(data.FavoriteMoves);
                 }
             })
             .catch(e => {
@@ -41,7 +41,7 @@ function RemoveFavorite(props) {
 export default connect(mapStateToProps, { setFavs })(RemoveFavorite);
 
 RemoveFavorite.propTypes = {
-    favs: PropTypes.string.isRequired,
+    favs: PropTypes.array.isRequired,
     user: PropTypes.string.isRequired,
     setFavs: PropTypes.func.isRequired,
     moveID: PropTypes.string.isRequired

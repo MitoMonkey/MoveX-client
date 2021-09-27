@@ -22958,7 +22958,7 @@ Reduxstate format = {
         ...
     ],
     user: string (username),
-    favs: string (_id1,_id2,...),
+    favs: array [_id1,_id2,...],
     visibilityFilter: string (move title)
 }
 */ class MainView extends _reactDefault.default.Component {
@@ -23004,7 +23004,7 @@ Reduxstate format = {
         localStorage.removeItem('user');
         localStorage.removeItem('favs');
         this.props.setUser('');
-        this.props.setFavs('');
+        this.props.setFavs([]);
         window.open('/', '_self');
     }
     updateUserdata(newUserData) {
@@ -23044,20 +23044,20 @@ Reduxstate format = {
     }
     render() {
         const { moves , user  } = this.props; // passed from the store by mapStateToProps
-        const nav = /*#__PURE__*/ _jsxRuntime.jsx(_navBarDefault.default, {
-            onLoggedOut: ()=>this.onLoggedOut()
-            ,
-            onBackClick: ()=>history.goBack()
-            ,
-            __source: {
-                fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 128
-            },
-            __self: this
-        });
+        //const nav = 
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
             children: [
-                nav,
+                /*#__PURE__*/ _jsxRuntime.jsx(_navBarDefault.default, {
+                    onLoggedOut: ()=>this.onLoggedOut()
+                    ,
+                    onBackClick: ()=>history.goBack()
+                    ,
+                    __source: {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 132
+                    },
+                    __self: this
+                }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
@@ -23539,7 +23539,7 @@ MoveView.propTypes = {
     onBackClick: _propTypesDefault.default.func.isRequired,
     // removeFavorite: PropTypes.func.isRequired,
     // addFavorite: PropTypes.func.isRequired,
-    favs: _propTypesDefault.default.string.isRequired
+    favs: _propTypesDefault.default.array.isRequired
 };
 var _c;
 $RefreshReg$(_c, "MoveView");
@@ -28180,11 +28180,12 @@ function AddFavorite(props) {
                 }
             }).then((response)=>{
                 const data = response.data;
-                // console.log(data);
-                if (data.FavoriteMoves.toString().length === favs.length) return console.log('failed to add move in database');
+                console.log(data.FavoriteMoves);
+                if (data.FavoriteMoves.toString().length === favs.toString().length) return console.log('failed to add move in database');
                 else {
-                    localStorage.setItem('favs', data.FavoriteMoves.toString());
-                    setFavs(data.FavoriteMoves.toString());
+                    localStorage.setItem('favs', data.FavoriteMoves);
+                    setFavs(data.FavoriteMoves);
+                    console.log(favs);
                 }
             }).catch((e)=>{
                 console.log('error adding ' + moveID + ' to user profile ' + user);
@@ -28198,7 +28199,7 @@ function AddFavorite(props) {
         ,
         __source: {
             fileName: "src/components/add-favorite/add-favorite.jsx",
-            lineNumber: 40
+            lineNumber: 41
         },
         __self: this,
         children: "Add favorite"
@@ -28209,7 +28210,7 @@ exports.default = _reactRedux.connect(mapStateToProps, {
     setFavs: _actions.setFavs
 })(AddFavorite);
 AddFavorite.propTypes = {
-    favs: _propTypesDefault.default.string.isRequired,
+    favs: _propTypesDefault.default.array.isRequired,
     user: _propTypesDefault.default.string.isRequired,
     setFavs: _propTypesDefault.default.func.isRequired,
     moveID: _propTypesDefault.default.string.isRequired
@@ -29834,10 +29835,10 @@ function RemoveFavorite(props) {
         }).then((response)=>{
             const data = response.data;
             // console.log(data);
-            if (data.FavoriteMoves.toString().length === favs.length) return console.log('failed to delete move in database');
+            if (data.FavoriteMoves.toString().length === favs.toString().length) return console.log('failed to delete move in database');
             else {
-                localStorage.setItem('favs', data.FavoriteMoves.toString());
-                setFavs(data.FavoriteMoves.toString());
+                localStorage.setItem('favs', data.FavoriteMoves);
+                setFavs(data.FavoriteMoves);
             }
         }).catch((e)=>{
             console.log('error removing ' + moveID + ' to user profile ' + user);
@@ -29861,7 +29862,7 @@ exports.default = _reactRedux.connect(mapStateToProps, {
     setFavs: _actions.setFavs
 })(RemoveFavorite);
 RemoveFavorite.propTypes = {
-    favs: _propTypesDefault.default.string.isRequired,
+    favs: _propTypesDefault.default.array.isRequired,
     user: _propTypesDefault.default.string.isRequired,
     setFavs: _propTypesDefault.default.func.isRequired,
     moveID: _propTypesDefault.default.string.isRequired
@@ -31557,7 +31558,7 @@ MoveCard.propTypes = {
     }).isRequired,
     // removeFavorite: PropTypes.func.isRequired,
     // addFavorite: PropTypes.func.isRequired,
-    favs: _propTypesDefault.default.string.isRequired
+    favs: _propTypesDefault.default.array.isRequired
 };
 var _c;
 $RefreshReg$(_c, "MoveCard");
@@ -32083,7 +32084,7 @@ function ProfileView(props) {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
-            setUsername(response.data.Username);
+            // setUsername(response.data.Username);
             setEmail(response.data.Email);
             // console.log(response.data.Email);
             current_email = response.data.Email;
@@ -32147,7 +32148,7 @@ function ProfileView(props) {
                         __self: this,
                         children: [
                             "Email: ",
-                            current_email
+                            email
                         ]
                     }),
                     birthday ? /*#__PURE__*/ _jsxRuntime.jsxs("p", {
@@ -32158,7 +32159,7 @@ function ProfileView(props) {
                         __self: this,
                         children: [
                             "Birthday: ",
-                            current_birthday
+                            birthday.slice(0, 10)
                         ]
                     }) : /*#__PURE__*/ _jsxRuntime.jsx("span", {
                         __source: {
@@ -32538,7 +32539,7 @@ ProfileView.propTypes = {
         ImgURL: _propTypesDefault.default.string,
         Featured: _propTypesDefault.default.bool
     })).isRequired,
-    favs: _propTypesDefault.default.string.isRequired
+    favs: _propTypesDefault.default.array.isRequired
 };
 var _c;
 $RefreshReg$(_c, "ProfileView");
@@ -32852,7 +32853,7 @@ function NavBar(props) {
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                                         variant: "primary",
                                         onClick: ()=>{
-                                            this.onLoggedOut();
+                                            onLoggedOut();
                                         },
                                         __source: {
                                             fileName: "src/components/nav-bar/nav-bar.jsx",
@@ -32953,7 +32954,8 @@ _c = NavBar;
 exports.default = _reactRedux.connect(mapStateToProps)(NavBar);
 NavBar.propTypes = {
     user: _propTypesDefault.default.string,
-    onLoggedOut: _propTypesDefault.default.func.isRequired
+    onLoggedOut: _propTypesDefault.default.func.isRequired,
+    onBackClick: _propTypesDefault.default.func.isRequired
 };
 var _c;
 $RefreshReg$(_c, "NavBar");
@@ -35638,7 +35640,7 @@ function user(state = '', action) {
             return state;
     }
 }
-function favs(state = '', action) {
+function favs(state = [], action) {
     switch(action.type){
         case _actions.SET_FAVS:
             return action.value;

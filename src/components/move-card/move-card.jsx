@@ -58,5 +58,5 @@ MoveCard.propTypes = {
     }).isRequired,
     // removeFavorite: PropTypes.func.isRequired,
     // addFavorite: PropTypes.func.isRequired,
-    favs: PropTypes.string.isRequired
+    favs: PropTypes.array.isRequired
 };

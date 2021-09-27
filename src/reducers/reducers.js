@@ -28,7 +28,7 @@ function user(state = '', action) {
             return state;
     }
 }
-function favs(state = '', action) { // the local "state" is the global state.favs, due to the combined reducer
+function favs(state = [], action) { // the local "state" is the global state.favs, due to the combined reducer
     switch (action.type) {
         case SET_FAVS:
             return action.value;

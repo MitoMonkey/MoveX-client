@@ -116,7 +116,7 @@ function ProfileView(props) {
     React.useEffect(() => {
         const token = localStorage.getItem('token');
         axios.get('https://move-x.herokuapp.com/users/' + username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
-            setUsername(response.data.Username);
+            // setUsername(response.data.Username);
             setEmail(response.data.Email);
             // console.log(response.data.Email);
             current_email = response.data.Email;
@@ -149,9 +149,9 @@ function ProfileView(props) {
             <Col className="user-data text-center" sm={12} lg={6}>
                 <h3>User Profile</h3>
                 <p>Username: {props.user}</p>
-                <p>Email: {current_email}</p>
+                <p>Email: {email}</p>
                 {(birthday)
-                    ? <p>Birthday: {current_birthday}</p>
+                    ? <p>Birthday: {birthday.slice(0, 10)}</p>
                     : <span></span>
                 }
 
@@ -248,5 +248,5 @@ ProfileView.propTypes = {
         ImgURL: PropTypes.string,
         Featured: PropTypes.bool
     })).isRequired,
-    favs: PropTypes.string.isRequired
+    favs: PropTypes.array.isRequired
 };
