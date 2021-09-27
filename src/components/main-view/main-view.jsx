@@ -14,6 +14,7 @@ import MoveView from '../move-view/move-view';
 import { StyleView } from '../style-view/style-view';
 import { SourceView } from '../source-view/source-view';
 import ProfileView from '../profile-view/profile-view';
+import NavBar from '../nav-bar/nav-bar';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -124,11 +125,11 @@ class MainView extends React.Component {
     render() {
         const { moves, user } = this.props; // passed from the store by mapStateToProps
 
-        // const nav = <NavBar onLoggedIn={user => this.onLoggedIn(user)} onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.goBack()} />
+        const nav = <NavBar onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.goBack()} />
 
         return (
             <>
-                {/* nav (Component not yet created, but all elements are in the last <Row> of MainView) */}
+                {nav}
                 <Router>
                     <Row className="main-view justify-content-center">
                         <Route exact path="/" render={() => {
