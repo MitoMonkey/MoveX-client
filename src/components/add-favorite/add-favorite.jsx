@@ -20,7 +20,7 @@ function AddFavorite(props) {
             axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {}, { headers: { Authorization: `Bearer ${token}` } })
                 .then(response => {
                     const data = response.data;
-                    console.log(data.FavoriteMoves);
+                    // console.log(data.FavoriteMoves);
 
                     if (data.FavoriteMoves.toString().length === favs.toString().length) {
                         return console.log('failed to add move in database');
@@ -28,7 +28,7 @@ function AddFavorite(props) {
                     else {
                         localStorage.setItem('favs', data.FavoriteMoves);
                         setFavs(data.FavoriteMoves);
-                        console.log(favs);
+                        // console.log(favs);
                     }
                 })
                 .catch(e => {

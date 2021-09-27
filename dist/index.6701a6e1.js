@@ -28180,12 +28180,12 @@ function AddFavorite(props) {
                 }
             }).then((response)=>{
                 const data = response.data;
-                console.log(data.FavoriteMoves);
+                // console.log(data.FavoriteMoves);
                 if (data.FavoriteMoves.toString().length === favs.toString().length) return console.log('failed to add move in database');
                 else {
                     localStorage.setItem('favs', data.FavoriteMoves);
                     setFavs(data.FavoriteMoves);
-                    console.log(favs);
+                // console.log(favs);
                 }
             }).catch((e)=>{
                 console.log('error adding ' + moveID + ' to user profile ' + user);
