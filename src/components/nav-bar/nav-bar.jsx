@@ -44,7 +44,7 @@ function NavBar(props) {
                             </Nav.Item>
                             : <span></span>
                         }
-                        <span class="navbar-text"> Logged in as {user} </span>
+                        <span className="navbar-text"> Logged in as {user} </span>
                         <Nav.Item>
                             <Button variant="primary" onClick={() => { onBackClick() }}>Back</Button>
                         </Nav.Item>

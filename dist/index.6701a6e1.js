@@ -32993,7 +32993,7 @@ function NavBar(props) {
                                 __self: this
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsxs("span", {
-                                class: "navbar-text",
+                                className: "navbar-text",
                                 __source: {
                                     fileName: "src/components/nav-bar/nav-bar.jsx",
                                     lineNumber: 47
