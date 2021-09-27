@@ -224,22 +224,6 @@ class MainView extends React.Component {
 
                     </Row>
                 </Router>
-
-                <Row className="justify-content-center">
-                    {(user)
-                        ? <div className="user-bar">
-                            <span>Logged in as {user}  </span>
-                            <a href={`/`} className="btn btn-primary">Home</a>{'  '}
-                            <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>{'  '}
-                            <a href={`/users/` + user} className="btn btn-primary">Edit profile</a>
-                        </div>
-                        : <div className="user-bar">
-                            <a href={`/`} className="btn btn-primary">Login</a>{'  '}
-                            <a href={`/register`} className="btn btn-primary">Register</a>
-                        </div>
-
-                    }
-                </Row>
             </>
         );
     }
