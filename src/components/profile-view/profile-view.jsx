@@ -126,8 +126,8 @@ function ProfileView(props) {
         })
     }, []);
 
-    console.log("my email is " + email);
-    console.log("my email is " + current_email);
+    // console.log("my email is " + email);
+    // console.log("my email is " + current_email);
     /*
     function stringToDate(birthdayString) {
         var pattern = /(\d{4})\-(\d{2})\-(\d{2})/;

@@ -22948,8 +22948,7 @@ var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 // import CardGroup from 'react-bootstrap/CardGroup'; Was only used in MoveCard
-var _button = require("react-bootstrap/Button");
-var _buttonDefault = parcelHelpers.interopDefault(_button);
+// import Button from 'react-bootstrap/Button';
 var _mainViewScss = require("./main-view.scss");
 /*
 Reduxstate format = {
@@ -23254,7 +23253,7 @@ exports.default = _reactRedux.connect(mapStateToProps, {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","../move-view/move-view":"iUGEL","axios":"iYoWk","../login-view/login-view":"054li","../registration-view/registration-view":"aP2YV","./main-view.scss":"jyMAr","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-router-dom":"cpyQW","react-bootstrap/Button":"9CzHT","../style-view/style-view":"lHPne","../source-view/source-view":"1gdtE","../profile-view/profile-view":"2E7Aw","react-redux":"2L0if","../../actions/actions":"1Ttfj","../moves-list/moves-list":"2GEYT","../nav-bar/nav-bar":"bpxKL"}],"iUGEL":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","../move-view/move-view":"iUGEL","axios":"iYoWk","../login-view/login-view":"054li","../registration-view/registration-view":"aP2YV","./main-view.scss":"jyMAr","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-router-dom":"cpyQW","../style-view/style-view":"lHPne","../source-view/source-view":"1gdtE","../profile-view/profile-view":"2E7Aw","react-redux":"2L0if","../../actions/actions":"1Ttfj","../moves-list/moves-list":"2GEYT","../nav-bar/nav-bar":"bpxKL"}],"iUGEL":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$233b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -32093,8 +32092,8 @@ function ProfileView(props) {
             current_birthday = response.data.Birthday.split("T")[0];
         });
     }, []);
-    console.log("my email is " + email);
-    console.log("my email is " + current_email);
+    // console.log("my email is " + email);
+    // console.log("my email is " + current_email);
     /*
     function stringToDate(birthdayString) {
         var pattern = /(\d{4})\-(\d{2})\-(\d{2})/;

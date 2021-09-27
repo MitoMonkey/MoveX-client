@@ -10,47 +10,29 @@ It was created as a study project during my Fullstack Webdeveloper course @Carre
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
-
-* build tool: Parcel
-* Dependencies: 
-** react 17.0.2
-** react-dom 17.0.2
-
-React Redux (respecting the Flux pattern)
-Bootstrap as a UI library for styling and responsiveness
-a mix of class components and function components
+- Javascript (and a little CSS)
+- React
+- React Bootstrap as a UI library for styling and responsiveness
+- React Redux (respecting the Flux pattern)
+- a mix of class components and function components
+- axios to make AJAX requests to the API
+- build tool: Parcel
+- PropTypes for data validation between the components
 
 ## Live Demo
 
-[Live Demo Link]
-
-## Getting Started
-
-To build the project run `parcel src/index.html` from the project folder
-To start the app run `parcel serve ./src/index.html` 
-
-### Prerequisites
-
-### Setup
+[Live Demo Link](https://move-x.netlify.app/)
 
 ### Install
 
-### Usage
-
-### Run tests
+npm install (in project folder)
 
 ### Deployment
 
+To build the project run `parcel src/index.html` from the project folder
 
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](https://github.com/MitoMonkey/MoveX-client/issues).
-
-## Show your support
-
-Give a ⭐️ if you like this project!

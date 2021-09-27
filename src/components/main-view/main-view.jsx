@@ -19,7 +19,7 @@ import NavBar from '../nav-bar/nav-bar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 // import CardGroup from 'react-bootstrap/CardGroup'; Was only used in MoveCard
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 
 import './main-view.scss';
 
