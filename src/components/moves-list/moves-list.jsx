@@ -4,21 +4,17 @@ import Row from 'react-bootstrap/Row';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { MoveCard } from '../move-card/move-card';
+import MoveCard from '../move-card/move-card';
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
-// import AddFavorite from '../add-favorite/add-favorite';
-// import RemoveFavorite from '../remove-favorite/remove-favorite';
 
-const mapStateToProps = state => {
-    const { visibilityFilter } = state;
-    return { visibilityFilter };
-};
+let mapStateToProps = state => { return { moves: state.moves, visibilityFilter: state.visibilityFilter } }
 
 function MovesList(props) {
     const { moves, visibilityFilter } = props;
     let filteredMoves = moves;
 
     if (visibilityFilter !== '') {
+        // console.log(visibilityFilter);
         filteredMoves = moves.filter(m => m.Title.toLowerCase().includes(visibilityFilter.toLowerCase()));
     }
 
@@ -36,8 +32,6 @@ function MovesList(props) {
                     <Col sm={6} md={4} lg={3} key={m._id}>
                         <MoveCard
                             move={m}
-                        // removeFavorite={(moveId) => RemoveFavorite(moveId)}
-                        // addFavorite={(moveId) => AddFavorite(moveId)}
                         />
                     </Col>
                 ))}

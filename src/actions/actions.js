@@ -32,7 +32,7 @@ export function setFavs(value) {
         value
     };
 }
-export function addFav(id) {
+/* export function addFav(id) {
     return {
         type: ADD_FAV,
         id
@@ -43,4 +43,4 @@ export function remFav(id) {
         type: REM_FAV,
         id
     };
-}
+} */

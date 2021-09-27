@@ -12,31 +12,30 @@ import { Link } from "react-router-dom";
 
 // import './move-card.scss';
 
-export class MoveCard extends React.Component {
+let mapStateToProps = state => { return { favs: state.favs } }
 
-    render() {
-        const { move, favs } = this.props;
+function MoveCard(props) {
 
-        return (
-            <Card className="Card" >
-                <Card.Img variant="top" src={move.ImgURL} />
-                <Card.Body>
-                    <Card.Title>{move.Title}</Card.Title>
-                    <Card.Text>{move.Cues}</Card.Text>
-                    <Link to={`/moves/${move._id}`}>
-                        <Button variant="primary">View details</Button>
-                    </Link>
-                    {(favs.includes(move._id))
-                        ? <Button variant="primary" onClick={() => RemoveFavorite(move._id)} >Remove favorite</Button>
-                        : <Button variant="primary" onClick={() => AddFavorite(move._id)} >Add favorite</Button>
-                    }
-                </Card.Body>
-            </Card>
-        );
-    }
+    const { favs, move } = props;
+
+    return (
+        <Card className="Card" >
+            <Card.Img variant="top" src={move.ImgURL} />
+            <Card.Body>
+                <Card.Title>{move.Title}</Card.Title>
+                <Card.Text>{move.Cues}</Card.Text>
+                <Link to={`/moves/${move._id}`}>
+                    <Button variant="primary">View details</Button>
+                </Link>
+                {(favs.includes(move._id))
+                    ? <RemoveFavorite moveID={move._id} />
+                    : <AddFavorite moveID={move._id} />
+                }
+            </Card.Body>
+        </Card>
+    );
 }
 
-let mapStateToProps = state => { return { favs: state.favs } }
 export default connect(mapStateToProps)(MoveCard);
 
 // validate data types

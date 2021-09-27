@@ -30,7 +30,6 @@ export function LoginView(props) {
             });
     };
 
-    // noValidate attribute to disable HTML5 validations by default and access Constraint API
     return (
         <Form>
             <Form.Group controlId="formUsername">

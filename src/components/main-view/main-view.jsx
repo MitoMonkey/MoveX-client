@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'; // library for AJAX operations
 
 // library module for state-based routing. "BrowserRouter" relates to <Router> in the render() block
-import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { connect } from 'react-redux';
 import { setMoves, setUser, setFavs } from '../../actions/actions'; //setUser is required for the nav-bar "logout" button
@@ -10,11 +10,10 @@ import { setMoves, setUser, setFavs } from '../../actions/actions'; //setUser is
 import MovesList from '../moves-list/moves-list';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-// import { MoveCard } from '../move-card/move-card'; Now included in MovesList
-import { MoveView } from '../move-view/move-view';
+import MoveView from '../move-view/move-view';
 import { StyleView } from '../style-view/style-view';
 import { SourceView } from '../source-view/source-view';
-import { ProfileView } from '../profile-view/profile-view';
+import ProfileView from '../profile-view/profile-view';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -125,8 +124,11 @@ class MainView extends React.Component {
     render() {
         const { moves, user } = this.props; // passed from the store by mapStateToProps
 
+        // const nav = <NavBar onLoggedIn={user => this.onLoggedIn(user)} onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.goBack()} />
+
         return (
             <>
+                {/* nav (Component not yet created, but all elements are in the last <Row> of MainView) */}
                 <Router>
                     <Row className="main-view justify-content-center">
                         <Route exact path="/" render={() => {
@@ -139,7 +141,7 @@ class MainView extends React.Component {
                             // Loading page is displayed if no moves could be loaded
                             if (moves.length === 0) return <div className="main-view">Loading the moves from the database. Check console for errors if it does not finish loading.</div>;
 
-                            return <MovesList moves={moves} />;
+                            return <MovesList />;
                         }} />
 
                         <Route path="/register" render={() => {
@@ -156,15 +158,11 @@ class MainView extends React.Component {
                                 </Col>);
 
                             // make sure users can only see their own profile
-                            if (match.params.username === user.username) return (
+                            if (match.params.username === user) return (
                                 <ProfileView
-                                    user={user.username}
-                                    favMoves={moves.filter(m => user.favs.includes(m._id))}
-                                    // removeFavorite={(moveId) => this.removeFavorite(moveId)}
-                                    // addFavorite={(moveId) => this.addFavorite(moveId)}
                                     updateUserdata={newUserData => this.updateUserdata(newUserData)}
                                     deleteUser={() => this.deleteUser()}
-                                    onBackClick={() => history.goBack()}
+                                    onBackClick={() => history.goBack()} // bo button yet. But will be in NavBar anyway
                                 />
                             );
                             return (
@@ -185,9 +183,6 @@ class MainView extends React.Component {
                                 <MoveView
                                     move={moves.find(m => m._id === match.params.moveId)}
                                     onBackClick={() => history.goBack()}
-                                // removeFavorite={(moveId) => this.removeFavorite(moveId)}
-                                // addFavorite={(moveId) => this.addFavorite(moveId)}
-                                // addToFavorites={() => this.addToFavorites(match.params.moveId)}
                                 />
                             );
                         }} />
@@ -232,10 +227,10 @@ class MainView extends React.Component {
                 <Row className="justify-content-center">
                     {(user)
                         ? <div className="user-bar">
-                            <span>Logged in as {user.username}  </span>
+                            <span>Logged in as {user}  </span>
                             <a href={`/`} className="btn btn-primary">Home</a>{'  '}
                             <Button variant="primary" onClick={() => { this.onLoggedOut() }}>Logout</Button>{'  '}
-                            <a href={`/users/` + user.username} className="btn btn-primary">Edit profile</a>
+                            <a href={`/users/` + user} className="btn btn-primary">Edit profile</a>
                         </div>
                         : <div className="user-bar">
                             <a href={`/`} className="btn btn-primary">Login</a>{'  '}
@@ -249,6 +244,15 @@ class MainView extends React.Component {
     }
 }
 
-let mapStateToProps = state => { return { moves: state.moves, user: state.user, favs: state.favs } } // retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
+// retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
+let mapStateToProps = state => {
+    return {
+        moves: state.moves,
+        user: state.user,
+        favs: state.favs
+    }
+}
+
 export default connect(mapStateToProps, { setMoves, setUser, setFavs })(MainView);
-// second argument (=mapDispatchToProps) connects the action creators as a prop to this component, so it can be used to dispatch actions by "this.props.setMoves()"
+// second argument (=mapDispatchToProps) connects the action creators as a prop to this component,
+// so it can be used to dispatch actions by "this.props.setMoves()"

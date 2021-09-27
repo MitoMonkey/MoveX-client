@@ -12,58 +12,57 @@ import RemoveFavorite from '../remove-favorite/remove-favorite';
 
 // import './move-view.scss';
 
-export class MoveView extends React.Component {
+let mapStateToProps = state => { return { favs: state.favs } }
 
-    render() {
-        const { move, onBackClick, favs } = this.props;
-        return (
-            <Row className="move-view justify-content-center text-center">
-                {/*<Col md={1}>
+function MoveView(props) {
+
+    const { move, onBackClick, favs } = props;
+    return (
+        <Row className="move-view justify-content-center text-center">
+            {/*<Col md={1}>
                     <div className="move-Poster">
                         <img src={move.ImgURL} />
                     </div>
                 </Col> */}
-                <Col sm={12} md={8}>
-                    <h3>Move details</h3>
-                    <div className="move-title">
-                        <strong><span className="label">Move Title: </span>
-                            <span className="value">{move.Title}</span>
-                        </strong>
-                    </div>
-                    <div className="move-style">
-                        <span className="label">Style: </span>
-                        <Link to={`/styles/${move.Style.Name}`}>
-                            <Button variant="link">{move.Style.Name}</Button>
-                        </Link>
-                    </div>
-                    <div className="move-source">
-                        <span className="label">Source: </span>
-                        <Link to={`/sources/${move.Source.Name}`}>
-                            <Button variant="link">{move.Source.Name}</Button>
-                        </Link>
-                    </div>
-                    <div className="move-cues">
-                        <span className="label">Cues: </span>
-                        <span className="value">{move.Cues}</span>
-                    </div>
-                    <div className="move-videoLink">
-                        <span className="label">Video: </span>
-                        <a className="value" href={move.VideoURL}>{move.VideoURL}</a>
-                    </div>
-                    <div>
-                        {(favs.includes(move._id))
-                            ? <Button variant="primary" onClick={() => RemoveFavorite(move._id)} >Remove favorite</Button>
-                            : <Button variant="primary" onClick={() => AddFavorite(move._id)} >Add favorite</Button>
-                        }
-                        <Button variant="primary" type="button" onClick={() => { onBackClick() }}>Back</Button>
-                    </div>
-                </Col>
-            </Row>
-        )
-    }
+            <Col sm={12} md={8}>
+                <h3>Move details</h3>
+                <div className="move-title">
+                    <strong><span className="label">Move Title: </span>
+                        <span className="value">{move.Title}</span>
+                    </strong>
+                </div>
+                <div className="move-style">
+                    <span className="label">Style: </span>
+                    <Link to={`/styles/${move.Style.Name}`}>
+                        <Button variant="link">{move.Style.Name}</Button>
+                    </Link>
+                </div>
+                <div className="move-source">
+                    <span className="label">Source: </span>
+                    <Link to={`/sources/${move.Source.Name}`}>
+                        <Button variant="link">{move.Source.Name}</Button>
+                    </Link>
+                </div>
+                <div className="move-cues">
+                    <span className="label">Cues: </span>
+                    <span className="value">{move.Cues}</span>
+                </div>
+                <div className="move-videoLink">
+                    <span className="label">Video: </span>
+                    <a className="value" href={move.VideoURL}>{move.VideoURL}</a>
+                </div>
+                <div>
+                    {(favs.includes(move._id))
+                        ? <RemoveFavorite moveID={move._id} />
+                        : <AddFavorite moveID={move._id} />
+                    }
+                    <Button variant="primary" type="button" onClick={() => { onBackClick() }}>Back</Button>
+                </div>
+            </Col>
+        </Row>
+    )
 }
 
-let mapStateToProps = state => { return { favs: state.favs } }
 export default connect(mapStateToProps)(MoveView);
 
 // validate data types

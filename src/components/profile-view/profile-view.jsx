@@ -6,14 +6,20 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 // import { Link } from "react-router-dom";
-import { MoveCard } from '../move-card/move-card';
+import MoveCard from '../move-card/move-card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import { connect } from 'react-redux';
 
 // import './profile-view.scss';
 
-export function ProfileView(props) {
-    const [username, setUsername] = useState(props.user);
+let mapStateToProps = state => { return { moves: state.moves, user: state.user, favs: state.favs } }
+
+function ProfileView(props) {
+    const { favs, moves, user } = props;
+    let favMoves = moves.filter(m => favs.includes(m._id));
+    console.log(favMoves);
+
+    const [username, setUsername] = useState(user);
     const [usernameInvalid, setUsernameInvalid] = useState('');
     const [password, setPassword] = useState('');
     const [passwordInvalid, setPasswordInvalid] = useState('');
@@ -105,9 +111,10 @@ export function ProfileView(props) {
         }
     };
 
+    // load user data into state (and as placeholders) when component is mounted
     let current_email = '';
     let current_birthday = '';
-    React.useEffect(() => { // load user data into state (and as placeholders) when component is mounted
+    React.useEffect(() => {
         const token = localStorage.getItem('token');
         axios.get('https://move-x.herokuapp.com/users/' + username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
             setUsername(response.data.Username);
@@ -198,16 +205,13 @@ export function ProfileView(props) {
             <Col className="text-center">
                 <div className="user-favorites">
                     <h3>Your favorite moves</h3>
-                    {(!props.favMoves)
+                    {(favMoves.length === 0)
                         ? <p>You did not choose any favorites yet.</p>
                         : <CardGroup className="justify-content-md-center">
-                            {props.favMoves.map(m => (
+                            {favMoves.map(m => (
                                 <Col sm={12} md={6} key={m._id}>
                                     <MoveCard
                                         move={m}
-                                    // removeFavorite={(moveId) => RemoveFavorite(moveId)}
-                                    // addFavorite={(moveId) => AddFavorite(moveId)}
-                                    // removeFavorite={() => props.removeFavorite(m._id)} 
                                     />
                                 </Col>))
                             }
@@ -218,7 +222,6 @@ export function ProfileView(props) {
     );
 }
 
-let mapStateToProps = state => { return { moves: state.moves, user: state.user, favs: state.favs } } // retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
 export default connect(mapStateToProps)(ProfileView);
 
 // validate prop data types
@@ -228,7 +231,7 @@ ProfileView.propTypes = {
     // removeFavorite: PropTypes.func.isRequired,
     // addFavorite: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
-    favMoves: PropTypes.arrayOf(PropTypes.shape({
+    moves: PropTypes.arrayOf(PropTypes.shape({
         _id: PropTypes.string.isRequired,
         Title: PropTypes.string.isRequired,
         Cues: PropTypes.string.isRequired,
@@ -243,5 +246,6 @@ ProfileView.propTypes = {
         VideoURL: PropTypes.string.isRequired,
         ImgURL: PropTypes.string,
         Featured: PropTypes.bool
-    })).isRequired
+    })).isRequired,
+    favs: PropTypes.string.isRequired
 };

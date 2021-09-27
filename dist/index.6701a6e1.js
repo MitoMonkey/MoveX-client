@@ -22935,11 +22935,12 @@ var _movesList = require("../moves-list/moves-list");
 var _movesListDefault = parcelHelpers.interopDefault(_movesList);
 var _loginView = require("../login-view/login-view");
 var _registrationView = require("../registration-view/registration-view");
-// import { MoveCard } from '../move-card/move-card'; Now included in MovesList
 var _moveView = require("../move-view/move-view");
+var _moveViewDefault = parcelHelpers.interopDefault(_moveView);
 var _styleView = require("../style-view/style-view");
 var _sourceView = require("../source-view/source-view");
 var _profileView = require("../profile-view/profile-view");
+var _profileViewDefault = parcelHelpers.interopDefault(_profileView);
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
@@ -23042,19 +23043,20 @@ Reduxstate format = {
     }
     render() {
         const { moves , user  } = this.props; // passed from the store by mapStateToProps
+        // const nav = <NavBar onLoggedIn={user => this.onLoggedIn(user)} onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.goBack()} />
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 130
+                        lineNumber: 132
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
                         className: "main-view justify-content-center",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 131
+                            lineNumber: 133
                         },
                         __self: this,
                         children: [
@@ -23075,12 +23077,11 @@ Reduxstate format = {
                                         children: "Loading the moves from the database. Check console for errors if it does not finish loading."
                                     }));
                                     return(/*#__PURE__*/ _jsxRuntime.jsx(_movesListDefault.default, {
-                                        moves: moves
                                     }));
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 132
+                                    lineNumber: 134
                                 },
                                 __self: this
                             }),
@@ -23098,7 +23099,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 145
+                                    lineNumber: 147
                                 },
                                 __self: this
                             }),
@@ -23113,12 +23114,7 @@ Reduxstate format = {
                                         })
                                     }));
                                     // make sure users can only see their own profile
-                                    if (match.params.username === user.username) return(/*#__PURE__*/ _jsxRuntime.jsx(_profileView.ProfileView, {
-                                        user: user.username,
-                                        favMoves: moves.filter((m)=>user.favs.includes(m._id)
-                                        ),
-                                        // removeFavorite={(moveId) => this.removeFavorite(moveId)}
-                                        // addFavorite={(moveId) => this.addFavorite(moveId)}
+                                    if (match.params.username === user) return(/*#__PURE__*/ _jsxRuntime.jsx(_profileViewDefault.default, {
                                         updateUserdata: (newUserData)=>this.updateUserdata(newUserData)
                                         ,
                                         deleteUser: ()=>this.deleteUser()
@@ -23129,7 +23125,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 151
+                                    lineNumber: 153
                                 },
                                 __self: this
                             }),
@@ -23148,7 +23144,7 @@ Reduxstate format = {
                                         className: "main-view",
                                         children: "Loading the moves from the database. Check console for errors if it does not finish loading."
                                     }));
-                                    return(/*#__PURE__*/ _jsxRuntime.jsx(_moveView.MoveView, {
+                                    return(/*#__PURE__*/ _jsxRuntime.jsx(_moveViewDefault.default, {
                                         move: moves.find((m)=>m._id === match.params.moveId
                                         ),
                                         onBackClick: ()=>history.goBack()
@@ -23156,7 +23152,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 174
+                                    lineNumber: 172
                                 },
                                 __self: this
                             }),
@@ -23185,7 +23181,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 194
+                                    lineNumber: 189
                                 },
                                 __self: this
                             }),
@@ -23214,7 +23210,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 211
+                                    lineNumber: 206
                                 },
                                 __self: this
                             })
@@ -23225,26 +23221,26 @@ Reduxstate format = {
                     className: "justify-content-center",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 232
+                        lineNumber: 227
                     },
                     __self: this,
                     children: user ? /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                         className: "user-bar",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 234
+                            lineNumber: 229
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsxs("span", {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 235
+                                    lineNumber: 230
                                 },
                                 __self: this,
                                 children: [
                                     "Logged in as ",
-                                    user.username,
+                                    user,
                                     " "
                                 ]
                             }),
@@ -23253,7 +23249,7 @@ Reduxstate format = {
                                 className: "btn btn-primary",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 236
+                                    lineNumber: 231
                                 },
                                 __self: this,
                                 children: "Home"
@@ -23266,18 +23262,18 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 237
+                                    lineNumber: 232
                                 },
                                 __self: this,
                                 children: "Logout"
                             }),
                             '  ',
                             /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                                href: `/users/` + user.username,
+                                href: `/users/` + user,
                                 className: "btn btn-primary",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 238
+                                    lineNumber: 233
                                 },
                                 __self: this,
                                 children: "Edit profile"
@@ -23287,7 +23283,7 @@ Reduxstate format = {
                         className: "user-bar",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 240
+                            lineNumber: 235
                         },
                         __self: this,
                         children: [
@@ -23296,7 +23292,7 @@ Reduxstate format = {
                                 className: "btn btn-primary",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 241
+                                    lineNumber: 236
                                 },
                                 __self: this,
                                 children: "Login"
@@ -23307,7 +23303,7 @@ Reduxstate format = {
                                 className: "btn btn-primary",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 242
+                                    lineNumber: 237
                                 },
                                 __self: this,
                                 children: "Register"
@@ -23319,19 +23315,20 @@ Reduxstate format = {
         }));
     }
 }
+// retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
 let mapStateToProps = (state)=>{
     return {
         moves: state.moves,
         user: state.user,
         favs: state.favs
     };
-} // retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
-;
+};
 exports.default = _reactRedux.connect(mapStateToProps, {
     setMoves: _actions.setMoves,
     setUser: _actions.setUser,
     setFavs: _actions.setFavs
-})(MainView); // second argument (=mapDispatchToProps) connects the action creators as a prop to this component, so it can be used to dispatch actions by "this.props.setMoves()"
+})(MainView); // second argument (=mapDispatchToProps) connects the action creators as a prop to this component,
+ // so it can be used to dispatch actions by "this.props.setMoves()"
 
   $parcel$ReactRefreshHelpers$35bf.postlude(module);
 } finally {
@@ -23347,9 +23344,6 @@ $parcel$ReactRefreshHelpers$233b.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-// import './move-view.scss';
-parcelHelpers.export(exports, "MoveView", ()=>MoveView
-);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -23367,250 +23361,244 @@ var _addFavorite = require("../add-favorite/add-favorite");
 var _addFavoriteDefault = parcelHelpers.interopDefault(_addFavorite);
 var _removeFavorite = require("../remove-favorite/remove-favorite");
 var _removeFavoriteDefault = parcelHelpers.interopDefault(_removeFavorite);
-class MoveView extends _reactDefault.default.Component {
-    render() {
-        const { move , onBackClick , favs  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-            className: "move-view justify-content-center text-center",
-            __source: {
-                fileName: "src/components/move-view/move-view.jsx",
-                lineNumber: 20
-            },
-            __self: this,
-            children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
-                sm: 12,
-                md: 8,
-                __source: {
-                    fileName: "src/components/move-view/move-view.jsx",
-                    lineNumber: 26
-                },
-                __self: this,
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx("h3", {
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 27
-                        },
-                        __self: this,
-                        children: "Move details"
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                        className: "move-title",
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 28
-                        },
-                        __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsxs("strong", {
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 29
-                            },
-                            __self: this,
-                            children: [
-                                /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                    className: "label",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 29
-                                    },
-                                    __self: this,
-                                    children: "Move Title: "
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                    className: "value",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 30
-                                    },
-                                    __self: this,
-                                    children: move.Title
-                                })
-                            ]
-                        })
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "move-style",
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 33
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 34
-                                },
-                                __self: this,
-                                children: "Style: "
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                to: `/styles/${move.Style.Name}`,
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 35
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                    variant: "link",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 36
-                                    },
-                                    __self: this,
-                                    children: move.Style.Name
-                                })
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "move-source",
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 39
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 40
-                                },
-                                __self: this,
-                                children: "Source: "
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                to: `/sources/${move.Source.Name}`,
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 41
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                    variant: "link",
-                                    __source: {
-                                        fileName: "src/components/move-view/move-view.jsx",
-                                        lineNumber: 42
-                                    },
-                                    __self: this,
-                                    children: move.Source.Name
-                                })
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "move-cues",
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 45
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 46
-                                },
-                                __self: this,
-                                children: "Cues: "
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "value",
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 47
-                                },
-                                __self: this,
-                                children: move.Cues
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "move-videoLink",
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 49
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 50
-                                },
-                                __self: this,
-                                children: "Video: "
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                                className: "value",
-                                href: move.VideoURL,
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 51
-                                },
-                                __self: this,
-                                children: move.VideoURL
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        __source: {
-                            fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 53
-                        },
-                        __self: this,
-                        children: [
-                            favs.includes(move._id) ? /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "primary",
-                                onClick: ()=>_removeFavoriteDefault.default(move._id)
-                                ,
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 55
-                                },
-                                __self: this,
-                                children: "Remove favorite"
-                            }) : /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "primary",
-                                onClick: ()=>_addFavoriteDefault.default(move._id)
-                                ,
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 56
-                                },
-                                __self: this,
-                                children: "Add favorite"
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "primary",
-                                type: "button",
-                                onClick: ()=>{
-                                    onBackClick();
-                                },
-                                __source: {
-                                    fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 58
-                                },
-                                __self: this,
-                                children: "Back"
-                            })
-                        ]
-                    })
-                ]
-            })
-        }));
-    }
-}
+// import './move-view.scss';
 let mapStateToProps = (state)=>{
     return {
         favs: state.favs
     };
 };
+function MoveView(props) {
+    const { move , onBackClick , favs  } = props;
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+        className: "move-view justify-content-center text-center",
+        __source: {
+            fileName: "src/components/move-view/move-view.jsx",
+            lineNumber: 21
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+            sm: 12,
+            md: 8,
+            __source: {
+                fileName: "src/components/move-view/move-view.jsx",
+                lineNumber: 27
+            },
+            __self: this,
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx("h3", {
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 28
+                    },
+                    __self: this,
+                    children: "Move details"
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                    className: "move-title",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 29
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsxs("strong", {
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 30
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                className: "label",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 30
+                                },
+                                __self: this,
+                                children: "Move Title: "
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                className: "value",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 31
+                                },
+                                __self: this,
+                                children: move.Title
+                            })
+                        ]
+                    })
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "move-style",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 34
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 35
+                            },
+                            __self: this,
+                            children: "Style: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                            to: `/styles/${move.Style.Name}`,
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 36
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                variant: "link",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 37
+                                },
+                                __self: this,
+                                children: move.Style.Name
+                            })
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "move-source",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 40
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 41
+                            },
+                            __self: this,
+                            children: "Source: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                            to: `/sources/${move.Source.Name}`,
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 42
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                variant: "link",
+                                __source: {
+                                    fileName: "src/components/move-view/move-view.jsx",
+                                    lineNumber: 43
+                                },
+                                __self: this,
+                                children: move.Source.Name
+                            })
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "move-cues",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 46
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 47
+                            },
+                            __self: this,
+                            children: "Cues: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 48
+                            },
+                            __self: this,
+                            children: move.Cues
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "move-videoLink",
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 50
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 51
+                            },
+                            __self: this,
+                            children: "Video: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("a", {
+                            className: "value",
+                            href: move.VideoURL,
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 52
+                            },
+                            __self: this,
+                            children: move.VideoURL
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    __source: {
+                        fileName: "src/components/move-view/move-view.jsx",
+                        lineNumber: 54
+                    },
+                    __self: this,
+                    children: [
+                        favs.includes(move._id) ? /*#__PURE__*/ _jsxRuntime.jsx(_removeFavoriteDefault.default, {
+                            moveID: move._id,
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 56
+                            },
+                            __self: this
+                        }) : /*#__PURE__*/ _jsxRuntime.jsx(_addFavoriteDefault.default, {
+                            moveID: move._id,
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 57
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                            variant: "primary",
+                            type: "button",
+                            onClick: ()=>{
+                                onBackClick();
+                            },
+                            __source: {
+                                fileName: "src/components/move-view/move-view.jsx",
+                                lineNumber: 59
+                            },
+                            __self: this,
+                            children: "Back"
+                        })
+                    ]
+                })
+            ]
+        })
+    }));
+}
+_c = MoveView;
 exports.default = _reactRedux.connect(mapStateToProps)(MoveView);
 // validate data types
 MoveView.propTypes = {
@@ -23635,6 +23623,8 @@ MoveView.propTypes = {
     // addFavorite: PropTypes.func.isRequired,
     favs: _propTypesDefault.default.string.isRequired
 };
+var _c;
+$RefreshReg$(_c, "MoveView");
 
   $parcel$ReactRefreshHelpers$233b.postlude(module);
 } finally {
@@ -28233,54 +28223,88 @@ parcelHelpers.defineInteropFlag(exports);
 var _reactDom = require("react-dom");
 
 },{"react-dom":"gkWJK","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"andpa":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$9fcc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$9fcc.prelude(module);
+
+try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+var _jsxRuntime = require("react/jsx-runtime");
 // import React from 'react';
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _reactRedux = require("react-redux");
 var _actions = require("../../actions/actions");
-function AddFavorite(moveID) {
-    let favs = this.props.favs;
-    if (favs.includes(moveID)) return alert('this move is already in your list of favorites');
-    else {
-        const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user');
-        axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {
-        }, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>{
-            const data = response.data;
-            // console.log(data);
-            this.props.addFav(moveID); // dispatch action to update the state
-            /* SAME LOGIC IN REDUCERS. HERE ONLY TO SET LOCAL STORAGE > USE applyMiddleware TO COMBINE IT? */ if (favs.length === 0) {
-                let newFavs = favs.concat(moveID);
-                localStorage.setItem('favs', newFavs);
-            } else {
-                let newFavs = favs.concat(',' + moveID);
-                localStorage.setItem('favs', newFavs);
-            }
-            window.open('/users/' + user, '_self');
-        }).catch((e)=>{
-            console.log('error adding ' + moveID + ' to user profile ' + user);
-            alert(e);
-        });
-    }
-}
-_c = AddFavorite;
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 let mapStateToProps = (state)=>{
     return {
-        favs: state.favs
+        favs: state.favs,
+        user: state.user
     };
-} // retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
-;
+};
+function AddFavorite(props) {
+    const { favs , user , setFavs , moveID  } = props;
+    function addMove() {
+        if (favs.includes(moveID)) return alert('this move is already in your list of favorites');
+        else {
+            const token = localStorage.getItem('token');
+            _axiosDefault.default.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((response)=>{
+                const data = response.data;
+                // console.log(data);
+                if (data.FavoriteMoves.toString().length === favs.length) return console.log('failed to add move in database');
+                else {
+                    localStorage.setItem('favs', data.FavoriteMoves.toString());
+                    setFavs(data.FavoriteMoves.toString());
+                }
+            }).catch((e)=>{
+                console.log('error adding ' + moveID + ' to user profile ' + user);
+                alert(e);
+            });
+        }
+    }
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+        variant: "primary",
+        onClick: ()=>addMove()
+        ,
+        __source: {
+            fileName: "src/components/add-favorite/add-favorite.jsx",
+            lineNumber: 40
+        },
+        __self: this,
+        children: "Add favorite"
+    }));
+}
+_c = AddFavorite;
 exports.default = _reactRedux.connect(mapStateToProps, {
-    addFav: _actions.addFav
+    setFavs: _actions.setFavs
 })(AddFavorite);
+AddFavorite.propTypes = {
+    favs: _propTypesDefault.default.string.isRequired,
+    user: _propTypesDefault.default.string.isRequired,
+    setFavs: _propTypesDefault.default.func.isRequired,
+    moveID: _propTypesDefault.default.string.isRequired
+};
 var _c;
 $RefreshReg$(_c, "AddFavorite");
 
-},{"react-redux":"2L0if","../../actions/actions":"1Ttfj","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"1Ttfj":[function(require,module,exports) {
+  $parcel$ReactRefreshHelpers$9fcc.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react-redux":"2L0if","../../actions/actions":"1Ttfj","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","react":"6TuXu","react-bootstrap/Button":"9CzHT","axios":"iYoWk","prop-types":"1tgq3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react/jsx-runtime":"8xIwr"}],"1Ttfj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "SET_MOVES", ()=>SET_MOVES
@@ -28302,11 +28326,18 @@ parcelHelpers.export(exports, "setFilter", ()=>setFilter
 parcelHelpers.export(exports, "setUser", ()=>setUser
 );
 parcelHelpers.export(exports, "setFavs", ()=>setFavs
-);
-parcelHelpers.export(exports, "addFav", ()=>addFav
-);
-parcelHelpers.export(exports, "remFav", ()=>remFav
-);
+) /* export function addFav(id) {
+    return {
+        type: ADD_FAV,
+        id
+    };
+}
+export function remFav(id) {
+    return {
+        type: REM_FAV,
+        id
+    };
+} */ ;
 const SET_MOVES = 'SET_MOVES';
 const SET_FILTER = 'SET_FILTER';
 const SET_USER = 'SET_USER';
@@ -28337,68 +28368,8 @@ function setFavs(value) {
         value
     };
 }
-function addFav(id) {
-    return {
-        type: ADD_FAV,
-        id
-    };
-}
-function remFav(id) {
-    return {
-        type: REM_FAV,
-        id
-    };
-}
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9qoDF":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-// import React from 'react';
-var _reactRedux = require("react-redux");
-var _actions = require("../../actions/actions");
-function RemoveFavorite(moveID) {
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
-    axios.delete('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }).then((response)=>{
-        const data = response.data;
-        // console.log(data);
-        this.props.remFav(moveID); // dispatch action to update the state
-        let favs = this.props.favs;
-        let newFavs = null;
-        if (data.FavoriteMoves.toString().length === favs.length) return console.log('failed to delete move in database');
-        else {
-            // if it is the only move in the list
-            if (!favs.includes(',')) newFavs = favs.replace(moveID, '');
-            // if there are multiple entries and moveID is the first in the list
-            if (favs.indexOf(moveID) === 0 && favs.includes(',')) newFavs = favs.replace(moveID + ',', '');
-            // if it is the last move in the list OR anywhere in the middle
-            if (favs.indexOf(moveID) > 0) newFavs = favs.replace(',' + moveID, '');
-            localStorage.setItem('favs', newFavs);
-            window.open('/users/' + user, '_self');
-        }
-    }).catch((e)=>{
-        console.log('error removing ' + moveID + ' to user profile ' + user);
-        alert(e);
-    });
-}
-_c = RemoveFavorite;
-let mapStateToProps = (state)=>{
-    return {
-        favs: state.favs
-    };
-} // retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
-;
-exports.default = _reactRedux.connect(mapStateToProps, {
-    remFav: _actions.remFav
-})(RemoveFavorite);
-var _c;
-$RefreshReg$(_c, "RemoveFavorite");
-
-},{"react-redux":"2L0if","../../actions/actions":"1Ttfj","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"iYoWk":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"iYoWk":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"3QmO2"}],"3QmO2":[function(require,module,exports) {
@@ -29908,7 +29879,84 @@ module.exports = CancelToken;
     return typeof payload === 'object' && payload.isAxiosError === true;
 };
 
-},{}],"054li":[function(require,module,exports) {
+},{}],"9qoDF":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$a6ba = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$a6ba.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _reactRedux = require("react-redux");
+var _actions = require("../../actions/actions");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+let mapStateToProps = (state)=>{
+    return {
+        favs: state.favs,
+        user: state.user
+    };
+};
+function RemoveFavorite(props) {
+    const { favs , user , setFavs , moveID  } = props;
+    function deleteMove() {
+        const token = localStorage.getItem('token');
+        _axiosDefault.default.delete('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            const data = response.data;
+            // console.log(data);
+            if (data.FavoriteMoves.toString().length === favs.length) return console.log('failed to delete move in database');
+            else {
+                localStorage.setItem('favs', data.FavoriteMoves.toString());
+                setFavs(data.FavoriteMoves.toString());
+            }
+        }).catch((e)=>{
+            console.log('error removing ' + moveID + ' to user profile ' + user);
+            alert(e);
+        });
+    }
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+        variant: "primary",
+        onClick: ()=>deleteMove()
+        ,
+        __source: {
+            fileName: "src/components/remove-favorite/remove-favorite.jsx",
+            lineNumber: 36
+        },
+        __self: this,
+        children: "Remove favorite"
+    }));
+}
+_c = RemoveFavorite;
+exports.default = _reactRedux.connect(mapStateToProps, {
+    setFavs: _actions.setFavs
+})(RemoveFavorite);
+RemoveFavorite.propTypes = {
+    favs: _propTypesDefault.default.string.isRequired,
+    user: _propTypesDefault.default.string.isRequired,
+    setFavs: _propTypesDefault.default.func.isRequired,
+    moveID: _propTypesDefault.default.string.isRequired
+};
+var _c;
+$RefreshReg$(_c, "RemoveFavorite");
+
+  $parcel$ReactRefreshHelpers$a6ba.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react-redux":"2L0if","../../actions/actions":"1Ttfj","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","react":"6TuXu","axios":"iYoWk","prop-types":"1tgq3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react/jsx-runtime":"8xIwr","react-bootstrap/Button":"9CzHT"}],"054li":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$02dd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29950,11 +29998,10 @@ function LoginView(props) {
             console.log('No such user. Error: ' + error);
         });
     };
-    // noValidate attribute to disable HTML5 validations by default and access Constraint API
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 35
+            lineNumber: 34
         },
         __self: this,
         children: [
@@ -29962,14 +30009,14 @@ function LoginView(props) {
                 controlId: "formUsername",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 36
+                    lineNumber: 35
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 37
+                            lineNumber: 36
                         },
                         __self: this,
                         children: "Username:"
@@ -29981,7 +30028,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 38
+                            lineNumber: 37
                         },
                         __self: this
                     })
@@ -29991,14 +30038,14 @@ function LoginView(props) {
                 controlId: "formPassword",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 40
+                    lineNumber: 39
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 41
+                            lineNumber: 40
                         },
                         __self: this,
                         children: "Password:"
@@ -30010,7 +30057,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 42
+                            lineNumber: 41
                         },
                         __self: this
                     })
@@ -30020,7 +30067,7 @@ function LoginView(props) {
                 className: "text-center",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 44
+                    lineNumber: 43
                 },
                 __self: this,
                 children: [
@@ -30030,7 +30077,7 @@ function LoginView(props) {
                         onClick: handleSubmit,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 45
+                            lineNumber: 44
                         },
                         __self: this,
                         children: "Login"
@@ -31263,6 +31310,7 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _moveCard = require("../move-card/move-card");
+var _moveCardDefault = parcelHelpers.interopDefault(_moveCard);
 var _cardGroup = require("react-bootstrap/CardGroup");
 var _cardGroupDefault = parcelHelpers.interopDefault(_cardGroup);
 var _row = require("react-bootstrap/Row");
@@ -31394,7 +31442,7 @@ class StyleView extends _reactDefault.default.Component {
                                             lineNumber: 36
                                         },
                                         __self: this,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCardDefault.default, {
                                             move: m,
                                             __source: {
                                                 fileName: "src/components/style-view/style-view.jsx",
@@ -31469,9 +31517,6 @@ $parcel$ReactRefreshHelpers$7140.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-// import './move-card.scss';
-parcelHelpers.export(exports, "MoveCard", ()=>MoveCard
-);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -31487,98 +31532,92 @@ var _addFavoriteDefault = parcelHelpers.interopDefault(_addFavorite);
 var _removeFavorite = require("../remove-favorite/remove-favorite");
 var _removeFavoriteDefault = parcelHelpers.interopDefault(_removeFavorite);
 var _reactRouterDom = require("react-router-dom");
-class MoveCard extends _reactDefault.default.Component {
-    render() {
-        const { move , favs  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
-            className: "Card",
-            __source: {
-                fileName: "src/components/move-card/move-card.jsx",
-                lineNumber: 21
-            },
-            __self: this,
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
-                    variant: "top",
-                    src: move.ImgURL,
-                    __source: {
-                        fileName: "src/components/move-card/move-card.jsx",
-                        lineNumber: 22
-                    },
-                    __self: this
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
-                    __source: {
-                        fileName: "src/components/move-card/move-card.jsx",
-                        lineNumber: 23
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
-                            __source: {
-                                fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 24
-                            },
-                            __self: this,
-                            children: move.Title
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
-                            __source: {
-                                fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 25
-                            },
-                            __self: this,
-                            children: move.Cues
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                            to: `/moves/${move._id}`,
-                            __source: {
-                                fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 26
-                            },
-                            __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "primary",
-                                __source: {
-                                    fileName: "src/components/move-card/move-card.jsx",
-                                    lineNumber: 27
-                                },
-                                __self: this,
-                                children: "View details"
-                            })
-                        }),
-                        favs.includes(move._id) ? /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            variant: "primary",
-                            onClick: ()=>_removeFavoriteDefault.default(move._id)
-                            ,
-                            __source: {
-                                fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 30
-                            },
-                            __self: this,
-                            children: "Remove favorite"
-                        }) : /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            variant: "primary",
-                            onClick: ()=>_addFavoriteDefault.default(move._id)
-                            ,
-                            __source: {
-                                fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 31
-                            },
-                            __self: this,
-                            children: "Add favorite"
-                        })
-                    ]
-                })
-            ]
-        }));
-    }
-}
+// import './move-card.scss';
 let mapStateToProps = (state)=>{
     return {
         favs: state.favs
     };
 };
+function MoveCard(props) {
+    const { favs , move  } = props;
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
+        className: "Card",
+        __source: {
+            fileName: "src/components/move-card/move-card.jsx",
+            lineNumber: 22
+        },
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
+                variant: "top",
+                src: move.ImgURL,
+                __source: {
+                    fileName: "src/components/move-card/move-card.jsx",
+                    lineNumber: 23
+                },
+                __self: this
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
+                __source: {
+                    fileName: "src/components/move-card/move-card.jsx",
+                    lineNumber: 24
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+                        __source: {
+                            fileName: "src/components/move-card/move-card.jsx",
+                            lineNumber: 25
+                        },
+                        __self: this,
+                        children: move.Title
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
+                        __source: {
+                            fileName: "src/components/move-card/move-card.jsx",
+                            lineNumber: 26
+                        },
+                        __self: this,
+                        children: move.Cues
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                        to: `/moves/${move._id}`,
+                        __source: {
+                            fileName: "src/components/move-card/move-card.jsx",
+                            lineNumber: 27
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                            variant: "primary",
+                            __source: {
+                                fileName: "src/components/move-card/move-card.jsx",
+                                lineNumber: 28
+                            },
+                            __self: this,
+                            children: "View details"
+                        })
+                    }),
+                    favs.includes(move._id) ? /*#__PURE__*/ _jsxRuntime.jsx(_removeFavoriteDefault.default, {
+                        moveID: move._id,
+                        __source: {
+                            fileName: "src/components/move-card/move-card.jsx",
+                            lineNumber: 31
+                        },
+                        __self: this
+                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_addFavoriteDefault.default, {
+                        moveID: move._id,
+                        __source: {
+                            fileName: "src/components/move-card/move-card.jsx",
+                            lineNumber: 32
+                        },
+                        __self: this
+                    })
+                ]
+            })
+        ]
+    }));
+}
+_c = MoveCard;
 exports.default = _reactRedux.connect(mapStateToProps)(MoveCard);
 // validate data types
 MoveCard.propTypes = {
@@ -31602,6 +31641,8 @@ MoveCard.propTypes = {
     // addFavorite: PropTypes.func.isRequired,
     favs: _propTypesDefault.default.string.isRequired
 };
+var _c;
+$RefreshReg$(_c, "MoveCard");
 
   $parcel$ReactRefreshHelpers$7140.postlude(module);
 } finally {
@@ -31777,6 +31818,7 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _moveCard = require("../move-card/move-card");
+var _moveCardDefault = parcelHelpers.interopDefault(_moveCard);
 var _cardGroup = require("react-bootstrap/CardGroup");
 var _cardGroupDefault = parcelHelpers.interopDefault(_cardGroup);
 var _row = require("react-bootstrap/Row");
@@ -31922,7 +31964,7 @@ class SourceView extends _reactDefault.default.Component {
                                             lineNumber: 39
                                         },
                                         __self: this,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCardDefault.default, {
                                             move: m,
                                             __source: {
                                                 fileName: "src/components/source-view/source-view.jsx",
@@ -31941,7 +31983,7 @@ class SourceView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 48
+                                    lineNumber: 46
                                 },
                                 __self: this,
                                 children: "Back"
@@ -31951,14 +31993,14 @@ class SourceView extends _reactDefault.default.Component {
                                 to: `/`,
                                 __source: {
                                     fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 49
+                                    lineNumber: 47
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                                     variant: "primary",
                                     __source: {
                                         fileName: "src/components/source-view/source-view.jsx",
-                                        lineNumber: 50
+                                        lineNumber: 48
                                     },
                                     __self: this,
                                     children: "Home"
@@ -31996,9 +32038,6 @@ $parcel$ReactRefreshHelpers$58c6.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-// import './profile-view.scss';
-parcelHelpers.export(exports, "ProfileView", ()=>ProfileView
-);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -32016,13 +32055,26 @@ var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 // import { Link } from "react-router-dom";
 var _moveCard = require("../move-card/move-card");
+var _moveCardDefault = parcelHelpers.interopDefault(_moveCard);
 var _cardGroup = require("react-bootstrap/CardGroup");
 var _cardGroupDefault = parcelHelpers.interopDefault(_cardGroup);
 var _reactRedux = require("react-redux");
 var _s = $RefreshSig$();
+// import './profile-view.scss';
+let mapStateToProps = (state)=>{
+    return {
+        moves: state.moves,
+        user: state.user,
+        favs: state.favs
+    };
+};
 function ProfileView(props) {
     _s();
-    const [username, setUsername] = _react.useState(props.user);
+    const { favs , moves , user  } = props;
+    let favMoves = moves.filter((m)=>favs.includes(m._id)
+    );
+    console.log(favMoves);
+    const [username, setUsername] = _react.useState(user);
     const [usernameInvalid, setUsernameInvalid] = _react.useState('');
     const [password, setPassword] = _react.useState('');
     const [passwordInvalid, setPasswordInvalid] = _react.useState('');
@@ -32104,6 +32156,7 @@ function ProfileView(props) {
     const deleteAccount = ()=>{
         if (confirm("Do you realy want to permanently delete your user account?")) props.deleteUser();
     };
+    // load user data into state (and as placeholders) when component is mounted
     let current_email = '';
     let current_birthday = '';
     _reactDefault.default.useEffect(()=>{
@@ -32143,14 +32196,14 @@ function ProfileView(props) {
                 lg: 6,
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 139
+                    lineNumber: 146
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 140
+                            lineNumber: 147
                         },
                         __self: this,
                         children: "User Profile"
@@ -32158,7 +32211,7 @@ function ProfileView(props) {
                     /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 141
+                            lineNumber: 148
                         },
                         __self: this,
                         children: [
@@ -32169,7 +32222,7 @@ function ProfileView(props) {
                     /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 142
+                            lineNumber: 149
                         },
                         __self: this,
                         children: [
@@ -32180,7 +32233,7 @@ function ProfileView(props) {
                     birthday ? /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 144
+                            lineNumber: 151
                         },
                         __self: this,
                         children: [
@@ -32190,14 +32243,14 @@ function ProfileView(props) {
                     }) : /*#__PURE__*/ _jsxRuntime.jsx("span", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 145
+                            lineNumber: 152
                         },
                         __self: this
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 148
+                            lineNumber: 155
                         },
                         __self: this,
                         children: "Update user data"
@@ -32206,7 +32259,7 @@ function ProfileView(props) {
                         className: "userData-form text-left",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 149
+                            lineNumber: 156
                         },
                         __self: this,
                         children: [
@@ -32214,57 +32267,10 @@ function ProfileView(props) {
                                 className: "justify-content-center",
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 150
+                                    lineNumber: 157
                                 },
                                 __self: this,
                                 children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                        sm: 6,
-                                        __source: {
-                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 151
-                                        },
-                                        __self: this,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                                            controlId: "formUsername",
-                                            __source: {
-                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 152
-                                            },
-                                            __self: this,
-                                            children: [
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 153
-                                                    },
-                                                    __self: this,
-                                                    children: "Username:"
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
-                                                    type: "text",
-                                                    required: true,
-                                                    value: username,
-                                                    onChange: (e)=>validateUsername(e.target.value)
-                                                    ,
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 154
-                                                    },
-                                                    __self: this
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Text, {
-                                                    className: "invalid",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 155
-                                                    },
-                                                    __self: this,
-                                                    children: usernameInvalid
-                                                })
-                                            ]
-                                        })
-                                    }),
                                     /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                         sm: 6,
                                         __source: {
@@ -32273,7 +32279,7 @@ function ProfileView(props) {
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                                            controlId: "formPassword",
+                                            controlId: "formUsername",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
                                                 lineNumber: 159
@@ -32286,13 +32292,13 @@ function ProfileView(props) {
                                                         lineNumber: 160
                                                     },
                                                     __self: this,
-                                                    children: "Password:"
+                                                    children: "Username:"
                                                 }),
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
-                                                    type: "password",
+                                                    type: "text",
                                                     required: true,
-                                                    placeholder: 'Password',
-                                                    onChange: (e)=>validatePassword(e.target.value)
+                                                    value: username,
+                                                    onChange: (e)=>validateUsername(e.target.value)
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
@@ -32304,7 +32310,54 @@ function ProfileView(props) {
                                                     className: "invalid",
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 166
+                                                        lineNumber: 162
+                                                    },
+                                                    __self: this,
+                                                    children: usernameInvalid
+                                                })
+                                            ]
+                                        })
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        sm: 6,
+                                        __source: {
+                                            fileName: "src/components/profile-view/profile-view.jsx",
+                                            lineNumber: 165
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
+                                            controlId: "formPassword",
+                                            __source: {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 166
+                                            },
+                                            __self: this,
+                                            children: [
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 167
+                                                    },
+                                                    __self: this,
+                                                    children: "Password:"
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+                                                    type: "password",
+                                                    required: true,
+                                                    placeholder: 'Password',
+                                                    onChange: (e)=>validatePassword(e.target.value)
+                                                    ,
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 168
+                                                    },
+                                                    __self: this
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Text, {
+                                                    className: "invalid",
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 173
                                                     },
                                                     __self: this,
                                                     children: passwordInvalid
@@ -32318,57 +32371,10 @@ function ProfileView(props) {
                                 className: "justify-content-center",
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 170
+                                    lineNumber: 177
                                 },
                                 __self: this,
                                 children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                                        sm: 6,
-                                        __source: {
-                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 171
-                                        },
-                                        __self: this,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                                            controlId: "formEmail",
-                                            __source: {
-                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 172
-                                            },
-                                            __self: this,
-                                            children: [
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 173
-                                                    },
-                                                    __self: this,
-                                                    children: "Email:"
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
-                                                    type: "email",
-                                                    required: true,
-                                                    value: email,
-                                                    onChange: (e)=>validateEmail(e.target.value)
-                                                    ,
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 174
-                                                    },
-                                                    __self: this
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Text, {
-                                                    className: "invalid",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 175
-                                                    },
-                                                    __self: this,
-                                                    children: emailInvalid
-                                                })
-                                            ]
-                                        })
-                                    }),
                                     /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                         sm: 6,
                                         __source: {
@@ -32377,7 +32383,7 @@ function ProfileView(props) {
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                                            controlId: "formBirthday",
+                                            controlId: "formEmail",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
                                                 lineNumber: 179
@@ -32390,6 +32396,53 @@ function ProfileView(props) {
                                                         lineNumber: 180
                                                     },
                                                     __self: this,
+                                                    children: "Email:"
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+                                                    type: "email",
+                                                    required: true,
+                                                    value: email,
+                                                    onChange: (e)=>validateEmail(e.target.value)
+                                                    ,
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 181
+                                                    },
+                                                    __self: this
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Text, {
+                                                    className: "invalid",
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 182
+                                                    },
+                                                    __self: this,
+                                                    children: emailInvalid
+                                                })
+                                            ]
+                                        })
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        sm: 6,
+                                        __source: {
+                                            fileName: "src/components/profile-view/profile-view.jsx",
+                                            lineNumber: 185
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
+                                            controlId: "formBirthday",
+                                            __source: {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 186
+                                            },
+                                            __self: this,
+                                            children: [
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
+                                                    __source: {
+                                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                                        lineNumber: 187
+                                                    },
+                                                    __self: this,
                                                     children: "Birthday:"
                                                 }),
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
@@ -32399,7 +32452,7 @@ function ProfileView(props) {
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 181
+                                                        lineNumber: 188
                                                     },
                                                     __self: this
                                                 })
@@ -32412,13 +32465,13 @@ function ProfileView(props) {
                                 className: "justify-content-center text-center",
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 185
+                                    lineNumber: 192
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 186
+                                        lineNumber: 193
                                     },
                                     __self: this,
                                     children: [
@@ -32428,7 +32481,7 @@ function ProfileView(props) {
                                             onClick: handleUpdate,
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 187
+                                                lineNumber: 194
                                             },
                                             __self: this,
                                             children: "Safe changes"
@@ -32437,7 +32490,7 @@ function ProfileView(props) {
                                             className: "invalid",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 188
+                                                lineNumber: 195
                                             },
                                             __self: this,
                                             children: formInvalid
@@ -32451,14 +32504,14 @@ function ProfileView(props) {
                         className: "delete-account text-center",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 192
+                            lineNumber: 199
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 193
+                                    lineNumber: 200
                                 },
                                 __self: this,
                                 children: "Delete user account"
@@ -32469,7 +32522,7 @@ function ProfileView(props) {
                                 onClick: deleteAccount,
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 194
+                                    lineNumber: 201
                                 },
                                 __self: this,
                                 children: "Delete account"
@@ -32483,29 +32536,29 @@ function ProfileView(props) {
                 className: "text-center",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 198
+                    lineNumber: 205
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                     className: "user-favorites",
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 199
+                        lineNumber: 206
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 200
+                                lineNumber: 207
                             },
                             __self: this,
                             children: "Your favorite moves"
                         }),
-                        !props.favMoves ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                        favMoves.length === 0 ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 202
+                                lineNumber: 209
                             },
                             __self: this,
                             children: "You did not choose any favorites yet."
@@ -32513,22 +32566,22 @@ function ProfileView(props) {
                             className: "justify-content-md-center",
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 203
+                                lineNumber: 210
                             },
                             __self: this,
-                            children: props.favMoves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                            children: favMoves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                     sm: 12,
                                     md: 6,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 205
+                                        lineNumber: 212
                                     },
                                     __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCardDefault.default, {
                                         move: m,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 206
+                                            lineNumber: 213
                                         },
                                         __self: this
                                     })
@@ -32541,16 +32594,8 @@ function ProfileView(props) {
         ]
     }));
 }
-_s(ProfileView, "LvLM3E/CAbZ5ZDEoEUlIoKPrwnA=");
+_s(ProfileView, "FWm1qaid2E2Ps7eiyGGKIYWuHZo=");
 _c = ProfileView;
-let mapStateToProps = (state)=>{
-    return {
-        moves: state.moves,
-        user: state.user,
-        favs: state.favs
-    };
-} // retrieve the relevant state from the store (= a "selector" hook) via the connect(mapStateToProps) function
-;
 exports.default = _reactRedux.connect(mapStateToProps)(ProfileView);
 // validate prop data types
 ProfileView.propTypes = {
@@ -32559,7 +32604,7 @@ ProfileView.propTypes = {
     // removeFavorite: PropTypes.func.isRequired,
     // addFavorite: PropTypes.func.isRequired,
     deleteUser: _propTypesDefault.default.func.isRequired,
-    favMoves: _propTypesDefault.default.arrayOf(_propTypesDefault.default.shape({
+    moves: _propTypesDefault.default.arrayOf(_propTypesDefault.default.shape({
         _id: _propTypesDefault.default.string.isRequired,
         Title: _propTypesDefault.default.string.isRequired,
         Cues: _propTypesDefault.default.string.isRequired,
@@ -32574,7 +32619,8 @@ ProfileView.propTypes = {
         VideoURL: _propTypesDefault.default.string.isRequired,
         ImgURL: _propTypesDefault.default.string,
         Featured: _propTypesDefault.default.bool
-    })).isRequired
+    })).isRequired,
+    favs: _propTypesDefault.default.string.isRequired
 };
 var _c;
 $RefreshReg$(_c, "ProfileView");
@@ -32604,26 +32650,26 @@ var _reactRedux = require("react-redux");
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _moveCard = require("../move-card/move-card");
+var _moveCardDefault = parcelHelpers.interopDefault(_moveCard);
 var _visibilityFilterInput = require("../visibility-filter-input/visibility-filter-input");
 var _visibilityFilterInputDefault = parcelHelpers.interopDefault(_visibilityFilterInput);
-// import AddFavorite from '../add-favorite/add-favorite';
-// import RemoveFavorite from '../remove-favorite/remove-favorite';
-const mapStateToProps = (state)=>{
-    const { visibilityFilter  } = state;
+let mapStateToProps = (state)=>{
     return {
-        visibilityFilter
+        moves: state.moves,
+        visibilityFilter: state.visibilityFilter
     };
 };
 function MovesList(props) {
     const { moves , visibilityFilter  } = props;
     let filteredMoves = moves;
-    if (visibilityFilter !== '') filteredMoves = moves.filter((m)=>m.Title.toLowerCase().includes(visibilityFilter.toLowerCase())
+    if (visibilityFilter !== '') // console.log(visibilityFilter);
+    filteredMoves = moves.filter((m)=>m.Title.toLowerCase().includes(visibilityFilter.toLowerCase())
     );
     if (!moves) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
         className: "main-view",
         __source: {
             fileName: "src/components/moves-list/moves-list.jsx",
-            lineNumber: 25
+            lineNumber: 21
         },
         __self: this,
         children: "Loading the moves from the database. Check console for errors if it does not finish loading."
@@ -32631,7 +32677,7 @@ function MovesList(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
         __source: {
             fileName: "src/components/moves-list/moves-list.jsx",
-            lineNumber: 28
+            lineNumber: 24
         },
         __self: this,
         children: [
@@ -32639,7 +32685,7 @@ function MovesList(props) {
                 className: "visibility-filter justify-content-center",
                 __source: {
                     fileName: "src/components/moves-list/moves-list.jsx",
-                    lineNumber: 29
+                    lineNumber: 25
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -32651,14 +32697,14 @@ function MovesList(props) {
                     },
                     __source: {
                         fileName: "src/components/moves-list/moves-list.jsx",
-                        lineNumber: 30
+                        lineNumber: 26
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_visibilityFilterInputDefault.default, {
                         visibilityFilter: visibilityFilter,
                         __source: {
                             fileName: "src/components/moves-list/moves-list.jsx",
-                            lineNumber: 31
+                            lineNumber: 27
                         },
                         __self: this
                     })
@@ -32668,7 +32714,7 @@ function MovesList(props) {
                 className: "moves-list justify-content-center",
                 __source: {
                     fileName: "src/components/moves-list/moves-list.jsx",
-                    lineNumber: 34
+                    lineNumber: 30
                 },
                 __self: this,
                 children: filteredMoves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -32677,14 +32723,14 @@ function MovesList(props) {
                         lg: 3,
                         __source: {
                             fileName: "src/components/moves-list/moves-list.jsx",
-                            lineNumber: 36
+                            lineNumber: 32
                         },
                         __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCard.MoveCard, {
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCardDefault.default, {
                             move: m,
                             __source: {
                                 fileName: "src/components/moves-list/moves-list.jsx",
-                                lineNumber: 37
+                                lineNumber: 33
                             },
                             __self: this
                         })
@@ -33384,19 +33430,32 @@ function favs(state = '', action) {
     switch(action.type){
         case _actions.SET_FAVS:
             return action.value;
-        case _actions.ADD_FAV:
-            if (state.includes(action.id)) return state;
-            // if it is the first/only move in the favs
-            if (state.length === 0) return state.concat(action.id);
-            else return state.concat(',' + action.id);
-        case _actions.REM_FAV:
-            // if there is only this one move in the list
-            if (!state.includes(',')) return state.replace(action.id, '');
-            // if there are multiple entries and moveID is the first in the list
-            if (state.indexOf(action.id) === 0 && state.includes(',')) return state.replace(action.id + ',', '');
-            // if it is the last move in the list OR anywhere in the middle
-            if (state.indexOf(action.id) > 0) return state.replace(',' + action.id, '');
-        default:
+        // following cases are not needed anymore, because the server takes care of it and the response simply updates state and localStorage
+        /* case ADD_FAV:
+        if (state.includes(action.id)) {
+            return state;
+        }
+        // if it is the first/only move in the favs
+        if (state.length === 0) {
+            return state.concat(action.id);
+        }
+        // if there are already others, add it to the end of the string
+        else {
+            return state.concat(',' + action.id);
+        }
+    case REM_FAV:
+        // if there is only this one move in the list
+        if (!state.includes(',')) {
+            return state.replace(action.id, '');
+        }
+        // if there are multiple entries and moveID is the first in the list
+        if (state.indexOf(action.id) === 0 && state.includes(',')) {
+            return state.replace(action.id + ',', '');
+        }
+        // if it is the last move in the list OR anywhere in the middle
+        if (state.indexOf(action.id) > 0) {
+            return state.replace(',' + action.id, '');
+        } */ default:
             return state;
     }
 }

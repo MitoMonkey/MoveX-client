@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { MoveCard } from '../move-card/move-card';
+import MoveCard from '../move-card/move-card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -39,8 +39,6 @@ export class SourceView extends React.Component {
                                 <Col sm={6} md={4} lg={3} key={m._id}>
                                     <MoveCard
                                         move={m}
-                                    // removeFavorite={(moveId) => removeFavorite(moveId)}
-                                    // addFavorite={(moveId) => addFavorite(moveId)}
                                     />
                                 </Col>
                             ))}

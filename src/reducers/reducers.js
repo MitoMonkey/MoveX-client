@@ -32,31 +32,32 @@ function favs(state = '', action) { // the local "state" is the global state.fav
     switch (action.type) {
         case SET_FAVS:
             return action.value;
-        case ADD_FAV:
-            if (state.includes(action.id)) {
-                return state;
-            }
-            // if it is the first/only move in the favs
-            if (state.length === 0) {
-                return state.concat(action.id);
-            }
-            // if there are already others, add it to the end of the string
-            else {
-                return state.concat(',' + action.id);
-            }
-        case REM_FAV:
-            // if there is only this one move in the list
-            if (!state.includes(',')) {
-                return state.replace(action.id, '');
-            }
-            // if there are multiple entries and moveID is the first in the list
-            if (state.indexOf(action.id) === 0 && state.includes(',')) {
-                return state.replace(action.id + ',', '');
-            }
-            // if it is the last move in the list OR anywhere in the middle
-            if (state.indexOf(action.id) > 0) {
-                return state.replace(',' + action.id, '');
-            }
+        // following cases are not needed anymore, because the server takes care of it and the response simply updates state and localStorage
+        /* case ADD_FAV:
+        if (state.includes(action.id)) {
+            return state;
+        }
+        // if it is the first/only move in the favs
+        if (state.length === 0) {
+            return state.concat(action.id);
+        }
+        // if there are already others, add it to the end of the string
+        else {
+            return state.concat(',' + action.id);
+        }
+    case REM_FAV:
+        // if there is only this one move in the list
+        if (!state.includes(',')) {
+            return state.replace(action.id, '');
+        }
+        // if there are multiple entries and moveID is the first in the list
+        if (state.indexOf(action.id) === 0 && state.includes(',')) {
+            return state.replace(action.id + ',', '');
+        }
+        // if it is the last move in the list OR anywhere in the middle
+        if (state.indexOf(action.id) > 0) {
+            return state.replace(',' + action.id, '');
+        } */
         default:
             return state;
     }
