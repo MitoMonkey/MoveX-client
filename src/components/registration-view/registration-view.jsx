@@ -17,7 +17,7 @@ export function RegistrationView(props) {
     const [emailInvalid, setEmailInvalid] = useState('');
     const [birthday, setBirthday] = useState('');
     const [TOC, setTOC] = useState(false);
-    const [formInvalid, setFormInvalid] = userState('');
+    const [formInvalid, setFormInvalid] = useState('');
 
     // instant form validation
     function validateUsername(inputValue) {
