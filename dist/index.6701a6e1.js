@@ -957,10 +957,8 @@ var _reduxDevtoolsExtension = require("redux-devtools-extension");
 var _indexScss = require("./index.scss");
 let preloadedState;
 const storedUsername = localStorage.getItem('user');
-const storedFavs = localStorage.getItem('favs');
-if (storedUsername || storedFavs) preloadedState = {
-    user: storedUsername,
-    favs: storedFavs
+if (storedUsername) preloadedState = {
+    user: storedUsername // JSON.parse(storedUsername)
 };
 const store = _redux.createStore(_reducersDefault.default, preloadedState, _reduxDevtoolsExtension.devToolsEnhancer());
 class MoveXApplication extends _reactDefault.default.Component {
@@ -969,7 +967,7 @@ class MoveXApplication extends _reactDefault.default.Component {
             store: store,
             __source: {
                 fileName: "src/index.jsx",
-                lineNumber: 26
+                lineNumber: 24
             },
             __self: this,
             children: [
@@ -978,13 +976,13 @@ class MoveXApplication extends _reactDefault.default.Component {
                     fluid: true,
                     __source: {
                         fileName: "src/index.jsx",
-                        lineNumber: 27
+                        lineNumber: 25
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_mainViewDefault.default, {
                         __source: {
                             fileName: "src/index.jsx",
-                            lineNumber: 28
+                            lineNumber: 26
                         },
                         __self: this
                     })
@@ -22957,8 +22955,13 @@ Reduxstate format = {
         Title: string,
         ...
     ],
-    user: string (username),
-    favs: array [_id1,_id2,...],
+    user: [
+        username: string,
+        password: string,
+        email: string,
+        Birthday: date,
+        FavoriteMoves: array [_id1,_id2,...]
+    ],
     visibilityFilter: string (move title)
 }
 */ class MainView extends _reactDefault.default.Component {
@@ -22982,12 +22985,10 @@ Reduxstate format = {
     onLoggedIn(authData) {
         console.log(authData);
         // safe username and favorite moves to store/state
-        this.props.setUser(authData.user.Username);
-        this.props.setFavs(authData.user.FavoriteMoves);
+        this.props.setUser(authData.user);
         // safe user data and token locally so they do not have to log again until they click the "log out" button
         localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', authData.user.Username);
-        localStorage.setItem('favs', authData.user.FavoriteMoves);
+        localStorage.setItem('user', authData.user);
         this.getMoves(authData.token);
     }
     // make login data persistent
@@ -22995,22 +22996,19 @@ Reduxstate format = {
         const accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
             this.props.setUser(localStorage.getItem('user'));
-            this.props.setFavs(localStorage.getItem('favs'));
             this.getMoves(accessToken);
         }
     }
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        localStorage.removeItem('favs');
         this.props.setUser('');
-        this.props.setFavs([]);
         window.open('/', '_self');
     }
     updateUserdata(newUserData) {
         const token = localStorage.getItem('token');
         const user = localStorage.getItem('user');
-        _axiosDefault.default.put('https://move-x.herokuapp.com/users/' + user, newUserData, {
+        _axiosDefault.default.put('https://move-x.herokuapp.com/users/' + user.Username, newUserData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -23021,14 +23019,14 @@ Reduxstate format = {
             this.onLoggedOut();
             window.open('/', '_self');
         }).catch((e)=>{
-            console.log('error updating the user data for ' + user);
+            console.log('error updating the user data for ' + user.Username);
             alert(e);
         });
     }
     deleteUser() {
         const token = localStorage.getItem('token');
         const user = localStorage.getItem('user');
-        _axiosDefault.default.delete('https://move-x.herokuapp.com/users/' + user, {
+        _axiosDefault.default.delete('https://move-x.herokuapp.com/users/' + user.Username, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -23044,7 +23042,6 @@ Reduxstate format = {
     }
     render() {
         const { moves , user  } = this.props; // passed from the store by mapStateToProps
-        //const nav = 
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_navBarDefault.default, {
@@ -23054,21 +23051,21 @@ Reduxstate format = {
                     ,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 132
+                        lineNumber: 130
                     },
                     __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 133
+                        lineNumber: 131
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
                         className: "main-view justify-content-center",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 134
+                            lineNumber: 132
                         },
                         __self: this,
                         children: [
@@ -23077,7 +23074,7 @@ Reduxstate format = {
                                 path: "/",
                                 render: ()=>{
                                     // make sure user is logged in
-                                    if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                    if (!user.Username) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                         md: 4,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                             onLoggedIn: (user1)=>this.onLoggedIn(user1)
@@ -23093,14 +23090,14 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 135
+                                    lineNumber: 133
                                 },
                                 __self: this
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
                                 path: "/register",
                                 render: ()=>{
-                                    if (user) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Redirect, {
+                                    if (user.Username) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Redirect, {
                                         to: "/"
                                     }));
                                     return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -23111,7 +23108,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 148
+                                    lineNumber: 146
                                 },
                                 __self: this
                             }),
@@ -23119,14 +23116,14 @@ Reduxstate format = {
                                 path: "/users/:username",
                                 render: ({ match , history  })=>{
                                     // make sure user is logged in
-                                    if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                    if (!user.Username) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                         md: 4,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                             onLoggedIn: (user1)=>this.onLoggedIn(user1)
                                         })
                                     }));
                                     // make sure users can only see their own profile
-                                    if (match.params.username === user) return(/*#__PURE__*/ _jsxRuntime.jsx(_profileViewDefault.default, {
+                                    if (match.params.username === user.Username) return(/*#__PURE__*/ _jsxRuntime.jsx(_profileViewDefault.default, {
                                         updateUserdata: (newUserData)=>this.updateUserdata(newUserData)
                                         ,
                                         deleteUser: ()=>this.deleteUser()
@@ -23137,7 +23134,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 154
+                                    lineNumber: 152
                                 },
                                 __self: this
                             }),
@@ -23145,7 +23142,7 @@ Reduxstate format = {
                                 path: "/moves/:moveId",
                                 render: ({ match , history  })=>{
                                     // make sure user is logged in
-                                    if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                    if (!user.Username) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                         md: 4,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                             onLoggedIn: (user1)=>this.onLoggedIn(user1)
@@ -23164,7 +23161,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 173
+                                    lineNumber: 171
                                 },
                                 __self: this
                             }),
@@ -23172,7 +23169,7 @@ Reduxstate format = {
                                 path: "/styles/:name",
                                 render: ({ match , history  })=>{
                                     // make sure user is logged in
-                                    if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                    if (!user.Username) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                         md: 4,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                             onLoggedIn: (user1)=>this.onLoggedIn(user1)
@@ -23193,7 +23190,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 190
+                                    lineNumber: 188
                                 },
                                 __self: this
                             }),
@@ -23201,7 +23198,7 @@ Reduxstate format = {
                                 path: "/sources/:name",
                                 render: ({ match , history  })=>{
                                     // make sure user is logged in
-                                    if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                    if (!user.Username) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                         md: 4,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                             onLoggedIn: (user1)=>this.onLoggedIn(user1)
@@ -23222,7 +23219,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 207
+                                    lineNumber: 205
                                 },
                                 __self: this
                             })
@@ -23237,14 +23234,12 @@ Reduxstate format = {
 let mapStateToProps = (state)=>{
     return {
         moves: state.moves,
-        user: state.user,
-        favs: state.favs
+        user: state.user
     };
 };
 exports.default = _reactRedux.connect(mapStateToProps, {
     setMoves: _actions.setMoves,
-    setUser: _actions.setUser,
-    setFavs: _actions.setFavs
+    setUser: _actions.setUser
 })(MainView); // second argument (=mapDispatchToProps) connects the action creators as a prop to this component,
  // so it can be used to dispatch actions by "this.props.setMoves()"
 
@@ -23282,16 +23277,17 @@ var _removeFavoriteDefault = parcelHelpers.interopDefault(_removeFavorite);
 // import './move-view.scss';
 let mapStateToProps = (state)=>{
     return {
-        favs: state.favs
+        user: state.user
     };
 };
 function MoveView(props) {
-    const { move , onBackClick , favs  } = props;
+    const { move , onBackClick , user  } = props;
+    const favs = user.FavoriteMoves;
     return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
         className: "move-view justify-content-center text-center",
         __source: {
             fileName: "src/components/move-view/move-view.jsx",
-            lineNumber: 21
+            lineNumber: 22
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
@@ -23299,14 +23295,14 @@ function MoveView(props) {
             md: 8,
             __source: {
                 fileName: "src/components/move-view/move-view.jsx",
-                lineNumber: 27
+                lineNumber: 28
             },
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                     __source: {
                         fileName: "src/components/move-view/move-view.jsx",
-                        lineNumber: 28
+                        lineNumber: 29
                     },
                     __self: this,
                     children: "Move details"
@@ -23315,13 +23311,13 @@ function MoveView(props) {
                     className: "move-title",
                     __source: {
                         fileName: "src/components/move-view/move-view.jsx",
-                        lineNumber: 29
+                        lineNumber: 30
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs("strong", {
                         __source: {
                             fileName: "src/components/move-view/move-view.jsx",
-                            lineNumber: 30
+                            lineNumber: 31
                         },
                         __self: this,
                         children: [
@@ -23329,7 +23325,7 @@ function MoveView(props) {
                                 className: "label",
                                 __source: {
                                     fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 30
+                                    lineNumber: 31
                                 },
                                 __self: this,
                                 children: "Move Title: "
@@ -23338,7 +23334,7 @@ function MoveView(props) {
                                 className: "value",
                                 __source: {
                                     fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 31
+                                    lineNumber: 32
                                 },
                                 __self: this,
                                 children: move.Title
@@ -23350,7 +23346,7 @@ function MoveView(props) {
                     className: "move-style",
                     __source: {
                         fileName: "src/components/move-view/move-view.jsx",
-                        lineNumber: 34
+                        lineNumber: 35
                     },
                     __self: this,
                     children: [
@@ -23358,7 +23354,7 @@ function MoveView(props) {
                             className: "label",
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 35
+                                lineNumber: 36
                             },
                             __self: this,
                             children: "Style: "
@@ -23367,14 +23363,14 @@ function MoveView(props) {
                             to: `/styles/${move.Style.Name}`,
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 36
+                                lineNumber: 37
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                                 variant: "link",
                                 __source: {
                                     fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 37
+                                    lineNumber: 38
                                 },
                                 __self: this,
                                 children: move.Style.Name
@@ -23386,7 +23382,7 @@ function MoveView(props) {
                     className: "move-source",
                     __source: {
                         fileName: "src/components/move-view/move-view.jsx",
-                        lineNumber: 40
+                        lineNumber: 41
                     },
                     __self: this,
                     children: [
@@ -23394,7 +23390,7 @@ function MoveView(props) {
                             className: "label",
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 41
+                                lineNumber: 42
                             },
                             __self: this,
                             children: "Source: "
@@ -23403,14 +23399,14 @@ function MoveView(props) {
                             to: `/sources/${move.Source.Name}`,
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 42
+                                lineNumber: 43
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                                 variant: "link",
                                 __source: {
                                     fileName: "src/components/move-view/move-view.jsx",
-                                    lineNumber: 43
+                                    lineNumber: 44
                                 },
                                 __self: this,
                                 children: move.Source.Name
@@ -23422,7 +23418,7 @@ function MoveView(props) {
                     className: "move-cues",
                     __source: {
                         fileName: "src/components/move-view/move-view.jsx",
-                        lineNumber: 46
+                        lineNumber: 47
                     },
                     __self: this,
                     children: [
@@ -23430,7 +23426,7 @@ function MoveView(props) {
                             className: "label",
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 47
+                                lineNumber: 48
                             },
                             __self: this,
                             children: "Cues: "
@@ -23439,7 +23435,7 @@ function MoveView(props) {
                             className: "value",
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 48
+                                lineNumber: 49
                             },
                             __self: this,
                             children: move.Cues
@@ -23450,7 +23446,7 @@ function MoveView(props) {
                     className: "move-videoLink",
                     __source: {
                         fileName: "src/components/move-view/move-view.jsx",
-                        lineNumber: 50
+                        lineNumber: 51
                     },
                     __self: this,
                     children: [
@@ -23458,7 +23454,7 @@ function MoveView(props) {
                             className: "label",
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 51
+                                lineNumber: 52
                             },
                             __self: this,
                             children: "Video: "
@@ -23468,7 +23464,7 @@ function MoveView(props) {
                             href: move.VideoURL,
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 52
+                                lineNumber: 53
                             },
                             __self: this,
                             children: move.VideoURL
@@ -23478,7 +23474,7 @@ function MoveView(props) {
                 /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                     __source: {
                         fileName: "src/components/move-view/move-view.jsx",
-                        lineNumber: 54
+                        lineNumber: 55
                     },
                     __self: this,
                     children: [
@@ -23486,14 +23482,14 @@ function MoveView(props) {
                             moveID: move._id,
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 56
+                                lineNumber: 57
                             },
                             __self: this
                         }) : /*#__PURE__*/ _jsxRuntime.jsx(_addFavoriteDefault.default, {
                             moveID: move._id,
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 57
+                                lineNumber: 58
                             },
                             __self: this
                         }),
@@ -23505,7 +23501,7 @@ function MoveView(props) {
                             },
                             __source: {
                                 fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 59
+                                lineNumber: 60
                             },
                             __self: this,
                             children: "Back"
@@ -23537,9 +23533,13 @@ MoveView.propTypes = {
         Featured: _propTypesDefault.default.bool
     }).isRequired,
     onBackClick: _propTypesDefault.default.func.isRequired,
-    // removeFavorite: PropTypes.func.isRequired,
-    // addFavorite: PropTypes.func.isRequired,
-    favs: _propTypesDefault.default.array.isRequired
+    user: _propTypesDefault.default.shape({
+        Username: _propTypesDefault.default.string.isRequired,
+        Password: _propTypesDefault.default.string.isRequired,
+        Email: _propTypesDefault.default.string.isRequired,
+        Birthday: _propTypesDefault.default.any,
+        FavoriteMoves: _propTypesDefault.default.array.isRequired
+    }).isRequired
 };
 var _c;
 $RefreshReg$(_c, "MoveView");
@@ -28163,32 +28163,30 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 let mapStateToProps = (state)=>{
     return {
-        favs: state.favs,
         user: state.user
     };
 };
 function AddFavorite(props) {
-    const { favs , user , setFavs , moveID  } = props;
+    const { user , moveID , setUser  } = props;
+    const favs = user.FavoriteMoves;
     function addMove() {
         if (favs.includes(moveID)) return alert('this move is already in your list of favorites');
         else {
             const token = localStorage.getItem('token');
-            _axiosDefault.default.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {
+            _axiosDefault.default.post('https://move-x.herokuapp.com/users/' + user.Username + '/moves/' + moveID, {
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             }).then((response)=>{
                 const data = response.data;
-                // console.log(data.FavoriteMoves);
                 if (data.FavoriteMoves.toString().length === favs.toString().length) return console.log('failed to add move in database');
                 else {
-                    localStorage.setItem('favs', data.FavoriteMoves);
-                    setFavs(data.FavoriteMoves);
-                // console.log(favs);
+                    localStorage.setItem('user', data);
+                    setUser(data);
                 }
             }).catch((e)=>{
-                console.log('error adding ' + moveID + ' to user profile ' + user);
+                console.log('error adding ' + moveID + ' to user profile ' + user.Username);
                 alert(e);
             });
         }
@@ -28199,7 +28197,7 @@ function AddFavorite(props) {
         ,
         __source: {
             fileName: "src/components/add-favorite/add-favorite.jsx",
-            lineNumber: 41
+            lineNumber: 40
         },
         __self: this,
         children: "Add favorite"
@@ -28207,13 +28205,18 @@ function AddFavorite(props) {
 }
 _c = AddFavorite;
 exports.default = _reactRedux.connect(mapStateToProps, {
-    setFavs: _actions.setFavs
+    setUser: _actions.setUser
 })(AddFavorite);
 AddFavorite.propTypes = {
-    favs: _propTypesDefault.default.array.isRequired,
-    user: _propTypesDefault.default.string.isRequired,
-    setFavs: _propTypesDefault.default.func.isRequired,
-    moveID: _propTypesDefault.default.string.isRequired
+    user: _propTypesDefault.default.shape({
+        Username: _propTypesDefault.default.string.isRequired,
+        Password: _propTypesDefault.default.string.isRequired,
+        Email: _propTypesDefault.default.string.isRequired,
+        Birthday: _propTypesDefault.default.any,
+        FavoriteMoves: _propTypesDefault.default.array.isRequired
+    }).isRequired,
+    moveID: _propTypesDefault.default.string.isRequired,
+    setUser: _propTypesDefault.default.func.isRequired
 };
 var _c;
 $RefreshReg$(_c, "AddFavorite");
@@ -28232,20 +28235,18 @@ parcelHelpers.export(exports, "SET_FILTER", ()=>SET_FILTER
 );
 parcelHelpers.export(exports, "SET_USER", ()=>SET_USER
 );
-parcelHelpers.export(exports, "SET_FAVS", ()=>SET_FAVS
-);
-parcelHelpers.export(exports, "ADD_FAV", ()=>ADD_FAV
-);
-parcelHelpers.export(exports, "REM_FAV", ()=>REM_FAV
-);
 parcelHelpers.export(exports, "setMoves", ()=>setMoves
 );
 parcelHelpers.export(exports, "setFilter", ()=>setFilter
 );
 parcelHelpers.export(exports, "setUser", ()=>setUser
-);
-parcelHelpers.export(exports, "setFavs", ()=>setFavs
-) /* export function addFav(id) {
+) /* export function setFavs(value) {
+    return {
+        type: SET_FAVS,
+        value
+    };
+}
+export function addFav(id) {
     return {
         type: ADD_FAV,
         id
@@ -28260,9 +28261,6 @@ export function remFav(id) {
 const SET_MOVES = 'SET_MOVES';
 const SET_FILTER = 'SET_FILTER';
 const SET_USER = 'SET_USER';
-const SET_FAVS = 'SET_FAVS';
-const ADD_FAV = 'ADD_FAV';
-const REM_FAV = 'REM_FAV';
 function setMoves(value) {
     return {
         type: SET_MOVES,
@@ -28275,16 +28273,10 @@ function setFilter(value) {
         value
     };
 }
-function setUser(username) {
+function setUser(user) {
     return {
         type: SET_USER,
-        username
-    };
-}
-function setFavs(value) {
-    return {
-        type: SET_FAVS,
-        value
+        user
     };
 }
 
@@ -29820,28 +29812,27 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 let mapStateToProps = (state)=>{
     return {
-        favs: state.favs,
         user: state.user
     };
 };
 function RemoveFavorite(props) {
-    const { favs , user , setFavs , moveID  } = props;
+    const { user , setUser , moveID  } = props;
+    const favs = user.FavoriteMoves;
     function deleteMove() {
         const token = localStorage.getItem('token');
-        _axiosDefault.default.delete('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {
+        _axiosDefault.default.delete('https://move-x.herokuapp.com/users/' + user.Username + '/moves/' + moveID, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
             const data = response.data;
-            // console.log(data);
             if (data.FavoriteMoves.toString().length === favs.toString().length) return console.log('failed to delete move in database');
             else {
-                localStorage.setItem('favs', data.FavoriteMoves);
-                setFavs(data.FavoriteMoves);
+                localStorage.setItem('user', data);
+                setUser(data);
             }
         }).catch((e)=>{
-            console.log('error removing ' + moveID + ' to user profile ' + user);
+            console.log('error removing ' + moveID + ' to user profile ' + user.Username);
             alert(e);
         });
     }
@@ -29851,7 +29842,7 @@ function RemoveFavorite(props) {
         ,
         __source: {
             fileName: "src/components/remove-favorite/remove-favorite.jsx",
-            lineNumber: 36
+            lineNumber: 35
         },
         __self: this,
         children: "Remove favorite"
@@ -29859,12 +29850,17 @@ function RemoveFavorite(props) {
 }
 _c = RemoveFavorite;
 exports.default = _reactRedux.connect(mapStateToProps, {
-    setFavs: _actions.setFavs
+    setUser: _actions.setUser
 })(RemoveFavorite);
 RemoveFavorite.propTypes = {
-    favs: _propTypesDefault.default.array.isRequired,
-    user: _propTypesDefault.default.string.isRequired,
-    setFavs: _propTypesDefault.default.func.isRequired,
+    user: _propTypesDefault.default.shape({
+        Username: _propTypesDefault.default.string.isRequired,
+        Password: _propTypesDefault.default.string.isRequired,
+        Email: _propTypesDefault.default.string.isRequired,
+        Birthday: _propTypesDefault.default.any,
+        FavoriteMoves: _propTypesDefault.default.array.isRequired
+    }).isRequired,
+    setUser: _propTypesDefault.default.func.isRequired,
     moveID: _propTypesDefault.default.string.isRequired
 };
 var _c;
@@ -31454,16 +31450,17 @@ var _reactRouterDom = require("react-router-dom");
 // import './move-card.scss';
 let mapStateToProps = (state)=>{
     return {
-        favs: state.favs
+        user: state.user
     };
 };
 function MoveCard(props) {
-    const { favs , move  } = props;
+    const { user , move  } = props;
+    const favs = user.FavoriteMoves;
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
         className: "Card",
         __source: {
             fileName: "src/components/move-card/move-card.jsx",
-            lineNumber: 22
+            lineNumber: 23
         },
         __self: this,
         children: [
@@ -31472,21 +31469,21 @@ function MoveCard(props) {
                 src: move.ImgURL,
                 __source: {
                     fileName: "src/components/move-card/move-card.jsx",
-                    lineNumber: 23
+                    lineNumber: 24
                 },
                 __self: this
             }),
             /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
                 __source: {
                     fileName: "src/components/move-card/move-card.jsx",
-                    lineNumber: 24
+                    lineNumber: 25
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
                         __source: {
                             fileName: "src/components/move-card/move-card.jsx",
-                            lineNumber: 25
+                            lineNumber: 26
                         },
                         __self: this,
                         children: move.Title
@@ -31494,7 +31491,7 @@ function MoveCard(props) {
                     /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
                         __source: {
                             fileName: "src/components/move-card/move-card.jsx",
-                            lineNumber: 26
+                            lineNumber: 27
                         },
                         __self: this,
                         children: move.Cues
@@ -31503,14 +31500,14 @@ function MoveCard(props) {
                         to: `/moves/${move._id}`,
                         __source: {
                             fileName: "src/components/move-card/move-card.jsx",
-                            lineNumber: 27
+                            lineNumber: 28
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                             variant: "primary",
                             __source: {
                                 fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 28
+                                lineNumber: 29
                             },
                             __self: this,
                             children: "View details"
@@ -31520,14 +31517,14 @@ function MoveCard(props) {
                         moveID: move._id,
                         __source: {
                             fileName: "src/components/move-card/move-card.jsx",
-                            lineNumber: 31
+                            lineNumber: 32
                         },
                         __self: this
                     }) : /*#__PURE__*/ _jsxRuntime.jsx(_addFavoriteDefault.default, {
                         moveID: move._id,
                         __source: {
                             fileName: "src/components/move-card/move-card.jsx",
-                            lineNumber: 32
+                            lineNumber: 33
                         },
                         __self: this
                     })
@@ -31556,9 +31553,13 @@ MoveCard.propTypes = {
         ImgURL: _propTypesDefault.default.string,
         Featured: _propTypesDefault.default.bool
     }).isRequired,
-    // removeFavorite: PropTypes.func.isRequired,
-    // addFavorite: PropTypes.func.isRequired,
-    favs: _propTypesDefault.default.array.isRequired
+    user: _propTypesDefault.default.shape({
+        Username: _propTypesDefault.default.string.isRequired,
+        Password: _propTypesDefault.default.string.isRequired,
+        Email: _propTypesDefault.default.string.isRequired,
+        Birthday: _propTypesDefault.default.any,
+        FavoriteMoves: _propTypesDefault.default.array.isRequired
+    }).isRequired
 };
 var _c;
 $RefreshReg$(_c, "MoveCard");
@@ -31983,25 +31984,22 @@ var _s = $RefreshSig$();
 let mapStateToProps = (state)=>{
     return {
         moves: state.moves,
-        user: state.user,
-        favs: state.favs
+        user: state.user
     };
 };
 function ProfileView(props) {
     _s();
-    const { favs , moves , user  } = props;
-    console.log(favs);
-    // favs = JSON.parse(favs);
-    // console.log(favs);
+    const { moves , user  } = props;
+    const favs = user.FavoriteMoves;
     let favMoves = moves.filter((m)=>favs.includes(m._id)
     );
-    const [username, setUsername] = _react.useState(user);
+    const [username, setUsername] = _react.useState(user.Username);
     const [usernameInvalid, setUsernameInvalid] = _react.useState('');
     const [password, setPassword] = _react.useState('');
     const [passwordInvalid, setPasswordInvalid] = _react.useState('');
-    const [email, setEmail] = _react.useState('');
+    const [email, setEmail] = _react.useState(user.Email);
     const [emailInvalid, setEmailInvalid] = _react.useState('');
-    const [birthday, setBirthday] = _react.useState('');
+    const [birthday, setBirthday] = _react.useState(user.Birthday);
     const [formInvalid, setFormInvalid] = _react.useState('');
     // instant form validation
     function validateUsername(inputValue) {
@@ -32078,24 +32076,15 @@ function ProfileView(props) {
         if (confirm("Do you realy want to permanently delete your user account?")) props.deleteUser();
     };
     // load user data into state (and as placeholders) when component is mounted
-    let current_email = '';
-    let current_birthday = '';
-    _reactDefault.default.useEffect(()=>{
+    /*React.useEffect(() => {
         const token = localStorage.getItem('token');
-        _axiosDefault.default.get('https://move-x.herokuapp.com/users/' + username, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>{
-            // setUsername(response.data.Username);
+        axios.get('https://move-x.herokuapp.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
+            setUsername(response.data.Username);
             setEmail(response.data.Email);
-            // console.log(response.data.Email);
-            // current_email = response.data.Email;
-            // console.log(current_email);
             setBirthday(response.data.Birthday);
-        // current_birthday = response.data.Birthday.split("T")[0];
-        });
-    }, []);
+        })
+    }, []); */ // const current_email = {...email};
+    // const current_birthday = {...birthday};
     // console.log("my email is " + email);
     // console.log("my email is " + current_email);
     /*
@@ -32120,14 +32109,14 @@ function ProfileView(props) {
                 lg: 6,
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 153
+                    lineNumber: 147
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 154
+                            lineNumber: 148
                         },
                         __self: this,
                         children: "User Profile"
@@ -32135,46 +32124,46 @@ function ProfileView(props) {
                     /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 155
+                            lineNumber: 149
                         },
                         __self: this,
                         children: [
                             "Username: ",
-                            props.user
+                            user.Username
                         ]
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 156
+                            lineNumber: 150
                         },
                         __self: this,
                         children: [
                             "Email: ",
-                            email
+                            user.Email
                         ]
                     }),
-                    birthday ? /*#__PURE__*/ _jsxRuntime.jsxs("p", {
+                    user.Birthday ? /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 158
+                            lineNumber: 152
                         },
                         __self: this,
                         children: [
                             "Birthday: ",
-                            birthday
+                            user.Birthday
                         ]
                     }) : /*#__PURE__*/ _jsxRuntime.jsx("span", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 159
+                            lineNumber: 153
                         },
                         __self: this
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 162
+                            lineNumber: 156
                         },
                         __self: this,
                         children: "Update user data"
@@ -32183,7 +32172,7 @@ function ProfileView(props) {
                         className: "userData-form text-left",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 163
+                            lineNumber: 157
                         },
                         __self: this,
                         children: [
@@ -32191,7 +32180,7 @@ function ProfileView(props) {
                                 className: "justify-content-center",
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 164
+                                    lineNumber: 158
                                 },
                                 __self: this,
                                 children: [
@@ -32199,21 +32188,21 @@ function ProfileView(props) {
                                         sm: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 165
+                                            lineNumber: 159
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                                             controlId: "formUsername",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 166
+                                                lineNumber: 160
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 167
+                                                        lineNumber: 161
                                                     },
                                                     __self: this,
                                                     children: "Username:"
@@ -32226,7 +32215,7 @@ function ProfileView(props) {
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 168
+                                                        lineNumber: 162
                                                     },
                                                     __self: this
                                                 }),
@@ -32234,7 +32223,7 @@ function ProfileView(props) {
                                                     className: "invalid",
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 169
+                                                        lineNumber: 163
                                                     },
                                                     __self: this,
                                                     children: usernameInvalid
@@ -32246,21 +32235,21 @@ function ProfileView(props) {
                                         sm: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 172
+                                            lineNumber: 166
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                                             controlId: "formPassword",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 173
+                                                lineNumber: 167
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 174
+                                                        lineNumber: 168
                                                     },
                                                     __self: this,
                                                     children: "Password:"
@@ -32273,7 +32262,7 @@ function ProfileView(props) {
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 175
+                                                        lineNumber: 169
                                                     },
                                                     __self: this
                                                 }),
@@ -32281,7 +32270,7 @@ function ProfileView(props) {
                                                     className: "invalid",
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 180
+                                                        lineNumber: 174
                                                     },
                                                     __self: this,
                                                     children: passwordInvalid
@@ -32295,7 +32284,7 @@ function ProfileView(props) {
                                 className: "justify-content-center",
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 184
+                                    lineNumber: 178
                                 },
                                 __self: this,
                                 children: [
@@ -32303,21 +32292,21 @@ function ProfileView(props) {
                                         sm: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 185
+                                            lineNumber: 179
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                                             controlId: "formEmail",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 186
+                                                lineNumber: 180
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 187
+                                                        lineNumber: 181
                                                     },
                                                     __self: this,
                                                     children: "Email:"
@@ -32330,7 +32319,7 @@ function ProfileView(props) {
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 188
+                                                        lineNumber: 182
                                                     },
                                                     __self: this
                                                 }),
@@ -32338,7 +32327,7 @@ function ProfileView(props) {
                                                     className: "invalid",
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 189
+                                                        lineNumber: 183
                                                     },
                                                     __self: this,
                                                     children: emailInvalid
@@ -32350,21 +32339,21 @@ function ProfileView(props) {
                                         sm: 6,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 192
+                                            lineNumber: 186
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                                             controlId: "formBirthday",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 193
+                                                lineNumber: 187
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 194
+                                                        lineNumber: 188
                                                     },
                                                     __self: this,
                                                     children: "Birthday:"
@@ -32376,7 +32365,7 @@ function ProfileView(props) {
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 195
+                                                        lineNumber: 189
                                                     },
                                                     __self: this
                                                 })
@@ -32389,13 +32378,13 @@ function ProfileView(props) {
                                 className: "justify-content-center text-center",
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 199
+                                    lineNumber: 193
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 200
+                                        lineNumber: 194
                                     },
                                     __self: this,
                                     children: [
@@ -32405,7 +32394,7 @@ function ProfileView(props) {
                                             onClick: handleUpdate,
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 201
+                                                lineNumber: 195
                                             },
                                             __self: this,
                                             children: "Safe changes"
@@ -32414,7 +32403,7 @@ function ProfileView(props) {
                                             className: "invalid",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 202
+                                                lineNumber: 196
                                             },
                                             __self: this,
                                             children: formInvalid
@@ -32428,14 +32417,14 @@ function ProfileView(props) {
                         className: "delete-account text-center",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 206
+                            lineNumber: 200
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 207
+                                    lineNumber: 201
                                 },
                                 __self: this,
                                 children: "Delete user account"
@@ -32446,7 +32435,7 @@ function ProfileView(props) {
                                 onClick: deleteAccount,
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 208
+                                    lineNumber: 202
                                 },
                                 __self: this,
                                 children: "Delete account"
@@ -32460,21 +32449,21 @@ function ProfileView(props) {
                 className: "text-center",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 212
+                    lineNumber: 206
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                     className: "user-favorites",
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 213
+                        lineNumber: 207
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 214
+                                lineNumber: 208
                             },
                             __self: this,
                             children: "Your favorite moves"
@@ -32482,7 +32471,7 @@ function ProfileView(props) {
                         favMoves.length === 0 ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 216
+                                lineNumber: 210
                             },
                             __self: this,
                             children: "You did not choose any favorites yet."
@@ -32490,7 +32479,7 @@ function ProfileView(props) {
                             className: "justify-content-md-center",
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 217
+                                lineNumber: 211
                             },
                             __self: this,
                             children: favMoves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -32498,14 +32487,14 @@ function ProfileView(props) {
                                     md: 6,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 219
+                                        lineNumber: 213
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCardDefault.default, {
                                         move: m,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 220
+                                            lineNumber: 214
                                         },
                                         __self: this
                                     })
@@ -32518,12 +32507,18 @@ function ProfileView(props) {
         ]
     }));
 }
-_s(ProfileView, "FWm1qaid2E2Ps7eiyGGKIYWuHZo=");
+_s(ProfileView, "FHXFKQcNsQIX4lE3jhAg+Zo5opY=");
 _c = ProfileView;
 exports.default = _reactRedux.connect(mapStateToProps)(ProfileView);
 // validate prop data types
 ProfileView.propTypes = {
-    user: _propTypesDefault.default.string.isRequired,
+    user: _propTypesDefault.default.shape({
+        Username: _propTypesDefault.default.string.isRequired,
+        Password: _propTypesDefault.default.string.isRequired,
+        Email: _propTypesDefault.default.string.isRequired,
+        Birthday: _propTypesDefault.default.any,
+        FavoriteMoves: _propTypesDefault.default.array.isRequired
+    }).isRequired,
     updateUserdata: _propTypesDefault.default.func.isRequired,
     deleteUser: _propTypesDefault.default.func.isRequired,
     moves: _propTypesDefault.default.arrayOf(_propTypesDefault.default.shape({
@@ -32681,8 +32676,6 @@ MovesList.propTypes = {
         ImgURL: _propTypesDefault.default.string,
         Featured: _propTypesDefault.default.bool
     })).isRequired,
-    // removeFavorite: PropTypes.func.isRequired,
-    // addFavorite: PropTypes.func.isRequired,
     visibilityFilter: _propTypesDefault.default.string
 };
 var _c;
@@ -32813,7 +32806,7 @@ function NavBar(props) {
                             },
                             __self: this,
                             children: [
-                                user ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
+                                user.Username ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
                                     __source: {
                                         fileName: "src/components/nav-bar/nav-bar.jsx",
                                         lineNumber: 24
@@ -32846,7 +32839,7 @@ function NavBar(props) {
                                         children: "Login"
                                     })
                                 }),
-                                user ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
+                                user.Username ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
                                     __source: {
                                         fileName: "src/components/nav-bar/nav-bar.jsx",
                                         lineNumber: 32
@@ -32881,14 +32874,14 @@ function NavBar(props) {
                                         children: "Register"
                                     })
                                 }),
-                                user ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
+                                user.Username ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
                                     __source: {
                                         fileName: "src/components/nav-bar/nav-bar.jsx",
                                         lineNumber: 40
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                                        href: `/users/` + user,
+                                        href: `/users/` + user.Username,
                                         className: "btn btn-primary",
                                         __source: {
                                             fileName: "src/components/nav-bar/nav-bar.jsx",
@@ -32922,7 +32915,7 @@ function NavBar(props) {
                                     __self: this,
                                     children: [
                                         "Logged in as ",
-                                        user
+                                        user.Username
                                     ]
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
@@ -32955,7 +32948,6 @@ function NavBar(props) {
 _c = NavBar;
 exports.default = _reactRedux.connect(mapStateToProps)(NavBar);
 NavBar.propTypes = {
-    user: _propTypesDefault.default.string,
     onLoggedOut: _propTypesDefault.default.func.isRequired,
     onBackClick: _propTypesDefault.default.func.isRequired
 };
@@ -35634,17 +35626,17 @@ function moves(state = [], action) {
             return state;
     }
 }
-function user(state = '', action) {
+function user(state = [], action) {
     switch(action.type){
         case _actions.SET_USER:
-            return action.username;
+            return action.user;
         default:
             return state;
     }
 }
-function favs(state = [], action) {
-    switch(action.type){
-        case _actions.SET_FAVS:
+/* function favs(state = [], action) { // the local "state" is the global state.favs, due to the combined reducer
+    switch (action.type) {
+        case SET_FAVS:
             return action.value;
         // following cases are not needed anymore, because the server takes care of it and the response simply updates state and localStorage
         /* case ADD_FAV:
@@ -35671,11 +35663,11 @@ function favs(state = [], action) {
         // if it is the last move in the list OR anywhere in the middle
         if (state.indexOf(action.id) > 0) {
             return state.replace(',' + action.id, '');
-        } */ default:
+        } * /
+        default:
             return state;
     }
-}
-// combined reducer: call the reducers defined above and pass them the state they are concered with
+}*/ // combined reducer: call the reducers defined above and pass them the state they are concered with
 /* long version
 function movesApp(state = {}, action) {
     return {
@@ -35686,8 +35678,7 @@ function movesApp(state = {}, action) {
 const movesApp = _redux.combineReducers({
     visibilityFilter,
     moves,
-    user,
-    favs
+    user
 });
 exports.default = movesApp;
 

@@ -12,11 +12,12 @@ import RemoveFavorite from '../remove-favorite/remove-favorite';
 
 // import './move-view.scss';
 
-let mapStateToProps = state => { return { favs: state.favs } }
+let mapStateToProps = state => { return { user: state.user } }
 
 function MoveView(props) {
+    const { move, onBackClick, user } = props;
+    const favs = user.FavoriteMoves;
 
-    const { move, onBackClick, favs } = props;
     return (
         <Row className="move-view justify-content-center text-center">
             {/*<Col md={1}>
@@ -84,7 +85,11 @@ MoveView.propTypes = {
         Featured: PropTypes.bool
     }).isRequired,
     onBackClick: PropTypes.func.isRequired,
-    // removeFavorite: PropTypes.func.isRequired,
-    // addFavorite: PropTypes.func.isRequired,
-    favs: PropTypes.array.isRequired
+    user: PropTypes.shape({
+        Username: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired,
+        Email: PropTypes.string.isRequired,
+        Birthday: PropTypes.any,
+        FavoriteMoves: PropTypes.array.isRequired
+    }).isRequired
 };

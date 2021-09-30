@@ -2,14 +2,15 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import { setFavs } from '../../actions/actions';
+import { setUser } from '../../actions/actions';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-let mapStateToProps = state => { return { favs: state.favs, user: state.user } }
+let mapStateToProps = state => { return { user: state.user } }
 
 function AddFavorite(props) {
-    const { favs, user, setFavs, moveID } = props;
+    const { user, moveID, setUser } = props;
+    const favs = user.FavoriteMoves;
 
     function addMove() {
         if (favs.includes(moveID)) {
@@ -17,22 +18,20 @@ function AddFavorite(props) {
         }
         else {
             const token = localStorage.getItem('token');
-            axios.post('https://move-x.herokuapp.com/users/' + user + '/moves/' + moveID, {}, { headers: { Authorization: `Bearer ${token}` } })
+            axios.post('https://move-x.herokuapp.com/users/' + user.Username + '/moves/' + moveID, {}, { headers: { Authorization: `Bearer ${token}` } })
                 .then(response => {
                     const data = response.data;
-                    // console.log(data.FavoriteMoves);
-
                     if (data.FavoriteMoves.toString().length === favs.toString().length) {
                         return console.log('failed to add move in database');
                     }
                     else {
-                        localStorage.setItem('favs', data.FavoriteMoves);
-                        setFavs(data.FavoriteMoves);
-                        // console.log(favs);
+                        
+                        localStorage.setItem('user', data);
+                        setUser(data);
                     }
                 })
                 .catch(e => {
-                    console.log('error adding ' + moveID + ' to user profile ' + user);
+                    console.log('error adding ' + moveID + ' to user profile ' + user.Username);
                     alert(e);
                 });
         }
@@ -42,11 +41,16 @@ function AddFavorite(props) {
     )
 }
 
-export default connect(mapStateToProps, { setFavs })(AddFavorite);
+export default connect(mapStateToProps, { setUser })(AddFavorite);
 
 AddFavorite.propTypes = {
-    favs: PropTypes.array.isRequired,
-    user: PropTypes.string.isRequired,
-    setFavs: PropTypes.func.isRequired,
-    moveID: PropTypes.string.isRequired
+    user: PropTypes.shape({
+        Username: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired,
+        Email: PropTypes.string.isRequired,
+        Birthday: PropTypes.any,
+        FavoriteMoves: PropTypes.array.isRequired
+    }).isRequired,
+    moveID: PropTypes.string.isRequired,
+    setUser: PropTypes.func.isRequired
 }

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { SET_FILTER, SET_MOVES, SET_USER, SET_FAVS } from '../actions/actions';
+import { SET_FILTER, SET_MOVES, SET_USER } from '../actions/actions';
 
 function visibilityFilter(state = '', action) {
     switch (action.type) {
@@ -20,15 +20,15 @@ function moves(state = [], action) {
     }
 }
 
-function user(state = '', action) {
+function user(state = [], action) {
     switch (action.type) {
         case SET_USER:
-            return action.username;
+            return action.user;
         default:
             return state;
     }
 }
-function favs(state = [], action) { // the local "state" is the global state.favs, due to the combined reducer
+/* function favs(state = [], action) { // the local "state" is the global state.favs, due to the combined reducer
     switch (action.type) {
         case SET_FAVS:
             return action.value;
@@ -57,11 +57,11 @@ function favs(state = [], action) { // the local "state" is the global state.fav
         // if it is the last move in the list OR anywhere in the middle
         if (state.indexOf(action.id) > 0) {
             return state.replace(',' + action.id, '');
-        } */
+        } * /
         default:
             return state;
     }
-}
+}*/
 
 // combined reducer: call the reducers defined above and pass them the state they are concered with
 /* long version
@@ -75,8 +75,7 @@ function movesApp(state = {}, action) {
 const movesApp = combineReducers({
     visibilityFilter,
     moves,
-    user,
-    favs
+    user
 });
 
 export default movesApp;

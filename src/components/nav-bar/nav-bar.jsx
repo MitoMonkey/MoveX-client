@@ -10,9 +10,9 @@ import { connect } from 'react-redux';
 let mapStateToProps = state => { return { user: state.user } }
 
 function NavBar(props) {
-
+    
     const { user, onLoggedOut, onBackClick } = props;
-
+    
     return (
         <Navbar bg="light" expand="md" sticky="top">
             <Container>
@@ -20,7 +20,7 @@ function NavBar(props) {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
                     <Nav className="container-fluid  align-items-center">
-                        {(user)
+                        {(user.Username)
                             ? <Nav.Item>
                                 <a href={`/`} className="btn btn-primary">Home</a>
                             </Nav.Item>
@@ -28,7 +28,7 @@ function NavBar(props) {
                                 <a href={`/`} className="btn btn-primary">Login</a>
                             </Nav.Item>
                         }
-                        {(user)
+                        {(user.Username)
                             ? <Nav.Item>
                                 <Button variant="primary" onClick={() => { onLoggedOut() }}>Logout</Button>
                             </Nav.Item>
@@ -36,16 +36,16 @@ function NavBar(props) {
                                 <a href={`/register`} className="btn btn-primary">Register</a>
                             </Nav.Item>
                         }
-                        {(user)
+                        {(user.Username)
                             ? <Nav.Item>
-                                <a href={`/users/` + user} className="btn btn-primary">Edit profile</a>
+                                <a href={`/users/` + user.Username} className="btn btn-primary">Edit profile</a>
                             </Nav.Item>
                             : <span></span>
                         }
                     </Nav>
                     <Nav className="me-auto align-items-center">
                         <Navbar.Text>
-                            Logged in as {user}
+                            Logged in as {user.Username}
                         </Navbar.Text>
                         <Nav.Item>
                             <Button variant="primary" onClick={() => { onBackClick() }}>Back</Button>
@@ -60,7 +60,6 @@ function NavBar(props) {
 export default connect(mapStateToProps)(NavBar);
 
 NavBar.propTypes = {
-    user: PropTypes.string,
     onLoggedOut: PropTypes.func.isRequired,
     onBackClick: PropTypes.func.isRequired
 };

@@ -11,11 +11,9 @@ import './index.scss';
 
 let preloadedState;
 const storedUsername = localStorage.getItem('user');
-const storedFavs = localStorage.getItem('favs');
-if (storedUsername || storedFavs) {
+if (storedUsername) {
     preloadedState = {
-        user: storedUsername, // JSON.parse(storedUsername)
-        favs: storedFavs
+        user: storedUsername // JSON.parse(storedUsername)
     }
 }
 const store = createStore(movesApp, preloadedState, devToolsEnhancer());

@@ -5,7 +5,7 @@ import axios from 'axios'; // library for AJAX operations
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { connect } from 'react-redux';
-import { setMoves, setUser, setFavs } from '../../actions/actions'; //setUser is required for the nav-bar "logout" button
+import { setMoves, setUser } from '../../actions/actions'; //setUser is required for the nav-bar "logout" button
 
 import MovesList from '../moves-list/moves-list';
 import { LoginView } from '../login-view/login-view';
@@ -30,8 +30,13 @@ Reduxstate format = {
         Title: string,
         ...
     ],
-    user: string (username),
-    favs: array [_id1,_id2,...],
+    user: [
+        username: string,
+        password: string,
+        email: string,
+        Birthday: date,
+        FavoriteMoves: array [_id1,_id2,...]
+    ],
     visibilityFilter: string (move title)
 }
 */
@@ -60,13 +65,11 @@ class MainView extends React.Component {
         console.log(authData);
 
         // safe username and favorite moves to store/state
-        this.props.setUser(authData.user.Username);
-        this.props.setFavs(authData.user.FavoriteMoves);
+        this.props.setUser(authData.user);
 
         // safe user data and token locally so they do not have to log again until they click the "log out" button
         localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', authData.user.Username);
-        localStorage.setItem('favs', authData.user.FavoriteMoves);
+        localStorage.setItem('user', authData.user);
         this.getMoves(authData.token);
     }
 
@@ -75,7 +78,6 @@ class MainView extends React.Component {
         const accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
             this.props.setUser(localStorage.getItem('user'));
-            this.props.setFavs(localStorage.getItem('favs'));
             this.getMoves(accessToken);
         }
     }
@@ -83,16 +85,14 @@ class MainView extends React.Component {
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        localStorage.removeItem('favs');
         this.props.setUser('');
-        this.props.setFavs([]);
         window.open('/', '_self');
     }
 
     updateUserdata(newUserData) {
         const token = localStorage.getItem('token');
         const user = localStorage.getItem('user');
-        axios.put('https://move-x.herokuapp.com/users/' + user, newUserData, { headers: { Authorization: `Bearer ${token}` } })
+        axios.put('https://move-x.herokuapp.com/users/' + user.Username, newUserData, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 const data = response.data;
                 console.log(data);
@@ -101,7 +101,7 @@ class MainView extends React.Component {
                 window.open('/', '_self');
             })
             .catch(e => {
-                console.log('error updating the user data for ' + user);
+                console.log('error updating the user data for ' + user.Username);
                 alert(e);
             });
     }
@@ -109,7 +109,7 @@ class MainView extends React.Component {
     deleteUser() {
         const token = localStorage.getItem('token');
         const user = localStorage.getItem('user');
-        axios.delete('https://move-x.herokuapp.com/users/' + user, { headers: { Authorization: `Bearer ${token}` } })
+        axios.delete('https://move-x.herokuapp.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 console.log(response);
                 alert('User account successfully deleted. Returning to login screen.');
@@ -125,8 +125,6 @@ class MainView extends React.Component {
     render() {
         const { moves, user } = this.props; // passed from the store by mapStateToProps
 
-        //const nav = 
-
         return (
             <>
                 <NavBar onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.back()} />
@@ -134,7 +132,7 @@ class MainView extends React.Component {
                     <Row className="main-view justify-content-center">
                         <Route exact path="/" render={() => {
                             // make sure user is logged in
-                            if (!user) return (
+                            if (!user.Username) return (
                                 <Col md={4}>
                                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                                 </Col>);
@@ -146,20 +144,20 @@ class MainView extends React.Component {
                         }} />
 
                         <Route path="/register" render={() => {
-                            if (user) return <Redirect to="/" />
+                            if (user.Username) return <Redirect to="/" />
                             return (<Col md={4}>
                                 <RegistrationView />
                             </Col>);
                         }} />
                         <Route path="/users/:username" render={({ match, history }) => {
                             // make sure user is logged in
-                            if (!user) return (
+                            if (!user.Username) return (
                                 <Col md={4}>
                                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                                 </Col>);
 
                             // make sure users can only see their own profile
-                            if (match.params.username === user) return (
+                            if (match.params.username === user.Username) return (
                                 <ProfileView
                                     updateUserdata={newUserData => this.updateUserdata(newUserData)}
                                     deleteUser={() => this.deleteUser()}
@@ -172,7 +170,7 @@ class MainView extends React.Component {
                         }} />
                         <Route path="/moves/:moveId" render={({ match, history }) => {
                             // make sure user is logged in
-                            if (!user) return (
+                            if (!user.Username) return (
                                 <Col md={4}>
                                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                                 </Col>);
@@ -189,7 +187,7 @@ class MainView extends React.Component {
                         }} />
                         <Route path="/styles/:name" render={({ match, history }) => {
                             // make sure user is logged in
-                            if (!user) return (
+                            if (!user.Username) return (
                                 <Col md={4}>
                                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                                 </Col>);
@@ -206,7 +204,7 @@ class MainView extends React.Component {
                         }} />
                         <Route path="/sources/:name" render={({ match, history }) => {
                             // make sure user is logged in
-                            if (!user) return (
+                            if (!user.Username) return (
                                 <Col md={4}>
                                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                                 </Col>);
@@ -233,11 +231,10 @@ class MainView extends React.Component {
 let mapStateToProps = state => {
     return {
         moves: state.moves,
-        user: state.user,
-        favs: state.favs
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps, { setMoves, setUser, setFavs })(MainView);
+export default connect(mapStateToProps, { setMoves, setUser })(MainView);
 // second argument (=mapDispatchToProps) connects the action creators as a prop to this component,
 // so it can be used to dispatch actions by "this.props.setMoves()"

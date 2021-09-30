@@ -1,9 +1,6 @@
 export const SET_MOVES = 'SET_MOVES';
 export const SET_FILTER = 'SET_FILTER';
 export const SET_USER = 'SET_USER';
-export const SET_FAVS = 'SET_FAVS';
-// export const ADD_FAV = 'ADD_FAV';
-// export const REM_FAV = 'REM_FAV';
 
 export function setMoves(value) {
     return {
@@ -19,20 +16,20 @@ export function setFilter(value) {
     };
 }
 
-export function setUser(username) {
+export function setUser(user) {
     return {
         type: SET_USER,
-        username
+        user
     };
 }
 
-export function setFavs(value) {
+/* export function setFavs(value) {
     return {
         type: SET_FAVS,
         value
     };
 }
-/* export function addFav(id) {
+export function addFav(id) {
     return {
         type: ADD_FAV,
         id

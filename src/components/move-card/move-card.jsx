@@ -12,11 +12,12 @@ import { Link } from "react-router-dom";
 
 // import './move-card.scss';
 
-let mapStateToProps = state => { return { favs: state.favs } }
+let mapStateToProps = state => { return { user: state.user } }
 
 function MoveCard(props) {
 
-    const { favs, move } = props;
+    const { user, move } = props;
+    const favs = user.FavoriteMoves;
 
     return (
         <Card className="Card" >
@@ -56,7 +57,11 @@ MoveCard.propTypes = {
         ImgURL: PropTypes.string,
         Featured: PropTypes.bool
     }).isRequired,
-    // removeFavorite: PropTypes.func.isRequired,
-    // addFavorite: PropTypes.func.isRequired,
-    favs: PropTypes.array.isRequired
+    user: PropTypes.shape({
+        Username: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired,
+        Email: PropTypes.string.isRequired,
+        Birthday: PropTypes.any,
+        FavoriteMoves: PropTypes.array.isRequired
+    }).isRequired
 };

@@ -59,7 +59,5 @@ MovesList.propTypes = {
         ImgURL: PropTypes.string,
         Featured: PropTypes.bool
     })).isRequired,
-    // removeFavorite: PropTypes.func.isRequired,
-    // addFavorite: PropTypes.func.isRequired,
     visibilityFilter: PropTypes.string
 };

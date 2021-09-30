@@ -12,19 +12,20 @@ import { connect } from 'react-redux';
 
 // import './profile-view.scss';
 
-let mapStateToProps = state => { return { moves: state.moves, user: state.user, favs: state.favs } }
+let mapStateToProps = state => { return { moves: state.moves, user: state.user} }
 
 function ProfileView(props) {
-    const { favs, moves, user } = props;
+    const { moves, user } = props;
+    const favs = user.FavoriteMoves;
     let favMoves = moves.filter(m => favs.includes(m._id));
 
-    const [username, setUsername] = useState(user);
+    const [username, setUsername] = useState(user.Username);
     const [usernameInvalid, setUsernameInvalid] = useState('');
     const [password, setPassword] = useState('');
     const [passwordInvalid, setPasswordInvalid] = useState('');
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(user.Email);
     const [emailInvalid, setEmailInvalid] = useState('');
-    const [birthday, setBirthday] = useState('');
+    const [birthday, setBirthday] = useState(user.Birthday);
     const [formInvalid, setFormInvalid] = useState('');
 
     // instant form validation
@@ -111,14 +112,14 @@ function ProfileView(props) {
     };
 
     // load user data into state (and as placeholders) when component is mounted
-    React.useEffect(() => {
+    /*React.useEffect(() => {
         const token = localStorage.getItem('token');
-        axios.get('https://move-x.herokuapp.com/users/' + username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
+        axios.get('https://move-x.herokuapp.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
             setUsername(response.data.Username);
             setEmail(response.data.Email);
             setBirthday(response.data.Birthday);
         })
-    }, []);
+    }, []); */
 
     // const current_email = {...email};
     // const current_birthday = {...birthday};
@@ -145,10 +146,10 @@ function ProfileView(props) {
         <>
             <Col className="user-data text-center" sm={12} lg={6}>
                 <h3>User Profile</h3>
-                <p>Username: {props.user}</p>
-                <p>Email: {email}</p>
-                {(birthday)
-                    ? <p>Birthday: {birthday}</p>
+                <p>Username: {user.Username}</p>
+                <p>Email: {user.Email}</p>
+                {(user.Birthday)
+                    ? <p>Birthday: {user.Birthday}</p>
                     : <span></span>
                 }
 
@@ -226,7 +227,13 @@ export default connect(mapStateToProps)(ProfileView);
 
 // validate prop data types
 ProfileView.propTypes = {
-    user: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+        Username: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired,
+        Email: PropTypes.string.isRequired,
+        Birthday: PropTypes.any,
+        FavoriteMoves: PropTypes.array.isRequired
+    }).isRequired,
     updateUserdata: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
     moves: PropTypes.arrayOf(PropTypes.shape({
@@ -244,6 +251,5 @@ ProfileView.propTypes = {
         VideoURL: PropTypes.string.isRequired,
         ImgURL: PropTypes.string,
         Featured: PropTypes.bool
-    })).isRequired,
-    favs: PropTypes.array.isRequired
+    })).isRequired
 };
