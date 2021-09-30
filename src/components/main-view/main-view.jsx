@@ -129,7 +129,7 @@ class MainView extends React.Component {
 
         return (
             <>
-                <NavBar onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.goBack()} />
+                <NavBar onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.back()} />
                 <Router>
                     <Row className="main-view justify-content-center">
                         <Route exact path="/" render={() => {
@@ -163,7 +163,7 @@ class MainView extends React.Component {
                                 <ProfileView
                                     updateUserdata={newUserData => this.updateUserdata(newUserData)}
                                     deleteUser={() => this.deleteUser()}
-                                    onBackClick={() => history.goBack()} // bo button yet. But will be in NavBar anyway
+                                    onBackClick={() => history.goBack()} // no button on the page, but will be in NavBar anyway
                                 />
                             );
                             return (

@@ -111,20 +111,17 @@ function ProfileView(props) {
     };
 
     // load user data into state (and as placeholders) when component is mounted
-    let current_email = '';
-    let current_birthday = '';
     React.useEffect(() => {
         const token = localStorage.getItem('token');
         axios.get('https://move-x.herokuapp.com/users/' + username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
-            // setUsername(response.data.Username);
+            setUsername(response.data.Username);
             setEmail(response.data.Email);
-            // console.log(response.data.Email);
-            current_email = response.data.Email;
-            // console.log(current_email);
             setBirthday(response.data.Birthday);
-            current_birthday = response.data.Birthday.split("T")[0];
         })
     }, []);
+
+    // const current_email = {...email};
+    // const current_birthday = {...birthday};
 
     // console.log("my email is " + email);
     // console.log("my email is " + current_email);
@@ -151,7 +148,7 @@ function ProfileView(props) {
                 <p>Username: {props.user}</p>
                 <p>Email: {email}</p>
                 {(birthday)
-                    ? <p>Birthday: {birthday.slice(0, 10)}</p>
+                    ? <p>Birthday: {birthday}</p>
                     : <span></span>
                 }
 
@@ -188,7 +185,7 @@ function ProfileView(props) {
                         <Col sm={6}>
                             <Form.Group controlId="formBirthday">
                                 <Form.Label>Birthday:</Form.Label>
-                                <Form.Control type="date" value={birthday.split("T")[0]} onChange={e => setBirthday(e.target.value)} />
+                                <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
                             </Form.Group>
                         </Col>
                     </Row>
