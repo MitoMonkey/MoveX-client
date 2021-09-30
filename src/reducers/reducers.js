@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { SET_FILTER, SET_MOVES, SET_USER, SET_FAVS, ADD_FAV, REM_FAV } from '../actions/actions';
+import { SET_FILTER, SET_MOVES, SET_USER, SET_FAVS } from '../actions/actions';
 
 function visibilityFilter(state = '', action) {
     switch (action.type) {

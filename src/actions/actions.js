@@ -2,8 +2,8 @@ export const SET_MOVES = 'SET_MOVES';
 export const SET_FILTER = 'SET_FILTER';
 export const SET_USER = 'SET_USER';
 export const SET_FAVS = 'SET_FAVS';
-export const ADD_FAV = 'ADD_FAV';
-export const REM_FAV = 'REM_FAV';
+// export const ADD_FAV = 'ADD_FAV';
+// export const REM_FAV = 'REM_FAV';
 
 export function setMoves(value) {
     return {
