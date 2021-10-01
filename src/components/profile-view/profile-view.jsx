@@ -25,7 +25,7 @@ function ProfileView(props) {
     const [passwordInvalid, setPasswordInvalid] = useState('');
     const [email, setEmail] = useState(user.Email);
     const [emailInvalid, setEmailInvalid] = useState('');
-    const [birthday, setBirthday] = useState(user.Birthday);
+    const [birthday, setBirthday] = useState(user.Birthday.split('T')[0]);
     const [formInvalid, setFormInvalid] = useState('');
 
     // instant form validation
@@ -91,14 +91,25 @@ function ProfileView(props) {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
 
         if (!passwordInvalid && !emailInvalid && !usernameInvalid) {
+            // let newBirthday = new Date(birthday);
+            let newBirthday = birthday;
+            if (birthday.length < 12) {
+                newBirthday = birthday + 'T00:00:00.000Z';
+            }
             let newUserData = {
                 Username: username,
                 Password: password,
                 Email: email,
-                Birthday: birthday
+                Birthday: newBirthday
             }
-            // update user data in database
+            // update user data in database and state
             props.updateUserdata(newUserData);
+            //console.log('birthday: ' + birthday);
+            // console.log('birthday.length: ' + birthday.length);
+            //console.log('newBirthday: ' + newBirthday);
+            // console.log('newBirthday.length: ' + newBirthday.length);
+            //console.log('user.Birthday: ' + user.Birthday);
+            // console.log("user.Birthday.split('T')[0]: " + user.Birthday.split('T')[0]);
         }
         else {
             setFormInvalid('Some values in the form are not valid: ' + usernameInvalid + ' ' + passwordInvalid + ' ' + emailInvalid);

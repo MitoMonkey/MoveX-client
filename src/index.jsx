@@ -10,10 +10,10 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
 import './index.scss';
 
 let preloadedState;
-const storedUsername = localStorage.getItem('user');
-if (storedUsername) {
+const storedUser = JSON.parse(localStorage.getItem('user'));
+if (storedUser) {
     preloadedState = {
-        user: storedUsername // JSON.parse(storedUsername)
+        user: storedUser
     }
 }
 const store = createStore(movesApp, preloadedState, devToolsEnhancer());

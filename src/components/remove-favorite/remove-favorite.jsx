@@ -21,7 +21,7 @@ function RemoveFavorite(props) {
                     return console.log('failed to delete move in database');
                 }
                 else {
-                    localStorage.setItem('user', data);
+                    localStorage.setItem('user', JSON.stringify(data));
                     setUser(data);
                 }
             })

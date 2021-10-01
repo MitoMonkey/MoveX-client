@@ -5,7 +5,7 @@ import axios from 'axios'; // library for AJAX operations
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { connect } from 'react-redux';
-import { setMoves, setUser } from '../../actions/actions'; //setUser is required for the nav-bar "logout" button
+import { setMoves, setUser } from '../../actions/actions';
 
 import MovesList from '../moves-list/moves-list';
 import { LoginView } from '../login-view/login-view';
@@ -69,15 +69,16 @@ class MainView extends React.Component {
 
         // safe user data and token locally so they do not have to log again until they click the "log out" button
         localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', authData.user);
+        localStorage.setItem('user', JSON.stringify(authData.user)); // localStorage can only store strings, not arrays
         this.getMoves(authData.token);
     }
 
     // make login data persistent
     componentDidMount() {
         const accessToken = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user'));
         if (accessToken !== null) {
-            this.props.setUser(localStorage.getItem('user'));
+            this.props.setUser(user);
             this.getMoves(accessToken);
         }
     }
@@ -85,13 +86,13 @@ class MainView extends React.Component {
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        this.props.setUser('');
+        this.props.setUser([]);
         window.open('/', '_self');
     }
 
     updateUserdata(newUserData) {
         const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user');
+        const user = JSON.parse(localStorage.getItem('user'));
         axios.put('https://move-x.herokuapp.com/users/' + user.Username, newUserData, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 const data = response.data;
@@ -108,7 +109,7 @@ class MainView extends React.Component {
 
     deleteUser() {
         const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user');
+        const user = JSON.parse(localStorage.getItem('user'));
         axios.delete('https://move-x.herokuapp.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 console.log(response);

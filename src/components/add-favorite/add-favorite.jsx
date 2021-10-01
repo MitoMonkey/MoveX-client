@@ -26,7 +26,7 @@ function AddFavorite(props) {
                     }
                     else {
                         
-                        localStorage.setItem('user', data);
+                        localStorage.setItem('user', JSON.stringify(data));
                         setUser(data);
                     }
                 })
