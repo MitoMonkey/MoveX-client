@@ -27,6 +27,7 @@ function ProfileView(props) {
     const [emailInvalid, setEmailInvalid] = useState('');
     const [birthday, setBirthday] = useState(user.Birthday.split('T')[0]);
     const [formInvalid, setFormInvalid] = useState('');
+    const originalBirthday = user.Birthday.split('T')[0];
 
     // instant form validation
     function validateUsername(inputValue) {
@@ -92,24 +93,27 @@ function ProfileView(props) {
 
         if (!passwordInvalid && !emailInvalid && !usernameInvalid) {
             // let newBirthday = new Date(birthday);
-            let newBirthday = birthday;
+            /* let newBirthday = birthday;
             if (birthday.length < 12) {
                 newBirthday = birthday + 'T00:00:00.000Z';
             }
+            if (newBirthday === user.Birthday) {alert('variables are equal')}
+            else { alert('variables are NOT equal')} */
+
             let newUserData = {
                 Username: username,
                 Password: password,
                 Email: email,
-                Birthday: newBirthday
+                Birthday: birthday
             }
             // update user data in database and state
-            props.updateUserdata(newUserData);
-            //console.log('birthday: ' + birthday);
+            // console.log('birthday: ' + birthday);
             // console.log('birthday.length: ' + birthday.length);
-            //console.log('newBirthday: ' + newBirthday);
+            // console.log('newBirthday: ' + newBirthday);
             // console.log('newBirthday.length: ' + newBirthday.length);
-            //console.log('user.Birthday: ' + user.Birthday);
+            // console.log('user.Birthday: ' + user.Birthday);
             // console.log("user.Birthday.split('T')[0]: " + user.Birthday.split('T')[0]);
+            props.updateUserdata(newUserData);
         }
         else {
             setFormInvalid('Some values in the form are not valid: ' + usernameInvalid + ' ' + passwordInvalid + ' ' + emailInvalid);
@@ -160,7 +164,7 @@ function ProfileView(props) {
                 <p>Username: {user.Username}</p>
                 <p>Email: {user.Email}</p>
                 {(user.Birthday)
-                    ? <p>Birthday: {user.Birthday}</p>
+                    ? <p>Birthday: {originalBirthday}</p>
                     : <span></span>
                 }
 
