@@ -42,11 +42,7 @@ export class SourceView extends React.Component {
                                     />
                                 </Col>
                             ))}
-                        </CardGroup>
-                        <Button variant="primary" type="button" onClick={() => { onBackClick(); }}>Back</Button>{'  '}
-                        <Link to={`/`}>
-                            <Button variant="primary">Home</Button>
-                        </Link>
+                        </CardGroup>                        
                     </Col>
                 </Row>
             </>

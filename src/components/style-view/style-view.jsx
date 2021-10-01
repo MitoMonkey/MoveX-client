@@ -37,11 +37,7 @@ export class StyleView extends React.Component {
                                     <MoveCard move={m} />
                                 </Col>
                             ))}
-                        </CardGroup>
-                        <Button variant="primary" type="button" onClick={() => { onBackClick(); }}>Back</Button>{'  '}
-                        <Link to={`/`}>
-                            <Button variant="primary">Home</Button>
-                        </Link>
+                        </CardGroup>                        
                     </Col>
                 </Row>
             </>

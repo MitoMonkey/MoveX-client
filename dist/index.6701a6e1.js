@@ -23043,30 +23043,30 @@ Reduxstate format = {
     }
     render() {
         const { moves , user  } = this.props; // passed from the store by mapStateToProps
-        return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_navBarDefault.default, {
-                    onLoggedOut: ()=>this.onLoggedOut()
-                    ,
-                    onBackClick: ()=>history.back()
-                    ,
-                    __source: {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 131
-                    },
-                    __self: this
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
-                    __source: {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 132
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
+            children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
+                __source: {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 131
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_navBarDefault.default, {
+                        onLoggedOut: ()=>this.onLoggedOut()
+                        ,
+                        onBackClick: ()=>history.back()
+                        ,
+                        __source: {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 132
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
                         className: "main-view justify-content-center",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 133
+                            lineNumber: 134
                         },
                         __self: this,
                         children: [
@@ -23091,7 +23091,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 134
+                                    lineNumber: 135
                                 },
                                 __self: this
                             }),
@@ -23109,7 +23109,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 147
+                                    lineNumber: 148
                                 },
                                 __self: this
                             }),
@@ -23135,7 +23135,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 153
+                                    lineNumber: 154
                                 },
                                 __self: this
                             }),
@@ -23162,7 +23162,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 172
+                                    lineNumber: 173
                                 },
                                 __self: this
                             }),
@@ -23191,7 +23191,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 189
+                                    lineNumber: 190
                                 },
                                 __self: this
                             }),
@@ -23220,14 +23220,14 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 206
+                                    lineNumber: 207
                                 },
                                 __self: this
                             })
                         ]
                     })
-                })
-            ]
+                ]
+            })
         }));
     }
 }
@@ -23472,42 +23472,27 @@ function MoveView(props) {
                         })
                     ]
                 }),
-                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                /*#__PURE__*/ _jsxRuntime.jsx("div", {
                     __source: {
                         fileName: "src/components/move-view/move-view.jsx",
                         lineNumber: 55
                     },
                     __self: this,
-                    children: [
-                        favs.includes(move._id) ? /*#__PURE__*/ _jsxRuntime.jsx(_removeFavoriteDefault.default, {
-                            moveID: move._id,
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 57
-                            },
-                            __self: this
-                        }) : /*#__PURE__*/ _jsxRuntime.jsx(_addFavoriteDefault.default, {
-                            moveID: move._id,
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 58
-                            },
-                            __self: this
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            variant: "primary",
-                            type: "button",
-                            onClick: ()=>{
-                                onBackClick();
-                            },
-                            __source: {
-                                fileName: "src/components/move-view/move-view.jsx",
-                                lineNumber: 60
-                            },
-                            __self: this,
-                            children: "Back"
-                        })
-                    ]
+                    children: favs.includes(move._id) ? /*#__PURE__*/ _jsxRuntime.jsx(_removeFavoriteDefault.default, {
+                        moveID: move._id,
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 57
+                        },
+                        __self: this
+                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_addFavoriteDefault.default, {
+                        moveID: move._id,
+                        __source: {
+                            fileName: "src/components/move-view/move-view.jsx",
+                            lineNumber: 58
+                        },
+                        __self: this
+                    })
                 })
             ]
         })
@@ -31368,37 +31353,6 @@ class StyleView extends _reactDefault.default.Component {
                                         })
                                     }, m._id)
                                 )
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "primary",
-                                type: "button",
-                                onClick: ()=>{
-                                    onBackClick();
-                                },
-                                __source: {
-                                    fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 41
-                                },
-                                __self: this,
-                                children: "Back"
-                            }),
-                            '  ',
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                to: `/`,
-                                __source: {
-                                    fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 42
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                    variant: "primary",
-                                    __source: {
-                                        fileName: "src/components/style-view/style-view.jsx",
-                                        lineNumber: 43
-                                    },
-                                    __self: this,
-                                    children: "Home"
-                                })
                             })
                         ]
                     })
@@ -31895,37 +31849,6 @@ class SourceView extends _reactDefault.default.Component {
                                         })
                                     }, m._id)
                                 )
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "primary",
-                                type: "button",
-                                onClick: ()=>{
-                                    onBackClick();
-                                },
-                                __source: {
-                                    fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 46
-                                },
-                                __self: this,
-                                children: "Back"
-                            }),
-                            '  ',
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                to: `/`,
-                                __source: {
-                                    fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 47
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                    variant: "primary",
-                                    __source: {
-                                        fileName: "src/components/source-view/source-view.jsx",
-                                        lineNumber: 48
-                                    },
-                                    __self: this,
-                                    children: "Home"
-                                })
                             })
                         ]
                     })
@@ -32760,6 +32683,7 @@ var _containerDefault = parcelHelpers.interopDefault(_container);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _reactRedux = require("react-redux");
+var _reactRouterDom = require("react-router-dom");
 let mapStateToProps = (state)=>{
     return {
         user: state.user
@@ -32773,20 +32697,20 @@ function NavBar(props) {
         sticky: "top",
         __source: {
             fileName: "src/components/nav-bar/nav-bar.jsx",
-            lineNumber: 17
+            lineNumber: 18
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs(_containerDefault.default, {
             __source: {
                 fileName: "src/components/nav-bar/nav-bar.jsx",
-                lineNumber: 18
+                lineNumber: 19
             },
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Brand, {
                     __source: {
                         fileName: "src/components/nav-bar/nav-bar.jsx",
-                        lineNumber: 19
+                        lineNumber: 20
                     },
                     __self: this,
                     children: "Move-X"
@@ -32795,7 +32719,7 @@ function NavBar(props) {
                     "aria-controls": "basic-navbar-nav",
                     __source: {
                         fileName: "src/components/nav-bar/nav-bar.jsx",
-                        lineNumber: 20
+                        lineNumber: 21
                     },
                     __self: this
                 }),
@@ -32804,7 +32728,7 @@ function NavBar(props) {
                     className: "justify-content-center",
                     __source: {
                         fileName: "src/components/nav-bar/nav-bar.jsx",
-                        lineNumber: 21
+                        lineNumber: 22
                     },
                     __self: this,
                     children: [
@@ -32812,126 +32736,61 @@ function NavBar(props) {
                             className: "container-fluid  align-items-center",
                             __source: {
                                 fileName: "src/components/nav-bar/nav-bar.jsx",
-                                lineNumber: 22
+                                lineNumber: 23
                             },
                             __self: this,
                             children: [
                                 user.Username ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
                                     __source: {
                                         fileName: "src/components/nav-bar/nav-bar.jsx",
-                                        lineNumber: 24
+                                        lineNumber: 25
                                     },
                                     __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                                        href: `/`,
-                                        className: "btn btn-primary",
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                        to: `/`,
                                         __source: {
                                             fileName: "src/components/nav-bar/nav-bar.jsx",
-                                            lineNumber: 25
+                                            lineNumber: 26
                                         },
                                         __self: this,
-                                        children: "Home"
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                            variant: "primary",
+                                            __source: {
+                                                fileName: "src/components/nav-bar/nav-bar.jsx",
+                                                lineNumber: 27
+                                            },
+                                            __self: this,
+                                            children: "Home"
+                                        })
                                     })
                                 }) : /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
                                     __source: {
                                         fileName: "src/components/nav-bar/nav-bar.jsx",
-                                        lineNumber: 27
+                                        lineNumber: 30
                                     },
                                     __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                                        href: `/`,
-                                        className: "btn btn-primary",
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                        to: `/`,
                                         __source: {
                                             fileName: "src/components/nav-bar/nav-bar.jsx",
-                                            lineNumber: 28
+                                            lineNumber: 31
                                         },
                                         __self: this,
-                                        children: "Login"
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                            variant: "primary",
+                                            __source: {
+                                                fileName: "src/components/nav-bar/nav-bar.jsx",
+                                                lineNumber: 32
+                                            },
+                                            __self: this,
+                                            children: "Login"
+                                        })
                                     })
                                 }),
                                 user.Username ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
                                     __source: {
                                         fileName: "src/components/nav-bar/nav-bar.jsx",
-                                        lineNumber: 32
-                                    },
-                                    __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                        variant: "primary",
-                                        onClick: ()=>{
-                                            onLoggedOut();
-                                        },
-                                        __source: {
-                                            fileName: "src/components/nav-bar/nav-bar.jsx",
-                                            lineNumber: 33
-                                        },
-                                        __self: this,
-                                        children: "Logout"
-                                    })
-                                }) : /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
-                                    __source: {
-                                        fileName: "src/components/nav-bar/nav-bar.jsx",
-                                        lineNumber: 35
-                                    },
-                                    __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                                        href: `/register`,
-                                        className: "btn btn-primary",
-                                        __source: {
-                                            fileName: "src/components/nav-bar/nav-bar.jsx",
-                                            lineNumber: 36
-                                        },
-                                        __self: this,
-                                        children: "Register"
-                                    })
-                                }),
-                                user.Username ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
-                                    __source: {
-                                        fileName: "src/components/nav-bar/nav-bar.jsx",
-                                        lineNumber: 40
-                                    },
-                                    __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                                        href: `/users/` + user.Username,
-                                        className: "btn btn-primary",
-                                        __source: {
-                                            fileName: "src/components/nav-bar/nav-bar.jsx",
-                                            lineNumber: 41
-                                        },
-                                        __self: this,
-                                        children: "Edit profile"
-                                    })
-                                }) : /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                    __source: {
-                                        fileName: "src/components/nav-bar/nav-bar.jsx",
-                                        lineNumber: 43
-                                    },
-                                    __self: this
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsxs(_navDefault.default, {
-                            className: "me-auto align-items-center",
-                            __source: {
-                                fileName: "src/components/nav-bar/nav-bar.jsx",
-                                lineNumber: 46
-                            },
-                            __self: this,
-                            children: [
-                                /*#__PURE__*/ _jsxRuntime.jsxs(_navbarDefault.default.Text, {
-                                    __source: {
-                                        fileName: "src/components/nav-bar/nav-bar.jsx",
-                                        lineNumber: 47
-                                    },
-                                    __self: this,
-                                    children: [
-                                        "Logged in as ",
-                                        user.Username
-                                    ]
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
-                                    __source: {
-                                        fileName: "src/components/nav-bar/nav-bar.jsx",
-                                        lineNumber: 50
+                                        lineNumber: 37
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
@@ -32941,11 +32800,118 @@ function NavBar(props) {
                                         },
                                         __source: {
                                             fileName: "src/components/nav-bar/nav-bar.jsx",
-                                            lineNumber: 51
+                                            lineNumber: 38
                                         },
                                         __self: this,
                                         children: "Back"
                                     })
+                                }) : /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
+                                    __source: {
+                                        fileName: "src/components/nav-bar/nav-bar.jsx",
+                                        lineNumber: 40
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                        to: `/register`,
+                                        __source: {
+                                            fileName: "src/components/nav-bar/nav-bar.jsx",
+                                            lineNumber: 41
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                            variant: "primary",
+                                            __source: {
+                                                fileName: "src/components/nav-bar/nav-bar.jsx",
+                                                lineNumber: 42
+                                            },
+                                            __self: this,
+                                            children: "Register"
+                                        })
+                                    })
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_navDefault.default, {
+                            className: "me-auto align-items-center",
+                            __source: {
+                                fileName: "src/components/nav-bar/nav-bar.jsx",
+                                lineNumber: 47
+                            },
+                            __self: this,
+                            children: [
+                                user.Username ? /*#__PURE__*/ _jsxRuntime.jsxs(_navbarDefault.default.Text, {
+                                    className: "text-nowrap",
+                                    __source: {
+                                        fileName: "src/components/nav-bar/nav-bar.jsx",
+                                        lineNumber: 49
+                                    },
+                                    __self: this,
+                                    children: [
+                                        "Logged in as ",
+                                        user.Username
+                                    ]
+                                }) : /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                    __source: {
+                                        fileName: "src/components/nav-bar/nav-bar.jsx",
+                                        lineNumber: 52
+                                    },
+                                    __self: this
+                                }),
+                                user.Username ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
+                                    __source: {
+                                        fileName: "src/components/nav-bar/nav-bar.jsx",
+                                        lineNumber: 55
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                        to: `/users/` + user.Username,
+                                        __source: {
+                                            fileName: "src/components/nav-bar/nav-bar.jsx",
+                                            lineNumber: 56
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                            className: "text-nowrap",
+                                            variant: "primary",
+                                            __source: {
+                                                fileName: "src/components/nav-bar/nav-bar.jsx",
+                                                lineNumber: 57
+                                            },
+                                            __self: this,
+                                            children: "Edit profile"
+                                        })
+                                    })
+                                }) : /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                    __source: {
+                                        fileName: "src/components/nav-bar/nav-bar.jsx",
+                                        lineNumber: 60
+                                    },
+                                    __self: this
+                                }),
+                                user.Username ? /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Item, {
+                                    __source: {
+                                        fileName: "src/components/nav-bar/nav-bar.jsx",
+                                        lineNumber: 63
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                        variant: "primary",
+                                        onClick: ()=>{
+                                            onLoggedOut();
+                                        },
+                                        __source: {
+                                            fileName: "src/components/nav-bar/nav-bar.jsx",
+                                            lineNumber: 64
+                                        },
+                                        __self: this,
+                                        children: "Logout"
+                                    })
+                                }) : /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                    __source: {
+                                        fileName: "src/components/nav-bar/nav-bar.jsx",
+                                        lineNumber: 66
+                                    },
+                                    __self: this
                                 })
                             ]
                         })
@@ -32969,7 +32935,7 @@ $RefreshReg$(_c, "NavBar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Navbar":"eYZQl","react-bootstrap/Nav":"io07g","react-bootstrap/Container":"2PRIq","react-bootstrap/Button":"9CzHT","react-redux":"2L0if","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"eYZQl":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Navbar":"eYZQl","react-bootstrap/Nav":"io07g","react-bootstrap/Container":"2PRIq","react-bootstrap/Button":"9CzHT","react-redux":"2L0if","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react-router-dom":"cpyQW"}],"eYZQl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _extends = require("@babel/runtime/helpers/esm/extends");

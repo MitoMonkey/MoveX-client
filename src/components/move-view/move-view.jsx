@@ -56,8 +56,7 @@ function MoveView(props) {
                     {(favs.includes(move._id))
                         ? <RemoveFavorite moveID={move._id} />
                         : <AddFavorite moveID={move._id} />
-                    }
-                    <Button variant="primary" type="button" onClick={() => { onBackClick() }}>Back</Button>
+                    }                    
                 </div>
             </Col>
         </Row>
