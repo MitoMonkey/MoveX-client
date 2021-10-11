@@ -10,7 +10,7 @@ API and client were created as a study project during my Fullstack Webdeveloper 
 ## Live Demo
 [Live app](https://move-x.netlify.app/)
 
-![Screenshot](./src/Sreenshot.png)
+![Screenshot](./src/Screenshot.png)
 
 ## User storys
 * As a user, I want to be able to receive information on moves, progressions and instructions so that I can find inspiration, learn new skills and develop my movement vocabulatory. 
