@@ -129,8 +129,8 @@ class MainView extends React.Component {
         return (
             <>
                 <Router>
-                <NavBar onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.back()} />
-                
+                    <NavBar onLoggedOut={() => this.onLoggedOut()} onBackClick={() => history.back()} />
+
                     <Row className="main-view justify-content-center">
                         <Route exact path="/" render={() => {
                             // make sure user is logged in

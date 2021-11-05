@@ -31402,6 +31402,7 @@ var _addFavoriteDefault = parcelHelpers.interopDefault(_addFavorite);
 var _removeFavorite = require("../remove-favorite/remove-favorite");
 var _removeFavoriteDefault = parcelHelpers.interopDefault(_removeFavorite);
 var _reactRouterDom = require("react-router-dom");
+// import images from '../../assets/Images/*.*';
 // import './move-card.scss';
 let mapStateToProps = (state)=>{
     return {
@@ -31411,11 +31412,13 @@ let mapStateToProps = (state)=>{
 function MoveCard(props) {
     const { user , move  } = props;
     const favs = user.FavoriteMoves;
+    // let img = new URL(move.ImgURL, import.meta.url);
+    // import image from move.ImgURL;
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
         className: "Card",
         __source: {
             fileName: "src/components/move-card/move-card.jsx",
-            lineNumber: 23
+            lineNumber: 28
         },
         __self: this,
         children: [
@@ -31424,21 +31427,21 @@ function MoveCard(props) {
                 src: move.ImgURL,
                 __source: {
                     fileName: "src/components/move-card/move-card.jsx",
-                    lineNumber: 24
+                    lineNumber: 29
                 },
                 __self: this
             }),
             /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
                 __source: {
                     fileName: "src/components/move-card/move-card.jsx",
-                    lineNumber: 25
+                    lineNumber: 30
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
                         __source: {
                             fileName: "src/components/move-card/move-card.jsx",
-                            lineNumber: 26
+                            lineNumber: 31
                         },
                         __self: this,
                         children: move.Title
@@ -31446,7 +31449,7 @@ function MoveCard(props) {
                     /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
                         __source: {
                             fileName: "src/components/move-card/move-card.jsx",
-                            lineNumber: 27
+                            lineNumber: 32
                         },
                         __self: this,
                         children: move.Cues
@@ -31455,14 +31458,14 @@ function MoveCard(props) {
                         to: `/moves/${move._id}`,
                         __source: {
                             fileName: "src/components/move-card/move-card.jsx",
-                            lineNumber: 28
+                            lineNumber: 33
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                             variant: "primary",
                             __source: {
                                 fileName: "src/components/move-card/move-card.jsx",
-                                lineNumber: 29
+                                lineNumber: 34
                             },
                             __self: this,
                             children: "View details"
@@ -31472,14 +31475,14 @@ function MoveCard(props) {
                         moveID: move._id,
                         __source: {
                             fileName: "src/components/move-card/move-card.jsx",
-                            lineNumber: 32
+                            lineNumber: 37
                         },
                         __self: this
                     }) : /*#__PURE__*/ _jsxRuntime.jsx(_addFavoriteDefault.default, {
                         moveID: move._id,
                         __source: {
                             fileName: "src/components/move-card/move-card.jsx",
-                            lineNumber: 33
+                            lineNumber: 38
                         },
                         __self: this
                     })

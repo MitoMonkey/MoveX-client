@@ -39,11 +39,12 @@ API and client were created as a study project during my Fullstack Webdeveloper 
 - PropTypes for data validation between the components
 
 ## Usage
-Set up the project with all dependencies: `npm install` (in project folder)
-In my version the GitHub repo is linked to the Netlify hosting. Pushing to the main branch automatically updates the live version.
+Set up the project with all dependencies: `npm install` (in project folder).
 
 ## Deployment
-To build the project run `parcel src/index.html` from the project folder
+To build the project run `npx parcel src/index.html` from the project folder.
+
+In my version the GitHub repo is linked to the Netlify hosting. Pushing to the main branch automatically updates the live version.
 
 ## Things to further improve/add
 * Modal instead of "alert"s

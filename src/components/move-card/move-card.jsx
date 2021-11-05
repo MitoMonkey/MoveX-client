@@ -10,6 +10,8 @@ import RemoveFavorite from '../remove-favorite/remove-favorite';
 
 import { Link } from "react-router-dom";
 
+// import images from '../../assets/Images/*.*';
+
 // import './move-card.scss';
 
 let mapStateToProps = state => { return { user: state.user } }
@@ -18,6 +20,9 @@ function MoveCard(props) {
 
     const { user, move } = props;
     const favs = user.FavoriteMoves;
+
+    // let img = new URL(move.ImgURL, import.meta.url);
+    // import image from move.ImgURL;
 
     return (
         <Card className="Card" >
