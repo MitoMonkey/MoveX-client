@@ -1,7 +1,7 @@
 # MoveX-client
 MoveX is a library of movements from various styles and traditions, with descriptions/cues and video sources.
 
-This is the React-based frontend - A single-page, responsive web application (SPA), built folling the MVC design pattern.
+This is the React-based frontend - A single-page, responsive web application (SPA), built following the MVC design pattern.
 
 Find the backend (REST API using MongoDB) here: [MoveX backend](https://github.com/MitoMonkey/MoveX-backend)
 
