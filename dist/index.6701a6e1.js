@@ -31725,27 +31725,31 @@ var _reactRouterDom = require("react-router-dom");
 class StyleView extends _reactDefault.default.Component {
     render() {
         const { moves , style , onBackClick  } = this.props;
+        // make sure the path to the image is correct
+        moves.forEach((m)=>{
+            if (!m.ImgURL.includes('..')) m.ImgURL = '.' + m.ImgURL;
+        });
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-                    className: "justify-content-center",
+                    className: "justify-content-center text-center",
                     __source: {
                         fileName: "src/components/style-view/style-view.jsx",
-                        lineNumber: 19
+                        lineNumber: 27
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                         md: 8,
                         __source: {
                             fileName: "src/components/style-view/style-view.jsx",
-                            lineNumber: 20
+                            lineNumber: 28
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 21
+                                    lineNumber: 29
                                 },
                                 __self: this,
                                 children: "Style Details"
@@ -31754,13 +31758,13 @@ class StyleView extends _reactDefault.default.Component {
                                 className: "style-name",
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 22
+                                    lineNumber: 30
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs("strong", {
                                     __source: {
                                         fileName: "src/components/style-view/style-view.jsx",
-                                        lineNumber: 23
+                                        lineNumber: 31
                                     },
                                     __self: this,
                                     children: [
@@ -31768,7 +31772,7 @@ class StyleView extends _reactDefault.default.Component {
                                             className: "label",
                                             __source: {
                                                 fileName: "src/components/style-view/style-view.jsx",
-                                                lineNumber: 23
+                                                lineNumber: 31
                                             },
                                             __self: this,
                                             children: "Style name: "
@@ -31776,7 +31780,7 @@ class StyleView extends _reactDefault.default.Component {
                                         /*#__PURE__*/ _jsxRuntime.jsx("span", {
                                             __source: {
                                                 fileName: "src/components/style-view/style-view.jsx",
-                                                lineNumber: 24
+                                                lineNumber: 32
                                             },
                                             __self: this,
                                             children: style.Name
@@ -31788,14 +31792,14 @@ class StyleView extends _reactDefault.default.Component {
                                 className: "style-description",
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 26
+                                    lineNumber: 34
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx("span", {
                                     className: "value",
                                     __source: {
                                         fileName: "src/components/style-view/style-view.jsx",
-                                        lineNumber: 27
+                                        lineNumber: 35
                                     },
                                     __self: this,
                                     children: style.Description
@@ -31808,13 +31812,13 @@ class StyleView extends _reactDefault.default.Component {
                     className: "justify-content-center text-center",
                     __source: {
                         fileName: "src/components/style-view/style-view.jsx",
-                        lineNumber: 31
+                        lineNumber: 39
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                         __source: {
                             fileName: "src/components/style-view/style-view.jsx",
-                            lineNumber: 32
+                            lineNumber: 40
                         },
                         __self: this,
                         children: [
@@ -31822,7 +31826,7 @@ class StyleView extends _reactDefault.default.Component {
                                 className: "style-moves",
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 33
+                                    lineNumber: 41
                                 },
                                 __self: this,
                                 children: "All moves in this style"
@@ -31831,7 +31835,7 @@ class StyleView extends _reactDefault.default.Component {
                                 className: "justify-content-md-center",
                                 __source: {
                                     fileName: "src/components/style-view/style-view.jsx",
-                                    lineNumber: 34
+                                    lineNumber: 42
                                 },
                                 __self: this,
                                 children: moves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -31840,14 +31844,14 @@ class StyleView extends _reactDefault.default.Component {
                                         lg: 3,
                                         __source: {
                                             fileName: "src/components/style-view/style-view.jsx",
-                                            lineNumber: 36
+                                            lineNumber: 44
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCardDefault.default, {
                                             move: m,
                                             __source: {
                                                 fileName: "src/components/style-view/style-view.jsx",
-                                                lineNumber: 37
+                                                lineNumber: 45
                                             },
                                             __self: this
                                         })
@@ -31917,27 +31921,31 @@ var _reactRouterDom = require("react-router-dom");
 class SourceView extends _reactDefault.default.Component {
     render() {
         const { moves , source , onBackClick  } = this.props;
+        // make sure the path to the image is correct
+        moves.forEach((m)=>{
+            if (!m.ImgURL.includes('..')) m.ImgURL = '.' + m.ImgURL;
+        });
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
                     className: "justify-content-center text-center",
                     __source: {
                         fileName: "src/components/source-view/source-view.jsx",
-                        lineNumber: 19
+                        lineNumber: 27
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                         md: 8,
                         __source: {
                             fileName: "src/components/source-view/source-view.jsx",
-                            lineNumber: 20
+                            lineNumber: 28
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                                 __source: {
                                     fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 21
+                                    lineNumber: 29
                                 },
                                 __self: this,
                                 children: "Source details"
@@ -31946,13 +31954,13 @@ class SourceView extends _reactDefault.default.Component {
                                 className: "source-name",
                                 __source: {
                                     fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 22
+                                    lineNumber: 30
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs("strong", {
                                     __source: {
                                         fileName: "src/components/source-view/source-view.jsx",
-                                        lineNumber: 23
+                                        lineNumber: 31
                                     },
                                     __self: this,
                                     children: [
@@ -31960,7 +31968,7 @@ class SourceView extends _reactDefault.default.Component {
                                             className: "label",
                                             __source: {
                                                 fileName: "src/components/source-view/source-view.jsx",
-                                                lineNumber: 23
+                                                lineNumber: 31
                                             },
                                             __self: this,
                                             children: "Source name: "
@@ -31969,7 +31977,7 @@ class SourceView extends _reactDefault.default.Component {
                                             className: "value",
                                             __source: {
                                                 fileName: "src/components/source-view/source-view.jsx",
-                                                lineNumber: 24
+                                                lineNumber: 32
                                             },
                                             __self: this,
                                             children: source.Name
@@ -31981,7 +31989,7 @@ class SourceView extends _reactDefault.default.Component {
                                 className: "source-weblink",
                                 __source: {
                                     fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 27
+                                    lineNumber: 35
                                 },
                                 __self: this,
                                 children: [
@@ -31989,7 +31997,7 @@ class SourceView extends _reactDefault.default.Component {
                                         className: "label",
                                         __source: {
                                             fileName: "src/components/source-view/source-view.jsx",
-                                            lineNumber: 28
+                                            lineNumber: 36
                                         },
                                         __self: this,
                                         children: "Weblink: "
@@ -32000,7 +32008,7 @@ class SourceView extends _reactDefault.default.Component {
                                         target: "_blank",
                                         __source: {
                                             fileName: "src/components/source-view/source-view.jsx",
-                                            lineNumber: 29
+                                            lineNumber: 37
                                         },
                                         __self: this,
                                         children: source.Weblink
@@ -32014,13 +32022,13 @@ class SourceView extends _reactDefault.default.Component {
                     className: "justify-content-center text-center",
                     __source: {
                         fileName: "src/components/source-view/source-view.jsx",
-                        lineNumber: 34
+                        lineNumber: 42
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
                         __source: {
                             fileName: "src/components/source-view/source-view.jsx",
-                            lineNumber: 35
+                            lineNumber: 43
                         },
                         __self: this,
                         children: [
@@ -32028,7 +32036,7 @@ class SourceView extends _reactDefault.default.Component {
                                 className: "source-moves",
                                 __source: {
                                     fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 36
+                                    lineNumber: 44
                                 },
                                 __self: this,
                                 children: "All moves from this source"
@@ -32037,7 +32045,7 @@ class SourceView extends _reactDefault.default.Component {
                                 className: "justify-content-md-center",
                                 __source: {
                                     fileName: "src/components/source-view/source-view.jsx",
-                                    lineNumber: 37
+                                    lineNumber: 45
                                 },
                                 __self: this,
                                 children: moves.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -32046,14 +32054,14 @@ class SourceView extends _reactDefault.default.Component {
                                         lg: 3,
                                         __source: {
                                             fileName: "src/components/source-view/source-view.jsx",
-                                            lineNumber: 39
+                                            lineNumber: 47
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_moveCardDefault.default, {
                                             move: m,
                                             __source: {
                                                 fileName: "src/components/source-view/source-view.jsx",
-                                                lineNumber: 40
+                                                lineNumber: 48
                                             },
                                             __self: this
                                         })

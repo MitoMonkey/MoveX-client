@@ -14,6 +14,14 @@ import { Link } from "react-router-dom";
 export class SourceView extends React.Component {
     render() {
         const { moves, source, onBackClick } = this.props;
+
+        // make sure the path to the image is correct
+        moves.forEach(m => {
+            if (!m.ImgURL.includes('..')) {
+                m.ImgURL = '.' + m.ImgURL;
+            }
+        });
+
         return (
             <>
                 <Row className="justify-content-center text-center">
@@ -42,7 +50,7 @@ export class SourceView extends React.Component {
                                     />
                                 </Col>
                             ))}
-                        </CardGroup>                        
+                        </CardGroup>
                     </Col>
                 </Row>
             </>

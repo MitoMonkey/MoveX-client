@@ -14,9 +14,17 @@ import { Link } from "react-router-dom";
 export class StyleView extends React.Component {
     render() {
         const { moves, style, onBackClick } = this.props;
+
+        // make sure the path to the image is correct
+        moves.forEach(m => {
+            if (!m.ImgURL.includes('..')) {
+                m.ImgURL = '.' + m.ImgURL;
+            }
+        });
+
         return (
             <>
-                <Row className="justify-content-center">
+                <Row className="justify-content-center text-center">
                     <Col md={8}>
                         <h3>Style Details</h3>
                         <div className="style-name">
@@ -37,7 +45,7 @@ export class StyleView extends React.Component {
                                     <MoveCard move={m} />
                                 </Col>
                             ))}
-                        </CardGroup>                        
+                        </CardGroup>
                     </Col>
                 </Row>
             </>
