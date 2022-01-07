@@ -108,42 +108,45 @@ export function RegistrationView(props) {
     };
 
     return (
-        <Form>
-            <Form.Group controlId="formUsername">
-                <Form.Label>Username:</Form.Label>
-                <Form.Control type="text" placeholder={'Username'} required onChange={e => validateUsername(e.target.value)} />
-                <Form.Text className="invalid">{usernameInvalid}</Form.Text>
-            </Form.Group>
-            <Form.Group controlId="formPassword">
-                <Form.Label>Password:</Form.Label>
-                <Form.Control
-                    type="password"
-                    required
-                    placeholder={'Password'}
-                    onChange={e => validatePassword(e.target.value)} />
-                <Form.Text className="invalid">{passwordInvalid}</Form.Text>
-            </Form.Group>
-            <Form.Group controlId="formEmail">
-                <Form.Label>Email:</Form.Label>
-                <Form.Control type="email" required placeholder={'Email'} onChange={e => validateEmail(e.target.value)} />
-                <Form.Text className="invalid">{emailInvalid}</Form.Text>
-            </Form.Group>
-            <Form.Group controlId="formBirthday">
-                <Form.Label>Birthday:</Form.Label>
-                <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formTerms">
-                <Form.Check
-                    type="checkbox"
-                    label="I agree to the terms and conditions, as well as the data privacy statement."
-                    checked={TOC}
-                    onChange={() => setTOC(!TOC)}
-                />
-            </Form.Group>
-            <div className="text-center">
-                <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
-                <Form.Text className="invalid">{formInvalid}</Form.Text>
-            </div>
-        </Form>
+        <>
+            <p className='text-center'>Please create a (dummy) account to use the app. You can enter anything you like as this is just a study project and the user data is only relevant for you to test the app.</p>
+            <Form>
+                <Form.Group controlId="formUsername">
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control type="text" placeholder={'Username'} required onChange={e => validateUsername(e.target.value)} />
+                    <Form.Text className="invalid">{usernameInvalid}</Form.Text>
+                </Form.Group>
+                <Form.Group controlId="formPassword">
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control
+                        type="password"
+                        required
+                        placeholder={'Password'}
+                        onChange={e => validatePassword(e.target.value)} />
+                    <Form.Text className="invalid">{passwordInvalid}</Form.Text>
+                </Form.Group>
+                <Form.Group controlId="formEmail">
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control type="email" required placeholder={'Email'} onChange={e => validateEmail(e.target.value)} />
+                    <Form.Text className="invalid">{emailInvalid}</Form.Text>
+                </Form.Group>
+                <Form.Group controlId="formBirthday">
+                    <Form.Label>Birthday:</Form.Label>
+                    <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formTerms">
+                    <Form.Check
+                        type="checkbox"
+                        label="I agree to the terms and conditions, as well as the data privacy statement."
+                        checked={TOC}
+                        onChange={() => setTOC(!TOC)}
+                    />
+                </Form.Group>
+                <div className="text-center">
+                    <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+                    <Form.Text className="invalid">{formInvalid}</Form.Text>
+                </div>
+            </Form>
+        </>
     );
 }

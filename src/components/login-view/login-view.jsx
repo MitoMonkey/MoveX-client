@@ -31,19 +31,22 @@ export function LoginView(props) {
     };
 
     return (
-        <Form>
-            <Form.Group controlId="formUsername">
-                <Form.Label>Username:</Form.Label>
-                <Form.Control required type="text" onChange={e => setUsername(e.target.value)} />
-            </Form.Group>
-            <Form.Group controlId="formPassword">
-                <Form.Label>Password:</Form.Label>
-                <Form.Control required type="password" onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-            <div className="text-center">
-                <Button variant="primary" type="submit" onClick={handleSubmit}>Login</Button>{'  '}
-            </div>
-        </Form>
+        <>
+            <p className='text-center'>Please create a (dummy) account to use the app. You can enter anything you like as this is just a study project and the user data is only relevant for you to test the app.</p>
+            <Form>
+                <Form.Group controlId="formUsername">
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control required type="text" onChange={e => setUsername(e.target.value)} />
+                </Form.Group>
+                <Form.Group controlId="formPassword">
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control required type="password" onChange={e => setPassword(e.target.value)} />
+                </Form.Group>
+                <div className="text-center">
+                    <Button variant="primary" type="submit" onClick={handleSubmit}>Login</Button>{'  '}
+                </div>
+            </Form>
+        </>
     );
 }
 
