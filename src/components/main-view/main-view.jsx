@@ -62,7 +62,7 @@ class MainView extends React.Component {
 
     // Method once a user is successfully logged in
     onLoggedIn(authData) {
-        console.log(authData);
+        // console.log(authData);
 
         // safe username and favorite moves to store/state
         this.props.setUser(authData.user);
