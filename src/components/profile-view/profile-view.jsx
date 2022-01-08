@@ -12,10 +12,18 @@ import { connect } from 'react-redux';
 
 // import './profile-view.scss';
 
-let mapStateToProps = state => { return { moves: state.moves, user: state.user} }
+let mapStateToProps = state => { return { moves: state.moves, user: state.user } }
 
 function ProfileView(props) {
     const { moves, user } = props;
+
+    // make sure the paths to the images are correct
+    moves.forEach(m => {
+        if (!m.ImgURL.includes('..')) {
+            m.ImgURL = '.' + m.ImgURL;
+        }
+    });
+
     const favs = user.FavoriteMoves;
     let favMoves = moves.filter(m => favs.includes(m._id));
 
@@ -25,9 +33,18 @@ function ProfileView(props) {
     const [passwordInvalid, setPasswordInvalid] = useState('');
     const [email, setEmail] = useState(user.Email);
     const [emailInvalid, setEmailInvalid] = useState('');
-    const [birthday, setBirthday] = useState(user.Birthday.split('T')[0]);
+    const [birthday, setBirthday] = useState(getBirthday());
     const [formInvalid, setFormInvalid] = useState('');
-    const originalBirthday = user.Birthday.split('T')[0];
+
+    // var originalBirthday = user.Birthday.slice(0, 10);
+    /* remove time from birthday and prevent errors when variable is empty */
+    function getBirthday() {
+        if (user.Birthday != null) {
+            // setBirthday(user.Birthday.split('T')[0]);
+            return user.Birthday.split('T')[0];
+        }
+        else return '';
+    }
 
     // instant form validation
     function validateUsername(inputValue) {
@@ -164,7 +181,7 @@ function ProfileView(props) {
                 <p>Username: {user.Username}</p>
                 <p>Email: {user.Email}</p>
                 {(user.Birthday)
-                    ? <p>Birthday: {originalBirthday}</p>
+                    ? <p>Birthday: {getBirthday()}</p>
                     : <span></span>
                 }
 
