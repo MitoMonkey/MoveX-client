@@ -4,7 +4,7 @@ import axios from 'axios'; // library for AJAX operations
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 // import './registration-view.scss';
 
@@ -91,7 +91,10 @@ export function RegistrationView(props) {
             })
                 .then(response => {
                     const data = response.data;
-                    // console.log(data);
+                    //console.log(data);
+
+                    /* automaticaly log in */
+                    // props.onLoggedIn(data);
                     window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
                 })
                 .catch(error => {
@@ -99,8 +102,6 @@ export function RegistrationView(props) {
                     setFormInvalid(error);
                 })
 
-            // automaticaly log in
-            // props.onLoggedIn(username);
         }
         else {
             setFormInvalid('Some values in the form are not valid: ' + usernameInvalid + ' ' + passwordInvalid + ' ' + emailInvalid);
@@ -150,3 +151,8 @@ export function RegistrationView(props) {
         </>
     );
 }
+
+// validate prop data types
+/* RegistrationView.propTypes = {
+    onLoggedIn: PropTypes.func.isRequired,
+}; */

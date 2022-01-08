@@ -96,7 +96,7 @@ class MainView extends React.Component {
         axios.put('https://move-x.herokuapp.com/users/' + user.Username, newUserData, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 const data = response.data;
-                console.log(data);
+                // console.log(data);
                 alert('Userdata successfully updated. Returning to login screen.');
                 this.onLoggedOut();
                 window.open('/', '_self');
@@ -113,9 +113,9 @@ class MainView extends React.Component {
         axios.delete('https://move-x.herokuapp.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 console.log(response);
-                alert('User account successfully deleted. Returning to login screen.');
+                alert('User account successfully deleted. Returning to registration screen.');
                 this.onLoggedOut();
-                window.open('/', '_self');
+                window.open('/register', '_self');
             })
             .catch(e => {
                 console.log('error deleting the account');
@@ -148,6 +148,7 @@ class MainView extends React.Component {
                         <Route path="/register" render={() => {
                             if (user.Username) return <Redirect to="/" />
                             return (<Col md={4}>
+                                {/* <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} /> */}
                                 <RegistrationView />
                             </Col>);
                         }} />
