@@ -47,7 +47,7 @@ To build the project run `npx parcel src/index.html` from the project folder.
 In my version the GitHub repo is linked to the Netlify hosting. Pushing to the main branch automatically updates the live version.
 
 ## Things to further improve/add
-* Modal instead of "alert"s
+* Modals instead of "alert"s
 * Registration view & edit profile form
     * Confirm password (input a second time to avoid typos)
     * `setUsernameInvalid('This username is already taken.');` > needs to be based on the server response
@@ -55,7 +55,6 @@ In my version the GitHub repo is linked to the Netlify hosting. Pushing to the m
     * Enter password (in modal) to confirm deletion user account
     * Confirm (old) password for changing user data
 * FloatingLabels in Forms (Seems to be a feature of react@next only…)
-* Include preview picture/thumbnail for each move (move.ImgURL)
 
 ## 🤝 Contributing
 
