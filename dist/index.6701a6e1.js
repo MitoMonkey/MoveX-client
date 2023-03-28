@@ -22818,7 +22818,7 @@ Reduxstate format = {
     }
     // import the moves from the backend
     getMoves(token) {
-        _axiosDefault.default.get('https://move-x.herokuapp.com/moves', {
+        _axiosDefault.default.get('https://movex-api.onrender.com/moves', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -22857,7 +22857,7 @@ Reduxstate format = {
     updateUserdata(newUserData) {
         const token = localStorage.getItem('token');
         const user = JSON.parse(localStorage.getItem('user'));
-        _axiosDefault.default.put('https://move-x.herokuapp.com/users/' + user.Username, newUserData, {
+        _axiosDefault.default.put('https://movex-api.onrender.com/users/' + user.Username, newUserData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -22875,7 +22875,7 @@ Reduxstate format = {
     deleteUser() {
         const token = localStorage.getItem('token');
         const user = JSON.parse(localStorage.getItem('user'));
-        _axiosDefault.default.delete('https://move-x.herokuapp.com/users/' + user.Username, {
+        _axiosDefault.default.delete('https://movex-api.onrender.com/users/' + user.Username, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -29800,7 +29800,7 @@ function AddFavorite(props) {
         if (favs.includes(moveID)) return alert('this move is already in your list of favorites');
         else {
             const token = localStorage.getItem('token');
-            _axiosDefault.default.post('https://move-x.herokuapp.com/users/' + user.Username + '/moves/' + moveID, {
+            _axiosDefault.default.post('https://movex-api.onrender.com/users/' + user.Username + '/moves/' + moveID, {
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -30003,7 +30003,7 @@ function RemoveFavorite(props) {
     const favs = user.FavoriteMoves;
     function deleteMove() {
         const token = localStorage.getItem('token');
-        _axiosDefault.default.delete('https://move-x.herokuapp.com/users/' + user.Username + '/moves/' + moveID, {
+        _axiosDefault.default.delete('https://movex-api.onrender.com/users/' + user.Username + '/moves/' + moveID, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -30940,7 +30940,7 @@ function LoginView(props) {
     const [password, setPassword] = _react.useState('');
     const handleSubmit = (e)=>{
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
-        /* Send a request to the server for authentication */ _axiosDefault.default.post('https://move-x.herokuapp.com/login', {
+        /* Send a request to the server for authentication */ _axiosDefault.default.post('https://movex-api.onrender.com/login', {
             Username: username,
             Password: password
         }).then((response)=>{
@@ -31166,7 +31166,7 @@ function RegistrationView(props) {
     const handleSubmit = (e)=>{
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
         if (!passwordInvalid && !emailInvalid && !usernameInvalid && TOC) // add user to database, and propt to root directory for login
-        _axiosDefault.default.post('https://move-x.herokuapp.com/users', {
+        _axiosDefault.default.post('https://movex-api.onrender.com/users', {
             Username: username,
             Password: password,
             Email: email,
@@ -32246,7 +32246,7 @@ function ProfileView(props) {
     // load user data into state (and as placeholders) when component is mounted
     /*React.useEffect(() => {
         const token = localStorage.getItem('token');
-        axios.get('https://move-x.herokuapp.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
+        axios.get('https://movex-api.onrender.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
             setUsername(response.data.Username);
             setEmail(response.data.Email);
             setBirthday(response.data.Birthday);
