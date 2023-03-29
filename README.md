@@ -5,7 +5,7 @@ This is the React-based frontend - A single-page, responsive web application (SP
 
 Find the backend (REST API using MongoDB) here: [MoveX backend](https://github.com/MitoMonkey/MoveX-backend)
 
-API and client were created as a study project during my Fullstack Webdeveloper course @CarrerFoundry.
+API and client were created as a study project during my Fullstack Web-developer course @CareerFoundry.
 
 ## Live Demo
 [Live app](https://move-x.netlify.app/)
@@ -13,7 +13,7 @@ API and client were created as a study project during my Fullstack Webdeveloper 
 ![Screenshot](./src/Screenshot.png)
 
 ## User storys
-* As a user, I want to be able to receive information on moves, progressions and instructions so that I can find inspiration, learn new skills and develop my movement vocabulatory. 
+* As a user, I want to be able to receive information on moves, progressions and instructions so that I can find inspiration, learn new skills and develop my movement vocabulary. 
 * As a user, I want to be able to create a profile so I can save my favorite moves.
 
 ## Features

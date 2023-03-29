@@ -48,11 +48,16 @@ class MainView extends React.Component {
 
     // import the moves from the backend
     getMoves(token) {
-        axios.get('https://movex-api.onrender.com/moves', { // http://localhost:8080/moves
+        axios.get('https://movex-api.onrender.com/moves', {
+            //axios.get('http://localhost:8080/moves', {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => {
-                this.props.setMoves(response.data);
+                if (response && response.data && response.data.length > 0) {
+                    this.props.setMoves(response.data);
+                } else {
+                    console.log("getting moves from database not successful");
+                }
             })
             .catch(function (e) {
                 console.log(e);

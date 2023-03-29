@@ -22819,11 +22819,13 @@ Reduxstate format = {
     // import the moves from the backend
     getMoves(token) {
         _axiosDefault.default.get('https://movex-api.onrender.com/moves', {
+            //axios.get('http://localhost:8080/moves', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
-            this.props.setMoves(response.data);
+            if (response && response.data && response.data.length > 0) this.props.setMoves(response.data);
+            else console.log("getting moves from database not successful");
         }).catch(function(e) {
             console.log(e);
             alert(e);
@@ -22895,7 +22897,7 @@ Reduxstate format = {
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 131
+                    lineNumber: 136
                 },
                 __self: this,
                 children: [
@@ -22906,7 +22908,7 @@ Reduxstate format = {
                         ,
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 132
+                            lineNumber: 137
                         },
                         __self: this
                     }),
@@ -22914,7 +22916,7 @@ Reduxstate format = {
                         className: "main-view justify-content-center",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 134
+                            lineNumber: 139
                         },
                         __self: this,
                         children: [
@@ -22939,7 +22941,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 135
+                                    lineNumber: 140
                                 },
                                 __self: this
                             }),
@@ -22957,7 +22959,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 148
+                                    lineNumber: 153
                                 },
                                 __self: this
                             }),
@@ -22983,7 +22985,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 155
+                                    lineNumber: 160
                                 },
                                 __self: this
                             }),
@@ -23010,7 +23012,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 174
+                                    lineNumber: 179
                                 },
                                 __self: this
                             }),
@@ -23039,7 +23041,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 191
+                                    lineNumber: 196
                                 },
                                 __self: this
                             }),
@@ -23068,7 +23070,7 @@ Reduxstate format = {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 208
+                                    lineNumber: 213
                                 },
                                 __self: this
                             })
