@@ -48,7 +48,7 @@ class MainView extends React.Component {
 
     // import the moves from the backend
     getMoves(token) {
-        axios.get('https://move-x.herokuapp.com/moves', { // http://localhost:8080/moves
+        axios.get('https://movex-api.onrender.com/moves', { // http://localhost:8080/moves
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => {
@@ -93,7 +93,7 @@ class MainView extends React.Component {
     updateUserdata(newUserData) {
         const token = localStorage.getItem('token');
         const user = JSON.parse(localStorage.getItem('user'));
-        axios.put('https://move-x.herokuapp.com/users/' + user.Username, newUserData, { headers: { Authorization: `Bearer ${token}` } })
+        axios.put('https://movex-api.onrender.com/users/' + user.Username, newUserData, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 const data = response.data;
                 // console.log(data);
@@ -110,7 +110,7 @@ class MainView extends React.Component {
     deleteUser() {
         const token = localStorage.getItem('token');
         const user = JSON.parse(localStorage.getItem('user'));
-        axios.delete('https://move-x.herokuapp.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } })
+        axios.delete('https://movex-api.onrender.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 console.log(response);
                 alert('User account successfully deleted. Returning to registration screen.');

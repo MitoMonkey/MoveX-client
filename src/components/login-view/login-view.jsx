@@ -17,7 +17,7 @@ export function LoginView(props) {
         e.preventDefault(); // prevents the default refresh of the page when the user clicks on "submit"
 
         /* Send a request to the server for authentication */
-        axios.post('https://move-x.herokuapp.com/login', {
+        axios.post('https://movex-api.onrender.com/login', {
             Username: username,
             Password: password
         })

@@ -83,7 +83,7 @@ export function RegistrationView(props) {
 
         if (!passwordInvalid && !emailInvalid && !usernameInvalid && TOC) {
             // add user to database, and propt to root directory for login
-            axios.post('https://move-x.herokuapp.com/users', {
+            axios.post('https://movex-api.onrender.com/users', {
                 Username: username,
                 Password: password,
                 Email: email,

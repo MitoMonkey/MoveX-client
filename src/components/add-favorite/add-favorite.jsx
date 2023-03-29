@@ -18,14 +18,14 @@ function AddFavorite(props) {
         }
         else {
             const token = localStorage.getItem('token');
-            axios.post('https://move-x.herokuapp.com/users/' + user.Username + '/moves/' + moveID, {}, { headers: { Authorization: `Bearer ${token}` } })
+            axios.post('https://movex-api.onrender.com/users/' + user.Username + '/moves/' + moveID, {}, { headers: { Authorization: `Bearer ${token}` } })
                 .then(response => {
                     const data = response.data;
                     if (data.FavoriteMoves.toString().length === favs.toString().length) {
                         return console.log('failed to add move in database');
                     }
                     else {
-                        
+
                         localStorage.setItem('user', JSON.stringify(data));
                         setUser(data);
                     }

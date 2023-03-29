@@ -13,7 +13,7 @@ function RemoveFavorite(props) {
 
     function deleteMove() {
         const token = localStorage.getItem('token');
-        axios.delete('https://move-x.herokuapp.com/users/' + user.Username + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
+        axios.delete('https://movex-api.onrender.com/users/' + user.Username + '/moves/' + moveID, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 const data = response.data;
 

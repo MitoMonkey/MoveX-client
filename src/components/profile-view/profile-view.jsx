@@ -146,7 +146,7 @@ function ProfileView(props) {
     // load user data into state (and as placeholders) when component is mounted
     /*React.useEffect(() => {
         const token = localStorage.getItem('token');
-        axios.get('https://move-x.herokuapp.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
+        axios.get('https://movex-api.onrender.com/users/' + user.Username, { headers: { Authorization: `Bearer ${token}` } }).then(response => {
             setUsername(response.data.Username);
             setEmail(response.data.Email);
             setBirthday(response.data.Birthday);
